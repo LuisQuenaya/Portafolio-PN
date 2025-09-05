@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Luis Ángel — Estadística e Informática</title>
+  <meta name="description" content="Portafolio de Luis Ángel — Estudiante de Estadística e Informática. Proyectos, habilidades y contacto." />
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#06b6d4;--muted:#94a3b8;--glass:rgba(255,255,255,0.03)}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;line-height:1.5;background:linear-gradient(180deg,#071025 0%, #071030 60%);color:#e6eef6;padding:24px}
+    .container{max-width:1000px;margin:0 auto}
+    header{display:flex;gap:16px;align-items:center}
+    .avatar{width:84px;height:84px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700;color:#04111a;font-size:28px;box-shadow:0 6px 20px rgba(2,6,23,0.6)}
+    h1{margin:0;font-size:28px}
+    p.lead{color:var(--muted);margin:6px 0 0}
+
+    nav{margin-top:20px;display:flex;gap:8px;flex-wrap:wrap}
+    nav a{padding:8px 12px;background:var(--glass);border-radius:10px;text-decoration:none;color:var(--muted);font-weight:600}
+    nav a.primary{background:linear-gradient(90deg, rgba(6,182,212,0.12), rgba(124,58,237,0.06));color:#bff0fb}
+
+    main{display:grid;grid-template-columns:1fr 340px;gap:20px;margin-top:22px}
+    @media (max-width:880px){main{grid-template-columns:1fr} .sidebar{order:2}}
+
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:18px;border-radius:14px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+
+    /* Projects */
+    .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    @media (max-width:640px){.projects{grid-template-columns:1fr}}
+    .project{padding:12px;border-radius:10px;background:rgba(255,255,255,0.02)}
+    .project h3{margin:0 0 6px;font-size:16px}
+    .project p{margin:0;color:var(--muted);font-size:14px}
+    .tags{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
+    .tag{font-size:12px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.03);color:var(--muted)}
+
+    /* Sidebar */
+    .sidebar .section{margin-bottom:12px}
+    .skill{display:flex;justify-content:space-between;align-items:center;margin:8px 0}
+    .bar{height:10px;background:rgba(255,255,255,0.04);border-radius:999px;flex:1;margin-left:12px;overflow:hidden}
+    .bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#7c3aed)}
+
+    footer{margin-top:26px;color:var(--muted);text-align:center;font-size:14px}
+
+    /* buttons & small styles */
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),#7c3aed);color:#04111a}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+    .contact-form input,.contact-form textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;margin-top:8px}
+    .contact-form textarea{min-height:100px;resize:vertical}
+
+    .muted{color:var(--muted);font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="avatar">LA</div>
+      <div>
+        <h1>Luis Ángel</h1>
+        <p class="lead">Estudiante de <strong>Estadística e Informática</strong> — Apasionado por análisis de datos, machine learning y visualización.</p>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:8px">
+        <a class="btn btn-primary" href="#contact">Contactar</a>
+        <a class="btn btn-ghost" href="#proyectos">Proyectos</a>
+      </div>
+    </header>
+
+    <nav>
+      <a class="primary" href="#sobre-mi">Sobre mí</a>
+      <a href="#habilidades">Habilidades</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#contact">Contacto</a>
+    </nav>
+
+    <main>
+      <section>
+        <div class="card" id="sobre-mi">
+          <h2>Sobre mí</h2>
+          <p class="muted">Hola — soy Luis Ángel, estudiante de Estadística e Informática. Me interesa transformar datos en historias útiles: limpieza de datos, modelos predictivos y dashboards interactivos. Busco prácticas y proyectos que me permitan aplicar técnicas estadísticas y programación (Python / R).</p>
+          <div style="margin-top:12px;display:flex;gap:8px">
+            <a class="btn btn-primary" href="#proyectos">Ver proyectos</a>
+            <a class="btn btn-ghost" href="#habilidades">Ver CV</a>
+          </div>
+        </div>
+
+        <div class="card" id="proyectos" style="margin-top:14px">
+          <h2>Proyectos destacados</h2>
+          <div class="projects">
+            <article class="project">
+              <h3>Análisis de satisfacción estudiantil</h3>
+              <p>Estudio de encuestas con limpieza, EDA y modelo de regresión para identificar factores de satisfacción.</p>
+              <div class="tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Regresión</span></div>
+            </article>
+
+            <article class="project">
+              <h3>Dashboard interactivo — Matriz de rendimiento</h3>
+              <p>Dashboard en Plotly/Dash que visualiza rendimiento por asignatura y grupo.</p>
+              <div class="tags"><span class="tag">Plotly</span><span class="tag">Dash</span><span class="tag">Visualización</span></div>
+            </article>
+
+            <article class="project">
+              <h3>Clasificador de anomalías</h3>
+              <p>Detector de outliers para series temporales usando Isolation Forest y ARIMA.</p>
+              <div class="tags"><span class="tag">Machine Learning</span><span class="tag">Time Series</span></div>
+            </article>
+
+            <article class="project">
+              <h3>Simulador de muestreo</h3>
+              <p>Pequeña web interactiva para enseñar técnicas de muestreo y error estándar.</p>
+              <div class="tags"><span class="tag">JavaScript</span><span class="tag">Didáctico</span></div>
+            </article>
+          </div>
+        </div>
+
+        <div class="card" id="contact" style="margin-top:14px">
+          <h2>Contacto</h2>
+          <p class="muted">¿Quieres trabajar conmigo o pedir una práctica? Envíame un mensaje.</p>
+          <form class="contact-form" onsubmit="fakeSubmit(event)">
+            <label>Nombre</label>
+            <input type="text" placeholder="Tu nombre" required />
+            <label>Email</label>
+            <input type="email" placeholder="tu@email.com" required />
+            <label>Mensaje</label>
+            <textarea placeholder="Escribe tu mensaje..." required></textarea>
+            <div style="margin-top:10px;display:flex;gap:8px">
+              <button class="btn btn-primary" type="submit">Enviar</button>
+              <a class="btn btn-ghost" href="mailto:tu-email@ejemplo.com">Enviar por email</a>
+            </div>
+            <p id="sent" style="display:none;margin-top:8px;color:#b7ffd7">Gracias — mensaje listo (simulado).</p>
+          </form>
+        </div>
+      </section>
+
+      <aside class="sidebar">
+        <div class="card section" id="habilidades">
+          <h3>Habilidades</h3>
+          <div class="skill"><strong>Python</strong><div class="bar" title="80%"><i style="width:80%"></i></div></div>
+          <div class="skill"><strong>R</strong><div class="bar" title="65%"><i style="width:65%"></i></div></div>
+          <div class="skill"><strong>SQL</strong><div class="bar" title="70%"><i style="width:70%"></i></div></div>
+          <div class="skill"><strong>Visualización</strong><div class="bar" title="75%"><i style="width:75%"></i></div></div>
+          <div style="margin-top:10px" class="muted">Otras: Git, Bash, Machine Learning básico, Plotly, Scikit-learn</div>
+        </div>
+
+        <div class="card section">
+          <h3>Educación</h3>
+          <p class="muted">Estudiante de <strong>Estadística e Informática</strong> — Universidad (en curso)</p>
+        </div>
+
+        <div class="card section">
+          <h3>Enlaces</h3>
+          <p style="margin:8px 0"><a href="#" class="btn btn-ghost">Descargar CV</a></p>
+          <p style="margin:8px 0"><a href="#proyectos" class="btn btn-ghost">Ver código (GitHub)</a></p>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <small>Diseñado para Luis Ángel — Estudiante de Estadística e Informática. Puedes pedirme cambios (colores, estructura, contenido).</small>
+    </footer>
+  </div>
+
+  <script>
+    function fakeSubmit(e){
+      e.preventDefault();
+      document.getElementById('sent').style.display='block';
+      setTimeout(()=>document.getElementById('sent').innerText='(esto es una demo — conecta un backend para recibir mensajes) ',2500);
+    }
+  </script>
+</body>
+</html>
