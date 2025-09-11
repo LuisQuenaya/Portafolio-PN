@@ -3,77 +3,258 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portafolio – Programación Numérica</title>
-  
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Animaciones AOS -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-  <!-- Fuente -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
+  <title>Portafolio - Programación Numérica</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      background: #0f172a;
-      color: #f1f5f9;
+    :root {
+      --bg: #f6f7f9;
+      --card: #ffffff;
+      --accent: #0f4c81;
+      --accent-2: #1d8fe1;
+      --muted: #6b7280;
+      --radius: 14px;
+      --shadow: 0 6px 18px rgba(11,18,30,0.06);
+      --soft-shadow: 0 8px 24px rgba(11,18,30,0.1);
       font-family: 'Poppins', sans-serif;
     }
-    .card:hover {
-      transform: translateY(-5px);
-      transition: 0.3s ease;
+      
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: #111;
+      line-height: 1.6;
     }
-    .nav-btn:hover {
-      transform: scale(1.1);
-      transition: 0.2s;
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: var(--accent);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 3rem;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+    }
+
+    header h1 { font-size: 1.2rem; font-weight: 600; }
+    nav a {
+      color: white;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    nav a:hover { color: var(--accent-2); }
+
+    .hero {
+      height: 100vh;
+      background: linear-gradient(rgba(15,76,129,0.7), rgba(15,76,129,0.7)), url('https://source.unsplash.com/1600x900/?math,code') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 2rem;
+      animation: fadeIn 2s ease-in;
+    }
+    .hero h2 { font-size: 2.5rem; margin-bottom: 1rem; animation: slideIn 1.5s ease; }
+    .hero p { font-size: 1.2rem; margin-bottom: 2rem; animation: slideIn 2s ease; }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .btn {
+      display: inline-block;
+      text-align: center;
+      padding: 0.8rem 1.5rem;
+      background: var(--accent-2);
+      border: none;
+      border-radius: var(--radius);
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      text-decoration: none;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: var(--soft-shadow);
+      background: var(--accent);
+    }
+
+    .section {
+      max-width: 1200px;
+      margin: 5rem auto;
+      padding: 0 2rem;
+    }
+    .section h3 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      color: var(--accent);
+    }
+
+    .unidad {
+      margin-bottom: 3rem;
+    }
+    .unidad h4 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--accent-2);
+      border-bottom: 2px solid var(--accent-2);
+      padding-bottom: 0.5rem;
+    }
+
+    .actividades {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--soft-shadow);
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(29,143,225,0.1);
+      transition: top 0.5s ease;
+    }
+    .card:hover::before { top: 0; }
+
+    .card h5 { margin-bottom: 1rem; color: var(--accent); }
+
+    footer {
+      background: var(--accent);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
     }
   </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="bg-gradient-to-r from-red-700 to-pink-700 text-white p-6 text-center shadow-lg">
-    <h1 class="text-3xl font-bold">📘 Portafolio – {{ datos.curso }}</h1>
-    <p class="mt-2">Estudiante: <span class="font-semibold">Luis Angel Quenaya Loza</span></p>
-    <p>{{ datos.universidad }} | Docente: {{ datos.docente }} | Sección: {{ datos.seccion }}</p>
+
+  <!-- Navbar -->
+  <header>
+    <h1>Portafolio Digital</h1>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#sobre">Sobre el Curso</a>
+      <a href="#actividades">Actividades</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
   </header>
 
-  <!-- Intro -->
-  <section class="p-8 text-center" data-aos="fade-up">
-    <h2 class="text-2xl font-bold text-red-400">¿Qué es la Programación Numérica?</h2>
-    <p class="mt-4 text-gray-300 max-w-3xl mx-auto">
-      La <span class="font-semibold">Programación Numérica</span> es una rama de la matemática aplicada y la computación 
-      que utiliza métodos algorítmicos para resolver problemas matemáticos de forma aproximada pero eficiente. 
-      Permite abordar situaciones donde las soluciones exactas son imposibles o muy costosas de calcular, con aplicaciones 
-      en ingeniería, ciencias aplicadas, economía y más.
-    </p>
+  <!-- Portada -->
+  <section class="hero" id="inicio">
+    <h2>Universidad Nacional del Altiplano</h2>
+    <p>Facultad de Ingeniería Estadística e Informática<br>
+    Escuela Profesional de Ingeniería Estadística e Informática</p>
+    <h3>Curso: Programación Numérica</h3>
+    <h4>Nombre: Luis Ángel Quenaya Loza</h4>
+    <a href="#actividades" class="btn">Ver Portafolio</a>
   </section>
 
-  <!-- Unidades -->
-  <section class="p-8" data-aos="fade-up">
-    <h2 class="text-2xl font-bold text-center text-red-400">📂 Unidades</h2>
-    <div class="grid md:grid-cols-3 gap-6 mt-6">
-      {% for unidad in datos.unidades %}
-      <div class="card bg-gray-800 rounded-2xl p-6 shadow-lg text-center hover:shadow-red-500/40" data-aos="zoom-in">
-        <h3 class="text-xl font-semibold text-white">{{ unidad.titulo }}</h3>
-        <p class="mt-3 text-gray-300">{{ unidad.descripcion }}</p>
-        <button class="mt-4 px-4 py-2 bg-red-600 text-white rounded-xl hover:bg-red-700 transition nav-btn">
-          Ver {{ unidad.titulo }}
-        </button>
+  <!-- Descripción -->
+  <section class="section" id="sobre">
+    <h3>Sobre el Curso</h3>
+    <p>El curso de <strong>Programación Numérica</strong> se centra en el estudio y aplicación de algoritmos para resolver problemas matemáticos mediante programación. 
+    Se abordan métodos de aproximación, cálculo de raíces, interpolación, integración numérica y resolución de ecuaciones diferenciales.</p>
+    <div class="motivacion" id="motivacion-text">“Innovando con resultados”</div>
+  </section>
+
+  <!-- Actividades -->
+  <section class="section" id="actividades">
+    <h3>Actividades</h3>
+
+    <!-- Unidad 1 -->
+    <p>Es esta unidad se desallorán las actividades iniciales del curso, orientadas a comprender los fundamentos básicos de la progrmacion numérica y su apliacion en la resolución de problemas.</p>
+
+    <div class="unidad">
+      <h4>Unidad 1</h4>
+      <div class="actividades">
+        <div class="card">
+          <h5>Actividad 1</h5>
+          <p>Es esta unidad se desallorán las actividades iniciales del curso, orientadas a comprender los fundamentos básicos de la progrmacion numérica y su apliacion en la resolución de problemas.</p>
+          <a href="pdf/Actividad_1_.pdf" target="_blank" class="btn">Ver PDF</a>          <a href="actividades/unidad1/actividad1.py" download class="btn">Descargar Código</a>
+        </div>
+        <div class="card">
+          <h5>Actividad 2</h5>
+          <p>Próximamente...</p>
+        </div>
       </div>
-      {% endfor %}
+    </div>
+
+    <!-- Unidad 2 -->
+    <div class="unidad">
+      <h4>Unidad 2</h4>
+      <div class="actividades">
+        <div class="card">
+          <h5>Actividad 1</h5>
+          <p>Espacio reservado para la primera actividad de la Unidad 2.</p>
+          <a href="#" class="btn">Ver PDF</a>
+          <a href="#" class="btn">Descargar Código</a>
+        </div>
+        <div class="card">
+          <h5>Actividad 2</h5>
+          <p>Próximamente...</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="text-center p-6 bg-gray-900 mt-10 text-gray-400">
-    © 2025 | Creado por Luis Angel Quenaya Loza 🚀
+  <footer id="contacto">
+    <p>© 2025 Luis Ángel Quenaya Loza | Universidad Nacional del Altiplano</p>
   </footer>
 
-  <!-- Scripts -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- JS Animaciones -->
   <script>
-    AOS.init({ duration: 1000 });
+    // Frases motivacionales dinámicas
+    const frases = [
+      "“Innovando con resultados”",
+      "“Cada código, una solución”",
+      "“De la teoría a la práctica”",
+      "“Conocimiento que construye soluciones”"
+    ];
+    let idx = 0;
+    setInterval(() => {
+      idx = (idx + 1) % frases.length;
+      const el = document.getElementById("motivacion-text");
+      el.style.opacity = 0;
+      setTimeout(() => {
+        el.textContent = frases[idx];
+        el.style.opacity = 1;
+      }, 300);
+    }, 4000);
   </script>
 </body>
 </html>
