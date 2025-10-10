@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portafolio - Programación Numérica</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #00aaff;
+      --accent-2: #00e0ff;
+      --muted: #c9d1d9;
+      --radius: 14px;
+      --shadow: 0 6px 18px rgba(11,18,30,0.3);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0d1117;
+      color: var(--muted);
+      line-height: 1.6;
+      overflow: hidden;
+    }
+
+    /* Fondo animado */
+    canvas#network {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: #0d1117;
+    }
+
+    /* Navbar */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 3rem;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    header h1 { font-size: 1.2rem; font-weight: 600; }
+    nav a {
+      color: white;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    nav a:hover { color: var(--accent-2); }
+
+    /* Logos laterales */
+    .logo-lateral {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 110px;
+      opacity: 0.9;
+      z-index: 500;
+    }
+    .logo-izq { left: 15px; }
+    .logo-der { right: 15px; }
+
+    /* Portada */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 2rem;
+      background: rgba(0,0,0,0.5);
+      animation: fadeIn 2s ease-in;
+    }
+
+    .hero h2 { font-size: 2.5rem; margin-bottom: 1rem; animation: slideIn 1.5s ease; }
+    .hero p { font-size: 1.2rem; margin-bottom: 2rem; animation: slideIn 2s ease; }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      background: var(--accent);
+      border: none;
+      border-radius: var(--radius);
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      text-decoration: none;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+      background: var(--accent-2);
+    }
+
+    /* Secciones */
+    .section {
+      max-width: 1000px;
+      margin: 5rem auto;
+      padding: 3rem;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .section h3 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      color: var(--accent-2);
+    }
+
+    .unidad h4 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0.5rem;
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+
+    #motivacion-text {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #00ffff;
+      margin-top: 1rem;
+      transition: opacity 0.4s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fondo animado -->
+  <canvas id="network"></canvas>
+
+  <!-- Logos laterales -->
+  <img src="imagenes/una puno.jpg" class="logo-lateral logo-izq" alt="UNA Puno" style="width:120px; height:auto;">
+<img src="imagenes/images.jpeg" class="logo-lateral logo-der" alt="Escuela de Informática" style="width:120px; height:auto;">
+
+
+  <!-- Navbar -->
+  <header>
+    <h1>Portafolio Digital</h1>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#sobre">Sobre el Curso</a>
+      <a href="#actividades">Unidades</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <!-- Portada -->
+  <section class="hero" id="inicio">
+    <h2>Universidad Nacional del Altiplano</h2>
+    <p>Facultad de Ingeniería Estadística e Informática<br>
+    Escuela Profesional de Ingeniería Estadística e Informática</p>
+    <h3>Curso: Programación Numérica</h3>
+    <h4>Estudiante: Luis Ángel Quenaya Loza</h4>
+    <a href="#actividades" class="btn">Entrar al Portafolio</a>
+  </section>
+
+  <!-- Descripción -->
+  <section class="section" id="sobre">
+    <h3>Sobre el Curso</h3>
+    <p>
+      En <strong>Programación Numérica</strong> desarrollamos soluciones algorítmicas para problemas matemáticos complejos,
+      aplicando métodos como la interpolación, integración numérica y cálculo de raíces.  
+      El curso busca fortalecer las habilidades de análisis, pensamiento lógico y precisión en la implementación de algoritmos.
+    </p>
+    <div id="motivacion-text">“Innovando con resultados”</div>
+  </section>
+
+  <!-- Unidades -->
+  <section class="section" id="actividades">
+    <h3>Unidades del Curso</h3>
+    <div class="unidad">
+      <h4>Unidad 1</h4>
+      <p>Fundamentos de la programación numérica, estructuras básicas y primeros algoritmos.</p>
+      <a href="unidad1.html" target="_blank" class="btn">Entrar a Unidad 1</a>
+    </div>
+    <div class="unidad">
+      <h4>Unidad 2</h4>
+      <p>Aplicación de métodos numéricos para la resolución de ecuaciones e integración.</p>
+      <a href="unidad2.html" target="_blank" class="btn">Entrar a Unidad 2</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contacto">
+    <p>© 2025 Luis Ángel Quenaya Loza | Universidad Nacional del Altiplano</p>
+  </footer>
+
+  <!-- Frases dinámicas -->
+  <script>
+    const frases = [
+      "“Innovando con resultados”",
+      "“Cada algoritmo es un paso hacia la precisión”",
+      "“Programar es convertir ideas en lógica”",
+      "“El código también puede ser arte”",
+      "“Resolver problemas es nuestra naturaleza”"
+    ];
+    let idx = 0;
+    setInterval(() => {
+      idx = (idx + 1) % frases.length;
+      const el = document.getElementById("motivacion-text");
+      el.style.opacity = 0;
+      setTimeout(() => {
+        el.textContent = frases[idx];
+        el.style.opacity = 1;
+      }, 300);
+    }, 4000);
+
+    // Fondo de redes neuronales
+    const canvas = document.getElementById('network');
+    const ctx = canvas.getContext('2d');
+    let w, h, nodes;
+
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+      nodes = Array(70).fill().map(() => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6
+      }));
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      for (let i = 0; i < nodes.length; i++) {
+        const n1 = nodes[i];
+        n1.x += n1.vx;
+        n1.y += n1.vy;
+        if (n1.x < 0 || n1.x > w) n1.vx *= -1;
+        if (n1.y < 0 || n1.y > h) n1.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(n1.x, n1.y, 2, 0, Math.PI * 2);
+        ctx.fillStyle = '#00ffff';
+        ctx.fill();
+
+        for (let j = i + 1; j < nodes.length; j++) {
+          const n2 = nodes[j];
+          const dx = n1.x - n2.x;
+          const dy = n1.y - n2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
+            ctx.strokeStyle = `rgba(0,255,255,${1 - dist / 120})`;
+            ctx.beginPath();
+            ctx.moveTo(n1.x, n1.y);
+            ctx.lineTo(n2.x, n2.y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  </script>
+</body>
+</html>
