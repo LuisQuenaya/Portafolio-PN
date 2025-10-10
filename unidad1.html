@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unidad 1 - Introducción a las Redes Neuronales</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #00aaff;
+      --accent-2: #00e0ff;
+      --muted: #c9d1d9;
+      --radius: 14px;
+      --shadow: 0 6px 18px rgba(11,18,30,0.3);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0d1117;
+      color: var(--muted);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    canvas#network {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: #0d1117;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 3rem;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    header h1 { font-size: 1.2rem; font-weight: 600; }
+    nav a {
+      color: white;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    nav a:hover { color: var(--accent-2); }
+
+    main {
+      max-width: 1000px;
+      margin: 8rem auto 5rem;
+      padding: 3rem;
+      background: rgba(0,0,0,0.6);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+      animation: fadeIn 2s ease;
+    }
+
+    h2, h3 {
+      color: var(--accent-2);
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    p {
+      text-align: justify;
+      margin-bottom: 1.2rem;
+    }
+
+    .subtemas {
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: rgba(0,0,0,0.7);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px var(--accent-2);
+    }
+
+    .card h4 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      background: var(--accent);
+      border-radius: var(--radius);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+    .btn:hover { background: var(--accent-2); }
+
+    footer {
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fondo animado -->
+  <canvas id="network"></canvas>
+
+  <header>
+    <h1>Unidad 1:</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="unidad2.html">Unidad 2</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Contenido de la Unidad</h2>
+    <p>En esta unidad desarrollaré una tarea sobre los fundamentos y aplicaciones de la programación numérica.</p>
+
+    <h3> Actividades</h3>
+
+    <div class="subtemas">
+      <div class="card">
+        <h4>Tarea 1: Analisis de funciones matematicas en Python</h4>
+
+        <a href="pdf/Actividad_1_.pdf" target="_blank" class="btn">Ver PDF</a>
+      </div>
+    
+      <div class="card">
+        <h4>Tarea 2:  Graficas de funciones lineales en Python.</h4>
+        <a href="pdf/Actividad_2_.pdf" target="_blank" class="btn">Ver Código</a>
+      </div>
+
+      <div class="card">
+        <h4>Tarea 3: Graficas de funciones lineales con ejercicios.</h4>
+        <a href="pdf/actividad_3.pdf" target="_blank" class="btn">Ver PDF</a>
+      </div>
+
+      <div class="card">
+        <h4>Tarea 4: Metodo de Biseccion</h4>
+        <a href="pdf/ACTIVIDAD 4.pdf" target="_blank" class="btn">Ver Código</a>
+      </div>
+
+      <div class="card">
+        <h4>Tarea 5: Metodo de Newton-Raphson en Python</h4>
+        <a href="pdf/Actividad_05.pdf" target="_blank" class="btn">Ver Código</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 - Luis Ángel Quenaya Loza | Unidad 1</p>
+  </footer>
+
+  <script>
+    // Fondo de red neuronal animado
+    const canvas = document.getElementById('network');
+    const ctx = canvas.getContext('2d');
+    let w, h, nodes;
+
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+      nodes = Array(70).fill().map(() => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6
+      }));
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      for (let i = 0; i < nodes.length; i++) {
+        const n1 = nodes[i];
+        n1.x += n1.vx;
+        n1.y += n1.vy;
+        if (n1.x < 0 || n1.x > w) n1.vx *= -1;
+        if (n1.y < 0 || n1.y > h) n1.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(n1.x, n1.y, 2, 0, Math.PI * 2);
+        ctx.fillStyle = '#00ffff';
+        ctx.fill();
+
+        for (let j = i + 1; j < nodes.length; j++) {
+          const n2 = nodes[j];
+          const dx = n1.x - n2.x;
+          const dy = n1.y - n2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
+            ctx.strokeStyle = `rgba(0,255,255,${1 - dist / 120})`;
+            ctx.beginPath();
+            ctx.moveTo(n1.x, n1.y);
+            ctx.lineTo(n2.x, n2.y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  </script>
+</body>
+</html>
