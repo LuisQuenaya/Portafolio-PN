@@ -1,494 +1,409 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Unidad 1 - Programación Numérica</title>
 
   <style>
-    :root{
-      --accent:#0078d7;
-      --accent-2:#009670;
-      --card-bg: #ffffff;
-      --page-bg: #f5f6fa;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
-      background:var(--page-bg);
-      color:#222;
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #0b0c10;
+      color: #f5f6fa;
+      margin: 0;
+      overflow-x: hidden;
     }
 
-    /* Contenedor principal */
-    main{
-      max-width:1000px;
-      margin:48px auto;
-      padding:26px;
-      background:#fff;
-      border-radius:12px;
-      box-shadow:0 6px 22px rgba(0,0,0,0.08);
+    main {
+      max-width: 900px;
+      margin: 80px auto;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     }
 
-    h1,h2,h3{margin:0 0 14px 0}
-    h2{color:var(--accent); text-align:center}
-    p.lead{margin:0 0 18px; color:#444; text-align:center}
-
-    /* Grid tarjetas */
-    .subtemas{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:18px;
-      margin-top:18px;
+    h2 {
+      text-align: center;
+      color: #00aaff;
+      text-shadow: 0 0 5px #00aaff;
     }
 
-    .card{
-      background:var(--card-bg);
-      border-radius:12px;
-      padding:14px;
-      box-shadow:0 3px 12px rgba(0,0,0,0.06);
-      transition:transform .18s ease, box-shadow .18s ease;
-      overflow:visible;
-    }
-    .card:hover{ transform:translateY(-6px); box-shadow:0 10px 28px rgba(0,0,0,0.12); }
-
-    /* Título clicable */
-    .card h4{
-      margin:0;
-      font-size:1rem;
-      cursor:pointer;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      user-select:none;
-    }
-    .chev{
-      margin-left:auto;
-      transition:transform .25s ease;
-      color:var(--accent);
-      font-weight:700;
-    }
-    .card.open .chev{ transform:rotate(90deg) }
-
-    /* Botones de PDF / acciones */
-    .card-actions{
-      margin-top:12px;
-      display:flex;
-      gap:10px;
-      align-items:center;
-    }
-    .btn{
-      background:var(--accent);
-      color:#fff;
-      padding:8px 12px;
-      border-radius:8px;
-      text-decoration:none;
-      font-size:.9rem;
-      border:0;
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-    }
-    .btn.secondary{
-      background:var(--accent-2);
-    }
-    .btn:active{ transform:translateY(1px) }
-
-    /* Panel detalle que se abre */
-    .details{
-      margin-top:12px;
-      display:none;
-      background:#f8fafb;
-      padding:12px;
-      border-radius:8px;
-      border:1px solid rgba(0,0,0,0.04);
-      animation:fadeIn .22s ease;
-    }
-    .details.active{ display:block; }
-
-    .problem{
-      font-size:.95rem;
-      margin-bottom:10px;
-      color:#222;
-      line-height:1.35;
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 15px 25px;
+      margin-bottom: 15px;
+      border-radius: 12px;
+      transition: transform 0.3s ease, background 0.3s ease;
+      cursor: pointer;
     }
 
-    /* Código */
-    pre.code{
-      background:#0f1724; /* dark block for contrast */
-      color:#e6eef8;
-      padding:12px;
-      border-radius:8px;
-      overflow:auto;
-      font-family: "Courier New", monospace;
-      font-size:.9rem;
-      margin:0 0 10px 0;
-    }
-    .code-toolbar{
-      display:flex;
-      justify-content:flex-end;
-      gap:8px;
-      margin-bottom:8px;
-    }
-    .copy-btn{
-      background:transparent;
-      border:1px solid rgba(255,255,255,0.12);
-      color:#fff;
-      padding:6px 10px;
-      border-radius:8px;
-      cursor:pointer;
-      font-size:.85rem;
-    }
-    .copy-btn:active{ transform:translateY(1px) }
-
-    /* PDF embebido */
-    .pdf-wrap{
-      margin-top:8px;
-    }
-    .pdf-frame{
-      width:100%;
-      min-height:360px;
-      border:1px solid rgba(0,0,0,0.06);
-      border-radius:6px;
+    .card:hover {
+      transform: scale(1.03);
+      background: rgba(0, 170, 255, 0.15);
     }
 
-    /* Footer */
-    footer{
-      text-align:center;
-      margin-top:22px;
-      color:#666;
-      font-size:.9rem;
+    .card h4 {
+      color: #00ffcc;
+      margin: 0;
     }
 
-    @keyframes fadeIn{
-      from{ opacity:0; transform:translateY(-6px) }
-      to{ opacity:1; transform:translateY(0) }
+    .actividad-detalle {
+      display: none;
+      margin-top: 20px;
+      background: rgba(255, 255, 255, 0.07);
+      padding: 25px;
+      border-radius: 10px;
+      animation: fadeIn 0.4s ease-in-out;
     }
 
-    /* Responsivo menor pantalla */
-    @media (max-width:520px){
-      pre.code{ font-size:.78rem }
-      .pdf-frame{ min-height:260px }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    pre {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 15px;
+      border-radius: 10px;
+      overflow-x: auto;
+      font-size: 0.9em;
+      color: #00ffcc;
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      height: 400px;
+      border: none;
+      margin-top: 15px;
+      border-radius: 10px;
+    }
+
+    a.btn {
+      display: inline-block;
+      margin-top: 10px;
+      background: #00aaff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    a.btn:hover {
+      background: #0088cc;
+    }
+
+    canvas#network {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #00aaff;
     }
   </style>
 </head>
-
 <body>
+  <canvas id="network"></canvas>
+
   <main>
-    <h2>Contenido de la Unidad</h2>
-    <p class="lead">En esta unidad desarrollaré una tarea sobre los fundamentos y aplicaciones de la programación numérica.</p>
+    <h2>Contenido de la Unidad 1</h2>
+    <p>En esta unidad desarrollaré tareas sobre los fundamentos y aplicaciones de la programación numérica.</p>
 
     <h3>Actividades</h3>
 
-    <div class="subtemas">
+    <!-- TAREA 1 -->
+    <div class="card" onclick="mostrar('tarea1')">
+      <h4>Tarea 1: Análisis de funciones</h4>
+    </div>
+    <div class="actividad-detalle" id="tarea1">
+      <p><strong>Problema:</strong> Se desea desarrollar un programa que, dado una función matemática ingresada por el usuario con un máximo de dos variables, identifique cuáles son esas variables y cuente el número de operaciones presentes, incluyendo sumas, restas, multiplicaciones, divisiones, potencias y multiplicaciones implícitas (como 5x o xy).</p>
+      <h4>Código utilizado:</h4>
+      <pre>
+import tkinter as tk
+from tkinter import ttk, messagebox
+import sympy as sp
+import re
 
-      <!-- === tarjeta 1 === -->
-      <div class="card" data-task="1">
-        <h4 class="task-title">
-          Tarea 1: Análisis de funciones matemáticas en Python
-          <span class="chev">▶</span>
-        </h4>
+def analizar():
+    expresion = entrada.get().strip()
 
-        <div class="card-actions">
-          <!-- Al abrir el detalle también se verá el iframe; este botón mantiene el PDF "como está" -->
-          <a class="btn" href="Actividad_1_.pdf" target="_blank" title="Abrir PDF en nueva pestaña">Abrir PDF</a>
-          <button class="btn secondary" onclick="openDetailsByCard(this)">Mostrar en tarjeta</button>
-        </div>
+    if not expresion:
+        messagebox.showwarning("Error", "Por favor ingresa una expresión matemática.")
+        return
 
-        <div class="details" aria-hidden="true">
-          <div class="problem">
-            <!-- Aquí puedes poner el enunciado real del problema -->
-            <strong>Enunciado:</strong> Implementar una función que reciba un valor x y calcule f(x) = x² + 3x + 2. Mostrar valores de f(x) para x entre -5 y 5.
-          </div>
+    # Reemplazar ^ por ** para potencias
+    expresion = expresion.replace("^", "**")
 
-          <!-- Código ejemplo -->
-          <div class="code-toolbar">
-            <button class="copy-btn" onclick="copyCodeFor(this)">Copiar código</button>
-          </div>
-          <pre class="code" data-lang="python">
-def analizar_funcion(x):
-    return x**2 + 3*x + 2
+    # 🔹 Agregar * cuando falta (ej: 5x -> 5*x, 2y -> 2*y, xy -> x*y)
+    expresion = re.sub(r'(\d)([a-zA-Z])', r'\1*\2', expresion)
+    expresion = re.sub(r'([a-zA-Z])(\d)', r'\1*\2', expresion)
+    expresion = re.sub(r'([a-zA-Z])([a-zA-Z])', r'\1*\2', expresion)
 
-for i in range(-5, 6):
-    print(f"x={i}, f(x)={analizar_funcion(i)}")
-          </pre>
+    try:
+        if "=" in expresion:
+            izquierda, derecha = expresion.split("=")
+            lhs = sp.sympify(izquierda.strip())
+            rhs = sp.sympify(derecha.strip())
+            eq = sp.Eq(lhs, rhs)
+        else:
+            lhs, rhs = sp.symbols("y"), sp.sympify(expresion)
+            eq = sp.Eq(lhs, rhs)
 
-          <!-- PDF embebido -->
-          <div class="pdf-wrap">
-            <object class="pdf-frame" data="Actividad_1_.pdf" type="application/pdf">
-              <!-- Fallback si el navegador no muestra el object -->
-              <p>Tu navegador no puede mostrar el PDF. <a href="Actividad_1_.pdf" target="_blank">Abrir PDF en nueva pestaña</a></p>
-            </object>
-          </div>
-        </div>
-      </div>
+        variables = list(eq.free_symbols)
+        num_vars = len(variables)
 
-      <!-- === tarjeta 2 === -->
-      <div class="card" data-task="2">
-        <h4 class="task-title">
-          Tarea 2: Gráficas de funciones lineales en Python
-          <span class="chev">▶</span>
-        </h4>
+        y = sp.Symbol("y")
+        if y in variables:
+            soluciones = sp.solve(eq, y)
+        else:
+            var_dep = variables[0]
+            soluciones = sp.solve(eq, var_dep)
 
-        <div class="card-actions">
-          <a class="btn" href="Actividad_2_.pdf" target="_blank" title="Abrir PDF en nueva pestaña">Abrir PDF</a>
-          <button class="btn secondary" onclick="openDetailsByCard(this)">Mostrar en tarjeta</button>
-        </div>
+        operaciones = sum(expresion.count(op) for op in "+-*/**")
 
-        <div class="details" aria-hidden="true">
-          <div class="problem">
-            <strong>Enunciado:</strong> Dibujar la recta y = 2x + 3 usando matplotlib. Mostrar leyenda y grid.
-          </div>
+        resultado_texto = f"Expresión: {expresion}\n"
+        resultado_texto += f"Variables encontradas: {', '.join(str(v) for v in variables)}\n"
+        resultado_texto += f"Número de variables: {num_vars}\n"
+        resultado_texto += f"Número de operaciones: {operaciones}\n"
 
-          <div class="code-toolbar">
-            <button class="copy-btn" onclick="copyCodeFor(this)">Copiar código</button>
-          </div>
-          <pre class="code" data-lang="python">
-import matplotlib.pyplot as plt
+        if len(soluciones) == 1:
+            resultado_texto += f" Es función: {soluciones[0]}"
+        elif len(soluciones) > 1:
+            resultado_texto += f"NO es función (múltiples salidas: {soluciones})"
+        else:
+            resultado_texto += " No se pudo determinar si es función."
 
-x = [i for i in range(-10, 11)]
-y = [2*i + 3 for i in x]
+        resultado.set(resultado_texto)
 
-plt.plot(x, y, label='y = 2x + 3')
-plt.legend()
-plt.grid()
-plt.show()
-          </pre>
+    except Exception as e:
+        messagebox.showerror("Error", f"No se pudo analizar la expresión.\n{e}")
 
-          <div class="pdf-wrap">
-            <object class="pdf-frame" data="Actividad_2_.pdf" type="application/pdf">
-              <p>Tu navegador no puede mostrar el PDF. <a href="Actividad_2_.pdf" target="_blank">Abrir PDF</a></p>
-            </object>
-          </div>
-        </div>
-      </div>
+# ---------------------------
+ventana = tk.Tk()
+ventana.title("Analizador Avanzado de Funciones")
+ventana.geometry("500x400")
+ventana.configure(bg="#f4f6f7")
 
-      <!-- === tarjeta 3 === -->
-      <div class="card" data-task="3">
-        <h4 class="task-title">
-          Tarea 3: Gráficas de funciones lineales con ejercicios
-          <span class="chev">▶</span>
-        </h4>
+estilo = ttk.Style()
+estilo.configure("TButton", font=("Arial", 12), padding=6)
+estilo.configure("TLabel", font=("Arial", 12))
 
-        <div class="card-actions">
-          <a class="btn" href="actividad_3.pdf" target="_blank" title="Abrir PDF en nueva pestaña">Abrir PDF</a>
-          <button class="btn secondary" onclick="openDetailsByCard(this)">Mostrar en tarjeta</button>
-        </div>
+titulo = tk.Label(
+    ventana, text="🔎 Analizador Avanzado de Funciones", 
+    font=("Arial", 16, "bold"), bg="#f4f6f7", fg="#2c3e50"
+)
+titulo.pack(pady=10)
 
-        <div class="details" aria-hidden="true">
-          <div class="problem">
-            <strong>Enunciado:</strong> Crear una función que dibuje la recta y = m x + b, recibir m y b como parámetros y mostrar varios ejemplos.
-          </div>
+entrada = ttk.Entry(ventana, font=("Consolas", 14))
+entrada.pack(pady=10, ipadx=20, ipady=5)
 
-          <div class="code-toolbar">
-            <button class="copy-btn" onclick="copyCodeFor(this)">Copiar código</button>
-          </div>
-          <pre class="code" data-lang="python">
-# Ejemplo de función lineal y gráfica
-import matplotlib.pyplot as plt
+btn = ttk.Button(ventana, text="Analizar", command=analizar)
+btn.pack(pady=10)
 
-def linea(m, b):
-    x = [i for i in range(-5, 6)]
-    y = [m*i + b for i in x]
-    plt.plot(x, y)
-    plt.title(f"y = {m}x + {b}")
-    plt.show()
-          </pre>
+resultado = tk.StringVar()
+label_resultado = tk.Label(
+    ventana, textvariable=resultado, 
+    font=("Consolas", 12), bg="#ecf0f1", fg="#2c3e50", 
+    relief="groove", justify="left", anchor="w"
+)
+label_resultado.pack(fill="both", expand=True, padx=20, pady=10)
 
-          <div class="pdf-wrap">
-            <object class="pdf-frame" data="actividad_3.pdf" type="application/pdf">
-              <p>Tu navegador no puede mostrar el PDF. <a href="actividad_3.pdf" target="_blank">Abrir PDF</a></p>
-            </object>
-          </div>
-        </div>
-      </div>
+ventana.mainloop()
+      </pre>
+      <a href="Actividad_1_.pdf" target="_blank" class="btn">Ver PDF</a>
+    </div>
 
-      <!-- === tarjeta 4 === -->
-      <div class="card" data-task="4">
-        <h4 class="task-title">
-          Tarea 4: Método de Bisección
-          <span class="chev">▶</span>
-        </h4>
+    <!-- TAREA 2 -->
+    <div class="card" onclick="mostrar('tarea2')">
+      <h4>Tarea 2: Gráficas de funciones lineales </h4>
+    </div>
+    <div class="actividad-detalle" id="tarea2">
+      <p><strong>Problema:</strong> Se desea desarrollar un programa que, dado una función matemática ingresada por el usuario con un máximo de dos variables, identifique cuáles son esas variables y cuente el número de operaciones presentes, incluyendo sumas, restas, multiplicaciones, divisiones, potencias y multiplicaciones implícitas (como 5x o xy)..</p>
+      <h4>Código utilizado:</h4>
+      <pre>
+def preparar_expresion(expr: str) -> str:
+          expr = expr.replace(" ", "")          # quitar espacios
+          expr = expr.replace("^", "**")        # potencia
+          expr = expr.replace("-x", "-1*x")     # caso -x
+          expr = expr.replace("+x", "+1*x")     # caso +x
+          if expr.startswith("x"):              # si empieza con x
+              expr = "1*" + expr
+          expr = expr.replace("x", "*x")        # poner multiplicación
+          expr = expr.replace("**x", "*x")      # corregir si se duplicó
+          return expr
 
-        <div class="card-actions">
-          <a class="btn" href="ACTIVIDAD%204.pdf" target="_blank" title="Abrir PDF en nueva pestaña">Abrir PDF</a>
-          <button class="btn secondary" onclick="openDetailsByCard(this)">Mostrar en tarjeta</button>
-        </div>
+      # Pedimos las dos funciones
+      func1 = input("Ingrese la primera función (ejemplo: 2x+1): ")
+      func2 = input("Ingrese la segunda función (ejemplo: -x+3): ")
 
-        <div class="details" aria-hidden="true">
-          <div class="problem">
-            <strong>Enunciado:</strong> Implementar el método de bisección para la función f(x) = x³ - x - 2 y aproximar la raíz entre a=1 y b=2.
-          </div>
+      func1 = preparar_expresion(func1)
+      func2 = preparar_expresion(func2)
 
-          <div class="code-toolbar">
-            <button class="copy-btn" onclick="copyCodeFor(this)">Copiar código</button>
-          </div>
-          <pre class="code" data-lang="python">
-def f(x):
-    return x**3 - x - 2
+      # Definimos el rango del gráfico (valores de X y Y)
+      xmin, xmax = -20, 20
+      ymin, ymax = -20, 20
 
-a, b = 1, 2
-for _ in range(10):
-    c = (a + b)/2
-    if f(a)*f(c) < 0:
-        b = c
-    else:
-        a = c
-print("Raíz aproximada:", c)
-          </pre>
+      # Recorremos los valores de Y de arriba hacia abajo
+      for y in range(ymax, ymin - 1, -1):
+          linea = ""
 
-          <div class="pdf-wrap">
-            <object class="pdf-frame" data="ACTIVIDAD%204.pdf" type="application/pdf">
-              <p>Tu navegador no puede mostrar el PDF. <a href="ACTIVIDAD%204.pdf" target="_blank">Abrir PDF</a></p>
-            </object>
-          </div>
-        </div>
-      </div>
+          for x in range(xmin, xmax + 1):
+              try:
+                  y1 = eval(func1)
+              except:
+                  y1 = None
+              try:
+                  y2 = eval(func2)
+              except:
+                  y2 = None
 
-      <!-- === tarjeta 5 === -->
-      <div class="card" data-task="5">
-        <h4 class="task-title">
-          Tarea 5: Método de Newton-Raphson en Python
-          <span class="chev">▶</span>
-        </h4>
+              cond1 = (y1 is not None and abs(y - y1) < 0.5)
+              cond2 = (y2 is not None and abs(y - y2) < 0.5)
 
-        <div class="card-actions">
-          <a class="btn" href="Actividad_05.pdf" target="_blank" title="Abrir PDF en nueva pestaña">Abrir PDF</a>
-          <button class="btn secondary" onclick="openDetailsByCard(this)">Mostrar en tarjeta</button>
-        </div>
+              if cond1 and cond2:
+                  linea += "#"
+              elif cond1:
+                  linea += "*"
+              elif cond2:
+                  linea += "o"
+              elif x == 0 and y == 0:
+                  linea += "+"
+              elif x == 0:
+                  linea += "|"
+              elif y == 0:
+                  linea += "-"
+              else:
+                  linea += " "
+          print(linea)
 
-        <div class="details" aria-hidden="true">
-          <div class="problem">
-            <strong>Enunciado:</strong> Implementar Newton-Raphson para f(x) = x² - 2 con derivada df(x) = 2x. Partir de x0=1 y hacer 5 iteraciones.
-          </div>
+      # Leyenda
+      print("\nLeyenda del gráfico:")
+      print("  * = Función 1")
+      print("  o = Función 2")
+      print("  # = Intersección")
+      print("  | = Eje Y")
+      print("  - = Eje X")
+      print("  + = Origen (0,0)")
+      </pre>
+      <a href="Actividad_2_.pdf" target="_blank" class="btn">Ver PDF</a>
+    </div>
 
-          <div class="code-toolbar">
-            <button class="copy-btn" onclick="copyCodeFor(this)">Copiar código</button>
-          </div>
-          <pre class="code" data-lang="python">
-def f(x): return x**2 - 2
-def df(x): return 2*x
+    <!-- TAREA 3 -->
+    <div class="card" onclick="mostrar('tarea3')">
+      <h4>Tarea 3: Método de Bisección</h4>
+    </div>
+    <div class="actividad-detalle" id="tarea3">
+      <p><strong>Problema:</strong> Las restricciones son condiciones que limitan el conjunto de valores posibles que pueden tomar las variables en un problema. Estas son esenciales en problemas de optimización y en sistemas de ecuaciones, ya que definen la región factible, es decir, el espacio de soluciones posibles. En ese sentido se proponen 5 ejercicios que deben ser desarrollados utilizando las restricciones y el código del anterior trabajo para realizar una representación gráfica.</p>
+      <h4>Enunciado:</h4>
+      <pre>
+      Un desarrollador tiene 15 horas semanales para dedicar al desarrollo de software de front-end (x) y back-end (y). Además:
+• Debe dedicar al menos 5 horas al desarrollo de front-end para cumplir con los entregables del cliente.
+• El tiempo total no puede exceder 15 horas por restricciones de tiempo del sprint.
+Formule las restricciones, represéntelas gráficamente e identifique las combinaciones posibles de tiempo a invertir en cada actividad.
 
-x = 1
-for i in range(5):
-    x = x - f(x)/df(x)
-print("Raíz aproximada:", x)
-          </pre>
+Un ingeniero de datos administra dos tipos de servidores en la nube: Servidores A y Servidores B. El costo por hora de Servidor A es S/3 y de Servidor B es S/5. El presupuesto máximo semanal asignado para mantener los servidores es de S/20.
+Determine cuántas horas puede mantener activos cada tipo de servidor, formule el sistema de ecuaciones y represéntelo gráficamente.
 
-          <div class="pdf-wrap">
-            <object class="pdf-frame" data="Actividad_05.pdf" type="application/pdf">
-              <p>Tu navegador no puede mostrar el PDF. <a href="Actividad_05.pdf" target="_blank">Abrir PDF</a></p>
-            </object>
-          </div>
-        </div>
-      </div>
+Un administrador de proyectos tecnológicos organiza su tiempo entre reuniones con stakeholders (x) y trabajo en la documentación técnica (y). Las reuniones requieren al menos 4 horas semanales y la documentación al menos 6 horas. Si dispone de 12 horas para ambas actividades,
+determine la región factible y analice las combinaciones posibles de tiempo.
 
-      <!-- === si quieres duplicados locales con ./ruta los puedes añadir abajo (mantengo tu estructura original) === -->
+Una empresa de desarrollo de videojuegos produce dos tipos de assets: Modelos 3D (P₁) y Texturas (P₂). Cada modelo 3D requiere 2 horas de trabajo y cada textura requiere 3 horas. El equipo de arte tiene un total de 18 horas disponibles semanalmente.
+Formule las restricciones, represéntelas gráficamente y determine cuántos assets de cada tipo pueden producirse en función del tiempo disponible.
 
-      <div class="card" data-task="1b">
-        <h4 class="task-title">
-          Tarea 1: Análisis de funciones matemáticas en Python (ruta ./)
-          <span class="chev">▶</span>
-        </h4>
+Una startup de hardware dispone de un máximo de 50 unidades de componentes electrónicos. Para ensamblar un dispositivo tipo A se necesitan 5 unidades y para un dispositivo tipo B se necesitan 10 unidades.
+Determine cuántos dispositivos de cada tipo puede ensamblar sin exceder las 50 unidades de componentes. Formule el problema, resuélvalo gráficamente y explique las posibles combinaciones de producción.
+      </pre>
+      <a href="Actividad_3.pdf" target="_blank" class="btn">Ver PDF</a>
+    </div>
 
-        <div class="card-actions">
-          <a class="btn" href="./Actividad_1_.pdf" target="_blank">Abrir PDF</a>
-          <button class="btn secondary" onclick="openDetailsByCard(this)">Mostrar en tarjeta</button>
-        </div>
-
-        <div class="details" aria-hidden="true">
-          <div class="problem"><strong>Enunciado:</strong> (misma tarea, ruta con ./)</div>
-          <div class="code-toolbar">
-            <button class="copy-btn" onclick="copyCodeFor(this)">Copiar código</button>
-          </div>
-          <pre class="code" data-lang="python">
-# Repite el código que ya colocaste arriba o coloca uno nuevo aquí.
-          </pre>
-          <div class="pdf-wrap">
-            <object class="pdf-frame" data="./Actividad_1_.pdf" type="application/pdf">
-              <p>Ver <a href="./Actividad_1_.pdf" target="_blank">Abrir PDF</a></p>
-            </object>
-          </div>
-        </div>
-      </div>
-
-      <!-- puedes añadir más tarjetas siguiendo el mismo patrón -->
-
-    </div> <!-- .subtemas -->
-
-    <footer>
-      <p>© 2025 - Unidad 1 | Programación Numérica</p>
-    </footer>
+    <!-- TAREA 4 -->
+    <div class="card" onclick="mostrar('tarea4')">
+      <h4>Tarea 4: Método de  Regula Falsi</h4>
+    </div>
+    <div class="actividad-detalle" id="tarea4">
+      <p><strong>Problema:</strong>El método de la Regula Falsi, también conocido como falsa posición, es una técnica numérica utilizada para encontrar raíces reales de una ecuación no lineal. Se basa en el principio de interpolación lineal entre dos puntos del intervalo donde la función cambia de signo, garantizando así la existencia de al menos una raíz dentro de ese rango.</p>
+     
+      <a href="ACTIVIDAD 4.pdf" target="_blank" class="btn">Ver PDF</a>
+    </div>
   </main>
 
+                <!-- TAREA 5 -->
+    <div class="card" onclick="mostrar('tarea4')">
+      <h4>Tarea 4: Método de Newton-Rapson</h4>
+    </div>
+    <div class="actividad-detalle" id="tarea4">
+      <p><strong>Problema:</strong>El método de la Newton Rapson, también conocido como falsa posición, es una técnica numérica utilizada para encontrar raíces reales de una ecuación no lineal. Se basa en el principio de interpolación lineal entre dos puntos del intervalo donde la función cambia de signo, garantizando así la existencia de al menos una raíz dentro de ese rango.</p>
+     
+      <a href="Actividad_05.pdf" target="_blank" class="btn">Ver PDF</a>
+    </div>
+  </main>
+  <footer>© 2025 -LUIS ANGEL QUENAYA LOZA</footer>
+
   <script>
-    // Al hacer clic en el título, abre/cierra el panel detalle
-    document.querySelectorAll('.task-title').forEach(title => {
-      title.addEventListener('click', () => {
-        const card = title.closest('.card');
-        toggleCard(card);
-      });
-    });
-
-    // Botón "Mostrar en tarjeta" actuará igualmente
-    function openDetailsByCard(button){
-      const card = button.closest('.card');
-      toggleCard(card);
-      // desplazar suavemente hacia la tarjeta
-      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-
-    function toggleCard(card){
-      const details = card.querySelector('.details');
-      const isOpen = details.classList.contains('active');
-      // cerrar todas para que solo una esté abierta a la vez (opcional)
-      document.querySelectorAll('.card').forEach(c => {
-        c.classList.remove('open');
-        c.querySelectorAll('.details').forEach(d => d.classList.remove('active'));
-      });
-      if(!isOpen){
-        details.classList.add('active');
-        card.classList.add('open');
-        details.setAttribute('aria-hidden','false');
-      } else {
-        details.classList.remove('active');
-        card.classList.remove('open');
-        details.setAttribute('aria-hidden','true');
-      }
-    }
-
-    // Copiar el código del <pre>. La función copyCodeFor toma el botón y copia el <pre> anterior.
-    function copyCodeFor(button){
-      const details = button.closest('.details');
-      const pre = details.querySelector('pre.code');
-      const text = pre.innerText.trim();
-      if(!navigator.clipboard){
-        // fallback
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        document.body.appendChild(ta);
-        ta.select();
-        try{ document.execCommand('copy'); alert('Copiado'); }
-        catch(e){ alert('No se pudo copiar'); }
-        ta.remove();
-        return;
-      }
-      navigator.clipboard.writeText(text).then(()=>{
-        const original = button.innerText;
-        button.innerText = 'Copiado ✓';
-        setTimeout(()=> button.innerText = original, 1800);
-      }).catch(err=>{
-        alert('Error al copiar: ' + err);
+    // Mostrar / ocultar actividades
+    function mostrar(id) {
+      const detalles = document.querySelectorAll('.actividad-detalle');
+      detalles.forEach(d => {
+        if (d.id === id) {
+          d.style.display = (d.style.display === "block") ? "none" : "block";
+        } else {
+          d.style.display = "none";
+        }
       });
     }
 
-    // Si quieres que una tarea específica comience abierta al cargar, descomenta y ajusta:
-    // window.addEventListener('load', () => {
-    //   const first = document.querySelector('.card[data-task="1"]');
-    //   if(first) toggleCard(first);
-    // });
+    // Fondo de red neuronal animado
+    const canvas = document.getElementById('network');
+    const ctx = canvas.getContext('2d');
+    let w, h, nodes;
 
+    function resizeCanvas() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+      nodes = Array(70).fill().map(() => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.8,
+        vy: (Math.random() - 0.5) * 0.8
+      }));
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, w, h);
+      nodes.forEach(a => {
+        a.x += a.vx;
+        a.y += a.vy;
+        if (a.x < 0 || a.x > w) a.vx *= -1;
+        if (a.y < 0 || a.y > h) a.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(a.x, a.y, 2, 0, Math.PI * 2);
+        ctx.fillStyle = "#00aaff";
+        ctx.fill();
+        nodes.forEach(b => {
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.strokeStyle = "rgba(0, 170, 255, 0.12)";
+            ctx.stroke();
+          }
+        });
+      });
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    animate();
   </script>
 </body>
 </html>
