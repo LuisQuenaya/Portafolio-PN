@@ -1,232 +1,202 @@
-<h2>Contenido de la Unidad</h2>
-<p>En esta unidad desarrollaré una tarea sobre los fundamentos y aplicaciones de la programación numérica.</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unidad 1 - Programación Numérica</title>
 
-<h3>Actividades</h3>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f5f6fa;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
 
-<div class="subtemas">
+    main {
+      max-width: 1000px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
 
-  <!-- Tarea 1 -->
-  <div class="card">
-    <img src="img/tarea1.jpg" alt="Tarea 1" class="card-img">
-    <h4>Tarea 1: Análisis de funciones matemáticas en Python</h4>
-    <div class="card-buttons">
-      <a href="Actividad_1_.pdf" target="_blank" class="btn">Ver PDF</a>
-      <button class="btn-code" onclick="toggleCode(this)">Ver código</button>
+    h2, h3 {
+      text-align: center;
+      color: #0078d7;
+    }
+
+    .subtemas {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #0078d7;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      margin-top: 10px;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #005fa3;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #0078d7;
+      color: white;
+      margin-top: 40px;
+      border-radius: 8px 8px 0 0;
+    }
+
+    canvas#network {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="network"></canvas>
+
+  <main>
+    <h2>Contenido de la Unidad</h2>
+    <p>En esta unidad desarrollaré una tarea sobre los fundamentos y aplicaciones de la programación numérica.</p>
+
+    <h3>Actividades</h3>
+
+    <div class="subtemas">
+
+      <div class="card">
+        <h4>Tarea 1: Análisis de funciones matemáticas en Python</h4>
+        <a href="Actividad_1_.pdf" target="_blank" class="btn">Ver PDF</a>
+      </div>
+
+      <div class="card">
+        <h4>Tarea 2: Gráficas de funciones lineales en Python</h4>
+        <a href="Actividad_2_.pdf" target="_blank" class="btn">Ver PDF</a>
+      </div>
+
+      <div class="card">
+        <h4>Tarea 3: Gráficas de funciones lineales con ejercicios</h4>
+        <a href="actividad_3.pdf" target="_blank" class="btn">Ver PDF</a>
+      </div>
+
+      <div class="card">
+        <h4>Tarea 4: Método de Bisección</h4>
+        <a href="ACTIVIDAD%204.pdf" target="_blank" class="btn">Ver PDF</a>
+      </div>
+
+      <div class="card">
+        <h4>Tarea 5: Método de Newton-Raphson en Python</h4>
+        <a href="Actividad_05.pdf" target="_blank" class="btn">Ver PDF</a>
+      </div>
+
+      <div class="card">
+        <h4>Tarea 1: Análisis de funciones matemáticas en Python</h4>
+        <a href="./Actividad_1_.pdf" target="_blank" class="btn">Ver PDF</a>
+      </div>
+
+      <div class="card">
+        <h4>Tarea 2: Gráficas de funciones lineales en Python</h4>
+        <a href="./Actividad_2_.pdf" target="_blank" class="btn">Ver PDF</a>
+      </div>
+
+      <div class="card">
+        <h4>Tarea 3: Gráficas de funciones lineales con ejercicios</h4>
+        <a href="./actividad_3.pdf" target="_blank" class="btn">Ver PDF</a>
+      </div>
+
+      <div class="card">
+        <h4>Tarea 4: Método de Bisección</h4>
+        <a href="./ACTIVIDAD%204.pdf" target="_blank" class="btn">Ver PDF</a>
+      </div>
+
+      <div class="card">
+        <h4>Tarea 5: Método de Newton-Raphson en Python</h4>
+        <a href="./Actividad_05.pdf" target="_blank" class="btn">Ver PDF</a>
+      </div>
+
     </div>
-    <div class="code-box">
-      <pre><code>def analizar_funcion(x):
-    return x**2 + 3*x + 2
+  </main>
 
-for i in range(-5, 6):
-    print(f"x={i}, f(x)={analizar_funcion(i)}")</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">Copiar código</button>
-    </div>
-  </div>
+  <footer>
+    <p>© 2025 - Unidad 1 | Programación Numérica</p>
+  </footer>
 
-  <!-- Tarea 2 -->
-  <div class="card">
-    <img src="img/tarea2.jpg" alt="Tarea 2" class="card-img">
-    <h4>Tarea 2: Gráficas de funciones lineales en Python</h4>
-    <div class="card-buttons">
-      <a href="Actividad_2_.pdf" target="_blank" class="btn">Ver PDF</a>
-      <button class="btn-code" onclick="toggleCode(this)">Ver código</button>
-    </div>
-    <div class="code-box">
-      <pre><code>import matplotlib.pyplot as plt
+  <script>
+    // Fondo de red neuronal animado
+    const canvas = document.getElementById('network');
+    const ctx = canvas.getContext('2d');
+    let w, h, nodes;
 
-x = [i for i in range(-10, 11)]
-y = [2*i + 3 for i in x]
+    function resizeCanvas() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+      nodes = Array(60).fill().map(() => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.7,
+        vy: (Math.random() - 0.5) * 0.7
+      }));
+    }
 
-plt.plot(x, y, label='y = 2x + 3', color='blue')
-plt.legend()
-plt.grid()
-plt.show()</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">Copiar código</button>
-    </div>
-  </div>
+    function animate() {
+      ctx.clearRect(0, 0, w, h);
+      nodes.forEach(a => {
+        a.x += a.vx;
+        a.y += a.vy;
+        if (a.x < 0 || a.x > w) a.vx *= -1;
+        if (a.y < 0 || a.y > h) a.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(a.x, a.y, 2, 0, Math.PI * 2);
+        ctx.fillStyle = "#0078d7";
+        ctx.fill();
+        nodes.forEach(b => {
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.strokeStyle = "rgba(0, 120, 215, 0.15)";
+            ctx.stroke();
+          }
+        });
+      });
+      requestAnimationFrame(animate);
+    }
 
-  <!-- Tarea 3 -->
-  <div class="card">
-    <img src="img/tarea3.jpg" alt="Tarea 3" class="card-img">
-    <h4>Tarea 3: Gráficas de funciones lineales con ejercicios</h4>
-    <div class="card-buttons">
-      <a href="actividad_3.pdf" target="_blank" class="btn">Ver PDF</a>
-      <button class="btn-code" onclick="toggleCode(this)">Ver código</button>
-    </div>
-    <div class="code-box">
-      <pre><code># Ejemplo de función lineal y gráfica
-import matplotlib.pyplot as plt
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    animate();
+  </script>
 
-def linea(m, b):
-    x = [i for i in range(-5, 6)]
-    y = [m*i + b for i in x]
-    plt.plot(x, y)
-    plt.title(f"y = {m}x + {b}")
-    plt.show()</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">Copiar código</button>
-    </div>
-  </div>
-
-  <!-- Tarea 4 -->
-  <div class="card">
-    <img src="img/tarea4.jpg" alt="Tarea 4" class="card-img">
-    <h4>Tarea 4: Método de Bisección</h4>
-    <div class="card-buttons">
-      <a href="ACTIVIDAD%204.pdf" target="_blank" class="btn">Ver PDF</a>
-      <button class="btn-code" onclick="toggleCode(this)">Ver código</button>
-    </div>
-    <div class="code-box">
-      <pre><code>def f(x):
-    return x**3 - x - 2
-
-a, b = 1, 2
-for _ in range(10):
-    c = (a + b)/2
-    if f(a)*f(c) < 0:
-        b = c
-    else:
-        a = c
-print("Raíz aproximada:", c)</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">Copiar código</button>
-    </div>
-  </div>
-
-  <!-- Tarea 5 -->
-  <div class="card">
-    <img src="img/tarea5.jpg" alt="Tarea 5" class="card-img">
-    <h4>Tarea 5: Método de Newton-Raphson en Python</h4>
-    <div class="card-buttons">
-      <a href="Actividad_05.pdf" target="_blank" class="btn">Ver PDF</a>
-      <button class="btn-code" onclick="toggleCode(this)">Ver código</button>
-    </div>
-    <div class="code-box">
-      <pre><code>def f(x): return x**2 - 2
-def df(x): return 2*x
-
-x = 1
-for i in range(5):
-    x = x - f(x)/df(x)
-print("Raíz aproximada:", x)</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">Copiar código</button>
-    </div>
-  </div>
-
-</div>
-
-<!-- JS -->
-<script>
-function toggleCode(btn) {
-  const codeBox = btn.parentElement.nextElementSibling;
-  codeBox.classList.toggle('active');
-}
-
-function copyCode(btn) {
-  const code = btn.previousElementSibling.innerText;
-  navigator.clipboard.writeText(code);
-  btn.innerText = "Copiado ✓";
-  setTimeout(() => btn.innerText = "Copiar código", 2000);
-}
-</script>
-
-<!-- CSS -->
-<style>
-.subtemas {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 25px;
-}
-
-.card {
-  background: #fff;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-}
-
-.card-img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-.card h4 {
-  margin: 10px;
-  text-align: center;
-  color: #333;
-}
-
-.card-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.btn, .btn-code {
-  padding: 8px 14px;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  background-color: #0078d7;
-  cursor: pointer;
-  transition: background 0.3s;
-  text-decoration: none;
-}
-
-.btn-code {
-  background-color: #009670;
-}
-
-.btn:hover { background-color: #005fa3; }
-.btn-code:hover { background-color: #007d5a; }
-
-.code-box {
-  display: none;
-  background-color: #f8f9fa;
-  padding: 10px;
-  margin: 10px;
-  border-radius: 8px;
-  position: relative;
-}
-
-.code-box.active {
-  display: block;
-  animation: fadeIn 0.4s ease;
-}
-
-.code-box pre {
-  overflow-x: auto;
-  font-family: 'Courier New', monospace;
-  font-size: 0.9rem;
-  color: #333;
-}
-
-.copy-btn {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: #0078d7;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 5px 10px;
-  cursor: pointer;
-  font-size: 0.8rem;
-}
-
-.copy-btn:hover {
-  background-color: #005fa3;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-5px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-</style>
-
+</body>
+</html>
