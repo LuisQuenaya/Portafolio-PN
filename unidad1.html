@@ -225,7 +225,7 @@ ventana.mainloop()
       <h4>Tarea 2: Gráficas de funciones lineales </h4>
     </div>
     <div class="actividad-detalle" id="tarea2">
-      <p><strong>Problema:</strong> Se desea desarrollar un programa que, dado una función matemática ingresada por el usuario con un máximo de dos variables, identifique cuáles son esas variables y cuente el número de operaciones presentes, incluyendo sumas, restas, multiplicaciones, divisiones, potencias y multiplicaciones implícitas (como 5x o xy)..</p>
+      <p><strong>Problema:</strong> Se desea desarrollar un programa que, dado una función matemática ingresada por el usuario con un máximo de dos variables, identifique cuáles son esas variables y cuente el número de operaciones presentes...</p>
       <h4>Código utilizado:</h4>
       <pre>
 def preparar_expresion(expr: str) -> str:
@@ -238,59 +238,6 @@ def preparar_expresion(expr: str) -> str:
           expr = expr.replace("x", "*x")        # poner multiplicación
           expr = expr.replace("**x", "*x")      # corregir si se duplicó
           return expr
-
-      # Pedimos las dos funciones
-      func1 = input("Ingrese la primera función (ejemplo: 2x+1): ")
-      func2 = input("Ingrese la segunda función (ejemplo: -x+3): ")
-
-      func1 = preparar_expresion(func1)
-      func2 = preparar_expresion(func2)
-
-      # Definimos el rango del gráfico (valores de X y Y)
-      xmin, xmax = -20, 20
-      ymin, ymax = -20, 20
-
-      # Recorremos los valores de Y de arriba hacia abajo
-      for y in range(ymax, ymin - 1, -1):
-          linea = ""
-
-          for x in range(xmin, xmax + 1):
-              try:
-                  y1 = eval(func1)
-              except:
-                  y1 = None
-              try:
-                  y2 = eval(func2)
-              except:
-                  y2 = None
-
-              cond1 = (y1 is not None and abs(y - y1) < 0.5)
-              cond2 = (y2 is not None and abs(y - y2) < 0.5)
-
-              if cond1 and cond2:
-                  linea += "#"
-              elif cond1:
-                  linea += "*"
-              elif cond2:
-                  linea += "o"
-              elif x == 0 and y == 0:
-                  linea += "+"
-              elif x == 0:
-                  linea += "|"
-              elif y == 0:
-                  linea += "-"
-              else:
-                  linea += " "
-          print(linea)
-
-      # Leyenda
-      print("\nLeyenda del gráfico:")
-      print("  * = Función 1")
-      print("  o = Función 2")
-      print("  # = Intersección")
-      print("  | = Eje Y")
-      print("  - = Eje X")
-      print("  + = Origen (0,0)")
       </pre>
       <a href="Actividad_2_.pdf" target="_blank" class="btn">Ver PDF</a>
     </div>
@@ -300,8 +247,7 @@ def preparar_expresion(expr: str) -> str:
       <h4>Tarea 3: Graficador de funciones y resolucion de ejercicios. </h4>
     </div>
     <div class="actividad-detalle" id="tarea3">
-      <p><strong>Problema:</strong> Las restricciones son condiciones que limitan el conjunto de valores posibles que pueden tomar las variables en un problema. Estas son esenciales en problemas de optimización y en sistemas de ecuaciones, ya que definen la región factible, es decir, el espacio de soluciones posibles. En ese sentido se proponen 5 ejercicios que deben ser desarrollados utilizando las restricciones y el código del anterior trabajo para realizar una representación gráfica.</p>
-      
+      <p><strong>Problema:</strong> Las restricciones son condiciones que limitan el conjunto de valores posibles...</p>
       <a href="Actividad_3.pdf" target="_blank" class="btn">Ver PDF</a>
     </div>
 
@@ -310,43 +256,34 @@ def preparar_expresion(expr: str) -> str:
       <h4>Tarea 4: Método de Biseccion </h4>
     </div>
     <div class="actividad-detalle" id="tarea4">
-      <p><strong>Problema:</strong>El metodo de biseccion es un procedimiento num´erico e iterativo que se utiliza para
-encontrar una ra´ız de una funci´on, es decir, un valor de x que hace que f(x) = 0..</p>
-     
+      <p><strong>Problema:</strong> El metodo de biseccion es un procedimiento num´erico e iterativo...</p>
       <a href="ACTIVIDAD 4.pdf" target="_blank" class="btn">Ver PDF</a>
     </div>
-  </main>
-                <!-- TAREA 5 -->
+
+    <!-- TAREA 5 -->
     <div class="card" onclick="mostrar('tarea5')">
       <h4>Tarea 5:Metodo de Newton Rapson.</h4>
     </div>
     <div class="actividad-detalle" id="tarea5">
       <p><strong>Problema:</strong>El metodo de Newton-Raphson es un procedimiento iterativo que permite obtener una
-aproximaci´on de las ra´ıces reales de una funci´on continua y derivable. Su fundamento se basa
-en el desarrollo del polinomio de Taylor de primer orden alrededor de un punto inicial x0,
-con la siguiente f´ormula recursiva:</p>
-     
+aproximaci´on de las ra´ıces reales...</p>
       <a href="Actividad_05.pdf" target="_blank" class="btn">Ver PDF</a>
     </div>
-  </main>
 
-     <!-- TAREA 6 -->
+    <!-- TAREA 6 -->
     <div class="card" onclick="mostrar('tarea6')">
-      <h4>Tarea 5:Metodo de Newton Rapson.</h4>
+      <h4>Tarea 6: Los otros metodos.</h4>
     </div>
     <div class="actividad-detalle" id="tarea6">
       <p><strong>Problema:</strong>El metodo de Newton-Raphson es un procedimiento iterativo que permite obtener una
-aproximaci´on de las raıces reales de una funci´on continua y derivable. Su fundamento se basa
-en el desarrollo del polinomio de Taylor de primer orden alrededor de un punto inicial x0,
-con la siguiente f´ormula recursiva:</p>
-     
+aproximaci´on de las raıces reales...</p>
       <a href="Actividad6.pdf" target="_blank" class="btn">Ver PDF</a>
     </div>
-  </main>          
+  </main>
+
   <footer>© 2025 -LUIS ANGEL QUENAYA LOZA</footer>
 
   <script>
-    // Mostrar / ocultar actividades
     function mostrar(id) {
       const detalles = document.querySelectorAll('.actividad-detalle');
       detalles.forEach(d => {
@@ -358,7 +295,6 @@ con la siguiente f´ormula recursiva:</p>
       });
     }
 
-    // Fondo de red neuronal animado
     const canvas = document.getElementById('network');
     const ctx = canvas.getContext('2d');
     let w, h, nodes;
@@ -406,5 +342,3 @@ con la siguiente f´ormula recursiva:</p>
   </script>
 </body>
 </html>
-
-
