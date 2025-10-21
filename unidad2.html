@@ -97,7 +97,7 @@
         <div>
           <h3 style="color:var(--azul-1);margin:12px 0 6px 0">🧩 Enunciado</h3>
           <div class="enunciado" id="detailEnunciado" contenteditable="false">
-            <em>👉 El metodo de bisecci´on es un procedimiento iterativo para aproximar las raıces de una
+            <em>👉 El metodo de biseccion es un procedimiento iterativo para aproximar las raıces de una
  funcion continua f(x). Se basa en el teorema de Bolzano, que indica que si f(a) · f(b) < 0
  en un intervalo [a,b], existe al menos una raız dentro del intervalo..</em>
           </div>
@@ -129,7 +129,10 @@ const activities = [
   {
     id: 'a1',
     title: 'Actividad 1 — Método de Bisección',
-    pdf: 'BISECCION.pdf',
+    pdf: 'Actividad1.pdf',
+    description: `El método de bisección es un procedimiento numérico que permite encontrar una raíz de una función continua dentro de un intervalo [a, b]. 
+Se basa en el teorema de Bolzano, que garantiza la existencia de una raíz si f(a) y f(b) tienen signos opuestos. 
+El intervalo se divide sucesivamente hasta que se alcanza una aproximación con el error deseado.`,
     code: `import numpy as np
 import matplotlib.pyplot as plt
 
@@ -185,7 +188,10 @@ plt.show()`
   {
     id: 'a2',
     title: 'Actividad 2 — Método de la Secante',
-    pdf: 'Secante.pdf',
+    pdf: 'Actividad2.pdf',
+    description: `El método de la secante es una técnica iterativa para encontrar raíces sin necesidad de derivadas. 
+Utiliza dos valores iniciales y construye una recta secante entre los puntos (x₀, f(x₀)) y (x₁, f(x₁)). 
+El punto donde esa recta corta el eje x se usa como nueva aproximación. Es más rápido que la bisección, pero menos estable si los puntos iniciales no son adecuados.`,
     code: `import numpy as np
 import matplotlib.pyplot as plt
 
@@ -239,7 +245,10 @@ else:
   {
     id: 'a3',
     title: 'Actividad 3 — Método del Punto Fijo',
-    pdf: 'Puntofijo.pdf',
+    pdf: 'Actividad3.pdf',
+    description: `El método del punto fijo consiste en transformar la ecuación f(x)=0 en una equivalente x=g(x). 
+Luego, se aplica el proceso iterativo xₙ₊₁=g(xₙ). 
+Si g(x) cumple ciertas condiciones de convergencia (como |g’(x)|<1 cerca de la raíz), las aproximaciones convergerán al valor real.`,
     code: `import numpy as np
 import matplotlib.pyplot as plt
 
@@ -287,8 +296,11 @@ for i in range(1, max_iter + 1):
 
   {
     id: 'a4',
-    title: 'Regulafalsi.4 — Método de Regula Falsi',
+    title: 'Actividad 4 — Método de Regula Falsi',
     pdf: 'Actividad4.pdf',
+    description: `El método de Regula Falsi combina las ideas del método de bisección y del método de la secante. 
+Traza una recta entre los puntos (a, f(a)) y (b, f(b)) donde f(a)·f(b)<0, y usa la intersección con el eje x como nueva aproximación. 
+A diferencia de la secante, mantiene el intervalo que encierra la raíz, lo que asegura su convergencia.`,
     code: `import numpy as np
 import matplotlib.pyplot as plt
 
@@ -344,60 +356,62 @@ plt.show()`
   }
 ];
 
+const activitiesGrid = document.getElementById('activitiesGrid');
+const detailScreen = document.getElementById('detailScreen');
+const detailTitle = document.getElementById('detailTitle');
+const detailEnunciado = document.getElementById('detailEnunciado');
+const detailCode = document.getElementById('detailCode');
+const openPdfBtn = document.getElementById('openPdfBtn');
+const downloadCodeBtn = document.getElementById('downloadCodeBtn');
+const closeDetailBtn = document.getElementById('closeDetailBtn');
+const floatingBack = document.getElementById('floatingBack');
+const floatingClose = document.getElementById('floatingClose');
 
-    const activitiesGrid = document.getElementById('activitiesGrid');
-    const detailScreen = document.getElementById('detailScreen');
-    const detailTitle = document.getElementById('detailTitle');
-    const detailEnunciado = document.getElementById('detailEnunciado');
-    const detailCode = document.getElementById('detailCode');
-    const openPdfBtn = document.getElementById('openPdfBtn');
-    const downloadCodeBtn = document.getElementById('downloadCodeBtn');
-    const closeDetailBtn = document.getElementById('closeDetailBtn');
-    const floatingBack = document.getElementById('floatingBack');
-    const floatingClose = document.getElementById('floatingClose');
+let currentActivity = null;
 
-    let currentActivity = null;
+function renderList(){
+  activitiesGrid.innerHTML = '';
+  activities.forEach(act=>{
+    const div = document.createElement('div');
+    div.className = 'card';
+    div.innerHTML = `<h3>${act.title}</h3><p>Haz clic para ver la actividad.</p>`;
+    div.onclick = ()=> openDetail(act);
+    activitiesGrid.appendChild(div);
+  });
+}
 
-    function renderList(){
-      activitiesGrid.innerHTML = '';
-      activities.forEach(act=>{
-        const div = document.createElement('div');
-        div.className = 'card';
-        div.innerHTML = `<h3>${act.title}</h3><p>Haz clic para ver la actividad.</p>`;
-        div.onclick = ()=> openDetail(act);
-        activitiesGrid.appendChild(div);
-      });
-    }
+function openDetail(act){
+  currentActivity = act;
+  detailTitle.textContent = act.title;
+  detailEnunciado.textContent = act.description;
+  detailCode.textContent = act.code;
+  openPdfBtn.onclick = ()=> window.open(act.pdf, '_blank');
+  downloadCodeBtn.onclick = ()=> downloadCode(act.title + '.py', detailCode.innerText);
+  detailScreen.classList.add('show');
+  floatingBack.style.display = 'block';
+}
 
-    function openDetail(act){
-      currentActivity = act;
-      detailTitle.textContent = act.title;
-      detailCode.textContent = act.code;
-      openPdfBtn.onclick = ()=> window.open(act.pdf, '_blank');
-      downloadCodeBtn.onclick = ()=> downloadCode(act.title + '.py', detailCode.innerText);
-      detailScreen.classList.add('show');
-      floatingBack.style.display = 'block';
-    }
+function closeDetail(){
+  detailScreen.classList.remove('show');
+  floatingBack.style.display = 'none';
+}
 
-    function closeDetail(){
-      detailScreen.classList.remove('show');
-      floatingBack.style.display = 'none';
-    }
+closeDetailBtn.addEventListener('click', closeDetail);
+floatingClose.addEventListener('click', closeDetail);
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeDetail(); });
 
-    closeDetailBtn.addEventListener('click', closeDetail);
-    floatingClose.addEventListener('click', closeDetail);
-    document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeDetail(); });
+function downloadCode(name, content){
+  const a=document.getElementById('downloadAnchor');
+  const blob=new Blob([content],{type:'text/x-python'});
+  a.href=URL.createObjectURL(blob);
+  a.download=name;
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
 
-    function downloadCode(name, content){
-      const a=document.getElementById('downloadAnchor');
-      const blob=new Blob([content],{type:'text/x-python'});
-      a.href=URL.createObjectURL(blob);
-      a.download=name;
-      a.click();
-      setTimeout(()=>URL.revokeObjectURL(a.href),1000);
-    }
+renderList();
+</script>
 
-    renderList();
-  </script>
 </body>
 </html>
+
