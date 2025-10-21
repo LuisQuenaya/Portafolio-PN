@@ -1,248 +1,471 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unidad 2 - Actividades</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Actividad 1 — Método de Bisección</title>
   <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: radial-gradient(circle at center, #001f3f, #000);
-      color: white;
-      overflow-x: hidden;
+    :root{
+      --azul-1: #00aaff;
+      --azul-2: #004b9a;
+      --blanco: #ffffff;
+      --negro: #0b0c10;
+      --panel: rgba(255,255,255,0.05);
     }
 
-    header {
-      text-align: center;
-      padding: 40px 20px 20px;
-      background: rgba(0, 0, 0, 0.5);
+    html,body{
+      height:100%;
+      margin:0;
+      background:var(--negro);
+      font-family: "Poppins", Arial, sans-serif;
+      color:var(--blanco);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
-    header h1 {
-      font-size: 2em;
-      color: #00aaff;
+    /* --- canvas layers (background visuals) --- */
+    .bg-canvas {
+      position:fixed;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
     }
 
-    main {
-      max-width: 800px;
-      margin: auto;
-      position: relative;
-      z-index: 2;
+    /* container */
+    .page {
+      position:relative;
+      z-index:2; /* above canvas */
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
     }
 
-    .card {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 15px 20px;
-      border-radius: 15px;
-      margin: 10px 0;
-      cursor: pointer;
-      transition: transform 0.3s, background 0.3s;
+    header{
+      padding:28px 24px;
+      display:flex;
+      align-items:center;
+      gap:16px;
+      background:linear-gradient(90deg, rgba(0,0,0,0.35), rgba(0,0,0,0.1));
+      box-shadow:0 4px 18px rgba(0,0,0,0.6);
     }
 
-    .card:hover {
-      background: rgba(0, 170, 255, 0.2);
-      transform: scale(1.02);
+    header .title {
+      font-size:1.45rem;
+      color:var(--azul-1);
+      text-shadow:0 0 8px rgba(0,170,255,0.12);
+      margin:0;
     }
 
-    .card h4 {
-      margin: 0;
-      color: #00cfff;
+    header .subtitle{
+      color: rgba(255,255,255,0.75);
+      font-size:0.95rem;
+      margin:0;
     }
 
-    /* Vista de actividad completa */
-    .actividad-pantalla {
-      display: none;
-      padding: 40px 20px;
-      background: rgba(0, 0, 0, 0.8);
-      border-radius: 20px;
-      max-width: 900px;
-      margin: 40px auto;
-      line-height: 1.6;
-      animation: fadeIn 0.5s ease-in-out;
+    main.content {
+      max-width:1100px;
+      width: calc(100% - 48px);
+      margin:28px auto;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;
+      padding:24px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* layout columns */
+    .layout {
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:18px;
+    }
+
+    /* left: main article */
+    .panel {
+      background: rgba(0,0,0,0.45);
+      border-radius:10px;
+      padding:18px;
+      min-height:360px;
+    }
+
+    .panel h2 {
+      margin-top:0;
+      color:var(--azul-1);
+      font-size:1.25rem;
+    }
+
+    .enunciado {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:8px;
+      padding:12px;
+      margin-bottom:14px;
+      color: #e7f7ff;
+      line-height:1.45;
+      min-height:120px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+    }
+
+    /* code block style (blue/white/black requested) */
+    pre.code {
+      background: #030409;
+      color: #e6fbff;
+      border-left: 6px solid var(--azul-2);
+      padding:14px;
+      border-radius:8px;
+      overflow:auto;
+      font-family: "Consolas", "Courier New", monospace;
+      font-size:0.92rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+      margin:0;
+    }
+
+    .btn-row {
+      display:flex;
+      gap:12px;
+      margin-top:16px;
+      flex-wrap:wrap;
     }
 
     .btn {
-      display: inline-block;
-      background: #00aaff;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 15px;
-      transition: background 0.3s;
+      background:var(--azul-1);
+      color:var(--negro);
+      padding:10px 16px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:700;
+      border:none;
+      cursor:pointer;
+      box-shadow:0 6px 18px rgba(0,170,255,0.12);
     }
 
-    .btn:hover {
-      background: #0090dd;
+    .btn.secondary {
+      background:#ffffff;
+      color:var(--azul-2);
+      font-weight:700;
     }
 
-    .volver-btn {
-      display: inline-block;
-      background: #ff4757;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 8px;
-      text-decoration: none;
-      margin-bottom: 20px;
-      font-weight: bold;
-      transition: background 0.3s;
+    .btn.ghost {
+      background:transparent;
+      color:var(--blanco);
+      border:1px solid rgba(255,255,255,0.06);
     }
 
-    .volver-btn:hover {
-      background: #e84118;
+    /* right: info column */
+    .aside {
+      display:flex;
+      flex-direction:column;
+      gap:14px;
     }
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.5);
-      color: #ccc;
-      font-size: 0.9em;
-      position: relative;
-      z-index: 2;
+    .card {
+      background:var(--panel);
+      padding:12px;
+      border-radius:10px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
     }
 
-    canvas#network {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 0;
+    .meta {
+      color: rgba(255,255,255,0.85);
+      font-size:0.95rem;
+      margin:0 0 6px 0;
     }
+
+    /* responsive */
+    @media (max-width:980px){
+      .layout{ grid-template-columns:1fr; }
+      .aside{ order:2;}
+    }
+
+    footer.sitefoot {
+      margin-top:26px;
+      padding:22px 0;
+      text-align:center;
+      color: rgba(255,255,255,0.6);
+      font-size:0.9rem;
+    }
+
+    /* small helper for download link hidden */
+    .hidden { display:none; }
   </style>
 </head>
 <body>
-  <canvas id="network"></canvas>
+  <!-- canvases for visuals -->
+  <canvas class="bg-canvas" id="gradCanvas"></canvas>
+  <canvas class="bg-canvas" id="barsCanvas"></canvas>
+  <canvas class="bg-canvas" id="networkCanvas"></canvas>
 
-  <header>
-    <h1>Unidad 1 - Actividades</h1>
-    <p>Curso de Cálculo Numérico</p>
-  </header>
+  <div class="page">
+    <header>
+      <div style="flex:1">
+        <h1 class="title">Actividad 1</h1>
+        <p class="subtitle">Indice H — Vista detallada</p>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <button class="btn" id="btn-pdf" title="Ver PDF (se abre en nueva pestaña)">📘 Ver PDF</button>
+        <button class="btn secondary" id="btn-download">💾 Descargar código</button>
+        <button class="btn ghost" id="btn-back">🔙 Volver a Unidad 1</button>
+      </div>
+    </header>
 
-  <!-- Vista principal -->
-  <main id="menu-principal">
-    <div class="card" onclick="abrirActividad('act1')"><h4>Actividad 1: Método de Bisección</h4></div>
-    <div class="card" onclick="abrirActividad('act2')"><h4>Actividad 2: Método de Falsa Posición</h4></div>
-    <div class="card" onclick="abrirActividad('act3')"><h4>Actividad 3: Método de Punto Fijo</h4></div>
-    <div class="card" onclick="abrirActividad('act4')"><h4>Actividad 4: Método de Secante</h4></div>
-    <div class="card" onclick="abrirActividad('act5')"><h4>Actividad 5: Método de Newton-Raphson</h4></div>
-    <div class="card" onclick="abrirActividad('act6')"><h4>Actividad 6: Los otros métodos</h4></div>
-  </main>
+    <main class="content" role="main">
+      <div class="layout">
+        <!-- left: main content -->
+        <section class="panel">
+          <h2>🧩 Enunciado</h2>
+          <div class="enunciado" id="enunciado">
+            <!-- <<-- Aquí pega tu enunciado después --> -->
+            <!-- // AQUÍ IRÁ EL ENUNCIADO: copia/pega tu texto o HTML -->
+            <em>El índice H (o índice de Hirsch) es un indicador utilizado para medir la productividad científica y el impacto de un investigador, grupo o institución. Se basa en la cantidad de publicaciones y el número de citas que estas reciben. Un autor tiene un índice H igual a h si ha publicado h artículos que han sido citados al menos h veces cada uno..</em>
+          </div>
 
-  <!-- Actividades completas -->
-  <section class="actividad-pantalla" id="act1">
-    <a class="volver-btn" onclick="volver()">⬅ Volver</a>
-    <h2>Actividad 1: Método de Bisección</h2>
-    <p><strong>🧩 Enunciado:</strong> Aquí podrás pegar el enunciado completo de la actividad 1.</p>
-    <p>Aplicar el método de bisección para encontrar la raíz de una función no lineal dentro de un intervalo dado.</p>
-    <a href="Actividad1.pdf" target="_blank" class="btn">Ver PDF</a>
-  </section>
+          <h2>🔢 Aplicación (explicación breve)</h2>
+          <p style="margin:0 0 12px 0;color:#dff7ff;">
+            
+          </p>
 
-  <section class="actividad-pantalla" id="act2">
-    <a class="volver-btn" onclick="volver()">⬅ Volver</a>
-    <h2>Actividad 2: Método de Falsa Posición</h2>
-    <p><strong>🧩 Enunciado:</strong> Aquí podrás pegar el enunciado completo de la actividad 2.</p>
-    <p>Emplear el método de falsa posición para estimar raíces reales con mayor precisión.</p>
-    <a href="Actividad2.pdf" target="_blank" class="btn">Ver PDF</a>
-  </section>
+          <h2>💻 Código de ejemplo</h2>
+          <pre class="code" id="codeBlock">
+# Ejemplo: método de bisección en Python
+def biseccion(f, a, b, tol=1e-6, maxit=100):
+    if f(a) * f(b) >= 0:
+        raise ValueError("El intervalo no cumple cambio de signo")
+    for i in range(maxit):
+        c = (a + b) / 2.0
+        if abs(f(c)) < tol or (b - a)/2.0 < tol:
+            return c, i+1
+        if f(a) * f(c) < 0:
+            b = c
+        else:
+            a = c
+    return c, maxit
+          </pre>
 
-  <section class="actividad-pantalla" id="act3">
-    <a class="volver-btn" onclick="volver()">⬅ Volver</a>
-    <h2>Actividad 3: Método de Punto Fijo</h2>
-    <p><strong>🧩 Enunciado:</strong> Aquí podrás pegar el enunciado completo de la actividad 3.</p>
-    <p>Aplicar el método de punto fijo para hallar soluciones aproximadas a ecuaciones no lineales.</p>
-    <a href="Actividad3.pdf" target="_blank" class="btn">Ver PDF</a>
-  </section>
+          <div class="btn-row">
+            <button class="btn" id="btn-pdf-2">📘 Abrir PDF</button>
+            <button class="btn secondary" id="btn-download-2">💾 Descargar código (.py)</button>
+          </div>
+        </section>
 
-  <section class="actividad-pantalla" id="act4">
-    <a class="volver-btn" onclick="volver()">⬅ Volver</a>
-    <h2>Actividad 4: Método de Secante</h2>
-    <p><strong>🧩 Enunciado:</strong> Aquí podrás pegar el enunciado completo de la actividad 4.</p>
-    <p>Utilizar el método de la secante para resolver ecuaciones no lineales de forma iterativa.</p>
-    <a href="Actividad4.pdf" target="_blank" class="btn">Ver PDF</a>
-  </section>
+        <!-- right: aside -->
+        <aside class="aside">
+          <div class="card">
+            <p class="meta"><strong>Materia:</strong> Programación Numérica</p>
+            <p class="meta"><strong>Profesor:</strong> [Tu profesor]</p>
+            <p class="meta"><strong>Entrega:</strong> Fecha / Observaciones</p>
+          </div>
 
-  <section class="actividad-pantalla" id="act5">
-    <a class="volver-btn" onclick="volver()">⬅ Volver</a>
-    <h2>Actividad 5: Método de Newton-Raphson</h2>
-    <p><strong>🧩 Enunciado:</strong> Aquí podrás pegar el enunciado completo de la actividad 5.</p>
-    <p>Implementar el método de Newton-Raphson para hallar raíces reales mediante derivadas sucesivas.</p>
-    <a href="Actividad5.pdf" target="_blank" class="btn">Ver PDF</a>
-  </section>
+          <div class="card">
+            <p class="meta"><strong>Recursos</strong></p>
+            <ul style="margin:6px 0 0 18px;color:rgba(255,255,255,0.9)">
+              <li>Documento PDF de la actividad</li>
+              <li>Ejemplos de código</li>
+              <li>Gráficas y resultados</li>
+            </ul>
+          </div>
 
-  <section class="actividad-pantalla" id="act6">
-    <a class="volver-btn" onclick="volver()">⬅ Volver</a>
-    <h2>Actividad 6: Los otros métodos</h2>
-    <p><strong>🧩 Enunciado:</strong> Aquí podrás pegar el enunciado completo de la actividad 6.</p>
-    <p>El método de Newton-Raphson es un procedimiento iterativo que permite obtener una aproximación de las raíces reales...</p>
-    <a href="Actividad6.pdf" target="_blank" class="btn">Ver PDF</a>
-  </section>
+          <div class="card">
+            <p class="meta"><strong>Notas rápidas</strong></p>
+            <p style="margin:6px 0 0 0;color:rgba(255,255,255,0.9)">
+              Puedes pegar aquí el enunciado y luego actualizar el bloque de código o imágenes.
+            </p>
+          </div>
+        </aside>
+      </div>
 
-  <footer>© 2025 - LUIS ANGEL QUENAYA LOZA</footer>
+      <footer class="sitefoot">© 2025 - LUIS ANGEL QUENAYA LOZA</footer>
+    </main>
+  </div>
+
+  <!-- hidden anchor for download (used by JS) -->
+  <a id="downloadLink" class="hidden"></a>
 
   <script>
-    function abrirActividad(id) {
-      document.getElementById('menu-principal').style.display = 'none';
-      document.querySelectorAll('.actividad-pantalla').forEach(a => a.style.display = 'none');
-      document.getElementById(id).style.display = 'block';
-      window.scrollTo(0, 0);
+    /* --------- Config (ruta de PDF y nombre del archivo de código) --------- */
+    const PDF_PATH = 'Actividad1.pdf'; // debe estar en la misma carpeta
+    const CODE_FILENAME = 'actividad1_biseccion.py';
+
+    /* ---------- Buttons ---------- */
+    document.getElementById('btn-pdf').addEventListener('click', () => {
+      window.open(PDF_PATH, '_blank');
+    });
+    document.getElementById('btn-pdf-2').addEventListener('click', () => {
+      window.open(PDF_PATH, '_blank');
+    });
+
+    // Download code: toma el contenido del <pre id="codeBlock"> y descarga .py
+    function downloadCode(filename) {
+      const code = document.getElementById('codeBlock').innerText;
+      const blob = new Blob([code], { type: 'text/x-python;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.getElementById('downloadLink');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+    document.getElementById('btn-download').addEventListener('click', () => downloadCode(CODE_FILENAME));
+    document.getElementById('btn-download-2').addEventListener('click', () => downloadCode(CODE_FILENAME));
+
+    // Back button -> vuelve a unidad1.html
+    document.getElementById('btn-back').addEventListener('click', () => {
+      // si prefieres volver dentro del mismo proyecto (sin recargar), cambia aquí
+      window.location.href = 'unidad1.html';
+    });
+
+    /* ------------------ Animated background: gradient + bars + network ------------------ */
+    const gradCanvas = document.getElementById('gradCanvas');
+    const barsCanvas = document.getElementById('barsCanvas');
+    const netCanvas = document.getElementById('networkCanvas');
+
+    const gctx = gradCanvas.getContext('2d');
+    const bctx = barsCanvas.getContext('2d');
+    const nctx = netCanvas.getContext('2d');
+
+    let W = gradCanvas.width = barsCanvas.width = netCanvas.width = window.innerWidth;
+    let H = gradCanvas.height = barsCanvas.height = netCanvas.height = window.innerHeight;
+
+    // resize
+    window.addEventListener('resize', () => {
+      W = gradCanvas.width = barsCanvas.width = netCanvas.width = window.innerWidth;
+      H = gradCanvas.height = barsCanvas.height = netCanvas.height = window.innerHeight;
+      initBars();
+      initNodes();
+    });
+
+    /* -------- animated gradient (smooth moving) -------- */
+    let t = 0;
+    function drawGradient() {
+      t += 0.003;
+      const g = gctx;
+      const grd = g.createLinearGradient(0, 0, W * Math.cos(t*0.8), H * Math.sin(t*0.5) + H);
+      grd.addColorStop(0, 'rgba(0,20,60,0.85)');
+      grd.addColorStop(0.3, 'rgba(0,90,150,0.25)');
+      grd.addColorStop(0.6, 'rgba(10,120,200,0.18)');
+      grd.addColorStop(1, 'rgba(0,0,0,0.85)');
+      g.clearRect(0,0,W,H);
+      g.fillStyle = grd;
+      g.fillRect(0,0,W,H);
+      // soft overlay radial
+      const rg = g.createRadialGradient(W*0.8, H*0.2, 100, W*0.8, H*0.2, 800);
+      rg.addColorStop(0, 'rgba(255,255,255,0.03)');
+      rg.addColorStop(1, 'rgba(0,0,0,0)');
+      g.fillStyle = rg;
+      g.fillRect(0,0,W,H);
     }
 
-    function volver() {
-      document.getElementById('menu-principal').style.display = 'block';
-      document.querySelectorAll('.actividad-pantalla').forEach(a => a.style.display = 'none');
-    }
-
-    const canvas = document.getElementById('network');
-    const ctx = canvas.getContext('2d');
-    let w, h, nodes;
-
-    function resizeCanvas() {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-      nodes = Array(70).fill().map(() => ({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.8,
-        vy: (Math.random() - 0.5) * 0.8
-      }));
-    }
-
-    function animate() {
-      ctx.clearRect(0, 0, w, h);
-      nodes.forEach(a => {
-        a.x += a.vx;
-        a.y += a.vy;
-        if (a.x < 0 || a.x > w) a.vx *= -1;
-        if (a.y < 0 || a.y > h) a.vy *= -1;
-        ctx.beginPath();
-        ctx.arc(a.x, a.y, 2, 0, Math.PI * 2);
-        ctx.fillStyle = "#00aaff";
-        ctx.fill();
-        nodes.forEach(b => {
-          const dx = a.x - b.x, dy = a.y - b.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 120) {
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = "rgba(0, 170, 255, 0.12)";
-            ctx.stroke();
-          }
+    /* -------- animated histogram bars (moving) -------- */
+    let bars = [];
+    const BAR_COUNT = Math.floor(Math.max(12, W / 60));
+    function initBars(){
+      bars = [];
+      for(let i=0;i<BAR_COUNT;i++){
+        bars.push({
+          x: i * (W / BAR_COUNT),
+          w: Math.max(10, (W / BAR_COUNT) * 0.6),
+          h: Math.random() * (H * 0.35) + 20,
+          speed: 0.5 + Math.random() * 1.2,
+          phase: Math.random() * Math.PI * 2
         });
-      });
+      }
+    }
+    initBars();
+
+    function drawBars(now){
+      bctx.clearRect(0,0,W,H);
+      // semi-transparent band (bottom) to place histogram feeling
+      bctx.save();
+      for(let i=0;i<bars.length;i++){
+        const bar = bars[i];
+        const hh = (Math.sin(now/1000 * bar.speed + bar.phase) * 0.5 + 0.5) * (H*0.35) + 10;
+        const x = bar.x + 8;
+        const y = H - hh - 40;
+        const gradient = bctx.createLinearGradient(x, y, x, y + hh);
+        gradient.addColorStop(0, 'rgba(0,170,255,0.95)');
+        gradient.addColorStop(0.6, 'rgba(255,255,255,0.12)');
+        gradient.addColorStop(1, 'rgba(0,0,0,0.05)');
+        bctx.fillStyle = gradient;
+        bctx.fillRect(x, y, bar.w, hh);
+        // glow
+        bctx.globalAlpha = 0.08;
+        bctx.fillStyle = 'rgba(0,170,255,0.4)';
+        bctx.fillRect(x-6, y-6, bar.w+12, hh+12);
+        bctx.globalAlpha = 1;
+      }
+      bctx.restore();
+    }
+
+    /* -------- network nodes and connecting lines (neural net look) -------- */
+    let nodes = [];
+    const NODE_COUNT = Math.floor(Math.max(40, W / 20));
+
+    function initNodes(){
+      nodes = [];
+      for(let i=0;i<NODE_COUNT;i++){
+        nodes.push({
+          x: Math.random()*W,
+          y: Math.random()*H,
+          vx: (Math.random()-0.5)*0.6,
+          vy: (Math.random()-0.5)*0.6,
+          r: 1 + Math.random()*2
+        });
+      }
+    }
+    initNodes();
+
+    function drawNetwork(){
+      nctx.clearRect(0,0,W,H);
+      nctx.lineWidth = 1;
+      for(let i=0;i<nodes.length;i++){
+        const a = nodes[i];
+        a.x += a.vx; a.y += a.vy;
+        if(a.x < 0 || a.x > W) a.vx *= -1;
+        if(a.y < 0 || a.y > H) a.vy *= -1;
+        // draw point
+        nctx.beginPath();
+        nctx.arc(a.x, a.y, a.r, 0, Math.PI*2);
+        nctx.fillStyle = 'rgba(0,170,255,0.9)';
+        nctx.fill();
+        // connect
+        for(let j=i+1;j<nodes.length;j++){
+          const b = nodes[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          if(dist < 120){
+            nctx.beginPath();
+            nctx.moveTo(a.x, a.y);
+            nctx.lineTo(b.x, b.y);
+            nctx.strokeStyle = 'rgba(0,170,255,' + (0.12 * (1 - dist/120)) + ')';
+            nctx.stroke();
+          }
+        }
+      }
+    }
+
+    /* -------- main loop -------- */
+    function animate(now){
+      drawGradient();
+      drawBars(now);
+      drawNetwork();
       requestAnimationFrame(animate);
     }
+    requestAnimationFrame(animate);
 
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-    animate();
+    /* init sizes */
+    window.addEventListener('load', () => {
+      W = gradCanvas.width = barsCanvas.width = netCanvas.width = window.innerWidth;
+      H = gradCanvas.height = barsCanvas.height = netCanvas.height = window.innerHeight;
+      initBars();
+      initNodes();
+    });
+
+    /* small touch: if user wants to paste enunciado quickly by double-click, allow edit */
+    document.getElementById('enunciado').addEventListener('dblclick', (e) => {
+      const el = e.currentTarget;
+      if(!el.isContentEditable){
+        el.contentEditable = true;
+        el.style.outline = '2px dashed rgba(0,170,255,0.18)';
+        el.focus();
+      }
+    });
   </script>
 </body>
 </html>
