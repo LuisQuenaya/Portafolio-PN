@@ -138,9 +138,62 @@
 
           <h3 style="color:var(--azul-1);margin:14px 0 6px 0">💻 Código de ejemplo</h3>
           <pre class="code" id="detailCode">
-# Ejemplo de plantilla (reemplaza por tu código)
-def ejemplo():
-    print("Código de ejemplo")
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+func_str = input("Ingrese la función f(x): ")  
+
+def f(x):
+    return eval(func_str, {"np": np, "x": x})
+
+
+a = float(input("Ingrese el valor inicial a: "))
+b = float(input("Ingrese el valor inicial b: "))
+
+tol = 1e-6
+max_iter = 100
+
+
+print("\nIter | a        | b        | xm       | f(xm)    | Error")
+print("--------------------------------------------------------")
+
+
+for i in range(1, max_iter+1):
+    xm = (a + b)/2
+    fxm = f(xm)
+    error = (b - a)/2
+    print(f"{i:4d} | {a:8.6f} | {b:8.6f} | {xm:8.6f} | {fxm:8.6f} | {error:8.6f}")
+    
+    if abs(fxm) < tol or error < tol:
+        raiz = xm
+        print(f"\nRaíz aproximada: {raiz:.6f} encontrada en {i} iteraciones")
+        break
+    
+    if f(a)*fxm < 0:
+        b = xm
+    else:
+        a = xm
+else:
+    print("\nNo se alcanzó la convergencia después del máximo de iteraciones")
+
+
+margen = (b - a)*0.1
+xmin = a - margen
+xmax = b + margen
+x = np.linspace(xmin, xmax, 400)
+y = f(x)
+
+plt.plot(x, y, label=f"f(x) = {func_str}")
+plt.axhline(0, color='black', linestyle='--')
+plt.axvline(raiz, color='red', linestyle='--', label=f"Raíz ≈ {raiz:.6f}")
+plt.title("Método de Bisección")
+plt.xlabel("x")
+plt.ylabel("f(x)")
+plt.legend()
+plt.grid(True)
+plt.show()
+
           </pre>
         </div>
 
@@ -418,3 +471,4 @@ def ejemplo():
   </script>
 </body>
 </html>
+
