@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unidad 1 - Actividades</title>
+  <title>Unidad 2 - Actividades</title>
   <style>
     body {
       margin: 0;
@@ -50,17 +50,21 @@
       color: #00cfff;
     }
 
-    .actividad-detalle {
+    /* Vista de actividad completa */
+    .actividad-pantalla {
       display: none;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
-      padding: 15px 20px;
-      margin: 8px 0 15px;
-      line-height: 1.5;
+      padding: 40px 20px;
+      background: rgba(0, 0, 0, 0.8);
+      border-radius: 20px;
+      max-width: 900px;
+      margin: 40px auto;
+      line-height: 1.6;
+      animation: fadeIn 0.5s ease-in-out;
     }
 
-    .actividad-detalle strong {
-      color: #00aaff;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .btn {
@@ -71,11 +75,28 @@
       border-radius: 8px;
       text-decoration: none;
       font-weight: bold;
-      margin-top: 10px;
+      margin-top: 15px;
+      transition: background 0.3s;
     }
 
     .btn:hover {
       background: #0090dd;
+    }
+
+    .volver-btn {
+      display: inline-block;
+      background: #ff4757;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      margin-bottom: 20px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .volver-btn:hover {
+      background: #e84118;
     }
 
     footer {
@@ -104,74 +125,78 @@
     <p>Curso de Cálculo Numérico</p>
   </header>
 
-  <main>
-    <!-- ACTIVIDAD 1 -->
-    <div class="card" onclick="mostrar('actividad1')">
-      <h4>Actividad 1: Método de Bisección</h4>
-    </div>
-    <div class="actividad-detalle" id="actividad1">
-      <p><strong>Problema:</strong> Aplicar el método de bisección para encontrar la raíz de una función no lineal dentro de un intervalo dado.</p>
-      <a href="Actividad1.pdf" target="_blank" class="btn">Ver PDF</a>
-    </div>
-
-    <!-- ACTIVIDAD 2 -->
-    <div class="card" onclick="mostrar('actividad2')">
-      <h4>Actividad 2: Método de Falsa Posición</h4>
-    </div>
-    <div class="actividad-detalle" id="actividad2">
-      <p><strong>Problema:</strong> Emplear el método de falsa posición para estimar raíces reales con mayor precisión.</p>
-      <a href="Actividad2.pdf" target="_blank" class="btn">Ver PDF</a>
-    </div>
-
-    <!-- ACTIVIDAD 3 -->
-    <div class="card" onclick="mostrar('actividad3')">
-      <h4>Actividad 3: Método de Punto Fijo</h4>
-    </div>
-    <div class="actividad-detalle" id="actividad3">
-      <p><strong>Problema:</strong> Aplicar el método de punto fijo para hallar soluciones aproximadas a ecuaciones no lineales.</p>
-      <a href="Actividad3.pdf" target="_blank" class="btn">Ver PDF</a>
-    </div>
-
-    <!-- ACTIVIDAD 4 -->
-    <div class="card" onclick="mostrar('actividad4')">
-      <h4>Actividad 4: Método de Secante</h4>
-    </div>
-    <div class="actividad-detalle" id="actividad4">
-      <p><strong>Problema:</strong> Utilizar el método de la secante para resolver ecuaciones no lineales de forma iterativa.</p>
-      <a href="Actividad4.pdf" target="_blank" class="btn">Ver PDF</a>
-    </div>
-
-    <!-- ACTIVIDAD 5 -->
-    <div class="card" onclick="mostrar('actividad5')">
-      <h4>Actividad 5: Método de Newton-Raphson</h4>
-    </div>
-    <div class="actividad-detalle" id="actividad5">
-      <p><strong>Problema:</strong> Implementar el método de Newton-Raphson para hallar raíces reales mediante derivadas sucesivas.</p>
-      <a href="Actividad5.pdf" target="_blank" class="btn">Ver PDF</a>
-    </div>
-
-    <!-- ACTIVIDAD 6 -->
-    <div class="card" onclick="mostrar('actividad6')">
-      <h4>Actividad 6: Los otros métodos</h4>
-    </div>
-    <div class="actividad-detalle" id="actividad6">
-      <p><strong>Problema:</strong> El método de Newton-Raphson es un procedimiento iterativo que permite obtener una aproximación de las raíces reales...</p>
-      <a href="Actividad6.pdf" target="_blank" class="btn">Ver PDF</a>
-    </div>
+  <!-- Vista principal -->
+  <main id="menu-principal">
+    <div class="card" onclick="abrirActividad('act1')"><h4>Actividad 1: Método de Bisección</h4></div>
+    <div class="card" onclick="abrirActividad('act2')"><h4>Actividad 2: Método de Falsa Posición</h4></div>
+    <div class="card" onclick="abrirActividad('act3')"><h4>Actividad 3: Método de Punto Fijo</h4></div>
+    <div class="card" onclick="abrirActividad('act4')"><h4>Actividad 4: Método de Secante</h4></div>
+    <div class="card" onclick="abrirActividad('act5')"><h4>Actividad 5: Método de Newton-Raphson</h4></div>
+    <div class="card" onclick="abrirActividad('act6')"><h4>Actividad 6: Los otros métodos</h4></div>
   </main>
+
+  <!-- Actividades completas -->
+  <section class="actividad-pantalla" id="act1">
+    <a class="volver-btn" onclick="volver()">⬅ Volver</a>
+    <h2>Actividad 1: Método de Bisección</h2>
+    <p><strong>🧩 Enunciado:</strong> Aquí podrás pegar el enunciado completo de la actividad 1.</p>
+    <p>Aplicar el método de bisección para encontrar la raíz de una función no lineal dentro de un intervalo dado.</p>
+    <a href="Actividad1.pdf" target="_blank" class="btn">Ver PDF</a>
+  </section>
+
+  <section class="actividad-pantalla" id="act2">
+    <a class="volver-btn" onclick="volver()">⬅ Volver</a>
+    <h2>Actividad 2: Método de Falsa Posición</h2>
+    <p><strong>🧩 Enunciado:</strong> Aquí podrás pegar el enunciado completo de la actividad 2.</p>
+    <p>Emplear el método de falsa posición para estimar raíces reales con mayor precisión.</p>
+    <a href="Actividad2.pdf" target="_blank" class="btn">Ver PDF</a>
+  </section>
+
+  <section class="actividad-pantalla" id="act3">
+    <a class="volver-btn" onclick="volver()">⬅ Volver</a>
+    <h2>Actividad 3: Método de Punto Fijo</h2>
+    <p><strong>🧩 Enunciado:</strong> Aquí podrás pegar el enunciado completo de la actividad 3.</p>
+    <p>Aplicar el método de punto fijo para hallar soluciones aproximadas a ecuaciones no lineales.</p>
+    <a href="Actividad3.pdf" target="_blank" class="btn">Ver PDF</a>
+  </section>
+
+  <section class="actividad-pantalla" id="act4">
+    <a class="volver-btn" onclick="volver()">⬅ Volver</a>
+    <h2>Actividad 4: Método de Secante</h2>
+    <p><strong>🧩 Enunciado:</strong> Aquí podrás pegar el enunciado completo de la actividad 4.</p>
+    <p>Utilizar el método de la secante para resolver ecuaciones no lineales de forma iterativa.</p>
+    <a href="Actividad4.pdf" target="_blank" class="btn">Ver PDF</a>
+  </section>
+
+  <section class="actividad-pantalla" id="act5">
+    <a class="volver-btn" onclick="volver()">⬅ Volver</a>
+    <h2>Actividad 5: Método de Newton-Raphson</h2>
+    <p><strong>🧩 Enunciado:</strong> Aquí podrás pegar el enunciado completo de la actividad 5.</p>
+    <p>Implementar el método de Newton-Raphson para hallar raíces reales mediante derivadas sucesivas.</p>
+    <a href="Actividad5.pdf" target="_blank" class="btn">Ver PDF</a>
+  </section>
+
+  <section class="actividad-pantalla" id="act6">
+    <a class="volver-btn" onclick="volver()">⬅ Volver</a>
+    <h2>Actividad 6: Los otros métodos</h2>
+    <p><strong>🧩 Enunciado:</strong> Aquí podrás pegar el enunciado completo de la actividad 6.</p>
+    <p>El método de Newton-Raphson es un procedimiento iterativo que permite obtener una aproximación de las raíces reales...</p>
+    <a href="Actividad6.pdf" target="_blank" class="btn">Ver PDF</a>
+  </section>
 
   <footer>© 2025 - LUIS ANGEL QUENAYA LOZA</footer>
 
   <script>
-    function mostrar(id) {
-      const detalles = document.querySelectorAll('.actividad-detalle');
-      detalles.forEach(d => {
-        if (d.id === id) {
-          d.style.display = (d.style.display === "block") ? "none" : "block";
-        } else {
-          d.style.display = "none";
-        }
-      });
+    function abrirActividad(id) {
+      document.getElementById('menu-principal').style.display = 'none';
+      document.querySelectorAll('.actividad-pantalla').forEach(a => a.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+      window.scrollTo(0, 0);
+    }
+
+    function volver() {
+      document.getElementById('menu-principal').style.display = 'block';
+      document.querySelectorAll('.actividad-pantalla').forEach(a => a.style.display = 'none');
     }
 
     const canvas = document.getElementById('network');
@@ -221,4 +246,3 @@
   </script>
 </body>
 </html>
-
