@@ -3,228 +3,106 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Actividad 1 — Método de Bisección</title>
+  <title>Unidades - Actividades (Interfaz única)</title>
   <style>
     :root{
-      --azul-1: #00aaff;
-      --azul-2: #004b9a;
-      --blanco: #ffffff;
-      --negro: #0b0c10;
+      --azul-1:#00aaff; --azul-2:#004b9a; --blanco:#ffffff; --negro:#0b0c10;
       --panel: rgba(255,255,255,0.05);
     }
-
-    html,body{
-      height:100%;
-      margin:0;
-      background:var(--negro);
-      font-family: "Poppins", Arial, sans-serif;
-      color:var(--blanco);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-    }
-
-    /* --- canvas layers (background visuals) --- */
-    .bg-canvas {
-      position:fixed;
-      inset:0;
-      z-index:0;
-      pointer-events:none;
-    }
-
-    /* container */
-    .page {
-      position:relative;
-      z-index:2; /* above canvas */
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-    }
-
-    header{
-      padding:28px 24px;
-      display:flex;
-      align-items:center;
-      gap:16px;
-      background:linear-gradient(90deg, rgba(0,0,0,0.35), rgba(0,0,0,0.1));
-      box-shadow:0 4px 18px rgba(0,0,0,0.6);
-    }
-
-    header .title {
-      font-size:1.45rem;
-      color:var(--azul-1);
-      text-shadow:0 0 8px rgba(0,170,255,0.12);
-      margin:0;
-    }
-
-    header .subtitle{
-      color: rgba(255,255,255,0.75);
-      font-size:0.95rem;
-      margin:0;
-    }
-
-    main.content {
-      max-width:1100px;
-      width: calc(100% - 48px);
-      margin:28px auto;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:14px;
-      padding:24px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-    }
-
-    /* layout columns */
-    .layout {
-      display:grid;
-      grid-template-columns: 1fr 420px;
-      gap:18px;
-    }
-
-    /* left: main article */
-    .panel {
-      background: rgba(0,0,0,0.45);
-      border-radius:10px;
-      padding:18px;
-      min-height:360px;
-    }
-
-    .panel h2 {
-      margin-top:0;
-      color:var(--azul-1);
-      font-size:1.25rem;
-    }
-
-    .enunciado {
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:8px;
-      padding:12px;
-      margin-bottom:14px;
-      color: #e7f7ff;
-      line-height:1.45;
-      min-height:120px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
-    }
-
-    /* code block style (blue/white/black requested) */
-    pre.code {
-      background: #030409;
-      color: #e6fbff;
-      border-left: 6px solid var(--azul-2);
-      padding:14px;
-      border-radius:8px;
-      overflow:auto;
-      font-family: "Consolas", "Courier New", monospace;
-      font-size:0.92rem;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
-      margin:0;
-    }
-
-    .btn-row {
-      display:flex;
-      gap:12px;
-      margin-top:16px;
-      flex-wrap:wrap;
-    }
-
-    .btn {
-      background:var(--azul-1);
-      color:var(--negro);
-      padding:10px 16px;
-      border-radius:10px;
-      text-decoration:none;
-      font-weight:700;
-      border:none;
-      cursor:pointer;
-      box-shadow:0 6px 18px rgba(0,170,255,0.12);
-    }
-
-    .btn.secondary {
-      background:#ffffff;
-      color:var(--azul-2);
-      font-weight:700;
-    }
-
-    .btn.ghost {
-      background:transparent;
-      color:var(--blanco);
-      border:1px solid rgba(255,255,255,0.06);
-    }
-
-    /* right: info column */
-    .aside {
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-    }
-
-    .card {
-      background:var(--panel);
-      padding:12px;
-      border-radius:10px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
-    }
-
-    .meta {
-      color: rgba(255,255,255,0.85);
-      font-size:0.95rem;
-      margin:0 0 6px 0;
-    }
-
+    html,body{height:100%;margin:0;font-family:"Poppins", Arial, sans-serif;background:var(--negro);color:var(--blanco);-webkit-font-smoothing:antialiased}
+    /* canvases */
+    .bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+    /* layout */
+    .app{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column}
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;background:linear-gradient(90deg, rgba(0,0,0,0.45), rgba(0,0,0,0.08));box-shadow:0 6px 20px rgba(0,0,0,0.6)}
+    .brand{display:flex;gap:12px;align-items:center}
+    .brand h1{margin:0;color:var(--azul-1);font-size:1.15rem;text-shadow:0 0 8px rgba(0,170,255,0.12)}
+    nav.units{display:flex;gap:8px;align-items:center}
+    .unit-btn{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--blanco);padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:600}
+    .unit-btn.active{background:linear-gradient(90deg,var(--azul-2),var(--azul-1));color:var(--negro);box-shadow:0 8px 24px rgba(0,170,255,0.14)}
+    main.container{max-width:1100px;margin:28px auto;width:calc(100% - 48px);padding:0 12px;display:flex;gap:18px}
+    /* left column: content (list or detail) */
+    .panel{flex:1}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+    .card{background:var(--panel);padding:14px;border-radius:12px;cursor:pointer;transition:transform .25s,background .25s}
+    .card:hover{transform:translateY(-6px);background:rgba(0,170,255,0.08)}
+    .card h3{margin:0;color:var(--azul-1)}
+    .card p{margin:8px 0 0 0;color:rgba(255,255,255,0.9);font-size:0.95rem}
+    /* pantalla detalle (full screen) */
+    .detail-screen{display:none;position:fixed;inset:0;background:rgba(2,6,20,0.98);z-index:20;overflow:auto;padding:26px 28px;box-sizing:border-box}
+    .detail-inner{max-width:1100px;margin:auto;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:18px;box-shadow:0 14px 50px rgba(0,0,0,0.7)}
+    .detail-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .detail-head h2{margin:0;color:var(--azul-1)}
+    .controls{display:flex;gap:10px;align-items:center}
+    .btn{background:var(--azul-1);color:var(--negro);padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:800;box-shadow:0 8px 22px rgba(0,170,255,0.12)}
+    .btn.secondary{background:#fff;color:var(--azul-2)}
+    .btn.ghost{background:transparent;color:var(--blanco);border:1px solid rgba(255,255,255,0.06)}
+    .content-columns{display:grid;grid-template-columns:1fr 360px;gap:16px;margin-top:14px}
+    .enunciado{background:rgba(255,255,255,0.02);padding:14px;border-radius:8px;min-height:120px;color:#e7f7ff;line-height:1.5}
+    pre.code{background:#030409;color:#e6fbff;border-left:6px solid var(--azul-2);padding:12px;border-radius:8px;overflow:auto;font-family:Consolas,monospace}
+    .meta-card{background:var(--panel);padding:12px;border-radius:8px}
+    footer.sitefoot{text-align:center;color:rgba(255,255,255,0.6);margin:20px 0 40px}
     /* responsive */
-    @media (max-width:980px){
-      .layout{ grid-template-columns:1fr; }
-      .aside{ order:2;}
-    }
-
-    footer.sitefoot {
-      margin-top:26px;
-      padding:22px 0;
-      text-align:center;
-      color: rgba(255,255,255,0.6);
-      font-size:0.9rem;
-    }
-
-    /* small helper for download link hidden */
-    .hidden { display:none; }
+    @media (max-width:980px){.content-columns{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-  <!-- canvases for visuals -->
-  <canvas class="bg-canvas" id="gradCanvas"></canvas>
-  <canvas class="bg-canvas" id="barsCanvas"></canvas>
-  <canvas class="bg-canvas" id="networkCanvas"></canvas>
+  <!-- background canvases -->
+  <canvas id="gradCanvas" class="bg-canvas"></canvas>
+  <canvas id="barsCanvas" class="bg-canvas"></canvas>
+  <canvas id="netCanvas" class="bg-canvas"></canvas>
 
-  <div class="page">
+  <div class="app">
     <header>
-      <div style="flex:1">
-        <h1 class="title">Actividad 1</h1>
-        <p class="subtitle">Indice H — Vista detallada</p>
+      <div class="brand">
+        <h1>Plataforma de Actividades</h1>
+        <div style="color:rgba(255,255,255,0.7);font-size:0.9rem">— Interfaz única con detalle full-screen</div>
       </div>
-      <div style="display:flex;gap:10px;align-items:center">
-        <button class="btn" id="btn-pdf" title="Ver PDF (se abre en nueva pestaña)">📘 Ver PDF</button>
-        <button class="btn secondary" id="btn-download">💾 Descargar código</button>
-        <button class="btn ghost" id="btn-back">🔙 Volver a Unidad 1</button>
-      </div>
+
+      <nav class="units" id="unitsNav">
+        <!-- Botones de unidad generados por JS -->
+      </nav>
     </header>
 
-    <main class="content" role="main">
-      <div class="layout">
-        <!-- left: main content -->
-        <section class="panel">
-          <h2>🧩 Enunciado</h2>
-          <div class="enunciado" id="enunciado">
-            <!-- <<-- Aquí pega tu enunciado después --> -->
-            <!-- // AQUÍ IRÁ EL ENUNCIADO: copia/pega tu texto o HTML -->
-            <em>El índice H (o índice de Hirsch) es un indicador utilizado para medir la productividad científica y el impacto de un investigador, grupo o institución. Se basa en la cantidad de publicaciones y el número de citas que estas reciben. Un autor tiene un índice H igual a h si ha publicado h artículos que han sido citados al menos h veces cada uno..</em>
+    <main class="container">
+      <section class="panel" id="panelMain">
+        <!-- Vista: lista de actividades de la unidad actual -->
+        <h2 id="unitTitle" style="color:var(--azul-1);margin-top:0">Unidad 1 — Actividades</h2>
+
+        <div class="grid" id="activitiesGrid">
+          <!-- tarjetas generadas en JS -->
+        </div>
+
+        <footer class="sitefoot">© 2025 - LUIS ANGEL QUENAYA LOZA</footer>
+      </section>
+    </main>
+  </div>
+
+  <!-- detalle full screen -->
+  <div class="detail-screen" id="detailScreen" aria-hidden="true">
+    <div class="detail-inner">
+      <div class="detail-head">
+        <h2 id="detailTitle">Actividad</h2>
+        <div class="controls">
+          <button class="btn" id="openPdfBtn">📘 Ver PDF</button>
+          <button class="btn secondary" id="downloadCodeBtn">💾 Descargar código</button>
+          <button class="btn ghost" id="closeDetailBtn">🔙 Volver</button>
+        </div>
+      </div>
+
+      <div class="content-columns">
+        <div>
+          <h3 style="color:var(--azul-1);margin:12px 0 6px 0">🧩 Enunciado</h3>
+          <div class="enunciado" id="detailEnunciado" title="Doble clic para editar (pegar tu enunciado)">
+            <em>👉 Aquí pega el enunciado de la actividad (doble clic para editar)</em>
           </div>
 
-          <h2>🔢 Aplicación (explicación breve)</h2>
-          <p style="margin:0 0 12px 0;color:#dff7ff;">
-            
-          </p>
+          <h3 style="color:var(--azul-1);margin:14px 0 6px 0">🔢 Explicación y ejemplo</h3>
+          <p style="margin:0 0 8px 0;color:#dff7ff">Breve explicación del método y su uso. Puedes pegar aquí resultados, tablas o imágenes.</p>
 
-          <h2>💻 Código de ejemplo</h2>
-          <pre class="code" id="codeBlock">
-# Ejemplo: método de bisección en Python
+          <h3 style="color:var(--azul-1);margin:14px 0 6px 0">💻 Código de ejemplo</h3>
+          <pre class="code" id="detailCode">
+# Ejemplo por defecto (puedes reemplazarlo)
 def biseccion(f, a, b, tol=1e-6, maxit=100):
     if f(a) * f(b) >= 0:
         raise ValueError("El intervalo no cumple cambio de signo")
@@ -238,84 +116,176 @@ def biseccion(f, a, b, tol=1e-6, maxit=100):
             a = c
     return c, maxit
           </pre>
+        </div>
 
-          <div class="btn-row">
-            <button class="btn" id="btn-pdf-2">📘 Abrir PDF</button>
-            <button class="btn secondary" id="btn-download-2">💾 Descargar código (.py)</button>
-          </div>
-        </section>
-
-        <!-- right: aside -->
-        <aside class="aside">
-          <div class="card">
-            <p class="meta"><strong>Materia:</strong> Programación Numérica</p>
-            <p class="meta"><strong>Profesor:</strong> [Tu profesor]</p>
-            <p class="meta"><strong>Entrega:</strong> Fecha / Observaciones</p>
+        <aside>
+          <div class="meta-card">
+            <p style="margin:0 0 6px 0"><strong>Materia:</strong> Programación Numérica</p>
+            <p style="margin:0 0 6px 0"><strong>Profesor:</strong> [Tu profesor]</p>
+            <p style="margin:0 0 6px 0"><strong>Fecha entrega:</strong> [dd/mm/aaaa]</p>
           </div>
 
-          <div class="card">
-            <p class="meta"><strong>Recursos</strong></p>
-            <ul style="margin:6px 0 0 18px;color:rgba(255,255,255,0.9)">
-              <li>Documento PDF de la actividad</li>
-              <li>Ejemplos de código</li>
+          <div class="meta-card" style="margin-top:12px">
+            <p style="margin:0 0 6px 0"><strong>Recursos</strong></p>
+            <ul style="margin:6px 0 0 18px">
+              <li>Documento PDF</li>
+              <li>Código descargable</li>
               <li>Gráficas y resultados</li>
             </ul>
           </div>
 
-          <div class="card">
-            <p class="meta"><strong>Notas rápidas</strong></p>
-            <p style="margin:6px 0 0 0;color:rgba(255,255,255,0.9)">
-              Puedes pegar aquí el enunciado y luego actualizar el bloque de código o imágenes.
-            </p>
+          <div class="meta-card" style="margin-top:12px">
+            <p style="margin:0;color:rgba(255,255,255,0.85)"><strong>Nota:</strong></p>
+            <p style="margin:6px 0 0 0;color:rgba(255,255,255,0.8)">Doble clic en el área de enunciado para pegar o editar rápidamente.</p>
           </div>
         </aside>
       </div>
-
-      <footer class="sitefoot">© 2025 - LUIS ANGEL QUENAYA LOZA</footer>
-    </main>
+    </div>
   </div>
 
-  <!-- hidden anchor for download (used by JS) -->
-  <a id="downloadLink" class="hidden"></a>
+  <!-- hidden anchor para descarga -->
+  <a id="downloadAnchor" style="display:none"></a>
 
   <script>
-    /* --------- Config (ruta de PDF y nombre del archivo de código) --------- */
-    const PDF_PATH = 'Actividad1.pdf'; // debe estar en la misma carpeta
-    const CODE_FILENAME = 'actividad1_biseccion.py';
+    /* ====== Datos iniciales (Unidades y actividades) ====== */
+    const units = [
+      {
+        id: 'u1', title: 'Unidad 1',
+        activities: [
+          { id:'u1a1', title:'Actividad 1: Análisis de funciones', pdf:'Actividad_1_.pdf'},
+          { id:'u1a2', title:'Actividad 2: Gráficas de funciones', pdf:'Actividad_2_.pdf'},
+          { id:'u1a3', title:'Actividad 3: Graficador y ejercicios', pdf:'Actividad_3.pdf'},
+          { id:'u1a4', title:'Actividad 4: Método de Bisección', pdf:'ACTIVIDAD 4.pdf'},
+          { id:'u1a5', title:'Actividad 5: Método de Newton-Raphson', pdf:'Actividad_05.pdf'},
+          { id:'u1a6', title:'Actividad 6: Los otros métodos', pdf:'Actividad6.pdf'}
+        ]
+      },
+      {
+        id:'u2', title:'Unidad 2',
+        activities:[
+          { id:'u2a1', title:'Actividad 1 - (placeholder)', pdf:'Unidad2_Actividad1.pdf' },
+          { id:'u2a2', title:'Actividad 2 - (placeholder)', pdf:'Unidad2_Actividad2.pdf' }
+        ]
+      },
+      {
+        id:'u3', title:'Unidad 3',
+        activities:[
+          { id:'u3a1', title:'Actividad 1 - (placeholder)', pdf:'Unidad3_Actividad1.pdf' }
+        ]
+      }
+    ];
 
-    /* ---------- Buttons ---------- */
-    document.getElementById('btn-pdf').addEventListener('click', () => {
-      window.open(PDF_PATH, '_blank');
-    });
-    document.getElementById('btn-pdf-2').addEventListener('click', () => {
-      window.open(PDF_PATH, '_blank');
-    });
+    const unitsNav = document.getElementById('unitsNav');
+    const activitiesGrid = document.getElementById('activitiesGrid');
+    const unitTitle = document.getElementById('unitTitle');
 
-    // Download code: toma el contenido del <pre id="codeBlock"> y descarga .py
-    function downloadCode(filename) {
-      const code = document.getElementById('codeBlock').innerText;
-      const blob = new Blob([code], { type: 'text/x-python;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.getElementById('downloadLink');
-      a.href = url;
-      a.download = filename;
-      a.click();
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    let currentUnit = units[0];
+
+    function renderUnits(){
+      unitsNav.innerHTML = '';
+      units.forEach(u=>{
+        const btn = document.createElement('button');
+        btn.className = 'unit-btn' + (u.id===currentUnit.id ? ' active' : '');
+        btn.textContent = u.title;
+        btn.onclick = ()=> selectUnit(u.id);
+        unitsNav.appendChild(btn);
+      });
     }
-    document.getElementById('btn-download').addEventListener('click', () => downloadCode(CODE_FILENAME));
-    document.getElementById('btn-download-2').addEventListener('click', () => downloadCode(CODE_FILENAME));
 
-    // Back button -> vuelve a unidad1.html
-    document.getElementById('btn-back').addEventListener('click', () => {
-      // si prefieres volver dentro del mismo proyecto (sin recargar), cambia aquí
-      window.location.href = 'unidad1.html';
+    function selectUnit(unitId){
+      const u = units.find(x=>x.id===unitId);
+      if(!u) return;
+      currentUnit = u;
+      renderUnits();
+      renderActivities();
+    }
+
+    function renderActivities(){
+      unitTitle.textContent = currentUnit.title + ' — Actividades';
+      activitiesGrid.innerHTML = '';
+      currentUnit.activities.forEach(act=>{
+        const c = document.createElement('div'); c.className='card';
+        c.onclick = ()=> openDetail(act);
+        const h = document.createElement('h3'); h.textContent = act.title;
+        const p = document.createElement('p'); p.textContent = 'Haz clic para ver detalles y descargar recursos.';
+        c.appendChild(h); c.appendChild(p);
+        activitiesGrid.appendChild(c);
+      });
+    }
+
+    // initial render
+    renderUnits();
+    renderActivities();
+
+    /* ====== Detalle full-screen handling ====== */
+    const detailScreen = document.getElementById('detailScreen');
+    const detailTitle = document.getElementById('detailTitle');
+    const detailEnunciado = document.getElementById('detailEnunciado');
+    const detailCode = document.getElementById('detailCode');
+    const openPdfBtn = document.getElementById('openPdfBtn');
+    const downloadCodeBtn = document.getElementById('downloadCodeBtn');
+    const closeDetailBtn = document.getElementById('closeDetailBtn');
+
+    // allow double-click edit enunciado
+    detailEnunciado.addEventListener('dblclick', (e)=>{
+      const el = e.currentTarget;
+      el.contentEditable = true;
+      el.style.outline = '2px dashed rgba(0,170,255,0.2)';
+      el.focus();
     });
 
-    /* ------------------ Animated background: gradient + bars + network ------------------ */
+    let currentActivity = null;
+
+    function openDetail(act){
+      currentActivity = act;
+      detailTitle.textContent = act.title;
+      // set enunciado placeholder (keeps previous if user edited)
+      if(!detailEnunciado.dataset.custom || detailEnunciado.dataset.activity !== act.id){
+        detailEnunciado.innerHTML = '<em>👉 Aquí pega el enunciado de la actividad (doble clic para editar)</em>';
+        detailEnunciado.dataset.custom = false;
+      }
+      // set code sample default (you can override)
+      detailCode.textContent = detailCode.textContent || '# Código de ejemplo';
+      // attach pdf/download actions
+      openPdfBtn.onclick = ()=> window.open(act.pdf, '_blank');
+      downloadCodeBtn.onclick = ()=> downloadCode(act.title.replace(/\s+/g,'_') + '.py', detailCode.innerText);
+      // show screen
+      detailScreen.style.display = 'block';
+      detailScreen.setAttribute('aria-hidden','false');
+      window.scrollTo(0,0);
+    }
+
+    // close / volver to activities (not to units)
+    function closeDetail(){
+      detailScreen.style.display = 'none';
+      detailScreen.setAttribute('aria-hidden','true');
+    }
+    closeDetailBtn.addEventListener('click', closeDetail);
+
+    // back button (in header) -> go to units list first (select first unit)
+    // but we keep units nav always visible; user asked "volver a unidad1" earlier — keep behavior: closing detail returns to activities
+    // Extra: Esc key closes detail
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeDetail(); });
+
+    /* download helper */
+    function downloadCode(filename, content){
+      const a = document.getElementById('downloadAnchor');
+      const blob = new Blob([content], {type:'text/x-python;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      a.href = url; a.download = filename; a.click();
+      setTimeout(()=> URL.revokeObjectURL(url), 1500);
+    }
+
+    /* If user edits the enunciado, mark it custom and tie to activity */
+    detailEnunciado.addEventListener('input', ()=>{
+      detailEnunciado.dataset.custom = true;
+      if(currentActivity) detailEnunciado.dataset.activity = currentActivity.id;
+    });
+
+    /* ===== Animated background (gradient + bars + network) ===== */
     const gradCanvas = document.getElementById('gradCanvas');
     const barsCanvas = document.getElementById('barsCanvas');
-    const netCanvas = document.getElementById('networkCanvas');
-
+    const netCanvas = document.getElementById('netCanvas');
     const gctx = gradCanvas.getContext('2d');
     const bctx = barsCanvas.getContext('2d');
     const nctx = netCanvas.getContext('2d');
@@ -323,47 +293,43 @@ def biseccion(f, a, b, tol=1e-6, maxit=100):
     let W = gradCanvas.width = barsCanvas.width = netCanvas.width = window.innerWidth;
     let H = gradCanvas.height = barsCanvas.height = netCanvas.height = window.innerHeight;
 
-    // resize
-    window.addEventListener('resize', () => {
+    window.addEventListener('resize', ()=>{
       W = gradCanvas.width = barsCanvas.width = netCanvas.width = window.innerWidth;
       H = gradCanvas.height = barsCanvas.height = netCanvas.height = window.innerHeight;
-      initBars();
-      initNodes();
+      initBars(); initNodes();
     });
 
-    /* -------- animated gradient (smooth moving) -------- */
+    /* Gradient */
     let t = 0;
-    function drawGradient() {
-      t += 0.003;
+    function drawGradient(){
+      t += 0.0025;
       const g = gctx;
-      const grd = g.createLinearGradient(0, 0, W * Math.cos(t*0.8), H * Math.sin(t*0.5) + H);
+      const grd = g.createLinearGradient(0, 0, W*Math.cos(t*0.8), H*Math.sin(t*0.5) + H);
       grd.addColorStop(0, 'rgba(0,20,60,0.85)');
-      grd.addColorStop(0.3, 'rgba(0,90,150,0.25)');
-      grd.addColorStop(0.6, 'rgba(10,120,200,0.18)');
-      grd.addColorStop(1, 'rgba(0,0,0,0.85)');
+      grd.addColorStop(0.35, 'rgba(0,90,150,0.18)');
+      grd.addColorStop(0.6, 'rgba(10,120,200,0.12)');
+      grd.addColorStop(1, 'rgba(0,0,0,0.9)');
       g.clearRect(0,0,W,H);
-      g.fillStyle = grd;
-      g.fillRect(0,0,W,H);
-      // soft overlay radial
-      const rg = g.createRadialGradient(W*0.8, H*0.2, 100, W*0.8, H*0.2, 800);
+      g.fillStyle = grd; g.fillRect(0,0,W,H);
+      const rg = g.createRadialGradient(W*0.85, H*0.18, 100, W*0.85, H*0.18, 800);
       rg.addColorStop(0, 'rgba(255,255,255,0.03)');
       rg.addColorStop(1, 'rgba(0,0,0,0)');
-      g.fillStyle = rg;
-      g.fillRect(0,0,W,H);
+      g.fillStyle = rg; g.fillRect(0,0,W,H);
     }
 
-    /* -------- animated histogram bars (moving) -------- */
+    /* Bars (histogram-like animated) */
     let bars = [];
-    const BAR_COUNT = Math.floor(Math.max(12, W / 60));
+    let BAR_COUNT = Math.max(8, Math.floor(W/60));
     function initBars(){
+      BAR_COUNT = Math.max(8, Math.floor(W/60));
       bars = [];
       for(let i=0;i<BAR_COUNT;i++){
         bars.push({
-          x: i * (W / BAR_COUNT),
-          w: Math.max(10, (W / BAR_COUNT) * 0.6),
-          h: Math.random() * (H * 0.35) + 20,
-          speed: 0.5 + Math.random() * 1.2,
-          phase: Math.random() * Math.PI * 2
+          x: i*(W/BAR_COUNT),
+          w: Math.max(10,(W/BAR_COUNT)*0.6),
+          h: Math.random()* (H*0.4) + 20,
+          speed: 0.4 + Math.random()*1.1,
+          phase: Math.random()*Math.PI*2
         });
       }
     }
@@ -371,41 +337,34 @@ def biseccion(f, a, b, tol=1e-6, maxit=100):
 
     function drawBars(now){
       bctx.clearRect(0,0,W,H);
-      // semi-transparent band (bottom) to place histogram feeling
-      bctx.save();
       for(let i=0;i<bars.length;i++){
         const bar = bars[i];
         const hh = (Math.sin(now/1000 * bar.speed + bar.phase) * 0.5 + 0.5) * (H*0.35) + 10;
-        const x = bar.x + 8;
+        const x = bar.x + (W/BAR_COUNT)*0.12;
         const y = H - hh - 40;
-        const gradient = bctx.createLinearGradient(x, y, x, y + hh);
+        const gradient = bctx.createLinearGradient(x,y,x,y+hh);
         gradient.addColorStop(0, 'rgba(0,170,255,0.95)');
         gradient.addColorStop(0.6, 'rgba(255,255,255,0.12)');
-        gradient.addColorStop(1, 'rgba(0,0,0,0.05)');
-        bctx.fillStyle = gradient;
-        bctx.fillRect(x, y, bar.w, hh);
-        // glow
+        gradient.addColorStop(1, 'rgba(0,0,0,0.06)');
+        bctx.fillStyle = gradient; bctx.fillRect(x,y,bar.w,hh);
         bctx.globalAlpha = 0.08;
         bctx.fillStyle = 'rgba(0,170,255,0.4)';
-        bctx.fillRect(x-6, y-6, bar.w+12, hh+12);
+        bctx.fillRect(x-6,y-6,bar.w+12,hh+12);
         bctx.globalAlpha = 1;
       }
-      bctx.restore();
     }
 
-    /* -------- network nodes and connecting lines (neural net look) -------- */
+    /* Network nodes */
     let nodes = [];
-    const NODE_COUNT = Math.floor(Math.max(40, W / 20));
-
+    let NODE_COUNT = Math.max(40, Math.floor(W/20));
     function initNodes(){
+      NODE_COUNT = Math.max(40, Math.floor(W/20));
       nodes = [];
       for(let i=0;i<NODE_COUNT;i++){
         nodes.push({
-          x: Math.random()*W,
-          y: Math.random()*H,
-          vx: (Math.random()-0.5)*0.6,
-          vy: (Math.random()-0.5)*0.6,
-          r: 1 + Math.random()*2
+          x: Math.random()*W, y: Math.random()*H,
+          vx:(Math.random()-0.5)*0.6, vy:(Math.random()-0.5)*0.6,
+          r:1 + Math.random()*2
         });
       }
     }
@@ -413,59 +372,49 @@ def biseccion(f, a, b, tol=1e-6, maxit=100):
 
     function drawNetwork(){
       nctx.clearRect(0,0,W,H);
-      nctx.lineWidth = 1;
       for(let i=0;i<nodes.length;i++){
         const a = nodes[i];
         a.x += a.vx; a.y += a.vy;
-        if(a.x < 0 || a.x > W) a.vx *= -1;
-        if(a.y < 0 || a.y > H) a.vy *= -1;
-        // draw point
+        if(a.x<0 || a.x>W) a.vx *= -1;
+        if(a.y<0 || a.y>H) a.vy *= -1;
         nctx.beginPath();
-        nctx.arc(a.x, a.y, a.r, 0, Math.PI*2);
-        nctx.fillStyle = 'rgba(0,170,255,0.9)';
-        nctx.fill();
-        // connect
+        nctx.arc(a.x,a.y,a.r,0,Math.PI*2);
+        nctx.fillStyle = 'rgba(0,170,255,0.9)'; nctx.fill();
         for(let j=i+1;j<nodes.length;j++){
           const b = nodes[j];
           const dx = a.x - b.x, dy = a.y - b.y;
           const dist = Math.sqrt(dx*dx + dy*dy);
           if(dist < 120){
-            nctx.beginPath();
-            nctx.moveTo(a.x, a.y);
-            nctx.lineTo(b.x, b.y);
-            nctx.strokeStyle = 'rgba(0,170,255,' + (0.12 * (1 - dist/120)) + ')';
+            nctx.beginPath(); nctx.moveTo(a.x,a.y); nctx.lineTo(b.x,b.y);
+            nctx.strokeStyle = 'rgba(0,170,255,' + (0.12*(1 - dist/120)) + ')';
             nctx.stroke();
           }
         }
       }
     }
 
-    /* -------- main loop -------- */
-    function animate(now){
+    /* animate loop */
+    function loop(now){
       drawGradient();
-      drawBars(now);
+      drawBars(now||0);
       drawNetwork();
-      requestAnimationFrame(animate);
+      requestAnimationFrame(loop);
     }
-    requestAnimationFrame(animate);
+    requestAnimationFrame(loop);
 
-    /* init sizes */
-    window.addEventListener('load', () => {
+    /* init on load */
+    window.addEventListener('load', ()=>{
       W = gradCanvas.width = barsCanvas.width = netCanvas.width = window.innerWidth;
       H = gradCanvas.height = barsCanvas.height = netCanvas.height = window.innerHeight;
-      initBars();
-      initNodes();
+      initBars(); initNodes();
     });
 
-    /* small touch: if user wants to paste enunciado quickly by double-click, allow edit */
-    document.getElementById('enunciado').addEventListener('dblclick', (e) => {
-      const el = e.currentTarget;
-      if(!el.isContentEditable){
-        el.contentEditable = true;
-        el.style.outline = '2px dashed rgba(0,170,255,0.18)';
-        el.focus();
-      }
+    /* small UX: close detail when clicking outside inner content */
+    detailScreen.addEventListener('click', (e)=>{
+      if(e.target === detailScreen) closeDetail();
     });
+
   </script>
 </body>
 </html>
+
