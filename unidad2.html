@@ -340,49 +340,7 @@ import matplotlib.pyplot as plt
 
 func_str = input("Ingrese la función f(x): ")
 
-def f(x):
-    return eval(func_str, {"np": np, "x": x})
-
-xmin = float(input("Ingrese el valor mínimo de x: "))
-xmax = float(input("Ingrese el valor máximo de x: "))
-
-x = np.linspace(xmin, xmax, 400)
-y = f(x)
-
-plt.plot(x, y, color='blue', label=f"f(x)={func_str}")
-plt.axhline(0, color='black', linestyle='--')
-plt.axvline(0, color='black', linestyle='--')
-plt.title("Gráfico de la función")
-plt.xlabel("x")
-plt.ylabel("f(x)")
-plt.legend()
-plt.grid(True)
-plt.show()
-
-x0 = float(input("Ingrese x0: "))
-x1 = float(input("Ingrese x1: "))
-
-tol = 1e-6
-max_iter = 100
-
-print("Iter | x0        | x1        | f(x0)      | f(x1)      | x2        | Error")
-print("--------------------------------------------------------------------------")
-
-for i in range(1, max_iter+1):
-    f0 = f(x0)
-    f1 = f(x1)
-    if f1 - f0 == 0:
-        print(f"División por cero en iteración {i}")
-        break
-    x2 = x1 - f1 * (x1 - x0) / (f1 - f0)
-    error = abs(x2 - x1)
-    print(f"{i:4d} | {x0:10.6f} | {x1:10.6f} | {f0:10.6f} | {f1:10.6f} | {x2:10.6f} | {error:10.6f}")
-    if error < tol:
-        print(f"Raíz aproximada: {x2:.6f} en {i} iteraciones")
-        break
-    x0, x1 = x1, x2
-else:
-    print("No se alcanzó convergencia")`
+function...`
   },
 
   {
@@ -400,41 +358,7 @@ print("=== MÉTODO DEL PUNTO FIJO ===")
 func_str = input("f(x) = ")
 g_str = input("g(x) = ")
 
-def f(x):
-    return eval(func_str, {"np": np, "x": x})
-
-def g(x):
-    return eval(g_str, {"np": np, "x": x})
-
-xmin = float(input("x mín: "))
-xmax = float(input("x máx: "))
-
-x = np.linspace(xmin, xmax, 400)
-y = f(x)
-
-plt.plot(x, y, label=f"f(x)={func_str}", color='blue')
-plt.axhline(0, color='black', linestyle='--')
-plt.axvline(0, color='black', linestyle='--')
-plt.legend()
-plt.grid(True)
-plt.show(block=False)
-
-x0 = float(input("x0 = "))
-tol = 1e-6
-max_iter = 100
-
-print("\\nIter |     x_n     |    g(x_n)    |   f(g(x_n)) |   Error")
-print("-"*55)
-
-for i in range(1, max_iter + 1):
-    x1 = g(x0)
-    err = abs(x1 - x0)
-    fx1 = f(x1)
-    print(f"{i:4d} | {x0:11.6f} | {x1:11.6f} | {fx1:11.6f} | {err:9.6f}")
-    if err < tol:
-        print(f"\\nRaíz ≈ {x1:.8f}")
-        break
-    x0 = x1`
+function...`
   },
 
   {
@@ -442,62 +366,14 @@ for i in range(1, max_iter + 1):
     title: 'Actividad 4 — Método de Regula Falsi',
     pdf: 'Regulafalsi.pdf',
     description: `El método de Regula Falsi combina las ideas del método de bisección y del método de la secante. 
-Traza una recta entre los puntos (a, f(a)) y (b, f(b)) donde f(a)·f(b)<0, y usa la intersección con el eje x como nueva aproximación. 
-A diferencia de la secante, mantiene el intervalo que encierra la raíz, lo que asegura su convergencia.`,
+Traza una recta entre los puntos (a, f(a)) y (b, f(b)) donde f(a)·f(b)<0, y usa la intersección con el eje x como nueva aproximación.`,
     code: `import numpy as np
 import matplotlib.pyplot as plt
 
-func_str = input("Ingrese la función f(x): ")  
+function...`
+  },   // ← ESTA COMA FALTABA
 
-def f(x):
-    return eval(func_str, {"np": np, "x": x})
-
-a = float(input("Ingrese el valor inicial a: "))
-b = float(input("Ingrese el valor inicial b: "))
-
-tol = 1e-6
-max_iter = 100
-tabla = []
-
-print("\\nIter | a        | b        | xr       | f(xr)    | Error")
-print("--------------------------------------------------------")
-
-for i in range(1, max_iter+1):
-    fa = f(a)
-    fb = f(b)
-    xr = b - fb*(b - a)/(fb - fa)
-    fxr = f(xr)
-    error = abs(fxr)
-    tabla.append((i, a, b, xr, fxr, error))
-    print(f"{i:4d} | {a:8.6f} | {b:8.6f} | {xr:8.6f} | {fxr:8.6f} | {error:8.6f}")
-    if abs(fxr) < tol:
-        raiz = xr
-        print(f"\\nRaíz aproximada: {raiz:.6f} encontrada en {i} iteraciones")
-        break
-    if fa*fxr < 0:
-        b = xr
-    else:
-        a = xr
-else:
-    print("\\nNo se alcanzó la convergencia después del máximo de iteraciones")
-
-margen = (b - a)*0.1
-xmin = min(a,b) - margen
-xmax = max(a,b) + margen
-x = np.linspace(xmin, xmax, 400)
-y = f(x)
-
-plt.plot(x, y, label=f"f(x) = {func_str}")
-plt.axhline(0, color='black', linestyle='--')
-plt.axvline(raiz, color='red', linestyle='--', label=f"Raíz ≈ {raiz:.6f}")
-plt.title("Método de Regula Falsi")
-plt.xlabel("x")
-plt.ylabel("f(x)")
-plt.legend()
-plt.grid(True)
-plt.show()`
-    
-{
+  {
     id: 'a5',
     title: 'Actividad 5 — Método de Newton-Raphson',
     pdf: 'Actividad_05.pdf',
@@ -506,63 +382,16 @@ plt.show()`
 import matplotlib.pyplot as plt
 import time
 
-ecuacion = input("Ingrese la función f(x): ")
+function...`
+  },
 
-def f(x):
-    return eval(ecuacion)
-
-def derivada(x):
-    h = 1e-6
-    return (f(x + h) - f(x - h)) / (2 * h)
-
-a = float(input("Ingrese el límite inferior del eje x: "))
-b = float(input("Ingrese el límite superior del eje x: "))
-
-x_vals = np.linspace(a, b, 400)
-y_vals = f(x_vals)
-
-plt.figure(figsize=(8, 5))
-plt.plot(x_vals, y_vals, 'b', label=f"f(x) = {ecuacion}")
-plt.axhline(0, color='black', linestyle='--')
-plt.axvline(0, color='black', linestyle='--')
-plt.title("Gráfico de la función ingresada")
-plt.xlabel("x")
-plt.ylabel("f(x)")
-plt.legend()
-plt.grid(True)
-plt.show(block=False)
-time.sleep(3)
-plt.close()
-
-x = float(input("Ingrese el valor inicial aproximado: "))
-tolerancia = 1e-6
-iter_max = 100
-
-for i in range(iter_max):
-    fx = f(x)
-    dfx = derivada(x)
-    if dfx == 0:
-        print(f"La derivada es cero en x = {x}. No se puede continuar.")
-        break
-    x_nuevo = x - fx / dfx
-    if abs(x_nuevo - x) < tolerancia:
-        print(f"\\nRaíz encontrada: {x_nuevo:.6f}")
-        print(f"Número de iteraciones: {i + 1}")
-        break
-    x = x_nuevo
-else:
-    print(f"\\nNo se logró la convergencia después de {iter_max} iteraciones.")
-    print(f"Último valor aproximado: {x:.6f}")`
-},
-
-{
+  {
     id: 'a6',
     title: 'Actividad 6 — Índice H',
     pdf: 'Actividad6.pdf',
     description: `El índice H es un indicador que mide la productividad científica y el impacto de los investigadores.`,
     code: `
 <h3>Autores de otros países y su índice H</h3>
-
 <table border="1" style="border-collapse: collapse; width: 100%;">
 <thead>
 <tr>
@@ -592,43 +421,11 @@ else:
 <td>33</td>
 </tr>
 </tbody>
-</table>
+</table>`
+  }
+];
 
-<br>
-
-<h3>Índice H de docentes de la Facultad</h3>
-
-<table border="1" style="border-collapse: collapse; width: 100%;">
-<thead>
-<tr>
-<th>Docente</th>
-<th>Índice H</th>
-<th>N° publicaciones</th>
-</tr>
-</thead>
-<tbody>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57224362115">Apaza-Tarqui, Alejandro</a></td><td>1</td><td>5</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57221112735">Carpio Vargas, Edgar Eloy</a></td><td>3</td><td>9</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57214094525">Canqui-Flores, Bernabé</a></td><td>3</td><td>8</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58491331500">Choquejahua-Acero, Remo</a></td><td>1</td><td>2</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58930847700">Coyla-Idme, Leonel</a></td><td>1</td><td>5</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58898481200">Gonzales, Leonid Alemán</a></td><td>0</td><td>4</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=59325707300">Gonzalo Copari Romero, Fredy</a></td><td>0</td><td>2</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57571711100">Huata-Panca, Percy</a></td><td>2</td><td>3</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57201897173">Ibañez-Quispe, Vladimiro</a></td><td>5</td><td>21</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=55865380000">Javier Quispe Carita, Angel</a></td><td>1</td><td>1</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58284593600">Laura Murillo, Ramiro</a></td><td>1</td><td>2</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58671914800">López-Cueva, Milton Antonio</a></td><td>1</td><td>6</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58778725100">Melgarejo-Bolivar, Romel P.</a></td><td>3</td><td>6</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57562709900">Mendoza-Mollocondo, Charles Ignacio</a></td><td>3</td><td>8</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58308326900">Herrera-Urtiaga, Alain Paul</a></td><td>0</td><td>3</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58088282100">Tito Lipa, José Pánfilo</a></td><td>0</td><td>3</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57003617100">Tumi-Figueroa, Ernesto Nayer</a></td><td>3</td><td>6</td></tr>
-</tbody>
-</table>
-`
-}
-
+  
 
 const activitiesGrid = document.getElementById('activitiesGrid');
 const detailScreen = document.getElementById('detailScreen');
@@ -688,6 +485,7 @@ renderList();
 
 </body>
 </html>
+
 
 
 
