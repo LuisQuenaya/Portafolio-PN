@@ -39,20 +39,27 @@
       background: var(--bg-dark);
     }
 
-    /* Logos laterales */
-    .logo-lateral {
-      position: fixed;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 120px;
-      opacity: 0.95;
-      z-index: 100;
-      transition: transform 0.3s ease;
-      filter: drop-shadow(0 0 10px rgba(0,255,255,0.4));
-    }
-    .logo-lateral:hover { transform: translateY(-50%) scale(1.05); }
-    .logo-izq { left: 18px; }
-    .logo-der { right: 18px; }
+    <style>
+/* Contenedor de logos */
+.logos-container {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
+    align-items: center;
+    z-index: 200;
+}
+
+/* Tamaño de logos */
+.logo-uni,
+.logo-escuela {
+    height: 90px;
+    width: auto;
+    object-fit: contain;
+}
+
 
     /* Navbar */
     header {
@@ -181,9 +188,13 @@
 <!-- Fondo -->
 <canvas id="network"></canvas>
 
-<!-- Logos -->
-<img src="UNA.png" class="logo-lateral logo-izq" alt="UNA Puno">
-<img src="finesi.png" class="logo-lateral logo-der" alt="Escuela de Informática">
+<!-- Logos laterales -->
+<div class="logos-container">
+    <img src="UNA.png" alt="Logo UNA Puno" class="logo-uni">
+    <img src="finesi.png" alt="Escuela de Informática" class="logo-escuela">
+</div>
+
+
 
 <!-- Navbar -->
 <header>
