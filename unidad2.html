@@ -68,6 +68,149 @@
   <canvas id="gradCanvas" class="bg-canvas"></canvas>
   <canvas id="barsCanvas" class="bg-canvas"></canvas>
   <canvas id="netCanvas" class="bg-canvas"></canvas>
+ <script>
+// =========================
+// CANVAS 1: GRADIENTE ANIMADO
+// =========================
+(function(){
+  const c = document.getElementById("gradCanvas");
+  const ctx = c.getContext("2d");
+
+  function resize(){
+    c.width = innerWidth;
+    c.height = innerHeight;
+  }
+  resize();
+  addEventListener("resize", resize);
+
+  let t = 0;
+  function draw(){
+    t += 0.005;
+
+    const g = ctx.createLinearGradient(
+      0, 0,
+      c.width * Math.cos(t),
+      c.height * Math.sin(t)
+    );
+
+    g.addColorStop(0, "#00101f");
+    g.addColorStop(0.5, "#002b45");
+    g.addColorStop(1, "#001a2c");
+
+    ctx.fillStyle = g;
+    ctx.fillRect(0,0,c.width,c.height);
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+
+// =========================
+// CANVAS 2: BARRAS DE LUZ
+// =========================
+(function(){
+  const c = document.getElementById("barsCanvas");
+  const ctx = c.getContext("2d");
+
+  function resize(){
+    c.width = innerWidth;
+    c.height = innerHeight;
+  }
+  resize();
+  addEventListener("resize", resize);
+
+  const bars = [];
+  const count = 35;
+
+  for(let i=0;i<count;i++){
+    bars.push({
+      x: Math.random()*c.width,
+      h: 80 + Math.random()*300,
+      speed: 0.4 + Math.random()*0.6,
+      alpha: 0.08 + Math.random()*0.12
+    });
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    bars.forEach(b=>{
+      ctx.fillStyle = `rgba(0,170,255,${b.alpha})`;
+      ctx.fillRect(b.x, 0, 2, b.h);
+      b.h += Math.sin(Date.now()*0.001 + b.x)*0.6;
+    });
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+
+// =========================
+// CANVAS 3: RED NEURONAL
+// =========================
+(function(){
+  const c = document.getElementById("netCanvas");
+  const ctx = c.getContext("2d");
+
+  function resize(){
+    c.width = innerWidth;
+    c.height = innerHeight;
+  }
+  resize();
+  addEventListener("resize", resize);
+
+  const dots = [];
+  const count = 90;
+
+  for(let i=0;i<count;i++){
+    dots.push({
+      x: Math.random()*c.width,
+      y: Math.random()*c.height,
+      vx: (Math.random()*1 - 0.5)*0.6,
+      vy: (Math.random()*1 - 0.5)*0.6
+    });
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+
+    // Puntos
+    dots.forEach(d=>{
+      d.x += d.vx;
+      d.y += d.vy;
+
+      if(d.x < 0 || d.x > c.width) d.vx *= -1;
+      if(d.y < 0 || d.y > c.height) d.vy *= -1;
+
+      ctx.fillStyle = "rgba(0,170,255,0.55)";
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, 2, 0, Math.PI*2);
+      ctx.fill();
+    });
+
+    // Conexiones
+    for(let i=0;i<count;i++){
+      for(let j=i+1;j<count;j++){
+        const dx = dots[i].x - dots[j].x;
+        const dy = dots[i].y - dots[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if(dist < 130){
+          ctx.strokeStyle = `rgba(0,170,255,${0.12 - (dist/130)*0.12})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(dots[i].x, dots[i].y);
+          ctx.lineTo(dots[j].x, dots[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
 
   <div class="app">
     <header>
@@ -414,5 +557,6 @@ renderList();
 
 </body>
 </html>
+
 
 
