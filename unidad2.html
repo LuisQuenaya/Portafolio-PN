@@ -497,7 +497,8 @@ plt.legend()
 plt.grid(True)
 plt.show()`
     
-  }
+  },
+  {
   id: 'a5',
     title: 'Actividad 5 — Metodo de Newton-Raphson',
     pdf: 'Actividad_05.pdf',
@@ -557,54 +558,110 @@ else:
     print(f"Último valor aproximado: {x:.6f}")`
 
   id: 'a6',
-    title: 'Actividad 6 — Punto Fijo',
-    pdf: 'Puntofijo (1).pdf',
-    description: `Es un procedimiento iterativo para aproximar las raıces de una ecuacion.
-Consiste en transformar la ecuaci´on f (x) = 0 en una forma equivalente x = g(x), donde g(x)
-es llamada la funci´on de iteracion.`,
-    code: `import numpy as np
-import matplotlib.pyplot as plt
+    title: 'Actividad 6 — Indice H',
+    pdf: 'Actividad6.pdf',
+    description: `El ındice H (o ´ındice de Hirsch) es un indicador utilizado para medir la productividad
+cient´ıfica y el impacto de un investigador, grupo o institucion. Se basa en la cantidad de
+publicaciones y el numero de citas que estas reciben. Un autor tiene un ´ındice H igual a h si
+ha publicado h artıculos que han sido citados al menos h veces cada uno.`,
+  <table border="1" style="border-collapse: collapse; width: 100%;">
+    <thead>
+        <tr>
+            <th>Autor</th>
+            <th>Investigación</th>
+            <th>N° publicaciones</th>
+            <th>Índice H</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="https://www.scopus.com/authid/detail.uri?authorId=36545025500">Grau, Àngela</a></td>
+            <td><i>A new class of secant-like methods for solving nonlinear systems of equations</i></td>
+            <td>12</td>
+            <td>9</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.scopus.com/authid/detail.uri?authorId=6602720000">Díaz-Barrero, José Luis</a></td>
+            <td><i>On the local convergence of a family of two-step iterative methods for solving nonlinear equations</i></td>
+            <td>41</td>
+            <td>12</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.scopus.com/authid/detail.uri?authorId=7004530784">Argyros, Ioannis Konstantinos</a></td>
+            <td><i>An algorithm for nonlinear problems with variational inequality methods</i></td>
+            <td>931</td>
+            <td>33</td>
+        </tr>
+    </tbody>
+</table>
 
-print("=== MÉTODO DEL PUNTO FIJO ===")
+<p><strong>Tabla:</strong> Autores de otros países y su índice H.</p>
 
-func_str = input("f(x) = ")
-g_str = input("g(x) = ")
+  <table border="1" style="border-collapse: collapse; width: 100%;">
+    <thead>
+        <tr>
+            <th>Docente</th>
+            <th>Índice H</th>
+            <th>N° publicaciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="https://www.scopus.com/authid/detail.uri?authorId=57224362115">Apaza-Tarqui, Alejandro</a></td><td>1</td><td>5</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.scopus.com/authid/detail.uri?authorId=57221112735">Carpio Vargas, Edgar Eloy</a></td><td>3</td><td>9</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.scopus.com/authid/detail.uri?authorId=57214094525">Canqui-Flores, Bernabé</a></td><td>3</td><td>8</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.scopus.com/authid/detail.uri?authorId=58491331500">Choquejahua-Acero, Remo</a></td><td>1</td><td>2</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.scopus.com/authid/detail.uri?authorId=58930847700">Coyla-Idme, Leonel</a></td><td>1</td><td>5</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.scopus.com/authid/detail.uri?authorId=58898481200">Gonzales, Leonid Alemán</a></td><td>0</td><td>4</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.scopus.com/authid/detail.uri?authorId=59325707300">Gonzalo Copari Romero, Fredy</a></td><td>0</td><td>2</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.scopus.com/authid/detail.uri?authorId=57571711100">Huata-Panca, Percy</a></td><td>2</td><td>3</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.scopus.com/authid/detail.uri?authorId=57201897173">Ibañez-Quispe, Vladimiro</a></td><td>5</td><td>21</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.scopus.com/authid/detail.uri?authorId=55865380000">Javier Quispe Carita, Angel</a></td><td>1</td><td>1</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.scopus.com/authid/detail.uri?authorId=58284593600">Laura Murillo, Ramiro</a></td><td>1</td><td>2</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.scopus.com/authid/detail.uri?authorId=58671914800">López-Cueva, Milton Antonio</a></td><td>1</td><td>6</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.scopus.com/authid/detail.uri?authorId=58778725100">Melgarejo-Bolivar, Romel P.</a></td><td>3</td><td>6</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.scopus.com/authid/detail.uri?authorId=57562709900">Mendoza-Mollocondo, Charles Ignacio</a></td><td>3</td><td>8</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.scopus.com/authid/detail.uri?authorId=58308326900">Herrera-Urtiaga, Alain Paul</a></td><td>0</td><td>3</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.scopus.com/authid/detail.uri?authorId=58088282100">Tito Lipa, José Pánfilo</a></td><td>0</td><td>3</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.scopus.com/authid/detail.uri?authorId=57003617100">Tumi-Figueroa, Ernesto Nayer</a></td><td>3</td><td>6</td>
+        </tr>
+    </tbody>
+</table>
 
-def f(x):
-    return eval(func_str, {"np": np, "x": x})
+<p><strong>Tabla:</strong> Índice H de docentes de la Facultad de Ingeniería Estadística e Informática.</p>
 
-def g(x):
-    return eval(g_str, {"np": np, "x": x})
-
-xmin = float(input("xmin: "))
-xmax = float(input("xmax: "))
-
-x = np.linspace(xmin, xmax, 400)
-y = f(x)
-
-plt.plot(x, y, label=f"f(x) ={func_str}", color='blue')
-plt.axhline(0, color='black', linestyle='--')
-plt.axvline(0, color='black', linestyle='--')
-plt.legend()
-plt.grid(True)
-plt.show(block=False)
-
-x0 = float(input("x0 = "))
-tol = 1e-6
-max_iter = 100
-
-print("\nIter | x_n | g(x_n) | f(g(x_n)) | Error")
-print("-" *55)
-
-for i in range(1, max_iter + 1):
-    x1 = g(x0)
-    err = abs(x1 - x0)
-    fx1 = f(x1)
-    print(f"{i:4d} | {x0:11.6f} | {x1:11.6f} | {fx1:11.6f} | {err:9.6f}")
-    if err < tol:
-        print(f"\nRaíz {x1:.8f}")
-        break
-    x0 = x1
 `
 ];
 
@@ -666,6 +723,7 @@ renderList();
 
 </body>
 </html>
+
 
 
 
