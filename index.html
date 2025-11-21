@@ -41,24 +41,20 @@
 
     <style>
 /* Contenedor de logos */
-.logos-container {
-    position: absolute;
-    top: 120px; /* más abajo para que no se junten con el header */
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 50px; /* más separación lateral */
-    align-items: center;
-    z-index: 2000;
-}
-
-/* Tamaño de logos más grandes */
-.logo-uni,
-.logo-escuela {
-    height: 150px; /* tamaño aumentado */
-    width: auto;
-    object-fit: contain;
-}
+ /* Logos laterales */
+    .logo-lateral {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 120px;
+      opacity: 0.95;
+      z-index: 100;
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0 0 10px rgba(0,255,255,0.4));
+    }
+    .logo-lateral:hover { transform: translateY(-50%) scale(1.05); }
+    .logo-izq { left: 18px; }
+    .logo-der { right: 18px; }
 
 
 
