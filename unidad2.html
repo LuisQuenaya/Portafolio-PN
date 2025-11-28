@@ -1,271 +1,282 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Unidad 2 — Lista de actividades</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Unidad 2 — Lista de actividades</title>
 
-  <style>
-    :root{
-      --azul-1:#00aaff;
-      --azul-2:#004b9a;
-      --blanco:#ffffff;
-      --negro:#0b0c10;
-      --panel: rgba(255,255,255,0.04);
-    }
-    html,body{
-      height:100%;
-      margin:0;
-      font-family:"Poppins", Arial, sans-serif;
-      background:var(--negro);
-      color:var(--blanco);
-      -webkit-font-smoothing:antialiased;
-      overflow:hidden;
-    }
-    .bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
-    .app{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;align-items:center}
-    header{width:100%;text-align:center;padding:48px 20px 10px;box-sizing:border-box;z-index:3}
-    header h1{margin:0;font-size:3rem;color:var(--azul-1);text-shadow:0 0 18px rgba(0,170,255,0.12)}
-    header h2{margin:6px 0 0;font-weight:400;color:rgba(255,255,255,0.85)}
-    .grid-wrap{width:100%;max-width:1100px;padding:28px 20px;box-sizing:border-box;z-index:3;flex:1;display:flex;align-items:flex-start;justify-content:center}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;width:100%}
-    .card{
-      background:var(--panel);
-      padding:18px;
-      border-radius:12px;
-      cursor:pointer;
-      transition:transform .28s ease, background .28s ease, box-shadow .28s;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-      backdrop-filter: blur(4px);
-    }
-    .card h3{margin:0;color:var(--azul-1);font-size:1.05rem}
-    .card p{margin:8px 0 0 0;color:rgba(255,255,255,0.88);font-size:.92rem}
-    .card:hover{
-      transform: translateY(-8px) scale(1.02);
-      background: linear-gradient(180deg, rgba(0,170,255,0.08), rgba(255,255,255,0.02));
-      box-shadow: 0 14px 40px rgba(0,170,255,0.12);
-    }
-    .detail-screen{display:none;position:fixed;inset:0;background:linear-gradient(180deg, rgba(1,6,20,0.95), rgba(0,0,0,0.96));z-index:30;overflow:auto;padding:36px;box-sizing:border-box;opacity:0;transform: translateX(30px);transition: opacity .32s ease, transform .32s ease;}
-    .detail-screen.show{ display:block; opacity:1; transform: translateX(0); }
-    .detail-inner{max-width:1100px;margin:0 auto;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:18px;box-shadow:0 20px 60px rgba(0,0,0,0.7)}
-    .detail-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-    .detail-head h2{margin:0;color:var(--azul-1)}
-    .controls{display:flex;gap:10px;align-items:center}
-    .btn{background:var(--azul-1);color:var(--negro);padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700;box-shadow:0 10px 30px rgba(0,170,255,0.12)}
-    .btn.secondary{background:#ffffff;color:var(--azul-2)}
-    .btn.ghost{background:transparent;color:var(--blanco);border:1px solid rgba(255,255,255,0.06)}
-    .content-columns{display:grid;grid-template-columns:1fr 340px;gap:18px;margin-top:14px}
-    .enunciado{background:rgba(255,255,255,0.02);padding:14px;border-radius:8px;min-height:160px;color:#e7f7ff;line-height:1.5;outline:none}
-    pre.code{background:#030409;color:#e6fbff;border-left:6px solid var(--azul-2);padding:12px;border-radius:8px;overflow:auto;font-family:Consolas,monospace}
-    .meta-card{background:var(--panel);padding:12px;border-radius:8px;margin-bottom:12px}
-    .footer-small{text-align:center;color:rgba(255,255,255,0.6);margin-top:26px}
-    .volver-floating{position:fixed;right:20px;bottom:18px;z-index:40}
-    .volver-floating .btn{padding:10px 12px;border-radius:12px}
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
 
-    /* ======================
-       ESTILO PARA FÓRMULAS
-       ====================== */
-    .formula {
-      background: #f4f4f4;
-      color: #000;
-      padding: 12px;
-      border-left: 4px solid #1976D2;
-      margin: 15px 0;
-      border-radius: 6px;
-      font-size: 1.1rem;
-    }
+    <style>
+        :root{
+            --azul-1:#00aaff;
+            --azul-2:#004b9a;
+            --blanco:#ffffff;
+            --negro:#0b0c10;
+            --panel: rgba(255,255,255,0.04);
+        }
+        html,body{
+            height:100%;
+            margin:0;
+            font-family:"Poppins", Arial, sans-serif;
+            background:var(--negro);
+            color:var(--blanco);
+            -webkit-font-smoothing:antialiased;
+            overflow:hidden;
+        }
+        .bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+        .app{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;align-items:center}
+        header{width:100%;text-align:center;padding:48px 20px 10px;box-sizing:border-box;z-index:3}
+        header h1{margin:0;font-size:3rem;color:var(--azul-1);text-shadow:0 0 18px rgba(0,170,255,0.12)}
+        header h2{margin:6px 0 0;font-weight:400;color:rgba(255,255,255,0.85)}
+        .grid-wrap{width:100%;max-width:1100px;padding:28px 20px;box-sizing:border-box;z-index:3;flex:1;display:flex;align-items:flex-start;justify-content:center}
+        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;width:100%}
+        .card{
+            background:var(--panel);
+            padding:18px;
+            border-radius:12px;
+            cursor:pointer;
+            transition:transform .28s ease, background .28s ease, box-shadow .28s;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+            backdrop-filter: blur(4px);
+        }
+        .card h3{margin:0;color:var(--azul-1);font-size:1.05rem}
+        .card p{margin:8px 0 0 0;color:rgba(255,255,255,0.88);font-size:.92rem}
+        .card:hover{
+            transform: translateY(-8px) scale(1.02);
+            background: linear-gradient(180deg, rgba(0,170,255,0.08), rgba(255,255,255,0.02));
+            box-shadow: 0 14px 40px rgba(0,170,255,0.12);
+        }
+        .detail-screen{display:none;position:fixed;inset:0;background:linear-gradient(180deg, rgba(1,6,20,0.95), rgba(0,0,0,0.96));z-index:30;overflow:auto;padding:36px;box-sizing:border-box;opacity:0;transform: translateX(30px);transition: opacity .32s ease, transform .32s ease;}
+        .detail-screen.show{ display:block; opacity:1; transform: translateX(0); }
+        .detail-inner{max-width:1100px;margin:0 auto;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:18px;box-shadow:0 20px 60px rgba(0,0,0,0.7)}
+        .detail-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+        .detail-head h2{margin:0;color:var(--azul-1)}
+        .controls{display:flex;gap:10px;align-items:center}
+        .btn{background:var(--azul-1);color:var(--negro);padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700;box-shadow:0 10px 30px rgba(0,170,255,0.12)}
+        .btn.secondary{background:#ffffff;color:var(--azul-2)}
+        .btn.ghost{background:transparent;color:var(--blanco);border:1px solid rgba(255,255,255,0.06)}
+        .content-columns{display:grid;grid-template-columns:1fr 340px;gap:18px;margin-top:14px}
+        .enunciado{background:rgba(255,255,255,0.02);padding:14px;border-radius:8px;min-height:160px;color:#e7f7ff;line-height:1.5;}
+        .enunciado a {color: var(--azul-1); text-decoration: none;}
+        .enunciado a:hover {text-decoration: underline;}
+        pre.code{background:#030409;color:#e6fbff;border-left:6px solid var(--azul-2);padding:12px;border-radius:8px;overflow:auto;font-family:Consolas,monospace;white-space: pre-wrap; /* Para asegurar que el código se descargue tal cual */}
+        .meta-card{background:var(--panel);padding:12px;border-radius:8px;margin-bottom:12px}
+        .footer-small{text-align:center;color:rgba(255,255,255,0.6);margin-top:26px}
+        .volver-floating{position:fixed;right:20px;bottom:18px;z-index:40}
+        .volver-floating .btn{padding:10px 12px;border-radius:12px}
 
-    @media (max-width:980px){.content-columns{grid-template-columns:1fr}header h1{font-size:2.2rem}}
-  </style>
+        /* ======================
+            ESTILO PARA FÓRMULAS (Mejorado para el tema oscuro)
+            ====================== */
+        .formula {
+            background: rgba(0, 75, 154, 0.2); /* Fondo azul oscuro claro */
+            color: var(--blanco);
+            padding: 12px;
+            border-left: 5px solid var(--azul-1); /* Borde azul brillante */
+            margin: 15px 0;
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0, 170, 255, 0.1);
+            overflow-x: auto;
+        }
 
-  <!-- ============================
-       MATHJAX
-       ============================ -->
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-  </script>
+        /* Estilos para tablas en description (Actividad 6) */
+        .activity-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: rgba(255,255,255,0.05);
+            border-radius: 6px;
+        }
+
+        .activity-table th, .activity-table td {
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 10px;
+            text-align: left;
+            font-size: 0.9em;
+        }
+
+        .activity-table th {
+            background-color: rgba(255,255,255,0.08);
+            color: var(--azul-1);
+        }
+        
+        @media (max-width:980px){.content-columns{grid-template-columns:1fr}header h1{font-size:2.2rem}}
+    </style>
 
 </head>
 <body>
 
-  <canvas id="gradCanvas" class="bg-canvas"></canvas>
-  <canvas id="barsCanvas" class="bg-canvas"></canvas>
-  <canvas id="netCanvas" class="bg-canvas"></canvas>
+    <canvas id="gradCanvas" class="bg-canvas"></canvas>
+    <canvas id="barsCanvas" class="bg-canvas"></canvas>
+    <canvas id="netCanvas" class="bg-canvas"></canvas>
 
-  <!-- ANIMACIONES CANVAS -->
-  <script>
-    // CANVAS 1
-    (function(){
-      const c = document.getElementById("gradCanvas");
-      const ctx = c.getContext("2d");
-      function resize(){ c.width = innerWidth; c.height = innerHeight; }
-      resize(); addEventListener("resize", resize);
-      let t = 0;
-      function draw(){
-        t += 0.005;
-        const g = ctx.createLinearGradient(0, 0, c.width * Math.cos(t), c.height * Math.sin(t));
-        g.addColorStop(0, "#00101f");
-        g.addColorStop(0.5, "#002b45");
-        g.addColorStop(1, "#001a2c");
-        ctx.fillStyle = g;
-        ctx.fillRect(0,0,c.width,c.height);
-        requestAnimationFrame(draw);
-      }
-      draw();
-    })();
-
-    // CANVAS 2
-    (function(){
-      const c = document.getElementById("barsCanvas");
-      const ctx = c.getContext("2d");
-      function resize(){ c.width = innerWidth; c.height = innerHeight; }
-      resize(); addEventListener("resize", resize);
-      const bars = []; const count = 35;
-      for(let i=0;i<count;i++){
-        bars.push({ x: Math.random()*c.width, h: 80+Math.random()*300, speed:0.4+Math.random()*0.6, alpha:0.08+Math.random()*0.12 });
-      }
-      function draw(){
-        ctx.clearRect(0,0,c.width,c.height);
-        bars.forEach(b=>{
-          ctx.fillStyle = `rgba(0,170,255,${b.alpha})`;
-          ctx.fillRect(b.x, 0, 2, b.h);
-          b.h += Math.sin(Date.now()*0.001 + b.x)*0.6;
-        });
-        requestAnimationFrame(draw);
-      }
-      draw();
-    })();
-
-    // CANVAS 3
-    (function(){
-      const c = document.getElementById("netCanvas");
-      const ctx = c.getContext("2d");
-      function resize(){ c.width = innerWidth; c.height = innerHeight; }
-      resize(); addEventListener("resize", resize);
-      const dots = []; const count = 90;
-      for(let i=0;i<count;i++){
-        dots.push({ x:Math.random()*c.width, y:Math.random()*c.height,
-          vx:(Math.random()-0.5)*0.6, vy:(Math.random()-0.5)*0.6 });
-      }
-      function draw(){
-        ctx.clearRect(0,0,c.width,c.height);
-        dots.forEach(d=>{
-          d.x+=d.vx; d.y+=d.vy;
-          if(d.x<0||d.x>c.width)d.vx*=-1;
-          if(d.y<0||d.y>c.height)d.vy*=-1;
-          ctx.fillStyle="rgba(0,170,255,0.55)";
-          ctx.beginPath(); ctx.arc(d.x,d.y,2,0,Math.PI*2); ctx.fill();
-        });
-        for(let i=0;i<count;i++){
-          for(let j=i+1;j<count;j++){
-            const dx=dots[i].x-dots[j].x;
-            const dy=dots[i].y-dots[j].y;
-            const dist=Math.sqrt(dx*dx+dy*dy);
-            if(dist<130){
-              ctx.strokeStyle = `rgba(0,170,255,${0.12 - (dist/130)*0.12})`;
-              ctx.lineWidth = 1;
-              ctx.beginPath();
-              ctx.moveTo(dots[i].x, dots[i].y);
-              ctx.lineTo(dots[j].x, dots[j].y);
-              ctx.stroke();
+    <script>
+        // CANVAS 1
+        (function(){
+            const c = document.getElementById("gradCanvas");
+            const ctx = c.getContext("2d");
+            function resize(){ c.width = innerWidth; c.height = innerHeight; }
+            resize(); addEventListener("resize", resize);
+            let t = 0;
+            function draw(){
+                t += 0.005;
+                const g = ctx.createLinearGradient(0, 0, c.width * Math.cos(t), c.height * Math.sin(t));
+                g.addColorStop(0, "#00101f");
+                g.addColorStop(0.5, "#002b45");
+                g.addColorStop(1, "#001a2c");
+                ctx.fillStyle = g;
+                ctx.fillRect(0,0,c.width,c.height);
+                requestAnimationFrame(draw);
             }
-          }
-        }
-        requestAnimationFrame(draw);
-      }
-      draw();
-    })();
-  </script>
+            draw();
+        })();
 
-  <!-- INTERFAZ -->
-  <div class="app">
-    <header>
-      <h1>Unidad 2</h1>
-      <h2>Lista de actividades</h2>
-    </header>
+        // CANVAS 2
+        (function(){
+            const c = document.getElementById("barsCanvas");
+            const ctx = c.getContext("2d");
+            function resize(){ c.width = innerWidth; c.height = innerHeight; }
+            resize(); addEventListener("resize", resize);
+            const bars = []; const count = 35;
+            for(let i=0;i<count;i++){
+                bars.push({ x: Math.random()*c.width, h: 80+Math.random()*300, speed:0.4+Math.random()*0.6, alpha:0.08+Math.random()*0.12 });
+            }
+            function draw(){
+                ctx.clearRect(0,0,c.width,c.height);
+                bars.forEach(b=>{
+                    ctx.fillStyle = `rgba(0,170,255,${b.alpha})`;
+                    ctx.fillRect(b.x, 0, 2, b.h);
+                    b.h += Math.sin(Date.now()*0.001 + b.x)*0.6;
+                });
+                requestAnimationFrame(draw);
+            }
+            draw();
+        })();
 
-    <div class="grid-wrap">
-      <div class="grid" id="activitiesGrid"></div>
+        // CANVAS 3
+        (function(){
+            const c = document.getElementById("netCanvas");
+            const ctx = c.getContext("2d");
+            function resize(){ c.width = innerWidth; c.height = innerHeight; }
+            resize(); addEventListener("resize", resize);
+            const dots = []; const count = 90;
+            for(let i=0;i<count;i++){
+                dots.push({ x:Math.random()*c.width, y:Math.random()*c.height,
+                    vx:(Math.random()-0.5)*0.6, vy:(Math.random()-0.5)*0.6 });
+            }
+            function draw(){
+                ctx.clearRect(0,0,c.width,c.height);
+                dots.forEach(d=>{
+                    d.x+=d.vx; d.y+=d.vy;
+                    if(d.x<0||d.x>c.width)d.vx*=-1;
+                    if(d.y<0||d.y>c.height)d.vy*=-1;
+                    ctx.fillStyle="rgba(0,170,255,0.55)";
+                    ctx.beginPath(); ctx.arc(d.x,d.y,2,0,Math.PI*2); ctx.fill();
+                });
+                for(let i=0;i<count;i++){
+                    for(let j=i+1;j<count;j++){
+                        const dx=dots[i].x-dots[j].x;
+                        const dy=dots[i].y-dots[j].y;
+                        const dist=Math.sqrt(dx*dx+dy*dy);
+                        if(dist<130){
+                            ctx.strokeStyle = `rgba(0,170,255,${0.12 - (dist/130)*0.12})`;
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(dots[i].x, dots[i].y);
+                            ctx.lineTo(dots[j].x, dots[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(draw);
+            }
+            draw();
+        })();
+    </script>
+
+    <div class="app">
+        <header>
+            <h1>Unidad 2</h1>
+            <h2>Lista de actividades</h2>
+        </header>
+
+        <div class="grid-wrap">
+            <div class="grid" id="activitiesGrid"></div>
+        </div>
+
+        <div class="footer-small">© 2025 - LUIS ANGEL QUENAYA LOZA</div>
     </div>
 
-    <div class="footer-small">© 2025 - LUIS ANGEL QUENAYA LOZA</div>
-  </div>
+    <div class="detail-screen" id="detailScreen" aria-hidden="true">
+        <div class="detail-inner">
+            <div class="detail-head">
+                <h2 id="detailTitle">Actividad</h2>
+                <div class="controls">
+                    <button class="btn" id="openPdfBtn">📘 Ver PDF</button> 
+                    <button class="btn secondary" id="downloadCodeBtn">💾 Descargar código</button>
+                    <button class="btn ghost" id="closeDetailBtn">🔙 Volver</button>
+                </div>
+            </div>
 
-  <!-- PANEL DETALLE -->
-  <div class="detail-screen" id="detailScreen" aria-hidden="true">
-    <div class="detail-inner">
-      <div class="detail-head">
-        <h2 id="detailTitle">Actividad</h2>
-        <div class="controls">
-          <button class="btn" id="openPdfBtn">📘 Ver PDF</button>
-          <button class="btn secondary" id="downloadCodeBtn">💾 Descargar código</button>
-          <button class="btn ghost" id="closeDetailBtn">🔙 Volver</button>
+            <div class="content-columns">
+                <div>
+                    <h3 style="color:var(--azul-1);margin:12px 0 6px 0">🧩 Enunciado</h3>
+                    <div class="enunciado" id="detailEnunciado"></div> 
+
+                    <h3 style="color:var(--azul-1);margin:14px 0 6px 0">💻 Código de ejemplo</h3>
+                    <pre class="code"><code id="detailCode"></code></pre>
+                </div>
+
+                <aside>
+                    <div class="meta-card">
+                        <p><strong>Facultad:</strong> FINESI</p>
+                        <p><strong>Materia:</strong> Programación Numérica</p>
+                        <p><strong>Fecha entrega:</strong> 21/10/2025</p>
+                    </div>
+                </aside>
+            </div>
         </div>
-      </div>
-
-      <div class="content-columns">
-        <div>
-          <h3 style="color:var(--azul-1);margin:12px 0 6px 0">🧩 Enunciado</h3>
-          <div class="enunciado" id="detailEnunciado" contenteditable="false"></div>
-
-          <h3 style="color:var(--azul-1);margin:14px 0 6px 0">💻 Código de ejemplo</h3>
-          <pre class="code" id="detailCode"></pre>
-        </div>
-
-        <aside>
-          <div class="meta-card">
-            <p><strong>Facultad:</strong> FINESI</p>
-            <p><strong>Materia:</strong> Programación Numérica</p>
-            <p><strong>Fecha entrega:</strong> 21/10/2025</p>
-          </div>
-        </aside>
-      </div>
     </div>
-  </div>
 
-  <div class="volver-floating" id="floatingBack" style="display:none">
-    <button class="btn ghost" id="floatingClose">🔙 Volver</button>
-  </div>
+    <div class="volver-floating" id="floatingBack" style="display:none">
+        <button class="btn ghost" id="floatingClose">🔙 Volver</button>
+    </div>
 
-  <a id="downloadAnchor" style="display:none"></a>
+    <a id="downloadAnchor" style="display:none"></a>
 
 <script>
-/* AQUÍ IRÁN TUS ACTIVIDADES (cuando me las envíes para ordenarlas) */
-
+// Array de Actividades (DATOS ORIGINALES, SOLO description y code MODIFICADOS para 6-12)
 const activities = [
-  {
-  {
-  id: 'a1',
-  title: 'Actividad 1 — Método de Bisección',
-  pdf: 'BISECCION.pdf',
-  description: `
-El método de bisección es un procedimiento numérico que permite encontrar una raíz de una función continua dentro de un intervalo [a, b].
-Se basa en el teorema de Bolzano, que indica que si f(a) y f(b) tienen signos opuestos, entonces existe al menos una raíz dentro del intervalo.
+    {
+        id: 'a1',
+        title: 'Actividad 1 — Método de Bisección',
+        pdf: 'BISECCION.pdf',
+        description: `
+            <p>El método de bisección es un procedimiento numérico que permite encontrar una raíz de una función continua dentro de un intervalo $[a, b]$. Se basa en el **teorema de Bolzano**, que indica que si $f(a)$ y $f(b)$ tienen signos opuestos, entonces existe al menos una raíz dentro del intervalo.</p>
 
-<div class="formula">
-<b>📌 Fórmula principal del método:</b>  
-$$ x_m = \frac{a + b}{2} $$
-</div>
+            <div class="formula">
+                $$ x_m = \frac{a + b}{2} $$
+            </div>
 
-<div class="formula">
-<b>📌 Condición para decidir el nuevo intervalo:</b>  
-Si  
-$$ f(a)\, f(x_m) < 0 $$  
-entonces la raíz está en \([a, x_m]\).  
-Si no, está en \([x_m, b]\).
-</div>
+            <p>El intervalo se reduce a la mitad en cada iteración, garantizando la convergencia.</p>
+            
+            <div class="formula">
+                **Condición de reemplazo:** Si $f(a) \cdot f(x_m) < 0$, la raíz está en $[a, x_m]$; de lo contrario, está en $[x_m, b]$.
+            </div>
 
-<div class="formula">
-<b>📌 Error absoluto:</b>  
-$$ E = \frac{b - a}{2} $$
-</div>
-  `,
-  code: `
+            <div class="formula">
+                **Error absoluto:** $$ E=\frac{b-a}{2} $$
+            </div>
+        `,
+        code: `
 import numpy as np
 import matplotlib.pyplot as plt
 
-func_str = input("Ingrese la función f(x): ")  
+func_str = input("Ingrese la función f(x): ")
 
 def f(x):
     return eval(func_str, {"np": np, "x": x})
@@ -276,18 +287,18 @@ b = float(input("Ingrese el valor inicial b: "))
 tol = 1e-6
 max_iter = 100
 
-print("\\nIter | a        | b        | xm       | f(xm)    | Error")
-print("--------------------------------------------------------")
+print("\nIter | a          | b          | xm         | f(xm)      | Error")
+print("---------------------------------------------------------------")
 
 for i in range(1, max_iter+1):
     xm = (a + b)/2
     fxm = f(xm)
     error = (b - a)/2
-    print(f"{i:4d} | {a:8.6f} | {b:8.6f} | {xm:8.6f} | {fxm:8.6f} | {error:8.6f}")
+    print(f"{i:4d} | {a:10.6f} | {b:10.6f} | {xm:10.6f} | {fxm:10.6f} | {error:10.6f}")
     
     if abs(fxm) < tol or error < tol:
         raiz = xm
-        print(f"\\nRaíz aproximada: {raiz:.6f} encontrada en {i} iteraciones")
+        print(f"\nRaíz aproximada: {raiz:.6f} encontrada en {i} iteraciones")
         break
     
     if f(a)*fxm < 0:
@@ -295,8 +306,9 @@ for i in range(1, max_iter+1):
     else:
         a = xm
 else:
-    print("\\nNo se alcanzó la convergencia después del máximo de iteraciones")
+    print("\nNo se alcanzó la convergencia después del máximo de iteraciones")
 
+# Código de graficación (mantenido)
 margen = (b - a)*0.1
 xmin = a - margen
 xmax = b + margen
@@ -312,111 +324,109 @@ plt.ylabel("f(x)")
 plt.legend()
 plt.grid(True)
 plt.show()`
-}
-,
+    },
+    {
+        id: 'a2',
+        title: 'Actividad 2 — Método de la Secante',
+        pdf: 'Secante.pdf',
+        description: `
+            <p>El método de la secante es un algoritmo de búsqueda de raíces de una función que utiliza dos aproximaciones iniciales, $x_{n-1}$ y $x_n$. A diferencia del método de Newton-Raphson, **no requiere calcular la derivada** de la función $f(x)$, aproximándola mediante la pendiente de la recta secante que pasa por los puntos $(x_{n-1}, f(x_{n-1}))$ y $(x_n, f(x_n))$</p>
 
-  {
-    id: 'a2',
-title: 'Actividad 2 — Método de la Secante',
-pdf: 'Secante.pdf',
-description: `
-<p>
-El método de la secante es una técnica numérica para encontrar raíces de ecuaciones sin necesidad de calcular derivadas.  
-Utiliza dos aproximaciones iniciales <b>x₀</b> y <b>x₁</b>, y a partir de ellas construye una recta secante entre los puntos  
-<b>(x₀, f(x₀))</b> y <b>(x₁, f(x₁))</b>.  
-</p>
+            <div class="formula">
+                $$ x_{n+1} = x_n - f(x_n)\,\\frac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})} $$
+            </div>
 
-<div class="formula">
-<strong>Fórmula del método de la Secante:</strong><br><br>
-\\[
-x_{n+1} = x_n - f(x_n)\,\\frac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})}
-\\]
-</div>
+            <p>**Nota:** Este método puede converger más rápido que la bisección (con orden $\phi \approx 1.618$), pero no siempre está garantizada la convergencia si los puntos iniciales no son cercanos a la raíz.</p>
+        `,
+        code: `
+import numpy as np
+import matplotlib.pyplot as plt
 
-<p>
-Esta aproximación suele converger más rápido que el método de bisección,  
-aunque puede ser menos estable si los valores iniciales no son adecuados.
-</p>
-`,
-code: `
- import numpy as np
- import matplotlib.pyplot as plt
+# === 1. Ingreso de la función ===
+func_str = input("Ingrese la función f(x): ")
 
- # === 1. Ingreso de la función ===
- func_str = input("Ingrese la función f(x): ")  # Ejemplo: x**3 - x - 1
+# Definir la función
+def f(x):
+    return eval(func_str, {"np": np, "x": x})
 
- # Definir la función
- def f(x):
-     return eval(func_str, {"np": np, "x": x})
+# === 2. Graficar la función ===
+xmin = float(input("Ingrese el valor mínimo de x: "))
+xmax = float(input("Ingrese el valor máximo de x: "))
 
- # === 2. Graficar la función ===
- xmin = float(input("Ingrese el valor mínimo de x: "))
- xmax = float(input("Ingrese el valor máximo de x: "))
+x = np.linspace(xmin, xmax, 400)
+y = f(x)
 
- x = np.linspace(xmin, xmax, 400)
- y = f(x)
+plt.figure(figsize=(8, 5))
+plt.plot(x, y, label=f"f(x) = {func_str}", color='blue')
+plt.axhline(0, color='black', linestyle='--')
+plt.axvline(0, color='black', linestyle='--')
+plt.title("Gráfico de la función ingresada")
+plt.xlabel("x")
+plt.ylabel("f(x)")
+plt.legend()
+plt.grid(True)
+plt.show()
 
- plt.figure(figsize=(8, 5))
- plt.plot(x, y, label=f"f(x) = {func_str}", color='blue')
- plt.axhline(0, color='black', linestyle='--')
- plt.axvline(0, color='black', linestyle='--')
- plt.title("Gráfico de la función ingresada")
- plt.xlabel("x")
- plt.ylabel("f(x)")
- plt.legend()
- plt.grid(True)
- plt.show()
+# === 3. Pregunta si desea aplicar el método de la Secante ===
+op = input("¿Desea encontrar una raíz con el método de la Secante? (s/n): ").lower()
 
- # === 3. Pregunta si desea aplicar el método de la Secante ===
- op = input("¿Desea encontrar una raíz con el método de la Secante? (s/n): ").lower()
+if op == "s":
+    # === 4. Ingreso de puntos iniciales ===
+    x0 = float(input("Ingrese el primer valor inicial x0: "))
+    x1 = float(input("Ingrese el segundo valor inicial x1: "))
 
- if op == "s":
-     # === 4. Ingreso de puntos iniciales ===
-     x0 = float(input("Ingrese el primer valor inicial x0: "))
-     x1 = float(input("Ingrese el segundo valor inicial x1: "))
+    tol = 1e-6
+    max_iter = 100
 
-     tol = 1e-6
-     max_iter = 100
+    print("\nIteración |      x0     |      x1     |    f(x0)    |    f(x1)    |      x2     |    Error")
+    print("-----------------------------------------------------------------------------------------")
 
-     print("\\nIteración |     x0      |      x1      |     f(x0)     |     f(x1)     |     x2      |   Error")
-     print("----------------------------------------------------------------------")
+    for i in range(1, max_iter + 1):
+        f0 = f(x0)
+        f1 = f(x1)
 
-     for i in range(1, max_iter + 1):
-         f0 = f(x0)
-         f1 = f(x1)
+        if f1 - f0 == 0:
+            print(f"\n⚠️ División por cero en la iteración {i}. El método no puede continuar.")
+            break
 
-         if f1 - f0 == 0:
-             print(f"\\n⚠️ División por cero en la iteración {i}. El método no puede continuar.")
-             break
+        # Fórmula de la Secante
+        x2 = x1 - f1 * (x1 - x0) / (f1 - f0)
+        error = abs(x2 - x1)
 
-         x2 = x1 - f1 * (x1 - x0) / (f1 - f0)
-         error = abs(x2 - x1)
+        print(f"{i:9d} | {x0:11.6f} | {x1:11.6f} | {f0:11.6f} | {f1:11.6f} | {x2:11.6f} | {error:10.6f}")
 
-         print(f"{i:9d} | {x0:10.6f} | {x1:10.6f} | {f0:12.6f} | {f1:12.6f} | {x2:10.6f} | {error:10.6f}")
+        if error < tol:
+            print(f"\n✅ Raíz aproximada encontrada: {x2:.6f}")
+            print(f"Iteraciones realizadas: {i}")
+            break
 
-         if error < tol:
-             print(f"\\n✅ Raíz aproximada encontrada: {x2:.6f}")
-             print(f"Iteraciones realizadas: {i}")
-             break
+        x0, x1 = x1, x2
 
-         x0, x1 = x1, x2
-
-     else:
-         print("\\n⚠️ No se alcanzó la convergencia después de", max_iter, "iteraciones.")
- else:
-     print("No se aplicó el método de la Secante.")
+    else:
+        print("\n⚠️ No se alcanzó la convergencia después de", max_iter, "iteraciones.")
+else:
+    print("No se aplicó el método de la Secante.")
 `
-}
-,
+    },
+    {
+        id: 'a3',
+        title: 'Actividad 3 — Método del Punto Fijo',
+        pdf: 'Puntofijo.pdf',
+        description: `
+            <p>El método del punto fijo busca una solución para la ecuación $f(x)=0$ transformándola en una forma equivalente $x=g(x)$. La raíz $\alpha$ es entonces el punto fijo de $g(x)$, es decir, $\alpha = g(\alpha)$.</p>
 
-  {
-    id: 'a3',
-    title: 'Actividad 3 — Método del Punto Fijo',
-    pdf: 'Puntofijo.pdf',
-    description: `El método del punto fijo consiste en transformar la ecuación f(x)=0 en una equivalente x=g(x). 
-Luego, se aplica el proceso iterativo xₙ₊₁=g(xₙ). 
-Si g(x) cumple ciertas condiciones de convergencia (como |g’(x)|<1 cerca de la raíz), las aproximaciones convergerán al valor real.`,
-    code: `import numpy as np
+            <div class="formula">
+                $$ x_{n+1} = g(x_n) $$
+            </div>
+
+            <p>La **convergencia** está garantizada si la función $g(x)$ es derivable en el intervalo que contiene la raíz y su valor absoluto de la derivada es menor que uno en dicho intervalo: $|g'(x)| < 1$.</p>
+
+            <div class="formula">
+                **Condición de convergencia:** $$ |g'(x)| \le k < 1 $$
+            </div>
+        `,
+        code: `
+import numpy as np
 import matplotlib.pyplot as plt
 
 print("=== MÉTODO DEL PUNTO FIJO ===")
@@ -447,27 +457,39 @@ x0 = float(input("x0 = "))
 tol = 1e-6
 max_iter = 100
 
-print("\nIter |     x_n     |    g(x_n)    |   f(g(x_n)) |   Error")
-print("-"*55)
+print("\nIter |       x_n      |      g(x_n)    |   f(g(x_n))    |     Error")
+print("--------------------------------------------------------------------")
 
 for i in range(1, max_iter + 1):
     x1 = g(x0)
     err = abs(x1 - x0)
     fx1 = f(x1)
-    print(f"{i:4d} | {x0:11.6f} | {x1:11.6f} | {fx1:11.6f} | {err:9.6f}")
+    print(f"{i:4d} | {x0:14.8f} | {x1:14.8f} | {fx1:14.8f} | {err:10.8f}")
     if err < tol:
         print(f"\nRaíz ≈ {x1:.8f}")
         break
-    x0 = x1`
-  },
+    x0 = x1
+else:
+    print("\nNo se alcanzó la convergencia después del máximo de iteraciones")
+`
+    },
+    {
+        id: 'a4',
+        title: 'Actividad 4 — Método de Regula Falsi',
+        pdf: 'Regulafalsi.pdf',
+        description: `
+            <p>El método de **Regula Falsi** (o método de la falsa posición) es una mejora del método de bisección. Se basa en trazar una recta secante entre los puntos finales $(a, f(a))$ y $(b, f(b))$ del intervalo, y usar la intersección de esta secante con el eje $x$ como la nueva aproximación a la raíz ($x_r$).</p>
 
-  {
-    id: 'a4',
-    title: 'Actividad 4 — Método de Regula Falsi',
-    pdf: 'Regulafalsi.pdf',
-    description: `El método de Regula Falsi combina las ideas del método de bisección y del método de la secante. 
-Traza una recta entre los puntos (a, f(a)) y (b, f(b)) donde f(a)·f(b)<0, y usa la intersección con el eje x como nueva aproximación.`,
-    code: `import numpy as np
+            <p>Al igual que bisección, requiere que $f(a) \cdot f(b) < 0$ para acotar la raíz.</p>
+
+            <div class="formula">
+                $$ x_r = b - f(b)\frac{b-a}{f(b)-f(a)} $$
+            </div>
+
+            <p>**Nota:** Este método mantiene la propiedad de convergencia de bisección, pero generalmente converge más rápido porque usa información de la función, aunque la convergencia puede ser lenta si la función es muy cóncava o convexa cerca de la raíz.</p>
+        `,
+        code: `
+import numpy as np
 import matplotlib.pyplot as plt
 
 func_str = input("Ingrese la función f(x): ")
@@ -478,67 +500,83 @@ def f(x):
 a = float(input("Ingrese el valor inicial a: "))
 b = float(input("Ingrese el valor inicial b: "))
 
-tol = 1e-6
-max_iter = 100
-
-print("\nIter | a        | b        | xr       | f(xr)    | Error")
-print("--------------------------------------------------------")
-
-for i in range(1, max_iter+1):
-    fa = f(a)
-    fb = f(b)
-    
-    xr = b - fb*(b - a)/(fb - fa)
-    fxr = f(xr)
-    error = abs(fxr)
-    
-    print(f"{i:4d} | {a:8.6f} | {b:8.6f} | {xr:8.6f} | {fxr:8.6f} | {error:8.6f}")
-    
-    if abs(fxr) < tol:
-        raiz = xr
-        print(f"\nRaíz aproximada: {raiz:.6f} encontrada en {i} iteraciones")
-        break
-    
-    if fa*fxr < 0:
-        b = xr
-    else:
-        a = xr
+if f(a) * f(b) >= 0:
+    print("Error: f(a) y f(b) deben tener signos opuestos.")
 else:
-    print("\nNo se alcanzó la convergencia después del máximo de iteraciones")
+    tol = 1e-6
+    max_iter = 100
+    raiz = None
 
-# Graficar automáticamente
-margen = (b - a)*0.1
-xmin = min(a,b) - margen
-xmax = max(a,b) + margen
-x = np.linspace(xmin, xmax, 400)
-y = f(x)
+    print("\nIter | a          | b          | xr         | f(xr)      | Error")
+    print("---------------------------------------------------------------")
 
-plt.plot(x, y, label=f"f(x) = {func_str}")
-plt.axhline(0, color='black', linestyle='--')
-plt.axvline(raiz, color='red', linestyle='--', label=f"Raíz ≈ {raiz:.6f}")
-plt.title("Método de Regula Falsi")
-plt.xlabel("x")
-plt.ylabel("f(x)")
-plt.legend()
-plt.grid(True)
-plt.show()`
-  },   // ← ESTA COMA FALTABA
+    for i in range(1, max_iter+1):
+        fa = f(a)
+        fb = f(b)
+        
+        # Fórmula de Regula Falsi
+        xr = b - fb * (b - a) / (fb - fa)
+        fxr = f(xr)
+        error = abs(fxr)
+        
+        print(f"{i:4d} | {a:10.6f} | {b:10.6f} | {xr:10.6f} | {fxr:10.6f} | {error:10.6f}")
+        
+        if abs(fxr) < tol:
+            raiz = xr
+            print(f"\nRaíz aproximada: {raiz:.6f} encontrada en {i} iteraciones")
+            break
+        
+        if fa * fxr < 0:
+            b = xr
+        else:
+            a = xr
+    else:
+        print("\nNo se alcanzó la convergencia después del máximo de iteraciones")
 
-  {
-    id: 'a5',
-    title: 'Actividad 5 — Método de Newton-Raphson',
-    pdf: 'Actividad_05.pdf',
-    description: `El método de Newton-Raphson es un procedimiento iterativo que permite obtener una aproximación de las raíces reales de una función continua y derivable.`,
-    code: `import numpy as np
+    # Código de graficación
+    if raiz is not None:
+        margen = (max(b, raiz) - min(a, raiz)) * 0.1
+        xmin = min(a,b,raiz) - margen
+        xmax = max(a,b,raiz) + margen
+        x = np.linspace(xmin, xmax, 400)
+        y = f(x)
+
+        plt.plot(x, y, label=f"f(x) = {func_str}")
+        plt.axhline(0, color='black', linestyle='--')
+        plt.axvline(raiz, color='red', linestyle='--', label=f"Raíz ≈ {raiz:.6f}")
+        plt.title("Método de Regula Falsi")
+        plt.xlabel("x")
+        plt.ylabel("f(x)")
+        plt.legend()
+        plt.grid(True)
+        plt.show()`
+    },
+    {
+        id: 'a5',
+        title: 'Actividad 5 — Método de Newton-Raphson',
+        pdf: 'Actividad_05.pdf',
+        description: `
+            <p>El método de **Newton-Raphson** es un método iterativo muy eficiente para encontrar raíces de funciones reales. Se basa en el desarrollo de la función en serie de Taylor alrededor del punto actual y truncando después del primer término, lo que equivale a usar la recta tangente a la función en $x_n$ para estimar el siguiente punto, $x_{n+1}$.</p>
+            
+            <div class="formula">
+                $$ x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} $$
+            </div>
+
+            <p>**Requisitos:** Requiere que la función sea derivable y que su derivada $f'(x)$ sea calculable y no nula cerca de la raíz. Tiende a la convergencia cuadrática (muy rápida) si la suposición inicial es suficientemente cercana a la raíz. En este código, la derivada se calcula numéricamente por diferencias finitas.</p>
+        `,
+        code: `
+import numpy as np
 import matplotlib.pyplot as plt
 import time
 
 ecuacion = input("Ingrese la función f(x): ")
 
 def f(x):
-    return eval(ecuacion)
+    # Usamos eval de forma controlada para ejecutar la función
+    return eval(ecuacion, {"np": np, "__builtins__": None, "x": x})
 
 def derivada(x):
+    # Aproximación numérica de la derivada por diferencia central
     h = 1e-6
     return (f(x + h) - f(x - h)) / (2 * h)
 
@@ -565,373 +603,503 @@ x = float(input("Ingrese el valor inicial aproximado: "))
 tolerancia = 1e-6
 iter_max = 100
 
+print("\nIter | x_n         | f(x_n)      | f'(x_n)     | Error")
+print("--------------------------------------------------------------------")
+
 for i in range(iter_max):
     fx = f(x)
     dfx = derivada(x)
-    if dfx == 0:
-        print(f"La derivada es cero en x = {x}. No se puede continuar.")
+    
+    if abs(dfx) < 1e-10: # Cuidado con la división por cero
+        print(f"La derivada es cero en x = {x:.6f}. No se puede continuar.")
         break
+        
     x_nuevo = x - fx / dfx
-    if abs(x_nuevo - x) < tolerancia:
+    error = abs(x_nuevo - x)
+    
+    print(f"{i+1:4d} | {x:11.6f} | {fx:11.6f} | {dfx:11.6f} | {error:8.6f}")
+
+    if error < tolerancia:
         print(f"\nRaíz encontrada: {x_nuevo:.6f}")
         print(f"Número de iteraciones: {i + 1}")
         break
+        
     x = x_nuevo
 else:
     print(f"\nNo se logró la convergencia después de {iter_max} iteraciones.")
-    print(f"Último valor aproximado: {x:.6f}")`
-  },
+    print(f"Último valor aproximado: {x:.6f}")
+`
+    },
+    // --- INICIO ACTIVIDADES MODIFICADAS/REESCRITAS (6 a 12) ---
+    {
+        id: 'a6',
+        title: 'Actividad 6 — Índice H (Métrica Bibliométrica)',
+        pdf: 'Actividad6.pdf',
+        description: `
+            <p>El **Índice H** (o índice de Hirsch) es una métrica bibliométrica propuesta en 2005 para cuantificar la productividad y el impacto de un investigador. Combina la cantidad de publicaciones con la frecuencia de sus citaciones.</p>
+            <p>Se define de la siguiente manera: Un científico tiene un índice $h$ si $h$ de sus publicaciones tienen al menos $h$ citaciones cada una, y el resto tienen $\le h$ citaciones.</p>
 
- {
-  id: 'a6',
-  title: 'Actividad 6 — Índice H',
-  pdf: 'Actividad6.pdf',
-  description: `
+            <div class="formula">
+                **Definición Formal:**
+                $$ h = \max \{i \in \mathbb{N} : \text{La publicación } i \text{ tiene al menos } i \text{ citas} \} $$
+            </div>
 
-<h2>Descripción</h2>
+            <h4>Autores Clave en Métodos Numéricos (Ejemplos de Índice H)</h4>
+            <p>La siguiente tabla muestra el Índice H de los autores principales en el material de referencia (los enlaces son ejemplos de Scopus ID):</p>
+            <table class="activity-table">
+                <thead>
+                    <tr>
+                        <th>Autor</th>
+                        <th>Investigación Central</th>
+                        <th>Enlace de Referencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Grau, Àngela</td>
+                        <td>Métodos Secantes para sistemas no lineales</td>
+                        <td><a href="https://www.scopus.com/authid/detail.uri?authorId=36545025500" target="_blank">Ver Scopus ID</a></td>
+                    </tr>
+                    <tr>
+                        <td>Díaz-Barrero, José Luis</td>
+                        <td>Convergencia de métodos iterativos</td>
+                        <td><a href="https://www.scopus.com/authid/detail.uri?authorId=6602720000" target="_blank">Ver Scopus ID</a></td>
+                    </tr>
+                    <tr>
+                        <td>Argyros, Ioannis K.</td>
+                        <td>Algoritmos para problemas no lineales</td>
+                        <td><a href="https://www.scopus.com/authid/detail.uri?authorId=7004530784" target="_blank">Ver Scopus ID</a></td>
+                    </tr>
+                </tbody>
+            </table>
 
-El <b>índice H</b> (o índice de Hirsch) es un indicador utilizado para medir la 
-<b>productividad científica</b> y el <b>impacto</b> de un investigador, grupo o institución.  
-Se basa en la cantidad de publicaciones y el número de citas que estas reciben.
+            <h4>Índice H de Docentes de la Facultad (Ejemplo de aplicación)</h4>
+            <p>El Índice H permite evaluar el impacto de la investigación local:</p>
+            <table class="activity-table">
+                <thead>
+                    <tr>
+                        <th>Docente (Enlace a Scopus ID)</th>
+                        <th>Índice H</th>
+                        <th>N° publicaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57224362115" target="_blank">Apaza-Tarqui, Alejandro</a></td><td>1</td><td>5</td></tr>
+                    <tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57221112735" target="_blank">Carpio Vargas, Edgar Eloy</a></td><td>3</td><td>9</td></tr>
+                    <tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57214094525" target="_blank">Canqui-Flores, Bernabé</a></td><td>3</td><td>8</td></tr>
+                    <tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58491331500" target="_blank">Choquejahua-Acero, Remo</a></td><td>1</td><td>2</td></tr>
+                    <tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58930847700" target="_blank">Coyla-Idme, Leonel</a></td><td>1</td><td>5</td></tr>
+                    <tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58898481200" target="_blank">Gonzales, Leonid Alemán</a></td><td>0</td><td>4</td></tr>
+                    <tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=59325707300" target="_blank">Gonzalo Copari Romero, Fredy</a></td><td>0</td><td>2</td></tr>
+                    <tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57571711100" target="_blank">Huata-Panca, Percy</a></td><td>2</td><td>3</td></tr>
+                    <tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57201897173" target="_blank">Ibañez-Quispe, Vladimiro</a></td><td>5</td><td>21</td></tr>
+                    <tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=55865380000" target="_blank">Javier Quispe Carita, Angel</a></td><td>1</td><td>1</td></tr>
+                    <tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58284593600" target="_blank">Laura Murillo, Ramiro</a></td><td>1</td><td>2</td></tr>
+                    <tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58671914800" target="_blank">López-Cueva, Milton Antonio</a></td><td>1</td><td>6</td></tr>
+                    <tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58778725100" target="_blank">Melgarejo-Bolivar, Romel P.</a></td><td>3</td><td>6</td></tr>
+                    <tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57562709900" target="_blank">Mendoza-Mollocondo, Charles Ignacio</a></td><td>3</td><td>8</td></tr>
+                    <tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58308326900" target="_blank">Herrera-Urtiaga, Alain Paul</a></td><td>0</td><td>3</td></tr>
+                    <tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58088282100" target="_blank">Tito Lipa, José Pánfilo</a></td><td>0</td><td>3</td></tr>
+                    <tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57003617100" target="_blank">Tumi-Figueroa, Ernesto Nayer</a></td><td>3</td><td>6</td></tr>
+                </tbody>
+            </table>
+        `,
+        code: `
+/**
+ * Python/Pseudocódigo para calcular el Índice H
+ * El código real requiere acceso a bases de datos bibliométricas (Scopus, WoS, etc.)
+ * Este es un ejemplo conceptual basado en un array de citas.
+ */
+def calcular_indice_h(citas):
+    """
+    Calcula el Índice H a partir de un array de números de citas.
+    @param citas: Lista de enteros representando el número de citas de cada artículo.
+    @return: El valor del Índice H.
+    """
+    if not citas:
+        return 0
 
-Un autor tiene un índice H igual a <i>h</i> si ha publicado <i>h</i> artículos que han sido citados 
-al menos <i>h</i> veces cada uno.
+    # 1. Ordenar las citas de forma descendente
+    citas.sort(reverse=True)
 
-<h3>Fórmula conceptual del índice H</h3>
+    h_index = 0
+    # 2. Recorrer la lista para encontrar el índice 'h'
+    for i in range(len(citas)):
+        # El artículo en la posición i (que tiene i+1 artículos con al menos esa cantidad)
+        # debe tener un número de citas >= (i + 1)
+        if citas[i] >= (i + 1):
+            h_index = i + 1
+        else:
+            # Una vez que la condición no se cumple, el valor anterior es el máximo h
+            break
+            
+    return h_index
 
-<pre><code>
-Indice H = max { h : el autor tiene h artículos con ≥ h citas }
-</code></pre>
-
-<h2>Ejemplo</h2>
-
-Si un investigador tiene 10 artículos y al menos 5 de ellos han sido citados 5 veces o más,  
-entonces su índice H es igual a 5.
-
-Este indicador combina cantidad y calidad de la producción científica en una sola medida.
-
-
-<h2>Creación de cuenta en CTI Vitae</h2>
-
-<b>CTI Vitae</b> es una plataforma del <b>CONCYTEC</b> (Consejo Nacional de Ciencia, Tecnología e Innovación Tecnológica del Perú) que funciona como un currículum virtual para investigadores, docentes y profesionales vinculados a la ciencia y la tecnología.
-
-Los usuarios pueden registrar:
-
-• Información académica  
-• Experiencia profesional  
-• Publicaciones  
-• Proyectos de investigación  
-• Patentes  
-• Reconocimientos y logros  
-
-La plataforma facilita la visibilidad del perfil del investigador y permite generar reportes de productividad científica y métricas como el índice H.
-
-<div style="text-align:center; margin: 20px 0;">
-  <img src="image.png" style="width:85%; border-radius:8px;">
-  <p><i>Figura: Captura de la plataforma CTI Vitae.</i></p>
-</div>
-
-
-<h2>Autores de otros países y su índice H</h2>
-
-<table border="1" style="border-collapse: collapse; width: 100%; text-align:center;">
-<thead>
-<tr>
-  <th>Autor</th>
-  <th>Investigación</th>
-  <th>N° publicaciones</th>
-  <th>Índice H</th>
-</tr>
-</thead>
-<tbody>
-
-<tr>
-  <td><a href="https://www.scopus.com/authid/detail.uri?authorId=36545025500" target="_blank">Grau, Àngela</a></td>
-  <td><i>A new class of secant-like methods for solving nonlinear systems of equations</i></td>
-  <td>12</td>
-  <td>9</td>
-</tr>
-
-<tr>
-  <td><a href="https://www.scopus.com/authid/detail.uri?authorId=6602720000" target="_blank">Díaz-Barrero, José Luis</a></td>
-  <td><i>On the local convergence of a family of two-step iterative methods for solving nonlinear equations</i></td>
-  <td>41</td>
-  <td>12</td>
-</tr>
-
-<tr>
-  <td><a href="https://www.scopus.com/authid/detail.uri?authorId=7004530784" target="_blank">Argyros, Ioannis Konstantinos</a></td>
-  <td><i>An algorithm for nonlinear problems with variational inequality methods</i></td>
-  <td>931</td>
-  <td>33</td>
-</tr>
-
-</tbody>
-</table>
-
-<br><br>
-
-<h2>Índice H de docentes de la Facultad de Ingeniería Estadística e Informática</h2>
-
-<table border="1" style="border-collapse: collapse; width: 100%; text-align:center;">
-<thead>
-<tr>
-  <th>Docente</th>
-  <th>Índice H</th>
-  <th>N° publicaciones</th>
-</tr>
-</thead>
-<tbody>
-
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57224362115">Apaza-Tarqui, Alejandro</a></td><td>1</td><td>5</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57221112735">Carpio Vargas, Edgar Eloy</a></td><td>3</td><td>9</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57214094525">Canqui-Flores, Bernabé</a></td><td>3</td><td>8</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58491331500">Choquejahua-Acero, Remo</a></td><td>1</td><td>2</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58930847700">Coyla-Idme, Leonel</a></td><td>1</td><td>5</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58898481200">Gonzales, Leonid Alemán</a></td><td>0</td><td>4</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=59325707300">Gonzalo Copari Romero, Fredy</a></td><td>0</td><td>2</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57571711100">Huata-Panca, Percy</a></td><td>2</td><td>3</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57201897173">Ibañez-Quispe, Vladimiro</a></td><td>5</td><td>21</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=55865380000">Javier Quispe Carita, Angel</a></td><td>1</td><td>1</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58284593600">Laura Murillo, Ramiro</a></td><td>1</td><td>2</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58671914800">López-Cueva, Milton Antonio</a></td><td>1</td><td>6</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58778725100">Melgarejo-Bolivar, Romel P.</a></td><td>3</td><td>6</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57562709900">Mendoza-Mollocondo, Charles Ignacio</a></td><td>3</td><td>8</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58308326900">Herrera-Urtiaga, Alain Paul</a></td><td>0</td><td>3</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58088282100">Tito Lipa, José Pánfilo</a></td><td>0</td><td>3</td></tr>
-<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57003617100">Tumi-Figueroa, Ernesto Nayer</a></td><td>3</td><td>6</td></tr>
-
-</tbody>
-</table>
+# Ejemplo de uso:
+# Un autor tiene 6 artículos con 10, 8, 5, 4, 2, 1 citas.
+ejemplo_citas = [10, 8, 5, 4, 2, 1] 
+# h=4: 4 artículos tienen 4 o más citas (10, 8, 5, 4).
+# Artículo 5 (con 2 citas) NO tiene 5 o más citas.
+# print(calcular_indice_h(ejemplo_citas)) # Salida: 4
 
 `
-}
-,
-   {
-  id: 'a7',
-  title: 'Actividad 7 — Gradiente de una Función',
-  pdf: 'actividad_8.pdf',
-  description: `
-El gradiente representa la dirección y magnitud del cambio más rápido de una función respecto a sus variables.
+    },
+    {
+        id: 'a7',
+        title: 'Actividad 7 — Gradiente de una Función (Descenso por Gradiente)',
+        pdf: 'actividad_8.pdf',
+        description: `
+            <p>El **Gradiente** ($\nabla f$) de una función escalar multivariable es un vector que apunta en la dirección de máximo crecimiento de la función. En el contexto de optimización, el método de **Descenso por Gradiente** se utiliza para encontrar el mínimo local de una función de coste (Loss Function) moviéndose en la dirección opuesta al gradiente.</p>
 
-En el caso de funciones de una sola variable, el gradiente coincide con la derivada:
+            <div class="formula">
+                **Vector Gradiente (Función Multivariable):**
+                $$ \nabla f(\mathbf{x}) = \begin{pmatrix} \frac{\partial f}{\partial x_1} \\ \frac{\partial f}{\partial x_2} \\ \vdots \\ \frac{\partial f}{\partial x_n} \end{pmatrix} $$
+            </div>
 
-<pre><code>
-∇f(x) = f'(x)
-</code></pre>
+            <div class="formula">
+                **Regla de Actualización (Descenso por Gradiente):**
+                $$ \mathbf{x}_{k+1} = \mathbf{x}_k - \eta \nabla f(\mathbf{x}_k) $$
+            </div>
 
-Para funciones de varias variables, el gradiente se define como el vector de derivadas parciales:
+            <p>Donde $\mathbf{x}_k$ es el vector de variables en la iteración $k$, $\nabla f(\mathbf{x}_k)$ es el gradiente de la función de coste evaluado en $\mathbf{x}_k$, y $\eta$ (eta) es la **tasa de aprendizaje** (Learning Rate), que controla el tamaño del paso.</p>
+        `,
+        code: `
+# Código de ejemplo en R para un Descenso por Gradiente simple
+# Función de Coste: f(x) = x^2 (Mínimo en x=0)
+# Gradiente (Derivada): f'(x) = 2x
 
-<pre><code>
-∇f(x, y, z) = ( ∂f/∂x , ∂f/∂y , ∂f/∂z )
-</code></pre>
-
-En el método de **descenso por gradiente**, se actualiza la variable en cada iteración moviéndose en la dirección opuesta al gradiente:
-
-<pre><code>
-x_{k+1} = x_k − η ∇f(x_k)
-</code></pre>
-
-donde:
-- η es la tasa de aprendizaje (learning rate)
-- ∇f(x_k) es el gradiente evaluado en la iteración k
-
-Para una función simple como:
-
-<pre><code>
-f(x) = x²
-</code></pre>
-
-su derivada (gradiente) es:
-
-<pre><code>
-f'(x) = 2x
-</code></pre>
-
-Por lo tanto, la regla de actualización queda:
-
-<pre><code>
-x_{k+1} = x_k − η (2x_k)
-</code></pre>
-
-Este proceso aproxima el valor donde la función alcanza su mínimo.
-`,
-  code: `
-n <- 0.01  # tasa de aprendizaje
+n <- 0.01  # Tasa de aprendizaje (Learning Rate)
 f <- function(x) x^2
 f_deriv <- function(x) 2 * x
 
-x0 <- 3    
-iter <- 21 
+x0 <- 3    # Punto inicial
+iter_max <- 21
 
-x <- numeric(iter)
-fx <- numeric(iter)
-fpx <- numeric(iter)
-grad <- numeric(iter)
+x_hist <- numeric(iter_max)
+x_hist[1] <- x0
+print(paste("Iteración 0: x =", x0))
 
-x[1] <- x0
-
-for (i in 1:iter) {
-  fx[i] <- f(x[i])
-  fpx[i] <- f_deriv(x[i])
-  grad[i] <- x[i] - n * fpx[i]
-  if (i < iter) {
-    x[i + 1] <- grad[i]
-  }
-}`
+for (i in 1:(iter_max - 1)) {
+    # Calcular el gradiente
+    grad_x <- f_deriv(x_hist[i])
+    
+    # Aplicar la regla de actualización: x_nuevo = x_actual - eta * gradiente
+    x_hist[i + 1] <- x_hist[i] - n * grad_x
+    
+    print(paste("Iteración", i, ": x =", round(x_hist[i + 1], 6), 
+                ", f(x) =", round(f(x_hist[i + 1]), 6)))
 }
-,
 
-  {
-  
-  id: 'a8',
-  title: 'Actividad 8 — Resumen del Articulo',
-  pdf: 'iamgen 1.pdf',
-  description: `
-El artículo analiza y contrasta dos métodos fundamentales para resolver problemas de regresión lineal: el pseudoinverso de Moore–Penrose y el descenso de gradiente. La regresión lineal tiene como objetivo encontrar los parámetros que mejor predicen una variable dependiente a partir de variables independientes, minimizando los errores cuadrados (OLS).
-
-El pseudoinverso de Moore–Penrose brinda una solución analítica exacta mediante operaciones matriciales, proporcionando el mínimo error posible. No obstante, esta técnica puede resultar costosa en términos computacionales y presentar inestabilidad cuando la matriz de características es muy grande o está mal condicionada.
-
-Por el contrario, el método de descenso de gradiente ajusta los parámetros progresivamente según la dirección del gradiente negativo del error, influenciado por la tasa de aprendizaje. Aunque no garantiza una solución exacta, su principal ventaja es su escalabilidad y eficacia para trabajar con grandes volúmenes de datos.
-
-En el marco teórico se explica que la estabilidad numérica y eficiencia de ambos métodos dependen del tamaño del conjunto de datos (n), del número de variables (d) y de la condición de la matriz X. El pseudoinverso se implementa generalmente mediante descomposición SVD, mientras que el descenso de gradiente requiere pasos controlados y puede verse afectado por el escalado de las variables.
-
-En la metodología, el autor realizó experimentos usando datos sintéticos y reales. Los datos sintéticos permitieron manipular aspectos como la cantidad de muestras, la dimensionalidad y la condición de la matriz. Para los datos reales se trabajó con los conjuntos California Housing (20,640 muestras y 8 variables) y Diabetes (442 muestras y 10 variables). Las métricas evaluadas fueron: tiempo de ejecución, error cuadrático medio (MSE) y, en el caso del descenso de gradiente, el número de iteraciones necesarias para converger. Las pruebas se realizaron en Python empleando pinv() para el pseudoinverso y un algoritmo de gradiente con una tasa de aprendizaje de 0.001 y una tolerancia de 1e-6.
-
-Los resultados mostraron que el pseudoinverso fue más rápido y preciso en conjuntos de tamaño pequeño o moderado, manteniendo alta estabilidad numérica. En contraste, el descenso de gradiente necesitó más iteraciones y su rendimiento dependió en gran medida del escalado de las variables y de la tasa de aprendizaje. Sin embargo, en escenarios con alta dimensionalidad o grandes volúmenes de datos, el descenso de gradiente (y variantes como el estocástico) resultó más eficiente y escalable.
-
-En conclusión, el pseudoinverso de Moore–Penrose es ideal para conjuntos bien condicionados y de tamaño moderado, debido a su exactitud y bajo error.
+# El resultado final (x_hist[iter_max]) se aproxima a 0.
 `
-},
+    },
+    {
+        id: 'a8',
+        title: 'Actividad 8 — Pseudoinverso vs. Descenso de Gradiente en Regresión Lineal',
+        pdf: 'iamgen 1.pdf',
+        description: `
+            <p>Este artículo contrasta dos métodos fundamentales para resolver el problema de la **Regresión Lineal por Mínimos Cuadrados Ordinarios (OLS)**: el uso de la solución de forma cerrada a través del **Pseudoinverso de Moore-Penrose** y el método iterativo del **Descenso de Gradiente**.</p>
+            
+            <h4>1. Pseudoinverso de Moore-Penrose (Solución Analítica)</h4>
+            <p>Proporciona la solución exacta para los coeficientes $\mathbf{w}$ que minimizan el error cuadrático. Se basa en la ecuación normal:</p>
+            
+            <div class="formula">
+                **Solución Analítica (Pesos $\mathbf{w}$):**
+                $$ \mathbf{w} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y} $$
+                **Donde $\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T$ es el Pseudoinverso $\mathbf{X}^{\dagger}$.**
+            </div>
 
- {
-    id: 'a9',
-    title: 'Actividad 9 — Dinamica del juego de caramelos y chupetines',
-    pdf: 'Dinamica (2).pdf',
-    description: `El presente trabajo desarrolla la simulación de un juego cooperativo en el que varios participantes comparten una bolsa con tres tipos de caramelos: A, B y C. El propósito es que, mediante combinaciones e intercambios, el grupo consiga generar al menos un chupetín (D) para cada jugador.
+            <p>**Ventajas:** Exactitud y bajo error. **Desventajas:** Alto costo computacional e inestabilidad numérica para matrices de características ($\mathbf{X}$) grandes o mal condicionadas (solución por SVD).</p>
 
-Cada participante inicia con dos caramelos asignados al azar. Durante cada turno, el sistema aplica las siguientes reglas:
+            <h4>2. Descenso de Gradiente (Solución Iterativa)</h4>
+            <p>Minimiza la **función de coste (Error Cuadrático Medio - MSE)** iterativamente, ajustando los pesos en la dirección opuesta al gradiente de la función de coste. La función de coste $J(\mathbf{w})$ es:</p>
 
-Si en la bolsa existen al menos un caramelo A, uno B y uno C, se crea un chupetín (D) y esos tres caramelos se retiran.
+            <div class="formula">
+                **Función de Coste (MSE):**
+                $$ J(\mathbf{w}) = \frac{1}{2m} \sum_{i=1}^{m} (h_\mathbf{w}(\mathbf{x}^{(i)}) - y^{(i)})^2 $$
+            </div>
 
-Si se encuentran disponibles dos unidades de cada tipo (AA, BB y CC), se producen dos chupetines (2D) y se añade un caramelo aleatorio adicional a la bolsa.
+            <p>**Ventajas:** Escalabilidad y eficiencia para grandes conjuntos de datos. **Desventajas:** Sensibilidad a la tasa de aprendizaje ($\eta$) y a la necesidad de normalización/escalado de las variables para asegurar una convergencia eficiente.</p>
+        `,
+        code: `
+# Código conceptual (no funcional) para ilustrar ambos métodos
 
-Cuando no es posible formar más chupetines, se permite devolver un chupetín (D) a cambio de tres caramelos aleatorios (uno correspondiente a cada tipo).
+def pseudoinverso_ols(X, y):
+    """Solución analítica usando el pseudoinverso (linalg.pinv)."""
+    # X_dagger = np.linalg.pinv(X)
+    # w = X_dagger @ y
+    return "Retorna la solución de forma cerrada (óptima)"
 
-El juego concluye cuando se logra obtener al menos un chupetín para cada jugador o cuando se alcanza el límite máximo de iteraciones.
+def descenso_gradiente(X, y, learning_rate, max_iter):
+    """Solución iterativa usando el descenso de gradiente."""
+    # w = np.zeros(X.shape[1])
+    # for i in range(max_iter):
+    #     pred = X @ w
+    #     error = pred - y
+    #     gradiente = X.T @ error / len(y)
+    #     w = w - learning_rate * gradiente
+    # return w
+    return "Retorna una aproximación a la solución después de N iteraciones"
 
-Este ejercicio muestra la aplicación de simulaciones estocásticas y estructuras iterativas en R para representar sistemas con elementos aleatorios y criterios de detención`,
+print("Comparación de rendimiento:")
+print("• Pseudoinverso: Mejor para datasets pequeños/moderados y bien condicionados.")
+print("• Descenso de Gradiente: Mejor para datasets masivos y alta dimensionalidad.")
+`
+    },
+    {
+        id: 'a9',
+        title: 'Actividad 9 — Dinámica del Juego de Caramelos y Chupetines (Simulación Estocástica)',
+        pdf: 'Dinamica (2).pdf',
+        description: `
+            <p>Esta actividad describe la simulación de un **juego cooperativo estocástico** modelado en R, donde el objetivo es alcanzar un estado final específico (un chupetín 'D' por jugador) a partir de un conjunto inicial de recursos aleatorios (caramelos 'A', 'B', 'C').</p>
+            
+            <p>La simulación utiliza **reglas de transición de estado** basadas en el inventario actual de caramelos y un componente estocástico (aleatorio) para la reposición de recursos. Los estados y las transiciones se rigen por las siguientes reglas:</p>
+
+            <div class="formula">
+                **Regla de Creación 1 (1D):**
+                $$ \{A \ge 1, B \ge 1, C \ge 1\} \Rightarrow \text{Crear } 1D, \text{ consumir } \{1A, 1B, 1C\} $$
+            </div>
+
+            <div class="formula">
+                **Regla de Creación 2 (2D + Reposición):**
+                $$ \{A \ge 2, B \ge 2, C \ge 2\} \Rightarrow \text{Crear } 2D, \text{ consumir } \{2A, 2B, 2C\}, \text{ y añadir 1 caramelo aleatorio} $$
+            </div>
+            
+            <p>La dinámica cesa cuando se cumple la **condición de victoria** (chupetines $\ge$ número de jugadores) o se alcanza el límite de iteraciones, sirviendo como ejemplo de modelado de sistemas complejos y dinámicos.</p>
+        `,
+        code: `
+# Código conceptual en R (Simulación Estocástica)
+
+# Inicialización
+JUGADORES <- 5
+BOLSA <- list(A=0, B=0, C=0, D=0)
+MAX_ITER <- 100
+set.seed(42) # Para reproducibilidad
+
+# Función para añadir caramelo aleatorio (Simulación estocástica)
+añadir_aleatorio <- function(bolsa) {
+  tipo <- sample(c('A', 'B', 'C'), 1)
+  bolsa[[tipo]] <- bolsa[[tipo]] + 1
+  return(bolsa)
+}
+
+# Bucle principal de la simulación
+for (i in 1:MAX_ITER) {
+  
+  # 1. Aplicar Regla de Creación 2 (Prioridad)
+  if (BOLSA$A >= 2 && BOLSA$B >= 2 && BOLSA$C >= 2) {
+    BOLSA$A <- BOLSA$A - 2
+    BOLSA$B <- BOLSA$B - 2
+    BOLSA$C <- BOLSA$C - 2
+    BOLSA$D <- BOLSA$D + 2
+    BOLSA <- añadir_aleatorio(BOLSA)
+    print(paste("Iter", i, ": Regla 2 aplicada (2D + reposición). Bolsa:", paste(unlist(BOLSA), collapse=", ")))
     
-  },
-  {
-
-id: 'a10',
-    title: 'Actividad 10 — Resumen del Aticulo',
-    pdf: 'tarea de resumenes.pdf',
-    description: `El artículo aborda el problema de la registración no rígida de imágenes médicas, un proceso esencial en el análisis clínico y diagnóstico por imágenes. Este procedimiento permite alinear imágenes obtenidas en distintos momentos, desde diferentes ángulos o con distintos sensores, para facilitar comparaciones anatómicas y la evaluación de cambios patológicos. Debido a la naturaleza deformable de los tejidos biológicos, los métodos de registración rígida resultan insuficientes; por ello, se requieren técnicas no rígidas capaces de adaptarse a deformaciones locales y globales.
-Uno de los algoritmos más utilizados para este propósito es el método de Demons, propuesto originalmente por Thirion. Este se basa en la analogía con el flujo óptico, calculando un campo de deformación que transforma una imagen “flotante” o de consulta (query image) para alinearla con una imagen de referencia. Sin embargo, el algoritmo Demons tradicional utiliza solo la información del gradiente de las imágenes, sin considerar la información direccional (orientación de estructuras), lo cual puede limitar su precisión, especialmente cuando se presentan grandes deformaciones o estructuras con direcciones dominantes complejas.
-`,
+  } 
+  # 2. Aplicar Regla de Creación 1
+  else if (BOLSA$A >= 1 && BOLSA$B >= 1 && BOLSA$C >= 1) {
+    BOLSA$A <- BOLSA$A - 1
+    BOLSA$B <- BOLSA$B - 1
+    BOLSA$C <- BOLSA$C - 1
+    BOLSA$D <- BOLSA$D + 1
+    print(paste("Iter", i, ": Regla 1 aplicada (1D). Bolsa:", paste(unlist(BOLSA), collapse=", ")))
     
-  },
+  }
+  
+  # 3. Condición de Victoria
+  if (BOLSA$D >= JUGADORES) {
+    print(paste("¡VICTORIA! Objetivo alcanzado en", i, "iteraciones."))
+    break
+  }
+  
+  # 4. Regla de Intercambio (Si no hay más creaciones posibles)
+  if (i %% 5 == 0 && BOLSA$D >= 1) { # Intenta intercambio cada 5 turnos
+      BOLSA$D <- BOLSA$D - 1
+      BOLSA <- añadir_aleatorio(BOLSA)
+      BOLSA <- añadir_aleatorio(BOLSA)
+      BOLSA <- añadir_aleatorio(BOLSA)
+      print(paste("Iter", i, ": Intercambio D por 3 caramelos aleatorios."))
+  }
+  
+  if (i == MAX_ITER) {
+      print("FIN: Límite de iteraciones alcanzado. No se alcanzó la victoria.")
+  }
+}
+`
+    },
+    {
+        id: 'a10',
+        title: 'Actividad 10 — Registración No Rígida de Imágenes (Método Demons)',
+        pdf: 'tarea de resumenes.pdf',
+        description: `
+            <p>El artículo se centra en la **registración no rígida** de imágenes médicas, un proceso crítico para alinear datos obtenidos de distintos escaneos o sensores. La registración no rígida permite modelar las deformaciones locales de los tejidos biológicos, a diferencia de la registración rígida que solo permite traslaciones y rotaciones.</p>
 
-{
-  id: 'a11',
-  title: 'Actividad 11 — Diferenciación Numérica',
-  pdf: 'Actividad11 (1).pdf',
-  description: `
-La diferenciación numérica es un método que permite aproximar la derivada de una función utilizando valores discretos, como datos tabulados o resultados experimentales. Matemáticamente, la derivada de una función se define como:
+            <p>El método principal discutido es el algoritmo **Demons**, que modela el campo de deformación entre la imagen flotante ($I_F$) y la imagen de referencia ($I_R$) basándose en el **flujo óptico**. La deformación es vista como un movimiento de "demons" que empujan a la imagen flotante hacia la imagen de referencia.</p>
 
-<pre><code>
-f'(x) = lim(h → 0) [ f(x + h) − f(x) ] / h
-</code></pre>
+            <div class="formula">
+                **Desplazamiento del Vóxel $v$ (Versión Simple de Demons):**
+                $$ \mathbf{v}(\mathbf{x}) = \frac{(I_R(\mathbf{x}) - I_F(\mathbf{x})) \cdot \nabla I_R(\mathbf{x})}{\| \nabla I_R(\mathbf{x}) \|^2 + (I_R(\mathbf{x}) - I_F(\mathbf{x}))^2} \cdot \nabla I_R(\mathbf{x}) $$
+            </div>
 
-En la práctica computacional, el incremento h nunca puede ser exactamente cero, por lo que se trabaja con valores pequeños pero finitos. Esto da origen a las diferencias finitas, que permiten estimar derivadas mediante operaciones entre puntos cercanos.
+            <p>Donde $I_R(\mathbf{x})$ y $I_F(\mathbf{x})$ son la intensidad del vóxel $\mathbf{x}$ en las imágenes de referencia y flotante, y $\nabla I_R(\mathbf{x})$ es el vector gradiente de la imagen de referencia. El artículo señala que las variantes más avanzadas incorporan información direccional y de regularización para manejar grandes deformaciones y mejorar la precisión.</p>
+        `,
+        code: `
+# Pseudocódigo/Comentario: La implementación del método Demons 
+# es compleja y típicamente se realiza usando librerías avanzadas 
+# (ej. ITK, SimpleITK en Python/C++).
 
-Existen varios enfoques para aproximar derivadas según la posición de los puntos utilizados:
+# === Pasos generales del Algoritmo Demons ===
+# 1. Inicializar el Campo de Deformación (DVF) a cero.
+# 2. Iterar hasta la convergencia:
+#    a. Deformar la Imagen Flotante: I_deformada = I_F(DVF).
+#    b. Calcular el Desplazamiento (v): Usando la fórmula del gradiente/intensidad.
+#    c. Suavizar/Regularizar v: Aplicar un filtro gaussiano (opcional, para estabilidad).
+#    d. Componer/Actualizar el DVF: DVF_nuevo = DVF + v.
+# 3. Resultado: El DVF final.
 
-• Diferencia hacia adelante  
-<pre><code>
-f'(x) ≈ [ f(x + h) − f(x) ] / h
-</code></pre>
-  Útil al inicio del intervalo.
+`
+    },
+    {
+        id: 'a11',
+        title: 'Actividad 11 — Diferenciación Numérica (Fórmulas de Diferencias Finitas)',
+        pdf: 'Actividad11 (1).pdf',
+        description: `
+            <p>La **Diferenciación Numérica** consiste en aproximar la derivada de una función $f(x)$ utilizando sus valores en un conjunto discreto de puntos. El concepto se basa en la definición de la derivada, pero con un paso $h$ pequeño pero finito.</p>
 
-• Diferencia hacia atrás  
-<pre><code>
-f'(x) ≈ [ f(x) − f(x − h) ] / h
-</code></pre>
-  Adecuada para los extremos finales del intervalo.
+            <div class="formula">
+                **Definición de la Derivada:**
+                $$ f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h} $$
+            </div>
 
-• Diferencia centrada  
-<pre><code>
-f'(x) ≈ [ f(x + h) − f(x − h) ] / (2h)
-</code></pre>
-  Brinda mayor precisión gracias a su simetría.
+            <p>Las aproximaciones más comunes se conocen como **Fórmulas de Diferencias Finitas**:</p>
 
-Además, también pueden obtenerse aproximaciones de la segunda derivada mediante combinaciones de diferencias de primer orden:
+            <h4>1. Diferencia Adelante (Forward Difference)</h4>
+            <p>Aproxima la pendiente usando el punto actual y el siguiente.</p>
+            <div class="formula">
+                $$ f'(x) \approx \frac{f(x + h) - f(x)}{h} + O(h) $$
+            </div>
 
-• Segunda derivada (diferencia centrada)  
-<pre><code>
-f''(x) ≈ [ f(x + h) − 2f(x) + f(x − h) ] / h²
-</code></pre>
+            <h4>2. Diferencia Atrás (Backward Difference)</h4>
+            <p>Aproxima la pendiente usando el punto actual y el anterior.</p>
+            <div class="formula">
+                $$ f'(x) \approx \frac{f(x) - f(x - h)}{h} + O(h) $$
+            </div>
 
-Estas técnicas permiten analizar la concavidad y el comportamiento local de una función. En esta actividad se aplicarán estos métodos para calcular derivadas de primer y segundo orden usando distintos valores de h y comparando su precisión.
-`,
-},
+            <h4>3. Diferencia Central (Central Difference)</h4>
+            <p>Aproxima la pendiente usando los puntos vecino anterior y posterior. Es generalmente la más precisa ($O(h^2)$).</p>
+            <div class="formula">
+                $$ f'(x) \approx \frac{f(x + h) - f(x - h)}{2h} + O(h^2) $$
+            </div>
+            <p>La notación $O(h)$ u $O(h^2)$ representa el orden del error de truncamiento.</p>
+        `,
+        code: `
+import numpy as np
 
- {
-  id: 'a12',
-  title: 'Actividad 12 — Interpolación',
-  pdf: 'actividad_12 (1).pdf',
-  description: `
-La interpolación numérica es una técnica utilizada para estimar valores desconocidos de una función a partir de un conjunto de puntos conocidos. Su propósito es construir una función aproximada P(x) que pase exactamente por los datos dados. Matemáticamente, esto se expresa como:
+# Ejemplo de aproximación de la derivada de f(x) = x^3 en x=2
+def f(x):
+    return x**3
 
-<pre><code>
-P(x_i) = f(x_i)
-</code></pre>
+x = 2.0
+h = 0.01
 
-Los métodos de interpolación permiten generar funciones continuas basadas en datos discretos, lo que resulta esencial en ingeniería, economía y aplicaciones computacionales.
+# 1. Diferencia Adelante
+f_prime_adelante = (f(x + h) - f(x)) / h
 
-Entre los métodos más utilizados destacan:
+# 2. Diferencia Atrás
+f_prime_atras = (f(x) - f(x - h)) / h
 
-• Interpolación lineal: aproxima los datos mediante un segmento recto entre dos puntos. Su ecuación es:
+# 3. Diferencia Central (más precisa)
+f_prime_central = (f(x + h) - f(x - h)) / (2 * h)
 
-<pre><code>
-P(x) = f(x₀) + ( (f(x₁) − f(x₀)) / (x₁ − x₀) ) * (x − x₀)
-</code></pre>
+# Derivada analítica real: f'(x) = 3*x^2. En x=2, f'(2) = 12
+real = 3 * x**2
 
-• Interpolación de Lagrange: construye un polinomio de grado n que pasa por todos los puntos. Su forma general es:
+print(f"Función: f(x) = x^3. Derivada real en x={x}: {real}")
+print(f"H = {h}")
+print(f"Diferencia Adelante: {f_prime_adelante:.6f} (Error: {abs(f_prime_adelante - real):.6f})")
+print(f"Diferencia Atrás:  {f_prime_atras:.6f} (Error: {abs(f_prime_atras - real):.6f})")
+print(f"Diferencia Central:  {f_prime_central:.6f} (Error: {abs(f_prime_central - real):.6f})")
 
-<pre><code>
-L(x) = Σ [ f(xᵢ) * Π ( (x − xⱼ) / (xᵢ − xⱼ) ) ]
-donde j ≠ i
-</code></pre>
+`
+    },
+    {
+        id: 'a12',
+        title: 'Actividad 12 — Ecuaciones Diferenciales Ordinarias (Método de Euler)',
+        pdf: 'Actividad_12.pdf',
+        description: `
+            <p>El **Método de Euler** es el método numérico más simple para resolver Ecuaciones Diferenciales Ordinarias (EDO) de primer orden con un valor inicial. Se basa en la aproximación de que la función es localmente lineal, utilizando el primer término de la expansión de Taylor para estimar el valor en el siguiente paso.</p>
 
-• Interpolación por diferencias divididas de Newton: utiliza una estructura recursiva. El polinomio se expresa como:
+            <p>Dada una EDO de la forma:</p>
+            <div class="formula">
+                $$ \frac{dy}{dx} = f(x, y), \quad \text{con condición inicial } y(x_0) = y_0 $$
+            </div>
 
-<pre><code>
-P(x) = f[x₀] 
-      + f[x₀, x₁](x − x₀) 
-      + f[x₀, x₁, x₂](x − x₀)(x − x₁) 
-      + ...
-</code></pre>
+            <p>La fórmula iterativa del Método de Euler permite avanzar la solución un paso de tamaño $h$ a la vez:</p>
+            <div class="formula">
+                $$ y_{i+1} = y_i + f(x_i, y_i) \cdot h $$
+            </div>
 
-• Interpolación cuadrática: emplea polinomios de segundo grado para capturar la curvatura entre los puntos:
+            <p>Donde $h = x_{i+1} - x_i$ es el tamaño del paso, y $f(x_i, y_i)$ es la pendiente (derivada) en el punto actual. Este método tiene un error de truncamiento local de orden $O(h^2)$ y un error global de orden $O(h)$, por lo que requiere pasos $h$ pequeños para ser preciso.</p>
+        `,
+        code: `
+import numpy as np
+import matplotlib.pyplot as plt
 
-<pre><code>
-P(x) = a₀ + a₁x + a₂x²
-</code></pre>
+# Definir la EDO: dy/dx = f(x, y)
+# Ejemplo: dy/dx = -2xy^2 (Solución real: y = 1 / (1 + x^2))
+def f(x, y):
+    return -2 * x * y**2
 
-• Splines cúbicos: dividen el intervalo en tramos, ajustando en cada uno un polinomio cúbico con continuidad en la primera y segunda derivada.
+# Parámetros iniciales
+x0 = 0.0 # Valor inicial de x
+y0 = 1.0 # Valor inicial de y(x0)
+xf = 2.0 # Valor final de x
+h = 0.1  # Tamaño del paso (step size)
 
-Estos métodos permiten alcanzar distintos niveles de precisión y estabilidad numérica. En esta actividad se aplicarán estas técnicas para analizar su comportamiento y la calidad de las aproximaciones obtenidas.
-`,
-},
+# Configuración del método
+n_steps = int((xf - x0) / h)
+x_vals = np.linspace(x0, xf, n_steps + 1)
+y_euler = np.zeros(n_steps + 1)
 
+# Condición inicial
+y_euler[0] = y0
+
+print("i | x_i | y_i (Aprox) | f(x_i, y_i)")
+print("---------------------------------------")
+
+# Bucle del Método de Euler
+for i in range(n_steps):
+    x_i = x_vals[i]
+    y_i = y_euler[i]
+    
+    # Calcular la pendiente (derivada)
+    slope = f(x_i, y_i)
+    
+    # Aplicar la fórmula de Euler: y_i+1 = y_i + f(x_i, y_i) * h
+    y_euler[i + 1] = y_i + slope * h
+    
+    print(f"{i:1d} | {x_i:.1f} | {y_i:.6f} | {slope:.6f}")
+
+# Graficación
+plt.figure(figsize=(8, 5))
+plt.plot(x_vals, y_euler, 'b-o', label=f"Euler (h={h})")
+
+# Solución real (para comparación)
+y_real = 1 / (1 + x_vals**2)
+plt.plot(x_vals, y_real, 'r--', label="Solución Real")
+
+plt.title("Método de Euler para EDOs")
+plt.xlabel("x")
+plt.ylabel("y(x)")
+plt.legend()
+plt.grid(True)
+plt.show()
+`
+    }
 ];
 
-  
-
-const activitiesGrid = document.getElementById('activitiesGrid');
+// Lógica de Interfaz y Eventos (Mantenida y adaptada)
+const grid = document.getElementById('activitiesGrid');
 const detailScreen = document.getElementById('detailScreen');
 const detailTitle = document.getElementById('detailTitle');
 const detailEnunciado = document.getElementById('detailEnunciado');
@@ -939,63 +1107,83 @@ const detailCode = document.getElementById('detailCode');
 const openPdfBtn = document.getElementById('openPdfBtn');
 const downloadCodeBtn = document.getElementById('downloadCodeBtn');
 const closeDetailBtn = document.getElementById('closeDetailBtn');
+const floatingCloseBtn = document.getElementById('floatingClose');
 const floatingBack = document.getElementById('floatingBack');
-const floatingClose = document.getElementById('floatingClose');
+const downloadAnchor = document.getElementById('downloadAnchor');
 
-let currentActivity = null;
-
-function renderList(){
-  activitiesGrid.innerHTML = '';
-  activities.forEach(act=>{
-    const div = document.createElement('div');
-    div.className = 'card';
-    div.innerHTML = `<h3>${act.title}</h3><p>Haz clic para ver la actividad.</p>`;
-    div.onclick = ()=> openDetail(act);
-    activitiesGrid.appendChild(div);
-  });
+function renderActivities() {
+    grid.innerHTML = '';
+    activities.forEach(activity => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `<h3>${activity.title}</h3><p>${activity.description.substring(0, 80).replace(/<[^>]*>?/gm, '...')}...</p>`;
+        card.onclick = () => showDetail(activity);
+        grid.appendChild(card);
+    });
 }
 
-function openDetail(act){
-  currentActivity = act;
-  detailTitle.textContent = act.title;
-  detailEnunciado.textContent = act.description;
-  detailCode.textContent = act.code;
-  openPdfBtn.onclick = ()=> window.open(act.pdf, '_blank');
-  downloadCodeBtn.onclick = ()=> downloadCode(act.title + '.py', detailCode.innerText);
-  detailScreen.classList.add('show');
-  floatingBack.style.display = 'block';
+function showDetail(activity) {
+    detailTitle.textContent = activity.title;
+    
+    // Inyectar el HTML de description (incluyendo las fórmulas y tablas)
+    detailEnunciado.innerHTML = activity.description; 
+    
+    // Inyectar el texto plano del código, manteniendo su formato para descarga
+    detailCode.textContent = activity.code; 
+    
+    // Configurar botón PDF
+    openPdfBtn.onclick = () => window.open(activity.pdf, '_blank');
+
+    // Re-renderizar MathJax en el contenido dinámico
+    if (window.MathJax) {
+        // Tip: El uso de typesetPromise asegura que se renderice después de inyectar el contenido
+        MathJax.typesetPromise([detailEnunciado]); 
+    }
+
+    // Mostrar el modal
+    detailScreen.classList.add('show');
+    detailScreen.setAttribute('aria-hidden', 'false');
+    floatingBack.style.display = 'block';
 }
 
-function closeDetail(){
-  detailScreen.classList.remove('show');
-  floatingBack.style.display = 'none';
+function closeDetail() {
+    detailScreen.classList.remove('show');
+    detailScreen.setAttribute('aria-hidden', 'true');
+    floatingBack.style.display = 'none';
 }
 
-closeDetailBtn.addEventListener('click', closeDetail);
-floatingClose.addEventListener('click', closeDetail);
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeDetail(); });
-
-function downloadCode(name, content){
-  const a=document.getElementById('downloadAnchor');
-  const blob=new Blob([content],{type:'text/x-python'});
-  a.href=URL.createObjectURL(blob);
-  a.download=name;
-  a.click();
-  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+function downloadCode() {
+    const codeContent = detailCode.textContent;
+    const activityId = detailTitle.textContent.replace(/[^a-zA-Z0-9]/g, '_');
+    const filename = `${activityId}.txt`;
+    
+    const blob = new Blob([codeContent], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    
+    downloadAnchor.href = url;
+    downloadAnchor.download = filename;
+    downloadAnchor.click();
+    
+    // Limpiar el objeto URL
+    URL.revokeObjectURL(url);
 }
 
-renderList();
+// Event Listeners para cerrar el modal
+closeDetailBtn.onclick = closeDetail;
+floatingCloseBtn.onclick = closeDetail;
+downloadCodeBtn.onclick = downloadCode;
+
+// Inicializar la aplicación
+document.addEventListener('DOMContentLoaded', renderActivities);
+
+// Asegurar el cierre del modal con la tecla ESC
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && detailScreen.classList.contains('show')) {
+        closeDetail();
+    }
+});
+
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
