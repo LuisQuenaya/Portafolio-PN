@@ -422,7 +422,160 @@ function...`
 </tr>
 </tbody>
 </table>`
+  },
+
+   {
+    id: 'a7',
+    title: 'Actividad 7 — Gradiente de una Funcion',
+    pdf: 'actividad_8.pdf',
+    description: `El gradiente representa la tasa de cambio o pendiente de una función respecto a sus variables. En el caso de una sola variable, el gradiente se reduce simplemente a la derivada de la función..`,
+    code: `
+n <- 0.01  # tasa de aprendizaje
+f <- function(x) x^2
+f_deriv <- function(x) 2 * x
+
+x0 <- 3    
+iter <- 21 
+
+x <- numeric(iter)
+fx <- numeric(iter)
+fpx <- numeric(iter)
+grad <- numeric(iter)
+
+x[1] <- x0
+
+for (i in 1:iter) {
+  fx[i] <- f(x[i])
+  fpx[i] <- f_deriv(x[i])
+  grad[i] <- x[i] - n * fpx[i]
+  if (i < iter) {
+    x[i + 1] <- grad[i]
   }
+}`
+  },
+
+  {
+  
+  id: 'a8',
+  title: 'Actividad 8 — Resumen del Articulo',
+  pdf: 'iamgen 1.pdf',
+  description: `
+El artículo analiza y contrasta dos métodos fundamentales para resolver problemas de regresión lineal: el pseudoinverso de Moore–Penrose y el descenso de gradiente. La regresión lineal tiene como objetivo encontrar los parámetros que mejor predicen una variable dependiente a partir de variables independientes, minimizando los errores cuadrados (OLS).
+
+El pseudoinverso de Moore–Penrose brinda una solución analítica exacta mediante operaciones matriciales, proporcionando el mínimo error posible. No obstante, esta técnica puede resultar costosa en términos computacionales y presentar inestabilidad cuando la matriz de características es muy grande o está mal condicionada.
+
+Por el contrario, el método de descenso de gradiente ajusta los parámetros progresivamente según la dirección del gradiente negativo del error, influenciado por la tasa de aprendizaje. Aunque no garantiza una solución exacta, su principal ventaja es su escalabilidad y eficacia para trabajar con grandes volúmenes de datos.
+
+En el marco teórico se explica que la estabilidad numérica y eficiencia de ambos métodos dependen del tamaño del conjunto de datos (n), del número de variables (d) y de la condición de la matriz X. El pseudoinverso se implementa generalmente mediante descomposición SVD, mientras que el descenso de gradiente requiere pasos controlados y puede verse afectado por el escalado de las variables.
+
+En la metodología, el autor realizó experimentos usando datos sintéticos y reales. Los datos sintéticos permitieron manipular aspectos como la cantidad de muestras, la dimensionalidad y la condición de la matriz. Para los datos reales se trabajó con los conjuntos California Housing (20,640 muestras y 8 variables) y Diabetes (442 muestras y 10 variables). Las métricas evaluadas fueron: tiempo de ejecución, error cuadrático medio (MSE) y, en el caso del descenso de gradiente, el número de iteraciones necesarias para converger. Las pruebas se realizaron en Python empleando pinv() para el pseudoinverso y un algoritmo de gradiente con una tasa de aprendizaje de 0.001 y una tolerancia de 1e-6.
+
+Los resultados mostraron que el pseudoinverso fue más rápido y preciso en conjuntos de tamaño pequeño o moderado, manteniendo alta estabilidad numérica. En contraste, el descenso de gradiente necesitó más iteraciones y su rendimiento dependió en gran medida del escalado de las variables y de la tasa de aprendizaje. Sin embargo, en escenarios con alta dimensionalidad o grandes volúmenes de datos, el descenso de gradiente (y variantes como el estocástico) resultó más eficiente y escalable.
+
+En conclusión, el pseudoinverso de Moore–Penrose es ideal para conjuntos bien condicionados y de tamaño moderado, debido a su exactitud y bajo error.
+`
+},
+
+ {
+    id: 'a9',
+    title: 'Actividad 9 — Dinamica del juego de caramelos y chupetines',
+    pdf: 'Dinamica(2).pdf',
+    description: `El presente trabajo desarrolla la simulación de un juego cooperativo en el que varios participantes comparten una bolsa con tres tipos de caramelos: A, B y C. El propósito es que, mediante combinaciones e intercambios, el grupo consiga generar al menos un chupetín (D) para cada jugador.
+
+Cada participante inicia con dos caramelos asignados al azar. Durante cada turno, el sistema aplica las siguientes reglas:
+
+Si en la bolsa existen al menos un caramelo A, uno B y uno C, se crea un chupetín (D) y esos tres caramelos se retiran.
+
+Si se encuentran disponibles dos unidades de cada tipo (AA, BB y CC), se producen dos chupetines (2D) y se añade un caramelo aleatorio adicional a la bolsa.
+
+Cuando no es posible formar más chupetines, se permite devolver un chupetín (D) a cambio de tres caramelos aleatorios (uno correspondiente a cada tipo).
+
+El juego concluye cuando se logra obtener al menos un chupetín para cada jugador o cuando se alcanza el límite máximo de iteraciones.
+
+Este ejercicio muestra la aplicación de simulaciones estocásticas y estructuras iterativas en R para representar sistemas con elementos aleatorios y criterios de detención`,
+    
+  },
+  {
+
+id: 'a10',
+    title: 'Actividad 10 — Resumen del Aticulo',
+    pdf: 'actividad_8.pdf',
+    description: `El artículo aborda el problema de la registración no rígida de imágenes médicas, un proceso esencial en el análisis clínico y diagnóstico por imágenes. Este procedimiento permite alinear imágenes obtenidas en distintos momentos, desde diferentes ángulos o con distintos sensores, para facilitar comparaciones anatómicas y la evaluación de cambios patológicos. Debido a la naturaleza deformable de los tejidos biológicos, los métodos de registración rígida resultan insuficientes; por ello, se requieren técnicas no rígidas capaces de adaptarse a deformaciones locales y globales.
+Uno de los algoritmos más utilizados para este propósito es el método de Demons, propuesto originalmente por Thirion. Este se basa en la analogía con el flujo óptico, calculando un campo de deformación que transforma una imagen “flotante” o de consulta (query image) para alinearla con una imagen de referencia. Sin embargo, el algoritmo Demons tradicional utiliza solo la información del gradiente de las imágenes, sin considerar la información direccional (orientación de estructuras), lo cual puede limitar su precisión, especialmente cuando se presentan grandes deformaciones o estructuras con direcciones dominantes complejas.
+`,
+    
+  },
+
+{
+  id: 'a11',
+  title: 'Actividad 11 — Diferenciación Numérica',
+  pdf: 'Actividad11 (1).pdf',
+  description: `
+La diferenciación numérica es un método que permite aproximar la derivada de una función utilizando valores discretos, como datos tabulados o resultados experimentales. Matemáticamente, la derivada de una función se define como:
+
+f'(x) = lim(h → 0) [ f(x + h) − f(x) ] / h
+
+En la práctica computacional, el incremento h nunca puede ser exactamente cero, por lo que se trabaja con valores pequeños pero finitos. Esto da origen a las **diferencias finitas**, que permiten estimar derivadas mediante operaciones entre puntos cercanos.
+
+Existen varios enfoques para aproximar derivadas según la posición de los puntos utilizados:
+
+• **Diferencia hacia adelante**  
+  f'(x) ≈ [ f(x + h) − f(x) ] / h  
+  Útil al inicio del intervalo.
+
+• **Diferencia hacia atrás**  
+  f'(x) ≈ [ f(x) − f(x − h) ] / h  
+  Adecuada para los extremos finales del intervalo.
+
+• **Diferencia centrada**  
+  f'(x) ≈ [ f(x + h) − f(x − h) ] / (2h)  
+  Brinda mayor precisión gracias a su simetría.
+
+Además, también pueden obtenerse aproximaciones de la **segunda derivada** mediante combinaciones de diferencias de primer orden:
+
+• Segunda derivada (diferencia centrada)  
+  f''(x) ≈ [ f(x + h) − 2f(x) + f(x − h) ] / h²
+
+Estas técnicas permiten analizar la concavidad y el comportamiento local de una función. En esta actividad se aplicarán estos métodos para calcular derivadas de primer y segundo orden usando distintos valores de h y comparando su precisión.
+`,
+},
+   {
+
+id: 'a12',
+    title: 'Actividad 12 — Irterpolacion',
+    pdf: 'actividad_12 (1).pdf',
+    description: `La interpolación numérica es una técnica utilizada para estimar valores desconocidos de una función a partir de un conjunto de puntos conocidos. Su propósito es construir una función aproximada P(x) que pase exactamente por los datos dados. Matemáticamente, esto se expresa como:
+
+P(x_i) = f(x_i)
+
+Los métodos de interpolación permiten generar funciones continuas basadas en datos discretos, lo que resulta esencial en ingeniería, economía y aplicaciones computacionales.
+
+Entre los métodos más usados destacan:
+
+• Interpolación lineal: aproxima los datos mediante un segmento recto entre dos puntos. Su ecuación es:
+
+P(x) = f(x₀) + ( (f(x₁) − f(x₀)) / (x₁ − x₀) ) * (x − x₀)
+
+• Interpolación de Lagrange: construye un polinomio de grado n que pasa por todos los puntos. Su forma general es:
+
+L(x) = Σ [ f(xᵢ) * Π ( (x − xⱼ) / (xᵢ − xⱼ) ) ]
+        donde j ≠ i
+
+• Interpolación por diferencias divididas de Newton: utiliza una estructura recursiva. El polinomio se expresa como:
+
+P(x) = f[x₀] + f[x₀, x₁](x − x₀) + f[x₀, x₁, x₂](x − x₀)(x − x₁) + ...
+
+• Interpolación cuadrática: emplea polinomios de segundo grado para capturar la curvatura entre los puntos:
+
+P(x) = a₀ + a₁x + a₂x²
+
+• Splines cúbicos: dividen el intervalo en tramos, ajustando en cada uno un polinomio cúbico con continuidad en la primera y segunda derivada.
+
+Estos métodos permiten alcanzar distintos niveles de precisión y estabilidad numérica. En esta actividad se aplicarán cada una de estas técnicas para analizar su comportamiento y la calidad de las aproximaciones obtenidas.
+`,
+    
+  },
+
 ];
 
   
@@ -485,6 +638,7 @@ renderList();
 
 </body>
 </html>
+
 
 
 
