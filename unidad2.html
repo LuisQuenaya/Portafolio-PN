@@ -9,7 +9,7 @@
         // Configuración explícita de MathJax (para asegurar el uso de $$...$$)
         MathJax = {
             tex: {
-                // Habilita tanto las dobles barras (\\( y \\)) como los dobles dólares ($$)
+                // Habilita tanto las dobles barras (\( y \)) como los dobles dólares ($$)
                 inlineMath: [['$', '$'], ['\\(', '\\)']], 
                 displayMath: [['$$', '$$'], ['\\[', '\\]']] 
             },
@@ -239,7 +239,7 @@
                     <div class="enunciado" id="detailEnunciado"></div> 
 
                     <div id="codeSection" style="display:none;">
-                         <h3 style="color:var(--azul-1);margin:14px 0 6px 0">💻 Código de ejemplo</h3>
+                            <h3 style="color:var(--azul-1);margin:14px 0 6px 0">💻 Código de ejemplo</h3>
                         <pre class="code"><code id="detailCode"></code></pre>
                     </div>
                 </div>
@@ -282,7 +282,7 @@ const activities = [
             </div>
 
             <h4>Importancia de graficar la función</h4>
-            <p>Antes de iniciar, es **recomendable graficar** $f(x)$ para ubicar aproximadamente el intervalo donde la función cambia de signo y elegir valores iniciales $a$ y $b$ adecuados.  </p>
+            <p>Antes de iniciar, es **recomendable graficar** $f(x)$ para ubicar aproximadamente el intervalo donde la función cambia de signo y elegir valores iniciales $a$ y $b$ adecuados. </p>
 
             <h4>Ventajas y limitaciones</h4>
             <ul>
@@ -408,7 +408,7 @@ plt.grid(True)
 plt.show()
 
 
-op = input("\\u00BFS\\u00ED o No? (s/n): ").lower()
+op = input("¿Sí o No? (s/n): ").lower()
 
 if op == "s":
     # === 4. Ingreso de puntos iniciales ===
@@ -418,7 +418,7 @@ if op == "s":
     tol = 1e-6
     max_iter = 100
 
-    print("\\nIteraci\\u00F3n |      x0     |      x1     |    f(x0)    |    f(x1)    |      x2     |    Error")
+    print("\\nIteración |       x0      |       x1      |    f(x0)     |    f(x1)     |       x2      |    Error")
     print("-----------------------------------------------------------------------------------------")
 
     for i in range(1, max_iter + 1):
@@ -426,26 +426,26 @@ if op == "s":
         f1 = f(x1)
 
         if f1 - f0 == 0:
-            print(f"\\n\\u26A0\\uFE0F Divisi\\u00F3n por cero en la iteraci\\u00F3n {i}. El m\\u00E9todo no puede continuar.")
+            print(f"\\n⚠️ División por cero en la iteración {i}. El método no puede continuar.")
             break
 
-        # F\\u00F3rmula de la Secante
+        # Fórmula de la Secante
         x2 = x1 - f1 * (x1 - x0) / (f1 - f0)
         error = abs(x2 - x1)
 
         print(f"{i:9d} | {x0:11.6f} | {x1:11.6f} | {f0:11.6f} | {f1:11.6f} | {x2:11.6f} | {error:10.6f}")
 
         if error < tol:
-            print(f"\\n\\u2705 Ra\\u00EDz aproximada encontrada: {x2:.6f}")
+            print(f"\\n✅ Raíz aproximada encontrada: {x2:.6f}")
             print(f"Iteraciones realizadas: {i}")
             break
 
         x0, x1 = x1, x2
 
     else:
-        print("\\n\\u26A0\\uFE0F No se alcanz\\u00F3 la convergencia despu\\u00E9s de", max_iter, "iteraciones.")
+        print("\\n⚠️ No se alcanzó la convergencia después de", max_iter, "iteraciones.")
 else:
-    print("No se aplic\\u00F3 el m\\u00E9todo de la Secante.")
+    print("No se aplicó el método de la Secante.")
 `
     },
   { 
@@ -493,7 +493,7 @@ else:
 import numpy as np
 import matplotlib.pyplot as plt
 
-print("=== M\\u00C9TODO DEL PUNTO FIJO ===")
+print("=== MÉTODO DEL PUNTO FIJO ===")
 
 func_str = input("f(x) = ")
 g_str = input("g(x) = ")
@@ -504,8 +504,8 @@ def f(x):
 def g(x):
     return eval(g_str, {"np": np, "x": x})
 
-xmin = float(input("x m\\u00EDn: "))
-xmax = float(input("x m\\u00E1x: "))
+xmin = float(input("x mín: "))
+xmax = float(input("x máx: "))
 
 x = np.linspace(xmin, xmax, 400)
 y = f(x)
@@ -521,7 +521,7 @@ x0 = float(input("x0 = "))
 tol = 1e-6
 max_iter = 100
 
-print("\\nIter |       x_n      |      g(x_n)    |   f(g(x_n))    |     Error")
+print("\\nIter |        x_n       |      g(x_n)     |    f(g(x_n))    |     Error")
 print("--------------------------------------------------------------------")
 
 for i in range(1, max_iter + 1):
@@ -530,11 +530,11 @@ for i in range(1, max_iter + 1):
     fx1 = f(x1)
     print(f"{i:4d} | {x0:14.8f} | {x1:14.8f} | {fx1:14.8f} | {err:10.8f}")
     if err < tol:
-        print(f"\\nRa\\u00EDz \\u2248 {x1:.8f}")
+        print(f"\\nRaíz ≈ {x1:.8f}")
         break
     x0 = x1
 else:
-    print("\\nNo se alcanz\\u00F3 la convergencia despu\\u00E9s del m\\u00E1ximo de iteraciones")
+    print("\\nNo se alcanzó la convergencia después del máximo de iteraciones")
 `
     },
     { 
@@ -590,7 +590,7 @@ else:
         fa = f(a)
         fb = f(b)
         
-        # F\\u00F3rmula de Regula Falsi
+        # Fórmula de Regula Falsi
         xr = b - fb * (b - a) / (fb - fa)
         fxr = f(xr)
         error = abs(fxr)
@@ -599,7 +599,7 @@ else:
         
         if abs(fxr) < tol:
             raiz = xr
-            print(f"\\nRa\\u00EDz aproximada: {raiz:.6f} encontrada en {i} iteraciones")
+            print(f"\\nRaíz aproximada: {raiz:.6f} encontrada en {i} iteraciones")
             break
         
         if fa * fxr < 0:
@@ -607,11 +607,11 @@ else:
         else:
             a = xr
     else:
-        print("\\nNo se alcanz\\u00F3 la convergencia despu\\u00E9s del m\\u00E1ximo de iteraciones")
+        print("\\nNo se alcanzó la convergencia después del máximo de iteraciones")
 
-    # C\\u00F3digo de graficaci\\u00F3n
+    # Código de graficación
     if raiz is not None:
-        # Ajuste de margen para la gr\\u00E1fica
+        # Ajuste de margen para la gráfica
         margen = 0.1 * (max(b, raiz) - min(a, raiz)) if raiz else 0.1 * (b - a)
         xmin = min(a,b,raiz) - margen
         xmax = max(a,b,raiz) + margen
@@ -620,21 +620,21 @@ else:
 
         plt.plot(x, y, label=f"f(x) = {func_str}")
         plt.axhline(0, color='black', linestyle='--')
-        plt.axvline(raiz, color='red', linestyle='--', label=f"Ra\\u00EDz \\u2248 {raiz:.6f}")
-        plt.title("M\\u00E9todo de Regula Falsi")
+        plt.axvline(raiz, color='red', linestyle='--', label=f"Raíz \\u2248 {raiz:.6f}")
+        plt.title("Método de Regula Falsi")
         plt.xlabel("x")
         plt.ylabel("f(x)")
         plt.legend()
         plt.grid(True)
         plt.show()`
     },
-   { 
+    { 
         id: 'a5',
         title: 'Actividad 5 — Método de Newton-Raphson',
         pdf: 'Actividad_05.pdf',
         description: `
             <h4>Descripción</h4>
-            <p>El **método de Newton-Raphson** es un procedimiento iterativo que permite obtener una aproximación de las raíces reales de una función continua y derivable. Su fundamento se basa en usar la **recta tangente** a la función en el punto actual $x_n$ para estimar el siguiente punto $x_{n+1}$.</p>
+            <p>El método de Newton-Raphson es un procedimiento iterativo que permite obtener una aproximación de las raíces reales de una función continua y derivable. Su fundamento se basa en usar la **recta tangente** a la función en el punto actual $x_n$ para estimar el siguiente punto $x_{n+1}$.</p>
             <p>Matemáticamente, se deriva del desarrollo del polinomio de **Taylor de primer orden** alrededor de un punto inicial $x_0$.</p>
 
             
@@ -662,19 +662,19 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 
-ecuacion = input("Ingrese la funci\\u00F3n f(x): ")
+ecuacion = input("Ingrese la función f(x): ")
 
 def f(x):
-    # Usamos eval de forma controlada para ejecutar la funci\\u00F3n
+    # Usamos eval de forma controlada para ejecutar la función
     return eval(ecuacion, {"np": np, "__builtins__": None, "x": x})
 
 def derivada(x):
-    # Aproximaci\\u00F3n num\\u00E9rica de la derivada por diferencia central
+    # Aproximación numérica de la derivada por diferencia central
     h = 1e-6
     return (f(x + h) - f(x - h)) / (2 * h)
 
-a = float(input("Ingrese el l\\u00EDmite inferior del eje x: "))
-b = float(input("Ingrese el l\\u00EDmite superior del eje x: "))
+a = float(input("Ingrese el límite inferior del eje x: "))
+b = float(input("Ingrese el límite superior del eje x: "))
 
 x_vals = np.linspace(a, b, 400)
 y_vals = f(x_vals)
@@ -683,7 +683,7 @@ plt.figure(figsize=(8, 5))
 plt.plot(x_vals, y_vals, 'b', label=f"f(x) = {ecuacion}")
 plt.axhline(0, color='black', linestyle='--')
 plt.axvline(0, color='black', linestyle='--')
-plt.title("Gr\\u00E1fico de la funci\\u00F3n ingresada")
+plt.title("Gráfico de la función ingresada")
 plt.xlabel("x")
 plt.ylabel("f(x)")
 plt.legend()
@@ -696,14 +696,14 @@ x = float(input("Ingrese el valor inicial aproximado: "))
 tolerancia = 1e-6
 iter_max = 100
 
-print("\\nIter | x_n         | f(x_n)      | f'(x_n)     | Error")
+print("\\nIter | x_n          | f(x_n)      | f'(x_n)     | Error")
 print("--------------------------------------------------------------------")
 
 for i in range(iter_max):
     fx = f(x)
     dfx = derivada(x)
     
-    if abs(dfx) < 1e-10: # Cuidado con la divisi\\u00F3n por cero
+    if abs(dfx) < 1e-10: # Cuidado con la división por cero
         print(f"La derivada es cero en x = {x:.6f}. No se puede continuar.")
         break
         
@@ -713,633 +713,727 @@ for i in range(iter_max):
     print(f"{i+1:4d} | {x:11.6f} | {fx:11.6f} | {dfx:11.6f} | {error:8.6f}")
 
     if error < tolerancia:
-        print(f"\\nRa\\u00EDz encontrada: {x_nuevo:.6f}")
-        print(f"N\\u00FAmero de iteraciones: {i + 1}")
+        print(f"\\nRaíz encontrada: {x_nuevo:.6f}")
+        print(f"Número de iteraciones: {i + 1}")
         break
         
     x = x_nuevo
 else:
-    print(f"\\nNo se logr\\u00F3 la convergencia despu\\u00E9s de {iter_max} iteraciones.")
-    print(f"\\u00DAltimo valor aproximado: {x:.6f}")
+    print(f"\\nNo se logró la convergencia después de {iter_max} iteraciones.")
+    print(f"Último valor aproximado: {x:.6f}")
 `
     },
     { 
         id: 'a6',
-        title: 'Actividad 6 — Índice H ',
+        title: 'Actividad 6 — Índice H (Métrica Bibliométrica)',
         pdf: 'Actividad6.pdf',
         description: `
-            <p>El **Índice H** (o índice de Hirsch) mide la productividad y el impacto de un investigador. Un autor tiene un índice H de $h$ si $h$ de sus $N_p$ publicaciones tienen al menos $h$ citas cada una, y las $(N_p - h)$ publicaciones restantes tienen un máximo de $h$ citas cada una.</p>
+            <p>El **Índice H** (o índice de Hirsch) mide la productividad y el impacto de un investigador. Un autor tiene un índice $h$ si $h$ de sus publicaciones tienen al menos $h$ citaciones cada una.</p>
             
-            <h4>Cálculo del Índice H (Algoritmo)</h4>
-            <p>Para calcular el índice H de un conjunto de publicaciones con un número de citas dado:</p>
-            <ol>
-                <li>Ordenar la lista de citas en orden **descendente** (de mayor a menor).</li>
-                <li>Iterar sobre la lista ordenada. Si el número de citas de la publicación $i$ (donde $i$ es la posición, empezando en 1) es **mayor o igual** a $i$, entonces el índice H es al menos $i$.</li>
-                <li>El valor máximo de $i$ que cumple la condición es el índice H.</li>
-            </ol>
-            
-            <h4>Ejemplo de cálculo</h4>
+            <div class="formula">
+                **Definición Formal:**
+                $$ h = \max \\{i \\in \\mathbb{N} : \\text{La publicación } i \\text{ tiene al menos } i \\text{ citas} \\} $$
+            </div>
+
+            <p>Es una métrica clave para evaluar el impacto científico.</p>
+
+            <h4>Autores Clave en Métodos Numéricos (Ejemplos de Índice H)</h4>
+            <p>Esta tabla muestra ejemplos de autores importantes en el área (los enlaces son ejemplos de Scopus ID):</p>
             <table class="activity-table">
                 <thead>
                     <tr>
-                        <th>Posición (i)</th>
-                        <th>Citas (orden descendente)</th>
-                        <th>Citas $\ge$ Posición (i)?</th>
-                        <th>Índice H</th>
+                        <th>Autor</th>
+                        <th>Investigación Central</th>
+                        <th>Enlace de Referencia</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td>1</td><td>10</td><td>$10 \ge 1$ (Sí)</td><td>1</td></tr>
-                    <tr><td>2</td><td>8</td><td>$8 \ge 2$ (Sí)</td><td>2</td></tr>
-                    <tr><td>3</td><td>5</td><td>$5 \ge 3$ (Sí)</td><td>3</td></tr>
-                    <tr><td>4</td><td>4</td><td>$4 \ge 4$ (Sí)</td><td>4</td></tr>
-                    <tr><td>5</td><td>3</td><td>$3 \ge 5$ (No)</td><td>4 (final)</td></tr>
+                    <tr>
+                        <td>Grau, Àngela</td>
+                        <td>Métodos Secantes para sistemas no lineales</td>
+                        <td><a href="https://www.scopus.com/authid/detail.uri?authorId=36545025500" target="_blank">Ver Scopus ID</a></td>
+                    </tr>
+                    <tr>
+                        <td>Díaz-Barrero, José Luis</td>
+                        <td>Convergencia de métodos iterativos</td>
+                        <td><a href="https://www.scopus.com/authid/detail.uri?authorId=6602720000" target="_blank">Ver Scopus ID</a></td>
+                    </tr>
+                    <tr>
+                        <td>Argyros, Ioannis K.</td>
+                        <td>Algoritmos para problemas no lineales</td>
+                        <td><a href="https://www.scopus.com/authid/detail.uri?authorId=7004530784" target="_blank">Ver Scopus ID</a></td>
+                    </tr>
                 </tbody>
             </table>
-            <p>En este ejemplo, el **Índice H es 4**. Significa que 4 de las publicaciones tienen al menos 4 citas.</p>
         `,
         code: `
-import numpy as np
+# Implementación del cálculo del Índice H en Python
 
-def calcular_indice_h(citas):
-    """Calcula el índice H de una lista de citas."""
-    # 1. Convertir a un array de numpy (opcional, pero útil)
-    citas_np = np.array(citas)
+def calcular_indice_h(citaciones):
+    """
+    Calcula el índice H de un investigador a partir de la lista de citaciones.
+    :param citaciones: Una lista de enteros con el número de citaciones por publicación.
+    :return: El valor del índice H.
+    """
+    # 1. Ordenar la lista de citaciones de forma descendente
+    citaciones_ordenadas = sorted(citaciones, reverse=True)
+    n = len(citaciones_ordenadas)
     
-    # 2. Ordenar las citas en orden descendente
-    citas_ordenadas = np.sort(citas_np)[::-1]
-    
-    n = len(citas_ordenadas)
     indice_h = 0
     
-    # 3. Iterar sobre la lista ordenada
+    # 2. Iterar sobre la lista y encontrar el mayor 'h' tal que la publicación 'h' 
+    # (en la posición h-1) tiene al menos 'h' citaciones.
     for i in range(n):
-        # i + 1 es el valor de 'h' (la posici\\u00F3n, empezando en 1)
-        h = i + 1 
+        # i + 1 representa la posición de la publicación (el valor 'h' que buscamos)
+        h_candidato = i + 1
         
-        # Condici\\u00F3n: El n\\u00FAmero de citas debe ser mayor o igual a la posici\\u00F3n
-        if citas_ordenadas[i] >= h:
-            indice_h = h # El \\u00EDndice H es al menos 'h'
+        # El número de citaciones en esta posición
+        citas = citaciones_ordenadas[i]
+        
+        if citas >= h_candidato:
+            indice_h = h_candidato # Se actualiza el índice H
         else:
-            # Si no cumple, el m\\u00E1ximo \\u00EDndice H ya fue encontrado
-            break 
+            # Si citas < h_candidato, significa que las publicaciones restantes 
+            # (con menos citas) no podrán cumplir la condición de h_candidato.
+            break
             
     return indice_h
 
-# EJEMPLO DE USO
-citas_input = input("Ingrese las citas separadas por comas (ej: 10,8,5,4,3): ")
-try:
-    citas_lista = [int(x.strip()) for x in citas_input.split(',')]
-    
-    if not citas_lista:
-        print("No se ingresaron citas v\\u00E1lidas.")
-    else:
-        h_index = calcular_indice_h(citas_lista)
-        print("\\nCitas ingresadas (ordenadas):", np.sort(np.array(citas_lista))[::-1])
-        print(f"\\u2705 El \\u00CDndice H es: {h_index}")
+# --- Ejemplo de uso ---
+# El primer valor tiene 10 citas, el segundo 8, el tercero 5, el cuarto 4, etc.
+citas_ejemplo = [10, 8, 5, 4, 3, 1] 
+# Publicaciones ordenadas por citaciones: (10, 8, 5, 4, 3, 1)
+# H=1: 10 >= 1 (OK)
+# H=2: 8 >= 2 (OK)
+# H=3: 5 >= 3 (OK)
+# H=4: 4 >= 4 (OK)
+# H=5: 3 >= 5 (FALLA) -> El índice H es 4
 
-except ValueError:
-    print("\\u26A0\\uFE0F Error: Aseg\\u00FArese de ingresar solo n\\u00FAmeros enteros separados por comas.")
+print(f"Citaciones del autor: {citas_ejemplo}")
+h_index = calcular_indice_h(citas_ejemplo)
+print(f"El Índice H del autor es: {h_index}")
 
+# Otro ejemplo: [15, 12, 10, 8, 5, 3] -> H = 5
+citas_ejemplo_2 = [15, 12, 10, 8, 5, 3]
+h_index_2 = calcular_indice_h(citas_ejemplo_2)
+print(f"\\nCitaciones del autor 2: {citas_ejemplo_2}")
+print(f"El Índice H del autor 2 es: {h_index_2}")
 `
     },
-    // =========================================================
-    // NUEVAS ACTIVIDADES (7 a 12)
-    // =========================================================
-    {
+    { 
         id: 'a7',
-        title: 'Actividad 7 — Integración: Regla del Trapecio',
-        pdf: 'ReglaTrapecio.pdf',
+        title: 'Actividad 7 — Integración Numérica (Trapecio)',
+        pdf: 'Actividad7.pdf',
         description: `
-            <p>La **Regla del Trapecio** es un método de integración numérica que se utiliza para aproximar el valor de una integral definida $\int_{a}^{b} f(x) dx$. Se basa en aproximar el área bajo la curva de la función $f(x)$ mediante el área de un **trapecio**.</p>
-            
-            <p>Si el intervalo $[a, b]$ se divide en un solo trapecio, la fórmula es:</p>
-            
+            <h4>Descripción</h4>
+            <p>El **Método del Trapecio** es un algoritmo de **integración numérica** que se utiliza para aproximar el valor de una integral definida $\int_a^b f(x) \,dx$. Se basa en reemplazar el área bajo la curva por el área de una serie de **trapecios**.</p>
+            <p>La integral se divide en $n$ subintervalos de ancho $h = (b-a)/n$. La aproximación es más precisa a medida que se aumenta el número de subintervalos $n$.</p>
+
             <div class="formula">
-                **Regla del Trapecio (Simple):**
-                $$ \int_{a}^{b} f(x) dx \approx \frac{b - a}{2} [f(a) + f(b)] $$
+                **Fórmula del Trapecio Simple:**
+                $$ \int_a^b f(x) \,dx \approx \frac{b-a}{2}[f(a) + f(b)] $$
             </div>
-            
-            <p>Para aumentar la precisión, se utiliza la **Regla del Trapecio Compuesta**, donde el intervalo se divide en $n$ subintervalos de ancho $h = (b-a)/n$, y se suman las áreas de los $n$ trapecios.</p>
-            
+
             <div class="formula">
-                **Regla del Trapecio (Compuesta):**
-                $$ \int_{a}^{b} f(x) dx \approx \frac{h}{2} [f(x_0) + 2\sum_{i=1}^{n-1} f(x_i) + f(x_n)] $$
+                **Fórmula del Trapecio Compuesto (Regla General):**
+                $$ \int_a^b f(x) \,dx \approx \frac{h}{2} [f(x_0) + 2\sum_{i=1}^{n-1} f(x_i) + f(x_n)] $$
             </div>
+
             
-            <h4>Error de Truncamiento</h4>
-            <p>El error en la regla del trapecio es proporcional al cuadrado del ancho del subintervalo $h^2$. Al aumentar el número de subintervalos ($n$), se reduce el error, pero se aumenta el costo computacional.</p>
+            
+            <h4>Error del Método</h4>
+            <p>El error de la aproximación con el método del trapecio compuesto se puede acotar por:</p>
+            <div class="formula">
+                $$ E_T = - \frac{(b-a)^3}{12 n^2} f''(\xi) $$
+            </div>
+            <p>Donde $\xi$ es un punto en el intervalo $[a, b]$. Esto muestra que el error es inversamente proporcional al cuadrado del número de subintervalos ($n^2$), lo que significa que **doblar $n$ reduce el error cuatro veces**.</p>
         `,
         code: `
 import numpy as np
 
+print("=== MÉTODO DEL TRAPECIO COMPUESTO ===")
+
 func_str = input("Ingrese la función f(x): ")
+a = float(input("Ingrese el límite inferior 'a': "))
+b = float(input("Ingrese el límite superior 'b': "))
+n = int(input("Ingrese el número de subintervalos 'n': "))
 
 def f(x):
     return eval(func_str, {"np": np, "x": x})
 
-a = float(input("Límite inferior (a): "))
-b = float(input("Límite superior (b): "))
-n = int(input("Número de subintervalos (n): "))
+# 1. Calcular el ancho del subintervalo (h)
+h = (b - a) / n
 
-if n <= 0:
-    print("El número de subintervalos debe ser positivo.")
-else:
-    h = (b - a) / n
-    sumatoria = 0
-    
-    # Suma de los términos intermedios (multiplicados por 2)
-    for i in range(1, n):
-        x_i = a + i * h
-        sumatoria += 2 * f(x_i)
-        
-    # Sumar los extremos (f(a) y f(b))
-    integral = (h / 2) * (f(a) + sumatoria + f(b))
-    
-    print(f"\\nAncho del subintervalo (h): {h:.6f}")
-    print(f"\\u2705 Aproximación de la integral: {integral:.8f}")
+# 2. Inicializar la suma con los extremos
+# f(x0) + f(xn)
+suma = f(a) + f(b)
+
+# 3. Sumar el doble de los términos intermedios
+# 2 * sum(f(xi)) para i = 1 hasta n-1
+for i in range(1, n):
+    x_i = a + i * h
+    suma += 2 * f(x_i)
+
+# 4. Aplicar la fórmula final del trapecio compuesto
+integral = (h / 2) * suma
+
+print(f"\\nFunción: f(x) = {func_str}")
+print(f"Intervalo: [{a}, {b}]")
+print(f"Subintervalos (n): {n}")
+print(f"Ancho (h): {h:.6f}")
+print(f"\\nEl valor aproximado de la integral es: {integral:.10f}")
 `
     },
-    {
+    { 
         id: 'a8',
-        title: 'Actividad 8 — Integración: Regla de Simpson 1/3',
-        pdf: 'ReglaSimpson.pdf',
+        title: 'Actividad 8 — Integración Numérica (Simpson 1/3)',
+        pdf: 'Actividad8.pdf',
         description: `
-            <p>La **Regla de Simpson 1/3** es otro método de integración numérica más preciso que el Trapecio. En lugar de aproximar la función con una línea recta (grado 1), utiliza un **polinomio de grado 2** (una parábola) para aproximar la función en dos subintervalos.</p>
-            
-            <p>Este método requiere que el número de subintervalos ($n$) sea **par**. Para un solo segmento (dos subintervalos), la fórmula es:</p>
-            
+            <h4>Descripción</h4>
+            <p>La **Regla de Simpson 1/3** es un método de **integración numérica** que aproxima la función $f(x)$ por un **polinomio de segundo grado** (una parábola) en dos subintervalos. Esto proporciona una aproximación mucho más precisa que el método del Trapecio.</p>
+            <p>Este método requiere que el número de subintervalos $n$ sea **par**.</p>
+
             <div class="formula">
-                **Regla de Simpson 1/3 (Simple, n=2):**
-                $$ \int_{x_0}^{x_2} f(x) dx \approx \frac{h}{3} [f(x_0) + 4f(x_1) + f(x_2)] $$
+                **Fórmula de Simpson 1/3 (Simple, para $n=2$):**
+                $$ \int_{x_0}^{x_2} f(x) \,dx \approx \frac{h}{3} [f(x_0) + 4f(x_1) + f(x_2)] $$
             </div>
-            
-            <p>Para la **Regla Compuesta**, se aplica la fórmula a todos los pares de subintervalos:</p>
-            
+
             <div class="formula">
-                **Regla de Simpson 1/3 (Compuesta, n par):**
-                $$ \int_{a}^{b} f(x) dx \approx \frac{h}{3} [f(x_0) + 4\sum_{i \text{ impar}}^{n-1} f(x_i) + 2\sum_{i \text{ par}}^{n-2} f(x_i) + f(x_n)] $$
+                **Fórmula de Simpson 1/3 Compuesto (Regla General, $n$ par):**
+                $$ \int_a^b f(x) \,dx \approx \frac{h}{3} \left[f(x_0) + 4\sum_{i \text{ impar}}^{n-1} f(x_i) + 2\sum_{i \text{ par}}^{n-2} f(x_i) + f(x_n)\right] $$
             </div>
+
             
-            <h4>Ventaja de Convergencia</h4>
-            <p>El error de truncamiento en Simpson 1/3 es proporcional a $h^4$, lo que significa que la precisión aumenta mucho más rápido que con el método del trapecio al disminuir $h$.</p>
+            
+            <h4>Error del Método</h4>
+            <p>El error de la aproximación con el método de Simpson 1/3 compuesto se puede acotar por:</p>
+            <div class="formula">
+                $$ E_S = - \frac{(b-a)^5}{180 n^4} f^{(4)}(\xi) $$
+            </div>
+            <p>Este error es inversamente proporcional a la cuarta potencia del número de subintervalos ($n^4$), lo que indica una **convergencia extremadamente rápida** (es de orden 4). **Doblar $n$ reduce el error 16 veces**.</p>
         `,
         code: `
 import numpy as np
 
+print("=== REGLA DE SIMPSON 1/3 COMPUESTA ===")
+
 func_str = input("Ingrese la función f(x): ")
+a = float(input("Ingrese el límite inferior 'a': "))
+b = float(input("Ingrese el límite superior 'b': "))
+n = int(input("Ingrese el número de subintervalos 'n' (debe ser par): "))
 
-def f(x):
-    return eval(func_str, {"np": np, "x": x})
-
-a = float(input("Límite inferior (a): "))
-b = float(input("Límite superior (b): "))
-n = int(input("Número de subintervalos (n, debe ser PAR): "))
-
-if n <= 0 or n % 2 != 0:
-    print("El número de subintervalos (n) debe ser un número PAR y positivo.")
+if n % 2 != 0:
+    print("\\n❌ Error: El número de subintervalos 'n' debe ser un número par.")
 else:
+    def f(x):
+        return eval(func_str, {"np": np, "x": x})
+
+    # 1. Calcular el ancho del subintervalo (h)
     h = (b - a) / n
-    suma_impares = 0 # Multiplicados por 4
-    suma_pares = 0   # Multiplicados por 2
-    
-    # Sumar términos intermedios
+
+    # 2. Inicializar la suma con los extremos
+    # f(x0) + f(xn)
+    suma = f(a) + f(b)
+
+    # 3. Sumar términos intermedios (coeficientes 4 y 2)
     for i in range(1, n):
         x_i = a + i * h
-        if i % 2 == 1:
-            suma_impares += f(x_i)
+        
+        if i % 2 != 0:
+            # Coeficiente 4 para índices impares
+            suma += 4 * f(x_i)
         else:
-            suma_pares += f(x_i)
-            
-    # Fórmula completa de Simpson 1/3
-    integral = (h / 3) * (f(a) + 4 * suma_impares + 2 * suma_pares + f(b))
-    
-    print(f"\\nAncho del subintervalo (h): {h:.6f}")
-    print(f"\\u2705 Aproximación de la integral: {integral:.8f}")
+            # Coeficiente 2 para índices pares
+            suma += 2 * f(x_i)
+
+    # 4. Aplicar la fórmula final de Simpson 1/3
+    integral = (h / 3) * suma
+
+    print(f"\\nFunción: f(x) = {func_str}")
+    print(f"Intervalo: [{a}, {b}]")
+    print(f"Subintervalos (n): {n}")
+    print(f"Ancho (h): {h:.6f}")
+    print(f"\\nEl valor aproximado de la integral es: {integral:.10f}")
 `
     },
-    {
+    { 
         id: 'a9',
-        title: 'Actividad 9 — Derivación Numérica: Diferencias Finitas',
-        pdf: 'DerivacionNum.pdf',
+        title: 'Actividad 9 — Integración Numérica (Simpson 3/8)',
+        pdf: 'Actividad9.pdf',
         description: `
-            <p>La **derivación numérica** aproxima la pendiente de una función $f(x)$ sin usar cálculo simbólico. Se basa en el límite de la definición de la derivada:</p>
-            
+            <h4>Descripción</h4>
+            <p>La **Regla de Simpson 3/8** es otro método de **integración numérica** que mejora la precisión al aproximar la función $f(x)$ por un **polinomio de tercer grado** en tres subintervalos contiguos.</p>
+            <p>Este método requiere que el número de subintervalos $n$ sea un **múltiplo de 3** ($n=3, 6, 9, \dots$).</p>
+
             <div class="formula">
-                **Derivada (Definición Límite):**
-                $$ f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h} $$
+                **Fórmula de Simpson 3/8 (Simple, para $n=3$):**
+                $$ \int_{x_0}^{x_3} f(x) \,dx \approx \frac{3h}{8} [f(x_0) + 3f(x_1) + 3f(x_2) + f(x_3)] $$
             </div>
-            
-            <p>Los métodos más comunes usan un valor finito de $h$ (paso) y se clasifican según los puntos utilizados:</p>
-            
-            <h4>1. Diferencia Adelantada (Forward Difference)</h4>
-            <p>Utiliza el punto actual $x$ y el siguiente $x+h$. Es de orden $O(h)$.</p>
+
             <div class="formula">
-                $$ f'(x) \approx \frac{f(x+h) - f(x)}{h} $$
+                **Fórmula de Simpson 3/8 Compuesto (Regla General, $n$ múltiplo de 3):**
+                $$ \int_a^b f(x) \,dx \approx \frac{3h}{8} \left[f(x_0) + 3\sum_{i \in \\{1, 2, 4, 5, \dots\\}} f(x_i) + 2\sum_{i \in \\{3, 6, 9, \dots\\}} f(x_i) + f(x_n)\right] $$
             </div>
+
             
-            <h4>2. Diferencia Retrasada (Backward Difference)</h4>
-            <p>Utiliza el punto actual $x$ y el anterior $x-h$. Es de orden $O(h)$.</p>
-            <div class="formula">
-                $$ f'(x) \approx \frac{f(x) - f(x-h)}{h} $$
-            </div>
             
-            <h4>3. Diferencia Central (Centered Difference)</h4>
-            <p>Utiliza puntos a ambos lados ($x-h$ y $x+h$). Es la más precisa, de orden $O(h^2)$.</p>
-            <div class="formula">
-                $$ f'(x) \approx \frac{f(x+h) - f(x-h)}{2h} $$
-            </div>
-            
-            <p>El desafío es elegir un $h$ lo suficientemente pequeño para reducir el error de truncamiento, pero no tan pequeño que el error de redondeo (por la precisión limitada de la máquina) se vuelva significativo.</p>
-        `,
-        code: `
-import numpy as np
-
-func_str = input("Ingrese la función f(x): ")
-x_val = float(input("Ingrese el punto x donde calcular f'(x): "))
-h = float(input("Ingrese el tamaño del paso (h), ej: 0.001: "))
-
-def f(x):
-    return eval(func_str, {"np": np, "x": x})
-
-# Diferencia Adelantada (O(h))
-def forward_diff(x, h):
-    return (f(x + h) - f(x)) / h
-
-# Diferencia Retrasada (O(h))
-def backward_diff(x, h):
-    return (f(x) - f(x - h)) / h
-
-# Diferencia Central (O(h^2))
-def centered_diff(x, h):
-    return (f(x + h) - f(x - h)) / (2 * h)
-
-print("\\n--- Resultados de Derivación Numérica ---")
-print(f"Punto (x): {x_val}")
-print(f"Paso (h): {h}")
-print("------------------------------------------")
-print(f"Adelantada (O(h)): {forward_diff(x_val, h):.8f}")
-print(f"Retrasada (O(h)):  {backward_diff(x_val, h):.8f}")
-print(f"Central (O(h²)):   {centered_diff(x_val, h):.8f}")
-`
-    },
-    {
-        id: 'a10',
-        title: 'Actividad 10 — Eliminación Gaussiana',
-        pdf: 'Gauss.pdf',
-        description: `
-            <p>La **Eliminación Gaussiana** es un método fundamental para resolver sistemas de ecuaciones lineales $AX=B$. El objetivo es transformar la matriz aumentada del sistema en una **matriz triangular superior** (proceso de eliminación), y luego resolver el sistema mediante **sustitución hacia atrás**.</p>
-            
-            <h4>Proceso de Eliminación</h4>
-            <p>Se utilizan operaciones elementales por fila para introducir ceros debajo de la diagonal principal. Estas operaciones incluyen:</p>
-            <ol>
-                <li>Multiplicar una fila por una constante distinta de cero.</li>
-                <li>Intercambiar dos filas.</li>
-                <li>Sumar el múltiplo de una fila a otra fila.</li>
-            </ol>
-            <p>La matriz aumentada se transforma en una matriz de la forma:</p>
-            <div class="formula">
-                $$ \begin{bmatrix} a_{11} & a_{12} & \cdots & a_{1n} & | & b_1 \\ 0 & a'_{22} & \cdots & a'_{2n} & | & b'_2 \\ \vdots & \vdots & \ddots & \vdots & | & \vdots \\ 0 & 0 & \cdots & a''_{nn} & | & b''_n \end{bmatrix} $$
-            </div>
-            
-            <h4>Sustitución hacia atrás</h4>
-            <p>Una vez que se obtiene la matriz triangular, la última ecuación contiene solo una incógnita ($x_n$), la cual se resuelve. Luego, este valor se sustituye en la penúltima ecuación para encontrar $x_{n-1}$, y así sucesivamente hasta encontrar $x_1$.</p>
-            
-            <h4>Pivoteo</h4>
-            <p>Es crucial usar **pivoteo parcial** (intercambiar filas para poner el elemento más grande de la columna debajo de la diagonal como pivote) para evitar la división por cero y reducir el error de redondeo.</p>
-        `,
-        code: `
-import numpy as np
-
-def eliminacion_gaussiana(A, B):
-    # Convertir a matrices de numpy para facilitar el c\\u00E1lculo
-    A = np.array(A, dtype=float)
-    B = np.array(B, dtype=float)
-    n = len(A)
-    
-    # Matriz aumentada [A|B]
-    M = np.hstack((A, B.reshape(n, 1)))
-
-    # --- FASE DE ELIMINACI\\u00D3N (Triangulaci\\u00F3n) ---
-    for i in range(n):
-        # Pivoteo (simple - encontrar el valor m\\u00E1ximo en la columna i)
-        max_row = i
-        for k in range(i + 1, n):
-            if abs(M[k, i]) > abs(M[max_row, i]):
-                max_row = k
-        M[[i, max_row]] = M[[max_row, i]] # Intercambio de filas
-        
-        # Eliminaci\\u00F3n de la columna i
-        for k in range(i + 1, n):
-            if M[i, i] == 0:
-                 # Manejo simple de singularidad
-                raise ValueError("El sistema tiene soluciones infinitas o no tiene soluci\\u00F3n (matriz singular).")
-
-            factor = M[k, i] / M[i, i]
-            M[k, i:] = M[k, i:] - factor * M[i, i:]
-
-    # --- FASE DE SUSTITUCI\\u00D3N HACIA ATR\\u00C1S ---
-    X = np.zeros(n)
-    for i in range(n - 1, -1, -1):
-        # Sustituci\\u00F3n
-        X[i] = (M[i, n] - np.dot(M[i, i+1:n], X[i+1:n])) / M[i, i]
-        
-    return X
-
-# EJEMPLO DE USO:
-# 2x + y - z = 8
-# -3x - y + 2z = -11
-# -2x + y + 2z = -3
-
-A = [[2, 1, -1], [-3, -1, 2], [-2, 1, 2]]
-B = [8, -11, -3]
-
-try:
-    solucion = eliminacion_gaussiana(A, B)
-    print("\\nMatriz de Coeficientes (A):")
-    print(np.array(A))
-    print("\\nVector de T\\u00E9rminos Independientes (B):")
-    print(np.array(B))
-    print("\\n\\u2705 Soluci\\u00F3n del sistema (X):")
-    print(solucion)
-except ValueError as e:
-    print(f"Error: {e}")
-`
-    },
-    {
-        id: 'a11',
-        title: 'Actividad 11 — Método de Jacobi',
-        pdf: 'Jacobi.pdf',
-        description: `
-            <p>El **Método de Jacobi** es un método iterativo utilizado para resolver sistemas de ecuaciones lineales $AX=B$. Es una alternativa a los métodos directos (como Eliminación Gaussiana), especialmente útil para **matrices grandes y dispersas**.</p>
-            
-            <h4>Condición de Convergencia</h4>
-            <p>Una condición suficiente (pero no necesaria) para que el método de Jacobi converja es que la matriz $A$ sea **estrictamente dominante diagonalmente**. Esto significa que, para cada fila, el valor absoluto del elemento en la diagonal es mayor que la suma de los valores absolutos de los otros elementos en esa fila.</p>
-            <div class="formula">
-                **Dominancia Diagonal:**
-                $$ |a_{ii}| > \sum_{j=1, j\neq i}^{n} |a_{ij}| \quad \text{para todo } i=1, \ldots, n $$
-            </div>
-            
-            <h4>Fórmula de Iteración</h4>
-            <p>El sistema se reescribe despejando cada variable $x_i$ de la ecuación $i$, utilizando las aproximaciones de las variables de la iteración anterior $k$ para calcular la aproximación actual $k+1$:</p>
-            <div class="formula">
-                $$ x_i^{(k+1)} = \frac{1}{a_{ii}} \left( b_i - \sum_{j=1, j\neq i}^{n} a_{ij} x_j^{(k)} \right) $$
-            </div>
-            
-            <h4>Ventajas</h4>
+            <h4>Comparación con Simpson 1/3</h4>
             <ul>
-                <li>Fácil de implementar.</li>
-                <li>Ideal para matrices grandes y dispersas.</li>
-                <li>Se presta bien a la paralelización (los cálculos de cada $x_i$ son independientes).</li>
+                <li>Ambos métodos tienen una precisión de orden cuatro ($O(h^4)$), pero Simpson 1/3 suele ser ligeramente más utilizado por su simplicidad y el menor factor de error constante.</li>
+                <li>Simpson 3/8 es útil cuando el número de subintervalos disponibles naturalmente es un múltiplo de 3, o para ser combinado con Simpson 1/3 cuando $n$ no es par ni múltiplo de 3 (Método Compuesto Mixto).</li>
+                <li>El error es inversamente proporcional a $n^4$, al igual que Simpson 1/3, garantizando una convergencia rápida.</li>
             </ul>
         `,
         code: `
 import numpy as np
 
-def metodo_jacobi(A, B, x0, tol=1e-5, max_iter=100):
-    A = np.array(A, dtype=float)
-    B = np.array(B, dtype=float)
-    X = np.array(x0, dtype=float)
-    n = len(A)
-    
-    X_nuevo = np.copy(X)
-    
-    print("Iter |  x1        |  x2        |  x3        | Error")
-    print("-------------------------------------------------------")
+print("=== REGLA DE SIMPSON 3/8 COMPUESTA ===")
 
-    for k in range(1, max_iter + 1):
-        X_ant = np.copy(X)
-        
-        # C\\u00E1lculo de la nueva iteraci\\u00F3n
-        for i in range(n):
-            suma = 0
-            for j in range(n):
-                if i != j:
-                    suma += A[i, j] * X_ant[j]
-            
-            if A[i, i] == 0:
-                raise ValueError("Divisi\\u00F3n por cero. El m\\u00E9todo de Jacobi no puede continuar.")
+func_str = input("Ingrese la función f(x): ")
+a = float(input("Ingrese el límite inferior 'a': "))
+b = float(input("Ingrese el límite superior 'b': "))
+n = int(input("Ingrese el número de subintervalos 'n' (debe ser múltiplo de 3): "))
 
-            X_nuevo[i] = (B[i] - suma) / A[i, i]
-        
-        error = np.linalg.norm(X_nuevo - X_ant) # Error euclidiano
-        X = np.copy(X_nuevo)
-        
-        print(f"{k:4d} | {X[0]:10.6f} | {X[1]:10.6f} | {X[2]:10.6f} | {error:8.6e}")
-        
-        if error < tol:
-            print(f"\\n\\u2705 Convergencia alcanzada en {k} iteraciones.")
-            return X
-            
-    print(f"\\n\\u26A0\\uFE0F No se alcanz\\u00F3 la convergencia despu\\u00E9s de {max_iter} iteraciones.")
-    return X
+if n % 3 != 0:
+    print("\\n❌ Error: El número de subintervalos 'n' debe ser múltiplo de 3.")
+else:
+    def f(x):
+        return eval(func_str, {"np": np, "x": x})
 
-# EJEMPLO (Dominante Diagonalmente):
-# 4x1 - x2 + 0x3 = 8
-# -2x1 + 5x2 + x3 = 10
-# 0x1 - x2 + 3x3 = 6
-A = [[4, -1, 0], [-2, 5, 1], [0, -1, 3]]
-B = [8, 10, 6]
-x0 = [0, 0, 0] # Vector inicial
+    # 1. Calcular el ancho del subintervalo (h)
+    h = (b - a) / n
 
-try:
-    solucion = metodo_jacobi(A, B, x0)
-    print("\\nSoluci\\u00F3n aproximada:", solucion)
-except ValueError as e:
-    print(f"Error: {e}")
+    # 2. Inicializar la suma con los extremos
+    # f(x0) + f(xn)
+    suma = f(a) + f(b)
+
+    # 3. Sumar términos intermedios (coeficientes 3 y 2)
+    for i in range(1, n):
+        x_i = a + i * h
+        
+        if i % 3 == 0:
+            # Coeficiente 2 para los múltiplos de 3 (que no son los extremos)
+            suma += 2 * f(x_i)
+        else:
+            # Coeficiente 3 para los demás
+            suma += 3 * f(x_i)
+
+    # 4. Aplicar la fórmula final de Simpson 3/8
+    integral = (3 * h / 8) * suma
+
+    print(f"\\nFunción: f(x) = {func_str}")
+    print(f"Intervalo: [{a}, {b}]")
+    print(f"Subintervalos (n): {n}")
+    print(f"Ancho (h): {h:.6f}")
+    print(f"\\nEl valor aproximado de la integral es: {integral:.10f}")
 `
     },
-    {
-        id: 'a12',
-        title: 'Actividad 12 — Regresión Lineal (Mínimos Cuadrados)',
-        pdf: 'MinimosCuadrados.pdf',
+    { 
+        id: 'a10',
+        title: 'Actividad 10 — Sistemas de Ecuaciones (Jacobi)',
+        pdf: 'Actividad10.pdf',
         description: `
-            <p>La **Regresión Lineal por Mínimos Cuadrados** es el método más común para ajustar una línea recta $y = mx + b$ a un conjunto de datos $(x_i, y_i)$. El objetivo es encontrar la pendiente ($m$) y la intersección ($b$) que **minimizan la suma de los cuadrados** de los residuos (la distancia vertical entre cada punto de datos y la línea ajustada).</p>
-            
-            <p>La función a minimizar es $S_r = \sum_{i=1}^{n} (y_i - (mx_i + b))^2$. Derivando $S_r$ con respecto a $m$ y $b$ e igualando a cero, se obtienen las siguientes **ecuaciones normales**:</p>
-            
+            <h4>Descripción</h4>
+            <p>El **Método de Jacobi** es un algoritmo iterativo utilizado para resolver **sistemas de ecuaciones lineales** de la forma $\mathbf{A}\mathbf{x} = \mathbf{b}$. Es especialmente útil para sistemas grandes y dispersos.</p>
+            <p>El método se basa en descomponer la matriz $\mathbf{A}$ en tres componentes: $\mathbf{A} = \mathbf{D} + \mathbf{L} + \mathbf{U}$, donde $\mathbf{D}$ es la diagonal, $\mathbf{L}$ es la triangular inferior estricta y $\mathbf{U}$ es la triangular superior estricta. A partir de esto, se obtiene una fórmula iterativa.</p>
+
             <div class="formula">
-                **Pendiente (m):**
-                $$ m = \frac{n \sum (x_i y_i) - \sum x_i \sum y_i}{n \sum x_i^2 - (\sum x_i)^2} $$
+                **Fórmula de iteración de Jacobi:**
+                $$ x_i^{(k+1)} = \frac{1}{a_{ii}} \left(b_i - \sum_{j \neq i} a_{ij} x_j^{(k)}\right) $$
+            </div>
+
+            <p>Donde $x_i^{(k+1)}$ es el nuevo valor de la variable $i$ en la iteración $k+1$, y $x_j^{(k)}$ son los valores de la iteración anterior $k$.</p>
+
+            
+            
+            <h4>Condición de Convergencia</h4>
+            <p>La convergencia del método de Jacobi está garantizada si la matriz de coeficientes $\mathbf{A}$ es **diagonalmente dominante**. Esto significa que el valor absoluto de cada elemento en la diagonal principal es mayor que la suma de los valores absolutos de los demás elementos en esa misma fila.</p>
+            <div class="formula">
+                **Criterio de Dominancia Diagonal:**
+                $$ |a_{ii}| > \sum_{j=1, j\neq i}^{n} |a_{ij}| \quad \text{para todo } i=1, \dots, n $$
+            </div>
+            <p>Si esta condición se cumple, el método converge a la solución, independientemente del vector inicial $\mathbf{x}^{(0)}$.</p>
+        `,
+        code: `
+import numpy as np
+
+print("=== MÉTODO ITERATIVO DE JACOBI ===")
+
+# --- 1. Definición del sistema ---
+# Ejemplo de matriz de coeficientes (A) - Diagonalmente Dominante
+A = np.array([
+    [10, 2, 1],
+    [1, 5, 1],
+    [2, 3, 10]
+], dtype=float)
+
+# Ejemplo de vector de términos independientes (b)
+b = np.array([7, -8, 6], dtype=float)
+
+# Número de ecuaciones/variables
+n = len(b)
+
+# --- 2. Parámetros de la iteración ---
+x = np.zeros(n) # Vector inicial de soluciones (x^0)
+tol = 1e-4      # Tolerancia
+max_iter = 50   # Máximo de iteraciones
+
+# --- 3. Ejecución del método de Jacobi ---
+print(f"\\nSistema Ax = b:\\nA = \\n{A}\\nb = {b}")
+print("\\nIter | x1        | x2        | x3        | Error Max.")
+print("-------------------------------------------------------")
+
+for k in range(max_iter):
+    x_prev = x.copy()
+    error_max = 0.0
+    
+    for i in range(n):
+        suma = 0.0
+        for j in range(n):
+            if i != j:
+                suma += A[i, j] * x_prev[j]
+        
+        # Fórmula de iteración de Jacobi
+        if A[i, i] == 0:
+            print("\\n❌ Error: La diagonal contiene un cero. La matriz no es invertible por este método.")
+            exit()
+            
+        x[i] = (b[i] - suma) / A[i, i]
+        
+        # Cálculo del error (diferencia máxima entre iteraciones)
+        error = abs(x[i] - x_prev[i])
+        if error > error_max:
+            error_max = error
+            
+    # Mostrar resultados de la iteración
+    print(f"{k+1:4d} | {x[0]:9.6f} | {x[1]:9.6f} | {x[2]:9.6f} | {error_max:10.8f}")
+    
+    # Condición de parada
+    if error_max < tol:
+        print(f"\\n✅ Solución encontrada en {k+1} iteraciones.")
+        print(f"Solución: x = {x}")
+        break
+else:
+    print(f"\\n⚠️ El método no convergió después de {max_iter} iteraciones.")
+    print(f"Última aproximación: x = {x}")
+
+# Solución con NumPy para verificar (opcional)
+# x_numpy = np.linalg.solve(A, b)
+# print(f"\\nSolución exacta (NumPy): {x_numpy}")
+`
+    },
+    { 
+        id: 'a11',
+        title: 'Actividad 11 — Sistemas de Ecuaciones (Gauss-Seidel)',
+        pdf: 'Actividad11.pdf',
+        description: `
+            <h4>Descripción</h4>
+            <p>El **Método de Gauss-Seidel** es una mejora del Método de Jacobi para resolver sistemas de ecuaciones lineales $\mathbf{A}\mathbf{x} = \mathbf{b}$. Su principal diferencia es que utiliza inmediatamente los **valores de las variables recién calculadas** en la misma iteración para las siguientes ecuaciones.</p>
+            <p>Esto generalmente resulta en una **convergencia más rápida** que el método de Jacobi.</p>
+
+            <div class="formula">
+                **Fórmula de iteración de Gauss-Seidel:**
+                $$ x_i^{(k+1)} = \frac{1}{a_{ii}} \left(b_i - \sum_{j=1}^{i-1} a_{ij} x_j^{(k+1)} - \sum_{j=i+1}^{n} a_{ij} x_j^{(k)}\right) $$
+            </div>
+
+            <p>Note que para la primera sumatoria se usan los valores de la **iteración actual** ($k+1$) y para la segunda, los valores de la **iteración anterior** ($k$).</p>
+
+            
+            
+            <h4>Condición de Convergencia</h4>
+            <p>Al igual que Jacobi, la convergencia está garantizada si la matriz $\mathbf{A}$ es **diagonalmente dominante**. Sin embargo, Gauss-Seidel puede converger incluso en casos donde Jacobi diverge, o viceversa.</p>
+            <ul>
+                <li>**Criterio Suficiente:** Si $\mathbf{A}$ es diagonalmente dominante, Gauss-Seidel converge.</li>
+                <li>**Criterio de Sassenfeld:** Un criterio más general que no requiere la dominancia diagonal, pero es más complejo de calcular.</li>
+            </ul>
+            <p>Debido a la actualización inmediata, es el método iterativo más común en aplicaciones de ingeniería.</p>
+        `,
+        code: `
+import numpy as np
+
+print("=== MÉTODO ITERATIVO DE GAUSS-SEIDEL ===")
+
+# --- 1. Definición del sistema ---
+# Ejemplo de matriz de coeficientes (A) - Diagonalmente Dominante
+A = np.array([
+    [10, 2, 1],
+    [1, 5, 1],
+    [2, 3, 10]
+], dtype=float)
+
+# Ejemplo de vector de términos independientes (b)
+b = np.array([7, -8, 6], dtype=float)
+
+# Número de ecuaciones/variables
+n = len(b)
+
+# --- 2. Parámetros de la iteración ---
+x = np.zeros(n) # Vector inicial de soluciones (x^0)
+tol = 1e-4      # Tolerancia
+max_iter = 50   # Máximo de iteraciones
+
+# --- 3. Ejecución del método de Gauss-Seidel ---
+print(f"\\nSistema Ax = b:\\nA = \\n{A}\\nb = {b}")
+print("\\nIter | x1        | x2        | x3        | Error Max.")
+print("-------------------------------------------------------")
+
+for k in range(max_iter):
+    x_prev = x.copy()
+    error_max = 0.0
+    
+    for i in range(n):
+        # 1. Suma de términos ya calculados (j < i) - usa x[j] de la iteración actual (k+1)
+        sum_k_plus_1 = 0.0
+        for j in range(i):
+            sum_k_plus_1 += A[i, j] * x[j] # ¡Usa el valor actualizado de x[j]!
+
+        # 2. Suma de términos pendientes (j > i) - usa x_prev[j] de la iteración anterior (k)
+        sum_k = 0.0
+        for j in range(i + 1, n):
+            sum_k += A[i, j] * x_prev[j] # ¡Usa el valor anterior de x[j]!
+
+        # Fórmula de iteración de Gauss-Seidel
+        if A[i, i] == 0:
+            print("\\n❌ Error: La diagonal contiene un cero. La matriz no es invertible por este método.")
+            exit()
+            
+        x[i] = (b[i] - sum_k_plus_1 - sum_k) / A[i, i]
+        
+        # Cálculo del error (diferencia máxima entre el valor actual y el anterior)
+        error = abs(x[i] - x_prev[i])
+        if error > error_max:
+            error_max = error
+            
+    # Mostrar resultados de la iteración
+    print(f"{k+1:4d} | {x[0]:9.6f} | {x[1]:9.6f} | {x[2]:9.6f} | {error_max:10.8f}")
+    
+    # Condición de parada
+    if error_max < tol:
+        print(f"\\n✅ Solución encontrada en {k+1} iteraciones.")
+        print(f"Solución: x = {x}")
+        break
+else:
+    print(f"\\n⚠️ El método no convergió después de {max_iter} iteraciones.")
+    print(f"Última aproximación: x = {x}")
+`
+    },
+    { 
+        id: 'a12',
+        title: 'Actividad 12 — Interpolación (Lagrange)',
+        pdf: 'Actividad12.pdf',
+        description: `
+            <h4>Descripción</h4>
+            <p>La **Interpolación de Lagrange** es un método para construir un **polinomio** que pasa exactamente por un conjunto dado de $n+1$ puntos $(x_i, y_i)$. El polinomio resultante, $P_n(x)$, tiene un grado menor o igual a $n$ y se denomina **Polinomio de Lagrange**.</p>
+            <p>A diferencia de otros métodos (como Newton), no requiere el cálculo de diferencias divididas, sino que construye el polinomio como una suma de polinomios base $L_i(x)$.</p>
+
+            <div class="formula">
+                **Polinomio de Interpolación de Lagrange:**
+                $$ P_n(x) = \sum_{i=0}^{n} y_i L_i(x) $$
+            </div>
+
+            <p>Donde $L_i(x)$ son los **polinomios base de Lagrange** definidos como:</p>
+            <div class="formula">
+                **Polinomios Base de Lagrange:**
+                $$ L_i(x) = \prod_{j=0, j \neq i}^{n} \frac{x - x_j}{x_i - x_j} $$
             </div>
             
-            <div class="formula">
-                **Intersección (b):**
-                $$ b = \bar{y} - m\bar{x} $$
-                <p>Donde $\bar{x}$ y $\bar{y}$ son las medias de los datos $x$ e $y$, respectivamente.</p>
-            </div>
             
-            <h4>Coeficiente de Determinación ($R^2$)</h4>
-            <p>Este valor mide qué tan bien la línea de regresión se ajusta a los datos, donde $R^2=1$ indica un ajuste perfecto.</p>
+
+            <h4>Ventajas y Desventajas</h4>
+            <ul>
+                <li>**Ventaja:** Es muy simple conceptualmente y fácil de implementar directamente a partir de los puntos.</li>
+                <li>**Ventaja:** Garantiza que el polinomio pasa por todos los puntos de datos.</li>
+                <li>**Desventaja:** Requiere recalcular todo el polinomio si se añade un nuevo punto de datos (a diferencia de la forma de Newton con diferencias divididas).</li>
+                <li>**Desventaja:** El fenómeno de **Runge** (grandes oscilaciones en los bordes) puede ocurrir con muchos puntos espaciados uniformemente.</li>
+            </ul>
         `,
         code: `
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Ingreso de datos
-print("Ingrese los datos x e y separados por comas y espacio (ej: 1,2,3 4,5,6)")
-try:
-    x_str = input("Valores de X: ")
-    y_str = input("Valores de Y: ")
-    
-    X = np.array([float(val.strip()) for val in x_str.split(',')])
-    Y = np.array([float(val.strip()) for val in y_str.split(',')])
+print("=== MÉTODO DE INTERPOLACIÓN DE LAGRANGE ===")
 
-    n = len(X)
-    if n != len(Y) or n < 2:
-        raise ValueError("El n\\u00FAmero de datos X e Y debe ser igual y mayor a 1.")
+# --- 1. Entrada de datos ---
+print("Ingrese los puntos (x, y) de la función. Deténgase con una línea vacía.")
+puntos = []
+while True:
+    try:
+        entrada = input("Punto (x, y): ")
+        if not entrada:
+            break
+        x, y = map(float, entrada.split(','))
+        puntos.append((x, y))
+    except ValueError:
+        print("Entrada inválida. Use el formato 'x,y'.")
 
-    # C\\u00E1lculos de las sumatorias
-    sum_x = np.sum(X)
-    sum_y = np.sum(Y)
-    sum_xy = np.sum(X * Y)
-    sum_x2 = np.sum(X**2)
+if len(puntos) < 2:
+    print("Se necesitan al menos dos puntos para la interpolación.")
+    exit()
 
-    # 1. C\\u00E1lculo de la pendiente (m)
-    numerador_m = n * sum_xy - sum_x * sum_y
-    denominador_m = n * sum_x2 - sum_x**2
-    
-    if denominador_m == 0:
-        raise ValueError("Error: El denominador para 'm' es cero (todos los valores de X son iguales).")
+# Separar x e y
+x_data = np.array([p[0] for p in puntos])
+y_data = np.array([p[1] for p in puntos])
+n = len(x_data) - 1 # Grado del polinomio
 
-    m = numerador_m / denominador_m
+# --- 2. Función del polinomio base de Lagrange L_i(x) ---
+def L_i(x, i, x_data):
+    """Calcula el i-ésimo polinomio base de Lagrange."""
+    resultado = 1.0
+    for j in range(len(x_data)):
+        if i != j:
+            # Producto: (x - x_j) / (x_i - x_j)
+            resultado *= (x - x_data[j]) / (x_data[i] - x_data[j])
+    return resultado
 
-    # 2. C\\u00E1lculo de la intersecci\\u00F3n (b)
-    prom_x = sum_x / n
-    prom_y = sum_y / n
-    b = prom_y - m * prom_x
+# --- 3. Función del Polinomio de Lagrange P_n(x) ---
+def P_n(x, x_data, y_data):
+    """Calcula el Polinomio de Lagrange P_n(x)."""
+    Pn_x = 0.0
+    for i in range(len(x_data)):
+        # Sumatoria: y_i * L_i(x)
+        Pn_x += y_data[i] * L_i(x, i, x_data)
+    return Pn_x
 
-    # 3. Funci\\u00F3n de la l\\u00EDnea ajustada
-    def linea_ajustada(x):
-        return m * x + b
-        
-    print(f"\\n\\u2705 Ecuaci\\u00F3n de la recta de regresi\\u00F3n:")
-    print(f"Y = {m:.4f} * X + {b:.4f}")
+# --- 4. Interpolación y Visualización ---
 
-    # C\\u00F3digo de graficaci\\u00F3n
-    x_line = np.linspace(np.min(X) - 1, np.max(X) + 1, 100)
-    y_line = linea_ajustada(x_line)
+# Valor a interpolar
+x_interpolar = float(input("\\nIngrese el valor de 'x' para interpolar: "))
+y_interpolar = P_n(x_interpolar, x_data, y_data)
 
-    plt.figure(figsize=(8, 5))
-    plt.scatter(X, Y, color='blue', label='Datos Originales')
-    plt.plot(x_line, y_line, color='red', label=f'Regresión: Y = {m:.2f}x + {b:.2f}')
-    plt.title('Regresión Lineal por Mínimos Cuadrados')
-    plt.xlabel('X')
-    plt.ylabel('Y')
-    plt.legend()
-    plt.grid(True)
-    plt.show()
+print(f"\\nValor interpolado P{n}({x_interpolar:.4f}) = {y_interpolar:.8f}")
 
-except ValueError as e:
-    print(f"\\u26A0\\uFE0F Error en los datos: {e}")
+# Gráfico
+x_plot = np.linspace(np.min(x_data) - 0.5, np.max(x_data) + 0.5, 200)
+y_plot = P_n(x_plot, x_data, y_data)
+
+plt.figure(figsize=(9, 6))
+# Polinomio interpolador
+plt.plot(x_plot, y_plot, 'b-', label=f'P{n}(x) de Lagrange') 
+# Puntos de datos
+plt.plot(x_data, y_data, 'ro', label='Puntos de datos')
+# Punto interpolado
+plt.plot(x_interpolar, y_interpolar, 'go', markersize=8, label=f'Punto interpolado ({x_interpolar:.2f}, {y_interpolar:.2f})')
+
+plt.title("Interpolación Polinomial de Lagrange")
+plt.xlabel("x")
+plt.ylabel("P(x)")
+plt.legend()
+plt.grid(True)
+plt.show()
 `
     }
 ];
 
 // =========================================================
-// LÓGICA DE RENDERIZADO Y FUNCIONALIDAD
+// LÓGICA DE LA INTERFAZ
 // =========================================================
 
+const activitiesGrid = document.getElementById('activitiesGrid');
 const detailScreen = document.getElementById('detailScreen');
-const gridContainer = document.getElementById('activitiesGrid');
 const detailTitle = document.getElementById('detailTitle');
 const detailEnunciado = document.getElementById('detailEnunciado');
 const detailCode = document.getElementById('detailCode');
 const codeSection = document.getElementById('codeSection');
-const openPdfBtn = document.getElementById('openPdfBtn');
+const closeDetailBtn = document.getElementById('closeDetailBtn');
+const floatingClose = document.getElementById('floatingClose');
+const floatingBack = document.getElementById('floatingBack');
 const downloadCodeBtn = document.getElementById('downloadCodeBtn');
 const downloadAnchor = document.getElementById('downloadAnchor');
-const floatingBack = document.getElementById('floatingBack');
+const openPdfBtn = document.getElementById('openPdfBtn');
 
-// 1. Dibuja las tarjetas en el grid
-function renderActivities() {
-    gridContainer.innerHTML = '';
+let currentActivity = null;
+
+// Función para renderizar las tarjetas en la cuadrícula
+function renderGrid() {
+    activitiesGrid.innerHTML = '';
     activities.forEach(activity => {
         const card = document.createElement('div');
-        card.className = 'card';
+        card.classList.add('card');
         card.setAttribute('data-id', activity.id);
-
-        // Tomar la primera parte de la descripción para el párrafo de la tarjeta
-        // Primero, limpia etiquetas HTML para obtener solo texto
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = activity.description;
-        const shortText = tempDiv.textContent || tempDiv.innerText || "";
         
-        const shortDesc = shortText.substring(0, 150) + '...';
-
         card.innerHTML = `
-            <h3>${activity.title}</h3>
-            <p>${shortDesc}</p>
+            <h3>${activity.title.split('—')[0].trim()}</h3>
+            <p>${activity.title.split('—')[1].trim()}</p>
         `;
         
-        card.addEventListener('click', () => showDetail(activity.id));
-        gridContainer.appendChild(card);
+        card.addEventListener('click', () => showDetail(activity));
+        activitiesGrid.appendChild(card);
     });
 }
 
-// 2. Muestra la pantalla de detalles de una actividad
-function showDetail(id) {
-    const activity = activities.find(a => a.id === id);
-    if (!activity) return;
-
-    // Actualizar contenido de la pantalla de detalles
+// Función para mostrar la vista de detalle
+function showDetail(activity) {
+    currentActivity = activity;
+    
+    // 1. Rellenar contenido
     detailTitle.textContent = activity.title;
     detailEnunciado.innerHTML = activity.description;
     
-    // Mostrar u ocultar sección de código
+    // Configurar sección de código (si existe)
     if (activity.code) {
-        detailCode.textContent = activity.code;
+        detailCode.textContent = activity.code.trim();
         codeSection.style.display = 'block';
         downloadCodeBtn.style.display = 'inline-block';
-        downloadCodeBtn.onclick = () => downloadCode(activity.code, activity.title.split('—')[0].trim());
     } else {
+        detailCode.textContent = '';
         codeSection.style.display = 'none';
         downloadCodeBtn.style.display = 'none';
     }
-
-    // Botón de PDF
-    openPdfBtn.onclick = () => window.open(activity.pdf, '_blank');
-
-    // Mostrar pantalla
-    document.body.style.overflow = 'hidden';
+    
+    // 2. Mostrar/Ocultar elementos de la interfaz
     detailScreen.classList.add('show');
-    floatingBack.style.display = 'block';
-
-    // Rerenderizar MathJax (Necesario cuando el contenido se carga dinámicamente)
+    document.body.style.overflow = 'auto'; // Habilitar scroll en detalle
+    
+    // 3. Renderizar fórmulas con MathJax (si las hay)
     if (window.MathJax) {
-        MathJax.typeset([detailEnunciado]);
+        MathJax.typesetPromise([detailEnunciado]).then(() => {
+            // Callback después de que MathJax termine de renderizar
+        });
+    }
+
+    // 4. Actualizar botones de acción
+    openPdfBtn.onclick = () => {
+        alert(`Simulando apertura de PDF: ${activity.pdf}`);
+        // window.open(activity.pdf, '_blank'); // Descomentar para abrir PDF real
+    };
+
+    downloadCodeBtn.onclick = () => downloadCode(activity);
+}
+
+// Función para cerrar la vista de detalle
+function closeDetail() {
+    detailScreen.classList.remove('show');
+    document.body.style.overflow = 'hidden'; // Restaurar overflow
+    currentActivity = null;
+    
+    // Forzar re-renderizado de MathJax en caso de que la grilla lo necesite (aunque no lo hace aquí)
+    if (window.MathJax) {
+        MathJax.typesetPromise([activitiesGrid]);
     }
 }
 
-// 3. Oculta la pantalla de detalles
-function hideDetail() {
-    document.body.style.overflow = 'auto';
-    detailScreen.classList.remove('show');
-    floatingBack.style.display = 'none';
+// Función para descargar el código
+function downloadCode(activity) {
+    if (!activity.code) return;
+
+    const filename = `${activity.id}_${activity.title.split('—')[0].trim().replace(/\s/g, '_')}.py`;
+    const codeContent = activity.code.trim();
+    const file = new Blob([codeContent], {type: 'text/plain'});
     
-    // Limpiar el contenido de MathJax para evitar errores en el siguiente render
-    detailEnunciado.innerHTML = ''; 
-}
-
-// 4. Función para descargar el código de ejemplo
-function downloadCode(code, name) {
-    const file = new Blob([code], { type: 'text/plain' });
     downloadAnchor.href = URL.createObjectURL(file);
-    downloadAnchor.download = `${name.replace(/ /g, '_')}.py`;
+    downloadAnchor.download = filename;
     downloadAnchor.click();
+
+    URL.revokeObjectURL(downloadAnchor.href); // Liberar memoria
+    alert(`Descargando ${filename}...`);
 }
 
-// 5. Inicialización y eventos
-document.addEventListener('DOMContentLoaded', () => {
-    // Renderizar todas las actividades al cargar
-    renderActivities();
+// Event Listeners
+closeDetailBtn.addEventListener('click', closeDetail);
+floatingClose.addEventListener('click', closeDetail); // El botón flotante (no se usa)
 
-    // Eventos de botones
-    document.getElementById('closeDetailBtn').addEventListener('click', hideDetail);
-    document.getElementById('floatingClose').addEventListener('click', hideDetail);
-});
-
-// Nota: Los canvas de fondo se ejecutan automáticamente por sus IIFE.
+// Ejecutar la renderización inicial
+document.addEventListener('DOMContentLoaded', renderGrid);
 </script>
 
 </body>
