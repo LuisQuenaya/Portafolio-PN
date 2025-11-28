@@ -266,21 +266,33 @@
 // Array de Actividades (DATOS CORREGIDOS, con sintaxis de LaTeX verificada)
 const activities = [
     {
+       {
         id: 'a1',
         title: 'Actividad 1 — Método de Bisección',
         pdf: 'BISECCION.pdf',
         description: `
-            <p>El método de bisección encuentra la raíz de una función continua $f(x)$ dentro de un intervalo $[a, b]$. Se basa en el **teorema de Bolzano**: si $f(a)$ y $f(b)$ tienen signos opuestos, debe haber una raíz en medio.</p>
+            <p>El método de bisección es un procedimiento iterativo para aproximar las **raíces** de una función continua $f(x)$. Se basa en el **Teorema de Bolzano**, que indica que si $f(a) \\cdot f(b) < 0$ en un intervalo $[a, b]$, existe al menos una raíz dentro del intervalo.</p>
 
+            <p>El método consiste en dividir el intervalo a la mitad y seleccionar el subintervalo donde la función cambia de signo, repitiendo este proceso hasta alcanzar la tolerancia deseada.</p>
+            
             <div class="formula">
-                **Fórmula del punto medio:**
+                **Fórmula del punto medio para acotar la raíz:**
                 $$ x_m = \frac{a + b}{2} $$
             </div>
 
-            <p>En cada paso, el intervalo se reduce a la mitad. Si $f(a) \\cdot f(x_m) < 0$, la raíz está en $[a, x_m]$; si no, está en $[x_m, b]$.</p>
+            <h4>Importancia de graficar la función</h4>
+            <p>Antes de iniciar, es **recomendable graficar** $f(x)$ para ubicar aproximadamente el intervalo donde la función cambia de signo y elegir valores iniciales $a$ y $b$ adecuados.  </p>
+
+            <h4>Ventajas y limitaciones</h4>
+            <ul>
+                <li>**Ventaja:** Siempre converge si la función es continua y $f(a) \\cdot f(b) < 0$.</li>
+                <li>**Ventaja:** Simple de implementar.</li>
+                <li>**Limitación:** Convergencia lineal (**más lenta** que métodos como Secante o Newton-Raphson).</li>
+                <li>**Limitación:** Requiere que la función cambie de signo en el intervalo.</li>
+            </ul>
             
             <div class="formula">
-                **Error absoluto:**
+                **Error absoluto (acotación del intervalo):**
                 $$ E=\frac{b-a}{2} $$
             </div>
         `,
@@ -337,19 +349,33 @@ plt.legend()
 plt.grid(True)
 plt.show()`
     },
-    {
+   {
         id: 'a2',
         title: 'Actividad 2 — Método de la Secante',
         pdf: 'Secante.pdf',
         description: `
-            <p>El método de la secante halla raíces sin usar derivadas. Usa dos puntos iniciales, $x_{n-1}$ y $x_n$, para construir una recta secante. La intersección de esta secante con el eje $x$ es la nueva aproximación $x_{n+1}$.</p>
+            <p>El **método de la secante** es un procedimiento iterativo para aproximar las **raíces** de una función continua $f(x)$. A diferencia de Newton-Raphson, **no necesita derivadas**, ya que la pendiente se estima usando dos puntos cercanos a la raíz.</p>
 
+            <p>Se basa en la idea de reemplazar la tangente por una **secante**, la línea que une los puntos $(x_{n-1}, f(x_{n-1}))$ y $(x_n, f(x_n))$. La intersección de esta secante con el eje $x$ nos da la siguiente aproximación:</p>
+            
             <div class="formula">
                 **Fórmula de la Secante:**
                 $$ x_{n+1} = x_n - f(x_n) \frac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})} $$
             </div>
+            
+            
 
-            <p>Suele ser más rápido que el método de bisección, pero no siempre garantiza la convergencia si los puntos iniciales no son buenos.</p>
+            <h4>Importancia de graficar la función</h4>
+            <p>Antes de iniciar, es recomendable **graficar** $f(x)$ para ubicar aproximadamente dónde cruza el eje $x$ y elegir dos valores iniciales $x_0$ y $x_1$ **cercanos a la raíz**, aumentando la probabilidad de convergencia.</p>
+
+            <h4>Ventajas y limitaciones</h4>
+            <ul>
+                <li>**Ventaja:** No requiere derivadas analíticas.</li>
+                <li>**Ventaja:** Puede ser más rápida que el método de bisección.</li>
+                <li>**Ventaja:** Convergencia superlineal (más rápida que la lineal) si los puntos iniciales son adecuados.</li>
+                <li>**Limitación:** Puede **divergir** si los puntos iniciales no se eligen bien.</li>
+                <li>**Limitación:** No garantiza convergencia si la función no es continua o si la diferencia $f(x_n) - f(x_{n-1})$ es cercana a cero.</li>
+            </ul>
         `,
         code: `
 import numpy as np
@@ -380,7 +406,7 @@ plt.legend()
 plt.grid(True)
 plt.show()
 
-# === 3. Pregunta si desea aplicar el método de la Secante ===
+
 op = input("¿Desea encontrar una raíz con el método de la Secante? (s/n): ").lower()
 
 if op == "s":
@@ -421,24 +447,46 @@ else:
     print("No se aplicó el método de la Secante.")
 `
     },
-    {
+  {
         id: 'a3',
         title: 'Actividad 3 — Método del Punto Fijo',
         pdf: 'Puntofijo.pdf',
         description: `
-            <p>El método del punto fijo busca la raíz $\\alpha$ de $f(x)=0$ convirtiéndola en la ecuación equivalente $x=g(x)$. La raíz $\\alpha$ es el **punto fijo** de $g(x)$, es decir, $\\alpha = g(\\alpha)$.</p>
+            <p>El **Método del Punto Fijo** es un procedimiento iterativo para aproximar las **raíces** de una ecuación $f(x)=0$. Consiste en transformar la ecuación original en una forma equivalente $x=g(x)$, donde $g(x)$ es llamada la **función de iteración**.</p>
+            
+            <p>El método genera una sucesión de aproximaciones mediante la siguiente fórmula, partiendo de un valor inicial $x_0$. Si la sucesión converge a un valor $r$, entonces $r$ es un **punto fijo** de $g(x)$, y por tanto es la raíz de $f(x)=0$.</p>
 
             <div class="formula">
                 **Fórmula de iteración:**
                 $$ x_{n+1} = g(x_n) $$
             </div>
+            
+            
 
-            <p>La convergencia solo ocurre si, cerca de la raíz, la derivada de $g(x)$ cumple con $|g'(x)| < 1$.</p>
+            <h4>Condición de Convergencia (Teorema del Punto Fijo)</h4>
+            <p>Para que el método converja, la función $g(x)$ debe cumplir el Teorema del Punto Fijo, donde la condición más crítica es:</p>
+            <ul>
+                <li>$g(x)$ debe ser continua en un intervalo $[a, b]$.</li>
+                <li>$g(x) \\in [a, b]$ para todo $x \\in [a, b]$ (El intervalo se mapea en sí mismo).</li>
+                <li>**Condición Clave:** Existe una constante $k < 1$ tal que la derivada cumple:</li>
+            </ul>
 
             <div class="formula">
                 **Condición de convergencia:**
                 $$ |g'(x)| \\le k < 1 $$
             </div>
+
+            <p>Si estas condiciones se cumplen, el método converge a la raíz única en el intervalo.</p>
+
+            <h4>Ventajas y limitaciones</h4>
+            <ul>
+                <li>**Ventaja:** Método simple y fácil de implementar.</li>
+                <li>**Ventaja:** No requiere el cálculo de derivadas de la función original $f(x)$.</li>
+                <li>**Ventaja:** Útil cuando es fácil despejar $x$ de la ecuación original.</li>
+                <li>**Limitación:** La convergencia depende fuertemente de la elección de la función $g(x)$.</li>
+                <li>**Limitación:** Puede **divergir** si $|g'(x)| \\ge 1$ cerca de la raíz.</li>
+                <li>**Limitación:** La velocidad de convergencia es **lineal** (más lenta que métodos como Newton-Raphson).</li>
+            </ul>
         `,
         code: `
 import numpy as np
@@ -489,20 +537,32 @@ else:
 `
     },
     {
+       {
         id: 'a4',
         title: 'Actividad 4 — Método de Regula Falsi',
         pdf: 'Regulafalsi.pdf',
         description: `
-            <p>El método de **Regula Falsi** (o falsa posición) mejora a bisección usando una recta secante entre los puntos $(a, f(a))$ y $(b, f(b))$. La nueva aproximación $x_r$ es el corte de esa recta con el eje $x$.</p>
+            <p>El **método de Regula Falsi** (o **Falsa Posición**) es un procedimiento iterativo para aproximar **raíces** de una función continua $f(x)$. Al igual que el método de bisección, requiere que $f(a) \\cdot f(b) < 0$ para acotar la raíz.</p>
 
-            <p>Necesita que $f(a) \\cdot f(b) < 0$ para acotar la raíz.</p>
-
+            <p>En lugar de usar el punto medio, se utiliza la intersección con el eje $x$ de la **recta secante** que une los puntos $(a, f(a))$ y $(b, f(b))$. Esto proporciona una mejor aproximación en la mayoría de los casos.</p>
+            
             <div class="formula">
                 **Fórmula de Regula Falsi:**
                 $$ x_r = b - f(b)\frac{b-a}{f(b)-f(a)} $$
             </div>
 
-            <p>Es más rápido que bisección, pero puede ser lento si la función es muy curva cerca de la raíz.</p>
+            
+
+            <h4>Importancia de graficar la función</h4>
+            <p>Antes de iniciar, es recomendable **graficar** $f(x)$ para ubicar el intervalo donde la función cambia de signo y elegir los valores iniciales $a$ y $b$ que acoten la raíz.</p>
+
+            <h4>Ventajas y limitaciones</h4>
+            <ul>
+                <li>**Ventaja:** Converge más rápido que el método de bisección en muchos casos.</li>
+                <li>**Ventaja:** Utiliza información de la pendiente aproximada entre los extremos, mejorando la estimación.</li>
+                <li>**Limitación:** Requiere que la función cambie de signo en el intervalo.</li>
+                <li>**Limitación:** Puede experimentar **convergencia lenta** (estancamiento) si la función es muy cóncava o convexa cerca de la raíz y uno de los extremos se queda fijo.</li>
+            </ul>
         `,
         code: `
 import numpy as np
@@ -551,7 +611,8 @@ else:
 
     # Código de graficación
     if raiz is not None:
-        margen = (max(b, raiz) - min(a, raiz)) * 0.1
+        # Ajuste de margen para la gráfica
+        margen = 0.1 * (max(b, raiz) - min(a, raiz)) if raiz else 0.1 * (b - a)
         xmin = min(a,b,raiz) - margen
         xmax = max(a,b,raiz) + margen
         x = np.linspace(xmin, xmax, 400)
@@ -567,19 +628,34 @@ else:
         plt.grid(True)
         plt.show()`
     },
-    {
+   {
         id: 'a5',
         title: 'Actividad 5 — Método de Newton-Raphson',
         pdf: 'Actividad_05.pdf',
         description: `
-            <p>El método de **Newton-Raphson** es un método iterativo muy rápido para hallar raíces. Se basa en usar la **recta tangente** a la función en el punto actual $x_n$ para estimar el siguiente punto $x_{n+1}$.</p>
+            <h4>Descripción</h4>
+            <p>El **método de Newton-Raphson** es un procedimiento iterativo que permite obtener una aproximación de las raíces reales de una función continua y derivable. Su fundamento se basa en usar la **recta tangente** a la función en el punto actual $x_n$ para estimar el siguiente punto $x_{n+1}$.</p>
+            <p>Matemáticamente, se deriva del desarrollo del polinomio de **Taylor de primer orden** alrededor de un punto inicial $x_0$.</p>
+
+            
             
             <div class="formula">
-                **Fórmula de Newton-Raphson:**
-                $$ x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} $$
+                **Fórmula de Newton-Raphson (Recursiva):**
+                $$ x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)} $$
             </div>
 
-            <p>Necesita que la función sea derivable ($f'(x)$). En este código, la derivada se aproxima numéricamente.</p>
+            <p>En cada iteración se utiliza la pendiente de la tangente $f'(x_n)$ en el punto $x_n$ para aproximarse progresivamente a la raíz. Si la función y su derivada son continuas, y el punto inicial está cerca de la raíz, la convergencia es **cuadrática** (muy rápida).</p>
+
+            <h4>Importancia de la visualización</h4>
+            <p>Antes de aplicar el método, es recomendable **graficar** la función $f(x)$ en un intervalo adecuado. Esto permite identificar las zonas donde cruza el eje $x$, estimar una raíz posible y elegir un valor inicial $x_0$ apropiado, lo que incrementa las probabilidades de que el método converja correctamente.</p>
+
+            <h4>Restricciones y limitaciones</h4>
+            <ul>
+                <li>**Restricción Crítica:** No se debe aplicar cuando la derivada $f'(x_n)$ es cero o muy cercana a cero, ya que genera una indeterminación (división por cero).</li>
+                <li>Si el punto inicial está lejos de la raíz, la **convergencia no está garantizada** (puede divergir o converger a otra raíz).</li>
+                <li>En raíces múltiples, la convergencia puede ser lenta o inestable.</li>
+                <li>Se requiere que tanto $f(x)$ como $f'(x)$ sean continuas cerca de la raíz buscada.</li>
+            </ul>
         `,
         code: `
 import numpy as np
@@ -649,15 +725,11 @@ else:
     },
     {
         id: 'a6',
-        title: 'Actividad 6 — Índice H (Métrica Bibliométrica)',
+        title: 'Actividad 6 — Índice H ',
         pdf: 'Actividad6.pdf',
         description: `
             <p>El **Índice H** (o índice de Hirsch) mide la productividad y el impacto de un investigador. Un autor tiene un índice $h$ si $h$ de sus publicaciones tienen al menos $h$ citaciones cada una.</p>
             
-            <div class="formula">
-                **Definición Formal:**
-                $$ h = \max \\{i \\in \\mathbb{N} : \\text{La publicación } i \\text{ tiene al menos } i \\text{ citas} \\} $$
-            </div>
 
             <p>Es una métrica clave para evaluar el impacto científico.</p>
 
@@ -728,61 +800,128 @@ else:
         title: 'Actividad 7 — Gradiente de una Función (Descenso por Gradiente)',
         pdf: 'actividad_8.pdf',
         description: `
-            <p>El **Gradiente** ($\\nabla f$) es un vector que indica la dirección de **máximo crecimiento** de una función. Es una herramienta fundamental en la optimización de algoritmos de Machine Learning e Inteligencia Artificial.</p>
-            <p>El método de **Descenso por Gradiente** busca el **mínimo** de una función de costo moviéndose en la dirección **opuesta** al gradiente. La convergencia depende de la **tasa de aprendizaje** ($\\eta$).</p>
+            <h4>Concepto del Gradiente ($\\nabla f$)</h4>
+            <p>El **Gradiente** es un vector que indica la dirección de **máximo crecimiento** y la rapidez con que cambia el valor de una función respecto a sus variables. Es una herramienta fundamental en la optimización de algoritmos de Machine Learning e Inteligencia Artificial.</p>
 
             <div class="formula">
                 **Vector Gradiente (Función Multivariable):**
                 $$ \\nabla f(\\mathbf{x}) = \\begin{pmatrix} \\frac{\\partial f}{\\partial x_1} \\\\ \\frac{\\partial f}{\\partial x_2} \\\\ \\vdots \\\\ \\frac{\\partial f}{\\partial x_n} \\end{pmatrix} $$
             </div>
 
+            <p>Si la función depende de una sola variable ($f(x)$), el gradiente se reduce a su **derivada** ($f'(x)$).</p>
+            
+            
+
+            <h4>Método de Descenso por Gradiente</h4>
+            <p>Este método busca el **mínimo** de una función de costo ($J(\\mathbf{x})$) moviéndose en la dirección **opuesta** al gradiente. La convergencia depende crucialmente de la **tasa de aprendizaje** ($\\eta$).</p>
+
             <div class="formula">
-                **Regla de Actualización (Descenso por Gradiente):**
+                **Regla de Actualización (Descenso por Gradiente General):**
                 $$ \\mathbf{x}_{k+1} = \\mathbf{x}_k - \\eta \\nabla f(\\mathbf{x}_k) $$
             </div>
-            
-            <p>Donde $\\eta$ es la **tasa de aprendizaje** (Learning Rate), que controla la longitud del paso que se da en cada iteración.</p>
+
+            <p>Donde $\\eta$ es la **tasa de aprendizaje** (*Learning Rate*), que controla la longitud del paso. Para una función de una variable, la regla de actualización es:</p>
+
+            <div class="formula">
+                **Regla de Actualización (Una Variable):**
+                $$ x_{i+1} = x_i - \\eta f'(x_i) $$
+            </div>
+
+            <p>Este proceso se repite hasta que el cambio es insignificante y la función se acerca a su mínimo local o global.</p>
         `,
-        
+        code: `
+# -----------------------------------------------------------------
+# 2. Implementación en R (una variable)
+# Método del gradiente descendente para f(x) = x^2, con f'(x) = 2x
+# -----------------------------------------------------------------
+
+n <- 0.01 # Tasa de aprendizaje (eta)
+f <- function ( x ) x ^2
+f_deriv <- function ( x ) 2 * x
+
+x0 <- 3 # valor inicial
+iter <- 21 # número de iteraciones
+
+x <- numeric ( iter )
+fx <- numeric ( iter )
+fpx <- numeric ( iter )
+grad <- numeric ( iter )
+
+x [1] <- x0
+
+for ( i in 1: iter ) {
+  fx [ i ] <- f ( x [ i ])
+  fpx [ i ] <- f_deriv ( x [ i ])
+  # Aplicación de la regla de actualización: xi - eta * f'(xi)
+  grad [ i ] <- x [ i ] - n * fpx [ i ] 
+  if ( i < iter ) {
+    x [ i + 1] <- grad [ i ]
+  }
+}
+
+tabla <- data . frame ( x = x , f_x = fx , f_deriv = fpx , grad = grad )
+print ( "Tabla de iteraciones (x se acerca a 0):" )
+print ( tabla )
+# Se observa cómo el valor de x va disminuyendo gradualmente hasta aproximarse al punto mínimo en x = 0.
+`
     },
     {
         id: 'a8',
         title: 'Actividad 8 — Pseudoinverso vs. Descenso de Gradiente en Regresión Lineal',
         pdf: 'iamgen 1.pdf',
         description: `
-            <p>Este resumen compara dos formas de resolver la **Regresión Lineal por Mínimos Cuadrados (OLS)**: el **Pseudoinverso** (solución directa/analítica) y el **Descenso de Gradiente** (solución iterativa).</p>
+            <p>Esta actividad compara dos métodos fundamentales para resolver la **Regresión Lineal por Mínimos Cuadrados (OLS)**: el **Pseudoinverso de Moore–Penrose** (solución analítica/directa) y el **Descenso de Gradiente** (solución iterativa).</p>
             
-            <h4>1. Pseudoinverso de Moore-Penrose (Solución Exacta)</h4>
-            <p>Proporciona la solución exacta para los pesos ($\\mathbf{w}$) en un solo paso matricial, garantizando el error mínimo posible.</p>
+            <hr>
+            
+            <h4>1. Solución Analítica (Pseudoinverso $\\mathbf{w}$ )</h4>
+            <p>El Pseudoinverso ofrece una **solución analítica exacta** para los pesos ($\\mathbf{w}$) mediante operaciones matriciales, proporcionando el **mínimo error cuadrático** posible.</p>
             
             <div class="formula">
-                **Solución Analítica (Pesos $\\mathbf{w}$):**
+                **Fórmula del Pseudoinverso de Moore–Penrose:**
                 $$ \\mathbf{w} = (\\mathbf{X}^T\\mathbf{X})^{-1}\\mathbf{X}^T\\mathbf{y} $$
             </div>
+            
+            <p>**Marco Teórico:** Es ideal para conjuntos de datos de tamaño moderado o bien condicionados. Sin embargo, puede ser computacionalmente costoso e inestable si la matriz de características ($\\mathbf{X}$) es muy grande o está mal condicionada.</p>
 
-            <h4>2. Descenso de Gradiente (Solución Aproximada)</h4>
-            <p>Ajusta los pesos iterativamente, minimizando la función de costo (generalmente el Error Cuadrático Medio, MSE) moviéndose en contra del gradiente.</p>
+            <hr>
+
+            <h4>2. Solución Iterativa (Descenso de Gradiente)</h4>
+            <p>El Descenso de Gradiente es un método **iterativo** que ajusta los pesos gradualmente en función de la dirección del **gradiente negativo del error** (función de coste).</p>
 
             <div class="formula">
                 **Función de Coste (MSE):**
                 $$ J(\\mathbf{w}) = \\frac{1}{2m} \\sum_{i=1}^{m} (h_\\mathbf{w}(\\mathbf{x}^{(i)}) - y^{(i)})^2 $$
             </div>
+            
+            
 
-            <p>El Descenso de Gradiente es muy escalable para grandes conjuntos de datos, mientras que el Pseudoinverso es rápido para datasets pequeños.</p>
+            <p>**Marco Teórico:** Aunque no garantiza una solución exacta en un número finito de pasos, es altamente **escalable** y adaptable a grandes volúmenes de datos.</p>
+
+            <hr>
+
+            <h4>Metodología y Conclusiones</h4>
+            <ul>
+                <li>**Experimentos:** Se usaron datasets como *California Housing* y *Diabetes* para evaluar el **tiempo de ejecución**, el **Error Cuadrático Medio (MSE)** y el número de iteraciones.</li>
+                <li>**Resultados:** El **Pseudoinverso** fue más rápido y preciso en conjuntos **pequeños o moderados**. El **Descenso de Gradiente** fue más escalable para grandes volúmenes de datos, pero su rendimiento dependió fuertemente del **escalado de las variables** y el ajuste de la **tasa de aprendizaje** ($\\eta$).</li>
+                <li>**Conclusión:** El Pseudoinverso es ideal para soluciones exactas en escenarios controlados; el Descenso de Gradiente es preferible en problemas de **gran escala** que priorizan la eficiencia sobre la exactitud inmediata.</li>
+            </ul>
         `,
-       
+        `
     },
     {
         id: 'a9',
         title: 'Actividad 9 — Dinámica del Juego de Caramelos y Chupetines (Simulación)',
         pdf: 'Dinamica (2).pdf',
         description: `
-            <p>Esta actividad es una **simulación estocástica** (con elementos aleatorios) en R. Simula un juego cooperativo donde los jugadores combinan recursos (caramelos: 'A', 'B', 'C') para crear un producto final (chupetín: 'D').</p>
+            <h4>Descripción General de la Dinámica</h4>
+            <p>Esta actividad es una **simulación estocástica** (con elementos aleatorios) modelada en R, cuyo propósito fue comprender de manera práctica los **procesos aleatorios**, el **intercambio** y la toma de decisiones estratégicas. El objetivo era que cada grupo lograra acumular 9 chupetines ('D').</p>
+            <p>Participaron 18 estudiantes, divididos en dos grupos. Cada grupo inició con 18 caramelos de tipos 'A', 'B', o 'C' distribuidos aleatoriamente. El enfoque principal es la **lógica de transiciones de estado** que rigen la creación de nuevos ítems y el ciclo de reabastecimiento.</p>
             
-            <p>El enfoque principal es la **lógica de transiciones de estado** que rigen la creación de nuevos ítems a partir de recursos existentes, y el intercambio de productos finales por nuevos recursos (ciclos de reabastecimiento).</p>
-
+            <h4>Reglas de Transformación de Recursos:</h4>
+            
             <div class="formula">
-                **Regla de Creación 1 (Básica):**
+                **Regla de Creación 1 (Producción Básica):**
                 $$ \\{A \\ge 1, B \\ge 1, C \\ge 1\\} \\Rightarrow 1D $$
             </div>
 
@@ -791,73 +930,218 @@ else:
                 $$ \\{A \\ge 2, B \\ge 2, C \\ge 2\\} \\Rightarrow 2D + \\text{Caramelo Aleatorio} $$
             </div>
             
-            <p>Cuando la bolsa está vacía de recursos necesarios, se aplica una regla de intercambio donde un chupetín ('D') se puede cambiar por tres caramelos aleatorios para reabastecer la bolsa y continuar el juego.</p>
+            
+
+            <p>Cuando la bolsa está vacía de recursos necesarios (ej., solo queda un tipo de caramelo) y hay chupetines, se aplica una regla de **intercambio** donde un chupetín ('D') se cambia por tres caramelos aleatorios para reabastecer la bolsa y continuar el juego (ciclo de vida).</p>
         `,
-        
+        code: `
+\`\`\`r
+set.seed (123)
+library ( ggplot2 )
+library ( tidyr )
+
+caramelos_posibles <- c("A", "B", "C")
+
+grupos <- list (
+    G1 = sample ( caramelos_posibles , 18 , replace = TRUE ) ,
+    G2 = sample ( caramelos_posibles , 18 , replace = TRUE )
+)
+
+chupetines <- c( G1 = 0 , G2 = 0)
+historial <- data . frame ( Ronda = integer () , Grupo = character () ,
+Caramelos = integer () , Chupetines = integer
+() )
+
+for ( ronda in 1:20) {
+    for ( g in names ( grupos ) ) {
+        caramelos <- grupos [[ g ]]
+        contador <- 0
+
+        # Bloque de Creación (Regla 1 y 2)
+        while (all (c("A", "B", "C") %in % caramelos ) ) {
+            for (c in c("A", "B", "C") ) caramelos <- caramelos [ - match (c,
+            caramelos ) ]
+            contador <- contador + 1
+        }
+
+        if ( contador >= 2) {
+            chupetines [ g ] <- chupetines [ g ] + 2
+            # Bonificación: 2D + Caramelo Aleatorio
+            caramelos <- c( caramelos , sample ( caramelos_posibles , 1 ,
+            replace = TRUE ) )
+        } else if ( contador == 1) {
+            chupetines [ g ] <- chupetines [ g ] + 1
+        }
+
+        # Bloque de Reabastecimiento (Intercambio D por recursos)
+        # Se activa si solo queda un tipo de caramelo (estancamiento) y hay chupetines para canjear.
+        if ( length ( unique ( caramelos ) ) == 1 && chupetines [ g ] > 0) {
+            chupetines [ g ] <- chupetines [ g ] - 1
+            # Se reabastece: -1D + 3 Caramelos Aleatorios
+            caramelos <- c( caramelos , sample ( caramelos_posibles , 3 ,
+            replace = TRUE ) )
+        }
+
+        grupos [[ g ]] <- caramelos
+        historial <- rbind ( historial ,
+            data . frame ( Ronda = ronda ,
+            Grupo = g ,
+            Caramelos = length ( caramelos ) ,
+            Chupetines = chupetines [ g ]) )
+    }
+    # Condición de fin de juego (Meta: 9 Chupetines)
+    if (any ( chupetines >= 9) ) break
+}
+
+ganador <- names ( which .max ( chupetines ) )
+cat ("\\nGANADOR :", ganador , "con", chupetines [ ganador ] , " chupetines .\\n")
+print ( historial )
+
+# Bloque de Graficación
+historial_largo <- historial |>
+    pivot_longer ( cols = c( Caramelos , Chupetines ) ,
+    names_to = " Tipo ",
+    values_to = " Cantidad ")
+
+ggplot ( historial_largo , aes ( x = Ronda , y = Cantidad , color = Tipo ,
+group = Tipo ) ) +
+    geom_line ( size = 1.2) +
+    geom_point ( size = 3) +
+    facet_wrap (~ Grupo ) +
+    labs (
+        title = paste (" Cantidad de caramelos y chupetines - Ganador :",
+        ganador ) ,
+        x = " Ronda ",
+        y = " Cantidad ",
+        color = " Tipo "
+    ) +
+    theme_minimal ( base_size = 14)
+\`\`\`
+`
     },
     {
+       {
         id: 'a10',
         title: 'Actividad 10 — Registración No Rígida de Imágenes (Método Demons)',
         pdf: 'tarea de resumenes.pdf',
         description: `
-            <p>La **Registración No Rígida** es fundamental en el procesamiento de imágenes médicas para alinear datos con deformaciones locales (ej. resonancias magnéticas tomadas en momentos diferentes). El algoritmo clave analizado es el método **Demons**.</p>
-
-            <p>Demons modela la deformación como un "flujo óptico", donde los píxeles de la imagen flotante ($I_F$) se mueven hasta coincidir con la de referencia ($I_R$), utilizando el gradiente de la imagen de referencia ($\\nabla I_R$) para guiar el movimiento.</p>
+            <h4>Resumen del Artículo "Non-rigid medical image registration using image field in Demons algorithm" (Lan, Guo & You, 2019)</h4>
+            <p>El artículo aborda la **registración no rígida de imágenes médicas**, un proceso esencial para alinear datos con deformaciones locales y facilitar comparaciones anatómicas (ej., RM o TC). Los métodos rígidos son insuficientes debido a la naturaleza deformable de los tejidos biológicos.</p>
+            
+            <p>El algoritmo base es el **Método Demons** (Thirion), que utiliza la analogía del flujo óptico para calcular un campo de deformación. Sin embargo, el Demons tradicional solo usa la información del **gradiente** sin considerar la **orientación de las estructuras**, lo cual puede limitar su precisión.</p>
 
             <div class="formula">
                 **Fórmula de Desplazamiento del Vóxel $\\mathbf{v}$ (Demons Simple):**
                 $$ \\mathbf{v}(\\mathbf{x}) = \\frac{(I_R(\\mathbf{x}) - I_F(\\mathbf{x})) \\cdot \\nabla I_R(\\mathbf{x})}{\\| \\nabla I_R(\\mathbf{x}) \\|^2 + (I_R(\\mathbf{x}) - I_F(\\mathbf{x}))^2} \\cdot \\nabla I_R(\\mathbf{x}) $$
             </div>
 
-            <p>El resultado es un **Campo de Vectores de Desplazamiento (DVF)** que mapea la deformación de una imagen a la otra.</p>
+            
+
+            <hr>
+
+            <h4>Propuesta del Estudio: Field-Demons (FD)</h4>
+            <p>Los autores proponen **Field-Demons (FD)**, una versión mejorada que introduce el concepto de **campo de imagen** (*image field*). Este campo incluye la información del **gradiente** y de **orientación de las estructuras** (*orientation fields*).</p>
+            <p>El enfoque FD aprovecha mejor la información estructural, simplificando la formulación del proceso de deformación al integrar ambas fuentes en una única ecuación iterativa.</p>
+
+            <h4>Resultados y Conclusiones</h4>
+            <ul>
+                <li>**Metodología:** Los experimentos se realizaron con imágenes **MRI cerebrales** y de **fondo de ojo (retina)**, comparando FD con otros métodos (Demons clásico, B-spline, etc.).</li>
+                <li>**Métricas:** Se evaluó mediante Error Cuadrático Medio (MSE), Información Mutua Normalizada (NMI) y Coeficiente de Correlación (Corre).</li>
+                <li>**Conclusión:** El método **Field-Demons supera** a los algoritmos tradicionales, alcanzando el **menor MSE** y los mayores valores de NMI y Corre. Esto se debe a que el uso del **campo de orientación** permite capturar mejor la **información direccional** del tejido.</li>
+                <li>**Análisis de Parámetros:** Se determinaron valores óptimos empíricos para los parámetros $\\alpha$ y $k$ (ej., $\\alpha = 1.2$ y $k = 0.9$ para cerebro) para lograr el mejor balance entre velocidad y exactitud.</li>
+            </ul>
         `,
-       
+        
     },
-    {
+ {
         id: 'a11',
         title: 'Actividad 11 — Diferenciación Numérica (Fórmulas de Diferencias Finitas)',
         pdf: 'Actividad11 (1).pdf',
         description: `
-            <p>La **Diferenciación Numérica** es la técnica para estimar la derivada de una función ($f'(x)$) a partir de un conjunto discreto de puntos, reemplazando el límite de la derivada por un paso finito $h$.</p>
+            <h4>Fundamentos de la Diferenciación Numérica</h4>
+            <p>La **Diferenciación Numérica** es la técnica para estimar la derivada de una función ($f'(x)$) a partir de un conjunto discreto de puntos, reemplazando el límite de la definición clásica por un paso finito ($h$).</p>
 
             <div class="formula">
-                **Definición de la Derivada:**
+                **Definición Analítica de la Derivada:**
                 $$ f'(x) = \\lim_{h \\to 0} \\frac{f(x + h) - f(x)}{h} $$
             </div>
+            
+            
 
-            <p>Las fórmulas más importantes, que aproximan la pendiente de la tangente con diferentes niveles de error (truncamiento), son:</p>
+            <p>Las fórmulas de **Diferencias Finitas** aproximan la pendiente de la tangente con diferentes niveles de **error de truncamiento** (basado en la serie de Taylor).</p>
 
-            <h4>1. Diferencia Adelante (Error $O(h)$)</h4>
-            <p>Utiliza el punto actual y un punto hacia adelante.</p>
+            <h4>Fórmulas de Diferencias Finitas para la Primera Derivada</h4>
+            
             <div class="formula">
+                **1. Diferencia Adelante (Forward) (Error $O(h)$):**
                 $$ f'(x) \\approx \\frac{f(x + h) - f(x)}{h} $$
             </div>
+            <p>Utiliza el punto actual y un punto hacia adelante.</p>
 
-            <h4>2. Diferencia Central (Más precisa, Error $O(h^2)$)</h4>
-            <p>Utiliza un punto hacia adelante y un punto hacia atrás, promediando la pendiente. Es la más usada por su mayor precisión.</p>
             <div class="formula">
+                **2. Diferencia Hacia Atrás (Backward) (Error $O(h)$):**
+                $$ f'(x) \\approx \\frac{f(x) - f(x - h)}{h} $$
+            </div>
+            <p>Utiliza el punto actual y un punto hacia atrás.</p>
+
+            <div class="formula">
+                **3. Diferencia Centrada (Central) (Más precisa, Error $O(h^2)$):**
                 $$ f'(x) \\approx \\frac{f(x + h) - f(x - h)}{2h} $$
             </div>
-        `,
-        
-    },
-    {
-        id: 'a12',
-        title: 'Actividad 12 — Ecuaciones Diferenciales Ordinarias (Método de Euler)',
-        pdf: 'Actividad_12.pdf',
-        description: `
-            <p>El **Método de Euler** es el método de solución numérica más básico para resolver Ecuaciones Diferenciales Ordinarias (EDO) de primer orden con un valor inicial ($y(x_0) = y_0$).</p>
+            <p>Utiliza un punto hacia adelante y un punto hacia atrás. Es la más usada en aplicaciones numéricas por su orden de error cuadrático ($O(h^2)$), lo que la hace mucho más precisa para el mismo paso $h$.</p>
 
-            <p>Se basa en el principio de que, si el paso ($h$) es pequeño, la función se comporta como una **línea recta** (pendiente constante) durante ese intervalo, utilizando la pendiente en el punto actual para predecir el siguiente punto.</p>
+            <h4>Fórmula para la Segunda Derivada</h4>
+            <p>El método de diferencias finitas centrado también se extiende para estimar derivadas de orden superior, como la segunda derivada:</p>
 
-            <p>Dada la EDO $\\frac{dy}{dx} = f(x, y)$, la fórmula de iteración es:</p>
             <div class="formula">
-                $$ y_{i+1} = y_i + f(x_i, y_i) \\cdot h $$
+                **Segunda Derivada (Centrada) (Error $O(h^2)$):**
+                $$ f''(x) \\approx \\frac{f(x + h) - 2f(x) + f(x - h)}{h^2} $$
             </div>
 
-            <p>Es un método de **primer orden** ($O(h)$). Su simplicidad es su ventaja, mientras que su principal desventaja es la necesidad de un paso $h$ muy pequeño para mantener una precisión aceptable.</p>
+            <p>En la práctica, la elección del paso $h$ es crucial: se puede elegir $h=1$ para datos discretos por unidad, o un $h$ muy pequeño (ej., $10^{-6}$) para funciones continuas, teniendo cuidado de no introducir demasiado **error de redondeo**.</p>
         `,
-        
+        code: `// Código removido a petición del usuario. Solo se incluye información y fórmulas.`
+    },
+  {
+        id: 'a12',
+        title: 'Actividad 12 — Interpolación Numérica',
+        pdf: 'Actividad_12 (1).pdf',
+        description: `
+            <p>La **Interpolación Numérica** es una técnica fundamental para estimar valores desconocidos de una función $f(x)$ a partir de un conjunto discreto de puntos conocidos $(x_i, y_i)$. El objetivo es construir una función aproximada $P(x)$ (generalmente un polinomio) que pase **exactamente** por todos los puntos dados.</p>
+            
+            <p>Estos métodos permiten obtener funciones continuas que modelan comportamientos reales de datos experimentales o simulados, siendo esenciales en áreas de ingeniería y ciencias computacionales.</p>
+            
+            <hr>
+
+            <h4>Métodos de Interpolación Clave</h4>
+
+            <p>Entre los métodos más comunes, se encuentran:</p>
+
+            <div class="formula">
+                **1. Interpolación Lineal**
+                <p>Aproxima los datos mediante tramos rectos entre dos puntos consecutivos $(x_0, y_0)$ y $(x_1, y_1)$.</p>
+                $$ P_1(x) = y_0 + \\frac{y_1 - y_0}{x_1 - x_0} (x - x_0) $$
+            </div>
+
+            <div class="formula">
+                **2. Interpolación de Lagrange**
+                <p>Construye un polinomio de grado $n$ que pasa por todos los $n+1$ puntos dados. Su expresión general es:</p>
+                $$ P_n(x) = \\sum_{i=0}^{n} y_i L_i(x) $$
+                <p>Donde $L_i(x)$ son los polinomios base de Lagrange, definidos como:</p>
+                $$ L_i(x) = \\prod_{\\substack{j=0 \\ j\\neq i}}^{n} \\frac{x - x_j}{x_i - x_j} $$
+            </div>
+            
+            
+
+            <div class="formula">
+                **3. Interpolación por Diferencias Divididas de Newton**
+                <p>Utiliza una forma recursiva basada en diferencias divididas, útil para añadir nuevos puntos sin recalcular toda la estructura.</p>
+                $$ P_n(x) = f[x_0] + f[x_0, x_1](x - x_0) + \\dots + f[x_0, x_1, \\dots, x_n] \\prod_{i=0}^{n-1} (x - x_i) $$
+            </div>
+
+            <p>Otros métodos avanzados incluyen la **Interpolación Cuadrática** y los **Splines Cúbicos**. Los Splines son especialmente valiosos ya que garantizan la continuidad de la función, su primera y segunda derivada en los puntos de unión (nodos), ofreciendo una alta suavidad y precisión en el modelado de curvaturas.</p>
+        `,
+        code: `// Código removido a petición del usuario. Solo se incluye información y fórmulas.`
     }
 ];
 
@@ -968,3 +1252,4 @@ document.addEventListener('keydown', (e) => {
 
 </body>
 </html>
+
