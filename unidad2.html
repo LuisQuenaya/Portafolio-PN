@@ -335,12 +335,72 @@ plt.show()`
     description: `El método de la secante es una técnica iterativa para encontrar raíces sin necesidad de derivadas. 
 Utiliza dos valores iniciales y construye una recta secante entre los puntos (x₀, f(x₀)) y (x₁, f(x₁)). 
 El punto donde esa recta corta el eje x se usa como nueva aproximación. Es más rápido que la bisección, pero menos estable si los puntos iniciales no son adecuados.`,
-    code: `import numpy as np
-import matplotlib.pyplot as plt
+    code: ` import numpy as np
+      import matplotlib.pyplot as plt
 
-func_str = input("Ingrese la función f(x): ")
+      # === 1. Ingreso de la función ===
+      func_str = input("Ingrese la función f(x): ")  # Ejemplo: x**3 - x - 1
 
-function...`
+      # Definir la función
+      def f(x):
+          return eval(func_str, {"np": np, "x": x})
+
+      # === 2. Graficar la función ===
+      xmin = float(input("Ingrese el valor mínimo de x: "))
+      xmax = float(input("Ingrese el valor máximo de x: "))
+
+      x = np.linspace(xmin, xmax, 400)
+      y = f(x)
+
+      plt.figure(figsize=(8, 5))
+      plt.plot(x, y, label=f"f(x) = {func_str}", color='blue')
+      plt.axhline(0, color='black', linestyle='--')
+      plt.axvline(0, color='black', linestyle='--')
+      plt.title("Gráfico de la función ingresada")
+      plt.xlabel("x")
+      plt.ylabel("f(x)")
+      plt.legend()
+      plt.grid(True)
+      plt.show()
+
+      # === 3. Pregunta si desea aplicar el método de la Secante ===
+      op = input("¿Desea encontrar una raíz con el método de la Secante? (s/n): ").lower()
+
+      if op == "s":
+          # === 4. Ingreso de puntos iniciales ===
+          x0 = float(input("Ingrese el primer valor inicial x0: "))
+          x1 = float(input("Ingrese el segundo valor inicial x1: "))
+
+          tol = 1e-6
+          max_iter = 100
+
+          print("\nIteración |     x0      |      x1      |     f(x0)     |     f(x1)     |     x2      |   Error")
+          print("----------------------------------------------------------------------")
+
+          for i in range(1, max_iter + 1):
+              f0 = f(x0)
+              f1 = f(x1)
+
+              if f1 - f0 == 0:
+                  print(f"\n⚠️ División por cero en la iteración {i}. El método no puede continuar.")
+                  break
+
+              x2 = x1 - f1 * (x1 - x0) / (f1 - f0)
+              error = abs(x2 - x1)
+
+              print(f"{i:9d} | {x0:10.6f} | {x1:10.6f} | {f0:12.6f} | {f1:12.6f} | {x2:10.6f} | {error:10.6f}")
+
+              if error < tol:
+                  print(f"\n✅ Raíz aproximada encontrada: {x2:.6f}")
+                  print(f"Iteraciones realizadas: {i}")
+                  break
+
+              x0, x1 = x1, x2
+
+          else:
+              print("\n⚠️ No se alcanzó la convergencia después de", max_iter, "iteraciones.")
+      else:
+          print("No se aplicó el método de la Secante.")`
   },
 
   {
@@ -358,7 +418,41 @@ print("=== MÉTODO DEL PUNTO FIJO ===")
 func_str = input("f(x) = ")
 g_str = input("g(x) = ")
 
-function...`
+def f(x):
+    return eval(func_str, {"np": np, "x": x})
+
+def g(x):
+    return eval(g_str, {"np": np, "x": x})
+
+xmin = float(input("x mín: "))
+xmax = float(input("x máx: "))
+
+x = np.linspace(xmin, xmax, 400)
+y = f(x)
+
+plt.plot(x, y, label=f"f(x)={func_str}", color='blue')
+plt.axhline(0, color='black', linestyle='--')
+plt.axvline(0, color='black', linestyle='--')
+plt.legend()
+plt.grid(True)
+plt.show(block=False)
+
+x0 = float(input("x0 = "))
+tol = 1e-6
+max_iter = 100
+
+print("\nIter |     x_n     |    g(x_n)    |   f(g(x_n)) |   Error")
+print("-"*55)
+
+for i in range(1, max_iter + 1):
+    x1 = g(x0)
+    err = abs(x1 - x0)
+    fx1 = f(x1)
+    print(f"{i:4d} | {x0:11.6f} | {x1:11.6f} | {fx1:11.6f} | {err:9.6f}")
+    if err < tol:
+        print(f"\nRaíz ≈ {x1:.8f}")
+        break
+    x0 = x1`
   },
 
   {
@@ -370,7 +464,58 @@ Traza una recta entre los puntos (a, f(a)) y (b, f(b)) donde f(a)·f(b)<0, y usa
     code: `import numpy as np
 import matplotlib.pyplot as plt
 
-function...`
+func_str = input("Ingrese la función f(x): ")
+
+def f(x):
+    return eval(func_str, {"np": np, "x": x})
+
+a = float(input("Ingrese el valor inicial a: "))
+b = float(input("Ingrese el valor inicial b: "))
+
+tol = 1e-6
+max_iter = 100
+
+print("\nIter | a        | b        | xr       | f(xr)    | Error")
+print("--------------------------------------------------------")
+
+for i in range(1, max_iter+1):
+    fa = f(a)
+    fb = f(b)
+    
+    xr = b - fb*(b - a)/(fb - fa)
+    fxr = f(xr)
+    error = abs(fxr)
+    
+    print(f"{i:4d} | {a:8.6f} | {b:8.6f} | {xr:8.6f} | {fxr:8.6f} | {error:8.6f}")
+    
+    if abs(fxr) < tol:
+        raiz = xr
+        print(f"\nRaíz aproximada: {raiz:.6f} encontrada en {i} iteraciones")
+        break
+    
+    if fa*fxr < 0:
+        b = xr
+    else:
+        a = xr
+else:
+    print("\nNo se alcanzó la convergencia después del máximo de iteraciones")
+
+# Graficar automáticamente
+margen = (b - a)*0.1
+xmin = min(a,b) - margen
+xmax = max(a,b) + margen
+x = np.linspace(xmin, xmax, 400)
+y = f(x)
+
+plt.plot(x, y, label=f"f(x) = {func_str}")
+plt.axhline(0, color='black', linestyle='--')
+plt.axvline(raiz, color='red', linestyle='--', label=f"Raíz ≈ {raiz:.6f}")
+plt.title("Método de Regula Falsi")
+plt.xlabel("x")
+plt.ylabel("f(x)")
+plt.legend()
+plt.grid(True)
+plt.show()`
   },   // ← ESTA COMA FALTABA
 
   {
@@ -382,54 +527,230 @@ function...`
 import matplotlib.pyplot as plt
 import time
 
-function...`
+ecuacion = input("Ingrese la función f(x): ")
+
+def f(x):
+    return eval(ecuacion)
+
+def derivada(x):
+    h = 1e-6
+    return (f(x + h) - f(x - h)) / (2 * h)
+
+a = float(input("Ingrese el límite inferior del eje x: "))
+b = float(input("Ingrese el límite superior del eje x: "))
+
+x_vals = np.linspace(a, b, 400)
+y_vals = f(x_vals)
+
+plt.figure(figsize=(8, 5))
+plt.plot(x_vals, y_vals, 'b', label=f"f(x) = {ecuacion}")
+plt.axhline(0, color='black', linestyle='--')
+plt.axvline(0, color='black', linestyle='--')
+plt.title("Gráfico de la función ingresada")
+plt.xlabel("x")
+plt.ylabel("f(x)")
+plt.legend()
+plt.grid(True)
+plt.show(block=False)
+time.sleep(3)
+plt.close()
+
+x = float(input("Ingrese el valor inicial aproximado: "))
+tolerancia = 1e-6
+iter_max = 100
+
+for i in range(iter_max):
+    fx = f(x)
+    dfx = derivada(x)
+    if dfx == 0:
+        print(f"La derivada es cero en x = {x}. No se puede continuar.")
+        break
+    x_nuevo = x - fx / dfx
+    if abs(x_nuevo - x) < tolerancia:
+        print(f"\nRaíz encontrada: {x_nuevo:.6f}")
+        print(f"Número de iteraciones: {i + 1}")
+        break
+    x = x_nuevo
+else:
+    print(f"\nNo se logró la convergencia después de {iter_max} iteraciones.")
+    print(f"Último valor aproximado: {x:.6f}")`
   },
 
-  {
-    id: 'a6',
-    title: 'Actividad 6 — Índice H',
-    pdf: 'Actividad6.pdf',
-    description: `El índice H es un indicador que mide la productividad científica y el impacto de los investigadores.`,
-    code: `
-<h3>Autores de otros países y su índice H</h3>
-<table border="1" style="border-collapse: collapse; width: 100%;">
+ {
+  id: 'a6',
+  title: 'Actividad 6 — Índice H',
+  pdf: 'Actividad6.pdf',
+  description: `
+
+<h2>Descripción</h2>
+
+El <b>índice H</b> (o índice de Hirsch) es un indicador utilizado para medir la 
+<b>productividad científica</b> y el <b>impacto</b> de un investigador, grupo o institución.  
+Se basa en la cantidad de publicaciones y el número de citas que estas reciben.
+
+Un autor tiene un índice H igual a <i>h</i> si ha publicado <i>h</i> artículos que han sido citados 
+al menos <i>h</i> veces cada uno.
+
+<h3>Fórmula conceptual del índice H</h3>
+
+<pre><code>
+Indice H = max { h : el autor tiene h artículos con ≥ h citas }
+</code></pre>
+
+<h2>Ejemplo</h2>
+
+Si un investigador tiene 10 artículos y al menos 5 de ellos han sido citados 5 veces o más,  
+entonces su índice H es igual a 5.
+
+Este indicador combina cantidad y calidad de la producción científica en una sola medida.
+
+
+<h2>Creación de cuenta en CTI Vitae</h2>
+
+<b>CTI Vitae</b> es una plataforma del <b>CONCYTEC</b> (Consejo Nacional de Ciencia, Tecnología e Innovación Tecnológica del Perú) que funciona como un currículum virtual para investigadores, docentes y profesionales vinculados a la ciencia y la tecnología.
+
+Los usuarios pueden registrar:
+
+• Información académica  
+• Experiencia profesional  
+• Publicaciones  
+• Proyectos de investigación  
+• Patentes  
+• Reconocimientos y logros  
+
+La plataforma facilita la visibilidad del perfil del investigador y permite generar reportes de productividad científica y métricas como el índice H.
+
+<div style="text-align:center; margin: 20px 0;">
+  <img src="image.png" style="width:85%; border-radius:8px;">
+  <p><i>Figura: Captura de la plataforma CTI Vitae.</i></p>
+</div>
+
+
+<h2>Autores de otros países y su índice H</h2>
+
+<table border="1" style="border-collapse: collapse; width: 100%; text-align:center;">
 <thead>
 <tr>
-<th>Autor</th>
-<th>Investigación</th>
-<th>N° publicaciones</th>
-<th>Índice H</th>
+  <th>Autor</th>
+  <th>Investigación</th>
+  <th>N° publicaciones</th>
+  <th>Índice H</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><a href="https://www.scopus.com/authid/detail.uri?authorId=36545025500">Grau, Àngela</a></td>
-<td><i>A new class of secant-like methods for solving nonlinear systems of equations</i></td>
-<td>12</td>
-<td>9</td>
-</tr>
-<tr>
-<td><a href="https://www.scopus.com/authid/detail.uri?authorId=6602720000">Díaz-Barrero, José Luis</a></td>
-<td><i>On the local convergence of a family of two-step iterative methods for solving nonlinear equations</i></td>
-<td>41</td>
-<td>12</td>
-</tr>
-<tr>
-<td><a href="https://www.scopus.com/authid/detail.uri?authorId=7004530784">Argyros, Ioannis Konstantinos</a></td>
-<td><i>An algorithm for nonlinear problems with variational inequality methods</i></td>
-<td>931</td>
-<td>33</td>
-</tr>
-</tbody>
-</table>`
-  },
 
+<tr>
+  <td><a href="https://www.scopus.com/authid/detail.uri?authorId=36545025500" target="_blank">Grau, Àngela</a></td>
+  <td><i>A new class of secant-like methods for solving nonlinear systems of equations</i></td>
+  <td>12</td>
+  <td>9</td>
+</tr>
+
+<tr>
+  <td><a href="https://www.scopus.com/authid/detail.uri?authorId=6602720000" target="_blank">Díaz-Barrero, José Luis</a></td>
+  <td><i>On the local convergence of a family of two-step iterative methods for solving nonlinear equations</i></td>
+  <td>41</td>
+  <td>12</td>
+</tr>
+
+<tr>
+  <td><a href="https://www.scopus.com/authid/detail.uri?authorId=7004530784" target="_blank">Argyros, Ioannis Konstantinos</a></td>
+  <td><i>An algorithm for nonlinear problems with variational inequality methods</i></td>
+  <td>931</td>
+  <td>33</td>
+</tr>
+
+</tbody>
+</table>
+
+<br><br>
+
+<h2>Índice H de docentes de la Facultad de Ingeniería Estadística e Informática</h2>
+
+<table border="1" style="border-collapse: collapse; width: 100%; text-align:center;">
+<thead>
+<tr>
+  <th>Docente</th>
+  <th>Índice H</th>
+  <th>N° publicaciones</th>
+</tr>
+</thead>
+<tbody>
+
+<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57224362115">Apaza-Tarqui, Alejandro</a></td><td>1</td><td>5</td></tr>
+<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57221112735">Carpio Vargas, Edgar Eloy</a></td><td>3</td><td>9</td></tr>
+<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57214094525">Canqui-Flores, Bernabé</a></td><td>3</td><td>8</td></tr>
+<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58491331500">Choquejahua-Acero, Remo</a></td><td>1</td><td>2</td></tr>
+<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58930847700">Coyla-Idme, Leonel</a></td><td>1</td><td>5</td></tr>
+<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58898481200">Gonzales, Leonid Alemán</a></td><td>0</td><td>4</td></tr>
+<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=59325707300">Gonzalo Copari Romero, Fredy</a></td><td>0</td><td>2</td></tr>
+<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57571711100">Huata-Panca, Percy</a></td><td>2</td><td>3</td></tr>
+<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57201897173">Ibañez-Quispe, Vladimiro</a></td><td>5</td><td>21</td></tr>
+<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=55865380000">Javier Quispe Carita, Angel</a></td><td>1</td><td>1</td></tr>
+<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58284593600">Laura Murillo, Ramiro</a></td><td>1</td><td>2</td></tr>
+<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58671914800">López-Cueva, Milton Antonio</a></td><td>1</td><td>6</td></tr>
+<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58778725100">Melgarejo-Bolivar, Romel P.</a></td><td>3</td><td>6</td></tr>
+<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57562709900">Mendoza-Mollocondo, Charles Ignacio</a></td><td>3</td><td>8</td></tr>
+<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58308326900">Herrera-Urtiaga, Alain Paul</a></td><td>0</td><td>3</td></tr>
+<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=58088282100">Tito Lipa, José Pánfilo</a></td><td>0</td><td>3</td></tr>
+<tr><td><a href="https://www.scopus.com/authid/detail.uri?authorId=57003617100">Tumi-Figueroa, Ernesto Nayer</a></td><td>3</td><td>6</td></tr>
+
+</tbody>
+</table>
+
+`
+}
+,
    {
-    id: 'a7',
-    title: 'Actividad 7 — Gradiente de una Funcion',
-    pdf: 'actividad_8.pdf',
-    description: `El gradiente representa la tasa de cambio o pendiente de una función respecto a sus variables. En el caso de una sola variable, el gradiente se reduce simplemente a la derivada de la función..`,
-    code: `
+  id: 'a7',
+  title: 'Actividad 7 — Gradiente de una Función',
+  pdf: 'actividad_8.pdf',
+  description: `
+El gradiente representa la dirección y magnitud del cambio más rápido de una función respecto a sus variables.
+
+En el caso de funciones de una sola variable, el gradiente coincide con la derivada:
+
+<pre><code>
+∇f(x) = f'(x)
+</code></pre>
+
+Para funciones de varias variables, el gradiente se define como el vector de derivadas parciales:
+
+<pre><code>
+∇f(x, y, z) = ( ∂f/∂x , ∂f/∂y , ∂f/∂z )
+</code></pre>
+
+En el método de **descenso por gradiente**, se actualiza la variable en cada iteración moviéndose en la dirección opuesta al gradiente:
+
+<pre><code>
+x_{k+1} = x_k − η ∇f(x_k)
+</code></pre>
+
+donde:
+- η es la tasa de aprendizaje (learning rate)
+- ∇f(x_k) es el gradiente evaluado en la iteración k
+
+Para una función simple como:
+
+<pre><code>
+f(x) = x²
+</code></pre>
+
+su derivada (gradiente) es:
+
+<pre><code>
+f'(x) = 2x
+</code></pre>
+
+Por lo tanto, la regla de actualización queda:
+
+<pre><code>
+x_{k+1} = x_k − η (2x_k)
+</code></pre>
+
+Este proceso aproxima el valor donde la función alcanza su mínimo.
+`,
+  code: `
 n <- 0.01  # tasa de aprendizaje
 f <- function(x) x^2
 f_deriv <- function(x) 2 * x
@@ -452,7 +773,8 @@ for (i in 1:iter) {
     x[i + 1] <- grad[i]
   }
 }`
-  },
+}
+,
 
   {
   
@@ -479,7 +801,7 @@ En conclusión, el pseudoinverso de Moore–Penrose es ideal para conjuntos bien
  {
     id: 'a9',
     title: 'Actividad 9 — Dinamica del juego de caramelos y chupetines',
-    pdf: 'Dinamica(2).pdf',
+    pdf: 'Dinamica (2).pdf',
     description: `El presente trabajo desarrolla la simulación de un juego cooperativo en el que varios participantes comparten una bolsa con tres tipos de caramelos: A, B y C. El propósito es que, mediante combinaciones e intercambios, el grupo consiga generar al menos un chupetín (D) para cada jugador.
 
 Cada participante inicia con dos caramelos asignados al azar. Durante cada turno, el sistema aplica las siguientes reglas:
@@ -499,7 +821,7 @@ Este ejercicio muestra la aplicación de simulaciones estocásticas y estructura
 
 id: 'a10',
     title: 'Actividad 10 — Resumen del Aticulo',
-    pdf: 'actividad_8.pdf',
+    pdf: 'tarea de resumenes.pdf',
     description: `El artículo aborda el problema de la registración no rígida de imágenes médicas, un proceso esencial en el análisis clínico y diagnóstico por imágenes. Este procedimiento permite alinear imágenes obtenidas en distintos momentos, desde diferentes ángulos o con distintos sensores, para facilitar comparaciones anatómicas y la evaluación de cambios patológicos. Debido a la naturaleza deformable de los tejidos biológicos, los métodos de registración rígida resultan insuficientes; por ello, se requieren técnicas no rígidas capaces de adaptarse a deformaciones locales y globales.
 Uno de los algoritmos más utilizados para este propósito es el método de Demons, propuesto originalmente por Thirion. Este se basa en la analogía con el flujo óptico, calculando un campo de deformación que transforma una imagen “flotante” o de consulta (query image) para alinearla con una imagen de referencia. Sin embargo, el algoritmo Demons tradicional utiliza solo la información del gradiente de las imágenes, sin considerar la información direccional (orientación de estructuras), lo cual puede limitar su precisión, especialmente cuando se presentan grandes deformaciones o estructuras con direcciones dominantes complejas.
 `,
@@ -513,68 +835,91 @@ Uno de los algoritmos más utilizados para este propósito es el método de Demo
   description: `
 La diferenciación numérica es un método que permite aproximar la derivada de una función utilizando valores discretos, como datos tabulados o resultados experimentales. Matemáticamente, la derivada de una función se define como:
 
+<pre><code>
 f'(x) = lim(h → 0) [ f(x + h) − f(x) ] / h
+</code></pre>
 
-En la práctica computacional, el incremento h nunca puede ser exactamente cero, por lo que se trabaja con valores pequeños pero finitos. Esto da origen a las **diferencias finitas**, que permiten estimar derivadas mediante operaciones entre puntos cercanos.
+En la práctica computacional, el incremento h nunca puede ser exactamente cero, por lo que se trabaja con valores pequeños pero finitos. Esto da origen a las diferencias finitas, que permiten estimar derivadas mediante operaciones entre puntos cercanos.
 
 Existen varios enfoques para aproximar derivadas según la posición de los puntos utilizados:
 
-• **Diferencia hacia adelante**  
-  f'(x) ≈ [ f(x + h) − f(x) ] / h  
+• Diferencia hacia adelante  
+<pre><code>
+f'(x) ≈ [ f(x + h) − f(x) ] / h
+</code></pre>
   Útil al inicio del intervalo.
 
-• **Diferencia hacia atrás**  
-  f'(x) ≈ [ f(x) − f(x − h) ] / h  
+• Diferencia hacia atrás  
+<pre><code>
+f'(x) ≈ [ f(x) − f(x − h) ] / h
+</code></pre>
   Adecuada para los extremos finales del intervalo.
 
-• **Diferencia centrada**  
-  f'(x) ≈ [ f(x + h) − f(x − h) ] / (2h)  
+• Diferencia centrada  
+<pre><code>
+f'(x) ≈ [ f(x + h) − f(x − h) ] / (2h)
+</code></pre>
   Brinda mayor precisión gracias a su simetría.
 
-Además, también pueden obtenerse aproximaciones de la **segunda derivada** mediante combinaciones de diferencias de primer orden:
+Además, también pueden obtenerse aproximaciones de la segunda derivada mediante combinaciones de diferencias de primer orden:
 
 • Segunda derivada (diferencia centrada)  
-  f''(x) ≈ [ f(x + h) − 2f(x) + f(x − h) ] / h²
+<pre><code>
+f''(x) ≈ [ f(x + h) − 2f(x) + f(x − h) ] / h²
+</code></pre>
 
 Estas técnicas permiten analizar la concavidad y el comportamiento local de una función. En esta actividad se aplicarán estos métodos para calcular derivadas de primer y segundo orden usando distintos valores de h y comparando su precisión.
 `,
 },
-   {
 
-id: 'a12',
-    title: 'Actividad 12 — Irterpolacion',
-    pdf: 'actividad_12 (1).pdf',
-    description: `La interpolación numérica es una técnica utilizada para estimar valores desconocidos de una función a partir de un conjunto de puntos conocidos. Su propósito es construir una función aproximada P(x) que pase exactamente por los datos dados. Matemáticamente, esto se expresa como:
+ {
+  id: 'a12',
+  title: 'Actividad 12 — Interpolación',
+  pdf: 'actividad_12 (1).pdf',
+  description: `
+La interpolación numérica es una técnica utilizada para estimar valores desconocidos de una función a partir de un conjunto de puntos conocidos. Su propósito es construir una función aproximada P(x) que pase exactamente por los datos dados. Matemáticamente, esto se expresa como:
 
+<pre><code>
 P(x_i) = f(x_i)
+</code></pre>
 
 Los métodos de interpolación permiten generar funciones continuas basadas en datos discretos, lo que resulta esencial en ingeniería, economía y aplicaciones computacionales.
 
-Entre los métodos más usados destacan:
+Entre los métodos más utilizados destacan:
 
 • Interpolación lineal: aproxima los datos mediante un segmento recto entre dos puntos. Su ecuación es:
 
+<pre><code>
 P(x) = f(x₀) + ( (f(x₁) − f(x₀)) / (x₁ − x₀) ) * (x − x₀)
+</code></pre>
 
 • Interpolación de Lagrange: construye un polinomio de grado n que pasa por todos los puntos. Su forma general es:
 
+<pre><code>
 L(x) = Σ [ f(xᵢ) * Π ( (x − xⱼ) / (xᵢ − xⱼ) ) ]
-        donde j ≠ i
+donde j ≠ i
+</code></pre>
 
 • Interpolación por diferencias divididas de Newton: utiliza una estructura recursiva. El polinomio se expresa como:
 
-P(x) = f[x₀] + f[x₀, x₁](x − x₀) + f[x₀, x₁, x₂](x − x₀)(x − x₁) + ...
+<pre><code>
+P(x) = f[x₀] 
+      + f[x₀, x₁](x − x₀) 
+      + f[x₀, x₁, x₂](x − x₀)(x − x₁) 
+      + ...
+</code></pre>
 
 • Interpolación cuadrática: emplea polinomios de segundo grado para capturar la curvatura entre los puntos:
 
+<pre><code>
 P(x) = a₀ + a₁x + a₂x²
+</code></pre>
 
 • Splines cúbicos: dividen el intervalo en tramos, ajustando en cada uno un polinomio cúbico con continuidad en la primera y segunda derivada.
 
-Estos métodos permiten alcanzar distintos niveles de precisión y estabilidad numérica. En esta actividad se aplicarán cada una de estas técnicas para analizar su comportamiento y la calidad de las aproximaciones obtenidas.
+Estos métodos permiten alcanzar distintos niveles de precisión y estabilidad numérica. En esta actividad se aplicarán estas técnicas para analizar su comportamiento y la calidad de las aproximaciones obtenidas.
 `,
-    
-  },
+},
 
 ];
 
@@ -638,6 +983,7 @@ renderList();
 
 </body>
 </html>
+
 
 
 
