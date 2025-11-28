@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Unidad 2 — Lista de actividades</title>
+
   <style>
     :root{
       --azul-1:#00aaff;
@@ -60,158 +61,124 @@
     .footer-small{text-align:center;color:rgba(255,255,255,0.6);margin-top:26px}
     .volver-floating{position:fixed;right:20px;bottom:18px;z-index:40}
     .volver-floating .btn{padding:10px 12px;border-radius:12px}
+
+    /* ======================
+       ESTILO PARA FÓRMULAS
+       ====================== */
+    .formula {
+      background: #f4f4f4;
+      color: #000;
+      padding: 12px;
+      border-left: 4px solid #1976D2;
+      margin: 15px 0;
+      border-radius: 6px;
+      font-size: 1.1rem;
+    }
+
     @media (max-width:980px){.content-columns{grid-template-columns:1fr}header h1{font-size:2.2rem}}
   </style>
+
+  <!-- ============================
+       MATHJAX
+       ============================ -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
 </head>
 <body>
 
   <canvas id="gradCanvas" class="bg-canvas"></canvas>
   <canvas id="barsCanvas" class="bg-canvas"></canvas>
   <canvas id="netCanvas" class="bg-canvas"></canvas>
- <script>
-// =========================
-// CANVAS 1: GRADIENTE ANIMADO
-// =========================
-(function(){
-  const c = document.getElementById("gradCanvas");
-  const ctx = c.getContext("2d");
 
-  function resize(){
-    c.width = innerWidth;
-    c.height = innerHeight;
-  }
-  resize();
-  addEventListener("resize", resize);
-
-  let t = 0;
-  function draw(){
-    t += 0.005;
-
-    const g = ctx.createLinearGradient(
-      0, 0,
-      c.width * Math.cos(t),
-      c.height * Math.sin(t)
-    );
-
-    g.addColorStop(0, "#00101f");
-    g.addColorStop(0.5, "#002b45");
-    g.addColorStop(1, "#001a2c");
-
-    ctx.fillStyle = g;
-    ctx.fillRect(0,0,c.width,c.height);
-
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-
-
-// =========================
-// CANVAS 2: BARRAS DE LUZ
-// =========================
-(function(){
-  const c = document.getElementById("barsCanvas");
-  const ctx = c.getContext("2d");
-
-  function resize(){
-    c.width = innerWidth;
-    c.height = innerHeight;
-  }
-  resize();
-  addEventListener("resize", resize);
-
-  const bars = [];
-  const count = 35;
-
-  for(let i=0;i<count;i++){
-    bars.push({
-      x: Math.random()*c.width,
-      h: 80 + Math.random()*300,
-      speed: 0.4 + Math.random()*0.6,
-      alpha: 0.08 + Math.random()*0.12
-    });
-  }
-
-  function draw(){
-    ctx.clearRect(0,0,c.width,c.height);
-    bars.forEach(b=>{
-      ctx.fillStyle = `rgba(0,170,255,${b.alpha})`;
-      ctx.fillRect(b.x, 0, 2, b.h);
-      b.h += Math.sin(Date.now()*0.001 + b.x)*0.6;
-    });
-
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-
-
-// =========================
-// CANVAS 3: RED NEURONAL
-// =========================
-(function(){
-  const c = document.getElementById("netCanvas");
-  const ctx = c.getContext("2d");
-
-  function resize(){
-    c.width = innerWidth;
-    c.height = innerHeight;
-  }
-  resize();
-  addEventListener("resize", resize);
-
-  const dots = [];
-  const count = 90;
-
-  for(let i=0;i<count;i++){
-    dots.push({
-      x: Math.random()*c.width,
-      y: Math.random()*c.height,
-      vx: (Math.random()*1 - 0.5)*0.6,
-      vy: (Math.random()*1 - 0.5)*0.6
-    });
-  }
-
-  function draw(){
-    ctx.clearRect(0,0,c.width,c.height);
-
-    // Puntos
-    dots.forEach(d=>{
-      d.x += d.vx;
-      d.y += d.vy;
-
-      if(d.x < 0 || d.x > c.width) d.vx *= -1;
-      if(d.y < 0 || d.y > c.height) d.vy *= -1;
-
-      ctx.fillStyle = "rgba(0,170,255,0.55)";
-      ctx.beginPath();
-      ctx.arc(d.x, d.y, 2, 0, Math.PI*2);
-      ctx.fill();
-    });
-
-    // Conexiones
-    for(let i=0;i<count;i++){
-      for(let j=i+1;j<count;j++){
-        const dx = dots[i].x - dots[j].x;
-        const dy = dots[i].y - dots[j].y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if(dist < 130){
-          ctx.strokeStyle = `rgba(0,170,255,${0.12 - (dist/130)*0.12})`;
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(dots[i].x, dots[i].y);
-          ctx.lineTo(dots[j].x, dots[j].y);
-          ctx.stroke();
-        }
+  <!-- ANIMACIONES CANVAS -->
+  <script>
+    // CANVAS 1
+    (function(){
+      const c = document.getElementById("gradCanvas");
+      const ctx = c.getContext("2d");
+      function resize(){ c.width = innerWidth; c.height = innerHeight; }
+      resize(); addEventListener("resize", resize);
+      let t = 0;
+      function draw(){
+        t += 0.005;
+        const g = ctx.createLinearGradient(0, 0, c.width * Math.cos(t), c.height * Math.sin(t));
+        g.addColorStop(0, "#00101f");
+        g.addColorStop(0.5, "#002b45");
+        g.addColorStop(1, "#001a2c");
+        ctx.fillStyle = g;
+        ctx.fillRect(0,0,c.width,c.height);
+        requestAnimationFrame(draw);
       }
-    }
+      draw();
+    })();
 
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-</script>
+    // CANVAS 2
+    (function(){
+      const c = document.getElementById("barsCanvas");
+      const ctx = c.getContext("2d");
+      function resize(){ c.width = innerWidth; c.height = innerHeight; }
+      resize(); addEventListener("resize", resize);
+      const bars = []; const count = 35;
+      for(let i=0;i<count;i++){
+        bars.push({ x: Math.random()*c.width, h: 80+Math.random()*300, speed:0.4+Math.random()*0.6, alpha:0.08+Math.random()*0.12 });
+      }
+      function draw(){
+        ctx.clearRect(0,0,c.width,c.height);
+        bars.forEach(b=>{
+          ctx.fillStyle = `rgba(0,170,255,${b.alpha})`;
+          ctx.fillRect(b.x, 0, 2, b.h);
+          b.h += Math.sin(Date.now()*0.001 + b.x)*0.6;
+        });
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
 
+    // CANVAS 3
+    (function(){
+      const c = document.getElementById("netCanvas");
+      const ctx = c.getContext("2d");
+      function resize(){ c.width = innerWidth; c.height = innerHeight; }
+      resize(); addEventListener("resize", resize);
+      const dots = []; const count = 90;
+      for(let i=0;i<count;i++){
+        dots.push({ x:Math.random()*c.width, y:Math.random()*c.height,
+          vx:(Math.random()-0.5)*0.6, vy:(Math.random()-0.5)*0.6 });
+      }
+      function draw(){
+        ctx.clearRect(0,0,c.width,c.height);
+        dots.forEach(d=>{
+          d.x+=d.vx; d.y+=d.vy;
+          if(d.x<0||d.x>c.width)d.vx*=-1;
+          if(d.y<0||d.y>c.height)d.vy*=-1;
+          ctx.fillStyle="rgba(0,170,255,0.55)";
+          ctx.beginPath(); ctx.arc(d.x,d.y,2,0,Math.PI*2); ctx.fill();
+        });
+        for(let i=0;i<count;i++){
+          for(let j=i+1;j<count;j++){
+            const dx=dots[i].x-dots[j].x;
+            const dy=dots[i].y-dots[j].y;
+            const dist=Math.sqrt(dx*dx+dy*dy);
+            if(dist<130){
+              ctx.strokeStyle = `rgba(0,170,255,${0.12 - (dist/130)*0.12})`;
+              ctx.lineWidth = 1;
+              ctx.beginPath();
+              ctx.moveTo(dots[i].x, dots[i].y);
+              ctx.lineTo(dots[j].x, dots[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+  </script>
+
+  <!-- INTERFAZ -->
   <div class="app">
     <header>
       <h1>Unidad 2</h1>
@@ -225,6 +192,7 @@
     <div class="footer-small">© 2025 - LUIS ANGEL QUENAYA LOZA</div>
   </div>
 
+  <!-- PANEL DETALLE -->
   <div class="detail-screen" id="detailScreen" aria-hidden="true">
     <div class="detail-inner">
       <div class="detail-head">
@@ -239,11 +207,7 @@
       <div class="content-columns">
         <div>
           <h3 style="color:var(--azul-1);margin:12px 0 6px 0">🧩 Enunciado</h3>
-          <div class="enunciado" id="detailEnunciado" contenteditable="false">
-            <em>👉 El metodo de biseccion es un procedimiento iterativo para aproximar las raıces de una
- funcion continua f(x). Se basa en el teorema de Bolzano, que indica que si f(a) · f(b) < 0
- en un intervalo [a,b], existe al menos una raız dentro del intervalo..</em>
-          </div>
+          <div class="enunciado" id="detailEnunciado" contenteditable="false"></div>
 
           <h3 style="color:var(--azul-1);margin:14px 0 6px 0">💻 Código de ejemplo</h3>
           <pre class="code" id="detailCode"></pre>
@@ -253,7 +217,6 @@
           <div class="meta-card">
             <p><strong>Facultad:</strong> FINESI</p>
             <p><strong>Materia:</strong> Programación Numérica</p>
-          
             <p><strong>Fecha entrega:</strong> 21/10/2025</p>
           </div>
         </aside>
@@ -268,15 +231,38 @@
   <a id="downloadAnchor" style="display:none"></a>
 
 <script>
+/* AQUÍ IRÁN TUS ACTIVIDADES (cuando me las envíes para ordenarlas) */
+
 const activities = [
   {
-    id: 'a1',
-    title: 'Actividad 1 — Método de Bisección',
-    pdf: 'BISECCION.pdf',
-    description: `El método de bisección es un procedimiento numérico que permite encontrar una raíz de una función continua dentro de un intervalo [a, b]. 
-Se basa en el teorema de Bolzano, que garantiza la existencia de una raíz si f(a) y f(b) tienen signos opuestos. 
-El intervalo se divide sucesivamente hasta que se alcanza una aproximación con el error deseado.`,
-    code: `import numpy as np
+  {
+  id: 'a1',
+  title: 'Actividad 1 — Método de Bisección',
+  pdf: 'BISECCION.pdf',
+  description: `
+El método de bisección es un procedimiento numérico que permite encontrar una raíz de una función continua dentro de un intervalo [a, b].
+Se basa en el teorema de Bolzano, que indica que si f(a) y f(b) tienen signos opuestos, entonces existe al menos una raíz dentro del intervalo.
+
+<div class="formula">
+<b>📌 Fórmula principal del método:</b>  
+$$ x_m = \frac{a + b}{2} $$
+</div>
+
+<div class="formula">
+<b>📌 Condición para decidir el nuevo intervalo:</b>  
+Si  
+$$ f(a)\, f(x_m) < 0 $$  
+entonces la raíz está en \([a, x_m]\).  
+Si no, está en \([x_m, b]\).
+</div>
+
+<div class="formula">
+<b>📌 Error absoluto:</b>  
+$$ E = \frac{b - a}{2} $$
+</div>
+  `,
+  code: `
+import numpy as np
 import matplotlib.pyplot as plt
 
 func_str = input("Ingrese la función f(x): ")  
@@ -326,82 +312,102 @@ plt.ylabel("f(x)")
 plt.legend()
 plt.grid(True)
 plt.show()`
-  },
+}
+,
 
   {
     id: 'a2',
-    title: 'Actividad 2 — Método de la Secante',
-    pdf: 'Secante.pdf',
-    description: `El método de la secante es una técnica iterativa para encontrar raíces sin necesidad de derivadas. 
-Utiliza dos valores iniciales y construye una recta secante entre los puntos (x₀, f(x₀)) y (x₁, f(x₁)). 
-El punto donde esa recta corta el eje x se usa como nueva aproximación. Es más rápido que la bisección, pero menos estable si los puntos iniciales no son adecuados.`,
-    code: ` import numpy as np
-      import matplotlib.pyplot as plt
+title: 'Actividad 2 — Método de la Secante',
+pdf: 'Secante.pdf',
+description: `
+<p>
+El método de la secante es una técnica numérica para encontrar raíces de ecuaciones sin necesidad de calcular derivadas.  
+Utiliza dos aproximaciones iniciales <b>x₀</b> y <b>x₁</b>, y a partir de ellas construye una recta secante entre los puntos  
+<b>(x₀, f(x₀))</b> y <b>(x₁, f(x₁))</b>.  
+</p>
 
-      # === 1. Ingreso de la función ===
-      func_str = input("Ingrese la función f(x): ")  # Ejemplo: x**3 - x - 1
+<div class="formula">
+<strong>Fórmula del método de la Secante:</strong><br><br>
+\\[
+x_{n+1} = x_n - f(x_n)\,\\frac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})}
+\\]
+</div>
 
-      # Definir la función
-      def f(x):
-          return eval(func_str, {"np": np, "x": x})
+<p>
+Esta aproximación suele converger más rápido que el método de bisección,  
+aunque puede ser menos estable si los valores iniciales no son adecuados.
+</p>
+`,
+code: `
+ import numpy as np
+ import matplotlib.pyplot as plt
 
-      # === 2. Graficar la función ===
-      xmin = float(input("Ingrese el valor mínimo de x: "))
-      xmax = float(input("Ingrese el valor máximo de x: "))
+ # === 1. Ingreso de la función ===
+ func_str = input("Ingrese la función f(x): ")  # Ejemplo: x**3 - x - 1
 
-      x = np.linspace(xmin, xmax, 400)
-      y = f(x)
+ # Definir la función
+ def f(x):
+     return eval(func_str, {"np": np, "x": x})
 
-      plt.figure(figsize=(8, 5))
-      plt.plot(x, y, label=f"f(x) = {func_str}", color='blue')
-      plt.axhline(0, color='black', linestyle='--')
-      plt.axvline(0, color='black', linestyle='--')
-      plt.title("Gráfico de la función ingresada")
-      plt.xlabel("x")
-      plt.ylabel("f(x)")
-      plt.legend()
-      plt.grid(True)
-      plt.show()
+ # === 2. Graficar la función ===
+ xmin = float(input("Ingrese el valor mínimo de x: "))
+ xmax = float(input("Ingrese el valor máximo de x: "))
 
-      # === 3. Pregunta si desea aplicar el método de la Secante ===
-      op = input("¿Desea encontrar una raíz con el método de la Secante? (s/n): ").lower()
+ x = np.linspace(xmin, xmax, 400)
+ y = f(x)
 
-      if op == "s":
-          # === 4. Ingreso de puntos iniciales ===
-          x0 = float(input("Ingrese el primer valor inicial x0: "))
-          x1 = float(input("Ingrese el segundo valor inicial x1: "))
+ plt.figure(figsize=(8, 5))
+ plt.plot(x, y, label=f"f(x) = {func_str}", color='blue')
+ plt.axhline(0, color='black', linestyle='--')
+ plt.axvline(0, color='black', linestyle='--')
+ plt.title("Gráfico de la función ingresada")
+ plt.xlabel("x")
+ plt.ylabel("f(x)")
+ plt.legend()
+ plt.grid(True)
+ plt.show()
 
-          tol = 1e-6
-          max_iter = 100
+ # === 3. Pregunta si desea aplicar el método de la Secante ===
+ op = input("¿Desea encontrar una raíz con el método de la Secante? (s/n): ").lower()
 
-          print("\nIteración |     x0      |      x1      |     f(x0)     |     f(x1)     |     x2      |   Error")
-          print("----------------------------------------------------------------------")
+ if op == "s":
+     # === 4. Ingreso de puntos iniciales ===
+     x0 = float(input("Ingrese el primer valor inicial x0: "))
+     x1 = float(input("Ingrese el segundo valor inicial x1: "))
 
-          for i in range(1, max_iter + 1):
-              f0 = f(x0)
-              f1 = f(x1)
+     tol = 1e-6
+     max_iter = 100
 
-              if f1 - f0 == 0:
-                  print(f"\n⚠️ División por cero en la iteración {i}. El método no puede continuar.")
-                  break
+     print("\\nIteración |     x0      |      x1      |     f(x0)     |     f(x1)     |     x2      |   Error")
+     print("----------------------------------------------------------------------")
 
-              x2 = x1 - f1 * (x1 - x0) / (f1 - f0)
-              error = abs(x2 - x1)
+     for i in range(1, max_iter + 1):
+         f0 = f(x0)
+         f1 = f(x1)
 
-              print(f"{i:9d} | {x0:10.6f} | {x1:10.6f} | {f0:12.6f} | {f1:12.6f} | {x2:10.6f} | {error:10.6f}")
+         if f1 - f0 == 0:
+             print(f"\\n⚠️ División por cero en la iteración {i}. El método no puede continuar.")
+             break
 
-              if error < tol:
-                  print(f"\n✅ Raíz aproximada encontrada: {x2:.6f}")
-                  print(f"Iteraciones realizadas: {i}")
-                  break
+         x2 = x1 - f1 * (x1 - x0) / (f1 - f0)
+         error = abs(x2 - x1)
 
-              x0, x1 = x1, x2
+         print(f"{i:9d} | {x0:10.6f} | {x1:10.6f} | {f0:12.6f} | {f1:12.6f} | {x2:10.6f} | {error:10.6f}")
 
-          else:
-              print("\n⚠️ No se alcanzó la convergencia después de", max_iter, "iteraciones.")
-      else:
-          print("No se aplicó el método de la Secante.")`
-  },
+         if error < tol:
+             print(f"\\n✅ Raíz aproximada encontrada: {x2:.6f}")
+             print(f"Iteraciones realizadas: {i}")
+             break
+
+         x0, x1 = x1, x2
+
+     else:
+         print("\\n⚠️ No se alcanzó la convergencia después de", max_iter, "iteraciones.")
+ else:
+     print("No se aplicó el método de la Secante.")
+`
+}
+,
 
   {
     id: 'a3',
@@ -983,6 +989,7 @@ renderList();
 
 </body>
 </html>
+
 
 
 
