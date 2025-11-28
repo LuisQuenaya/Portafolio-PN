@@ -5,11 +5,23 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Unidad 2 — Lista de actividades</title>
 
+    <script>
+        // Configuración explícita de MathJax (para asegurar el uso de $$...$$)
+        MathJax = {
+            tex: {
+                // Habilita tanto las dobles barras (\\( y \\)) como los dobles dólares ($$)
+                inlineMath: [['$', '$'], ['\\(', '\\)']], 
+                displayMath: [['$$', '$$'], ['\\[', '\\]']] 
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async
         src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
-
     <style>
         :root{
             --azul-1:#00aaff;
@@ -63,7 +75,7 @@
         .enunciado{background:rgba(255,255,255,0.02);padding:14px;border-radius:8px;min-height:160px;color:#e7f7ff;line-height:1.5;}
         .enunciado a {color: var(--azul-1); text-decoration: none;}
         .enunciado a:hover {text-decoration: underline;}
-        pre.code{background:#030409;color:#e6fbff;border-left:6px solid var(--azul-2);padding:12px;border-radius:8px;overflow:auto;font-family:Consolas,monospace;white-space: pre-wrap; /* Para asegurar que el código se descargue tal cual */}
+        pre.code{background:#030409;color:#e6fbff;border-left:6px solid var(--azul-2);padding:12px;border-radius:8px;overflow:auto;font-family:Consolas,monospace;white-space: pre-wrap;}
         .meta-card{background:var(--panel);padding:12px;border-radius:8px;margin-bottom:12px}
         .footer-small{text-align:center;color:rgba(255,255,255,0.6);margin-top:26px}
         .volver-floating{position:fixed;right:20px;bottom:18px;z-index:40}
@@ -217,7 +229,7 @@
                 <h2 id="detailTitle">Actividad</h2>
                 <div class="controls">
                     <button class="btn" id="openPdfBtn">📘 Ver PDF</button> 
-                    <button class="btn secondary" id="downloadCodeBtn">💾 Descargar código</button>
+                    <button class="btn secondary" id="downloadCodeBtn" style="display: none;">💾 Descargar código</button>
                     <button class="btn ghost" id="closeDetailBtn">🔙 Volver</button>
                 </div>
             </div>
@@ -227,8 +239,10 @@
                     <h3 style="color:var(--azul-1);margin:12px 0 6px 0">🧩 Enunciado</h3>
                     <div class="enunciado" id="detailEnunciado"></div> 
 
-                    <h3 style="color:var(--azul-1);margin:14px 0 6px 0">💻 Código de ejemplo</h3>
-                    <pre class="code"><code id="detailCode"></code></pre>
+                    <div id="codeSection" style="display:none;">
+                         <h3 style="color:var(--azul-1);margin:14px 0 6px 0">💻 Código de ejemplo</h3>
+                        <pre class="code"><code id="detailCode"></code></pre>
+                    </div>
                 </div>
 
                 <aside>
@@ -263,7 +277,7 @@ const activities = [
                 $$ x_m = \frac{a + b}{2} $$
             </div>
 
-            <p>En cada paso, el intervalo se reduce a la mitad. Si $f(a) \cdot f(x_m) < 0$, la raíz está en $[a, x_m]$; si no, está en $[x_m, b]$.</p>
+            <p>En cada paso, el intervalo se reduce a la mitad. Si $f(a) \\cdot f(x_m) < 0$, la raíz está en $[a, x_m]$; si no, está en $[x_m, b]$.</p>
             
             <div class="formula">
                 **Error absoluto:**
@@ -412,7 +426,7 @@ else:
         title: 'Actividad 3 — Método del Punto Fijo',
         pdf: 'Puntofijo.pdf',
         description: `
-            <p>El método del punto fijo busca la raíz $\alpha$ de $f(x)=0$ convirtiéndola en la ecuación equivalente $x=g(x)$. La raíz $\alpha$ es el **punto fijo** de $g(x)$, es decir, $\alpha = g(\alpha)$.</p>
+            <p>El método del punto fijo busca la raíz $\\alpha$ de $f(x)=0$ convirtiéndola en la ecuación equivalente $x=g(x)$. La raíz $\\alpha$ es el **punto fijo** de $g(x)$, es decir, $\\alpha = g(\\alpha)$.</p>
 
             <div class="formula">
                 **Fórmula de iteración:**
@@ -423,7 +437,7 @@ else:
 
             <div class="formula">
                 **Condición de convergencia:**
-                $$ |g'(x)| \le k < 1 $$
+                $$ |g'(x)| \\le k < 1 $$
             </div>
         `,
         code: `
@@ -481,7 +495,7 @@ else:
         description: `
             <p>El método de **Regula Falsi** (o falsa posición) mejora a bisección usando una recta secante entre los puntos $(a, f(a))$ y $(b, f(b))$. La nueva aproximación $x_r$ es el corte de esa recta con el eje $x$.</p>
 
-            <p>Necesita que $f(a) \cdot f(b) < 0$ para acotar la raíz.</p>
+            <p>Necesita que $f(a) \\cdot f(b) < 0$ para acotar la raíz.</p>
 
             <div class="formula">
                 **Fórmula de Regula Falsi:**
@@ -642,7 +656,7 @@ else:
             
             <div class="formula">
                 **Definición Formal:**
-                $$ h = \max \{i \in \mathbb{N} : \text{La publicación } i \text{ tiene al menos } i \text{ citas} \} $$
+                $$ h = \max \\{i \\in \\mathbb{N} : \\text{La publicación } i \\text{ tiene al menos } i \\text{ citas} \\} $$
             </div>
 
             <p>Es una métrica clave para evaluar el impacto científico.</p>
@@ -707,387 +721,143 @@ else:
                 </tbody>
             </table>
         `,
-        code: `
-/**
- * Python/Pseudocódigo para calcular el Índice H
- * El código real requiere acceso a bases de datos bibliométricas (Scopus, WoS, etc.)
- * Este es un ejemplo conceptual basado en un array de citas.
- */
-def calcular_indice_h(citas):
-    """
-    Calcula el Índice H a partir de un array de números de citas.
-    @param citas: Lista de enteros representando el número de citas de cada artículo.
-    @return: El valor del Índice H.
-    """
-    if not citas:
-        return 0
-
-    # 1. Ordenar las citas de forma descendente
-    citas.sort(reverse=True)
-
-    h_index = 0
-    # 2. Recorrer la lista para encontrar el índice 'h'
-    for i in range(len(citas)):
-        # El artículo en la posición i (que tiene i+1 artículos con al menos esa cantidad)
-        # debe tener un número de citas >= (i + 1)
-        if citas[i] >= (i + 1):
-            h_index = i + 1
-        else:
-            # Una vez que la condición no se cumple, el valor anterior es el máximo h
-            break
-            
-    return h_index
-
-# Ejemplo de uso:
-# Un autor tiene 6 artículos con 10, 8, 5, 4, 2, 1 citas.
-ejemplo_citas = [10, 8, 5, 4, 2, 1] 
-# h=4: 4 artículos tienen 4 o más citas (10, 8, 5, 4).
-# Artículo 5 (con 2 citas) NO tiene 5 o más citas.
-# print(calcular_indice_h(ejemplo_citas)) # Salida: 4
-
-`
+      
     },
     {
         id: 'a7',
         title: 'Actividad 7 — Gradiente de una Función (Descenso por Gradiente)',
         pdf: 'actividad_8.pdf',
         description: `
-            <p>El **Gradiente** ($\nabla f$) es un vector que indica la dirección de **máximo crecimiento** de una función. El método de **Descenso por Gradiente** busca el mínimo de una función de costo moviéndose en la dirección **opuesta** al gradiente.</p>
+            <p>El **Gradiente** ($\\nabla f$) es un vector que indica la dirección de **máximo crecimiento** de una función. Es una herramienta fundamental en la optimización de algoritmos de Machine Learning e Inteligencia Artificial.</p>
+            <p>El método de **Descenso por Gradiente** busca el **mínimo** de una función de costo moviéndose en la dirección **opuesta** al gradiente. La convergencia depende de la **tasa de aprendizaje** ($\\eta$).</p>
 
             <div class="formula">
                 **Vector Gradiente (Función Multivariable):**
-                $$ \nabla f(\mathbf{x}) = \begin{pmatrix} \frac{\partial f}{\partial x_1} \\ \frac{\partial f}{\partial x_2} \\ \vdots \\ \frac{\partial f}{\partial x_n} \end{pmatrix} $$
+                $$ \\nabla f(\\mathbf{x}) = \\begin{pmatrix} \\frac{\\partial f}{\\partial x_1} \\\\ \\frac{\\partial f}{\\partial x_2} \\\\ \\vdots \\\\ \\frac{\\partial f}{\\partial x_n} \\end{pmatrix} $$
             </div>
 
             <div class="formula">
                 **Regla de Actualización (Descenso por Gradiente):**
-                $$ \mathbf{x}_{k+1} = \mathbf{x}_k - \eta \nabla f(\mathbf{x}_k) $$
+                $$ \\mathbf{x}_{k+1} = \\mathbf{x}_k - \\eta \\nabla f(\\mathbf{x}_k) $$
             </div>
-
-            <p>Aquí, $\eta$ es la **tasa de aprendizaje** (Learning Rate), que controla qué tan grande es el paso que damos en cada iteración.</p>
+            
+            <p>Donde $\\eta$ es la **tasa de aprendizaje** (Learning Rate), que controla la longitud del paso que se da en cada iteración.</p>
         `,
-        code: `
-# Código de ejemplo en R para un Descenso por Gradiente simple
-# Función de Coste: f(x) = x^2 (Mínimo en x=0)
-# Gradiente (Derivada): f'(x) = 2x
-
-n <- 0.01  # Tasa de aprendizaje (Learning Rate)
-f <- function(x) x^2
-f_deriv <- function(x) 2 * x
-
-x0 <- 3    # Punto inicial
-iter_max <- 21
-
-x_hist <- numeric(iter_max)
-x_hist[1] <- x0
-print(paste("Iteración 0: x =", x0))
-
-for (i in 1:(iter_max - 1)) {
-    # Calcular el gradiente
-    grad_x <- f_deriv(x_hist[i])
-    
-    # Aplicar la regla de actualización: x_nuevo = x_actual - eta * gradiente
-    x_hist[i + 1] <- x_hist[i] - n * grad_x
-    
-    print(paste("Iteración", i, ": x =", round(x_hist[i + 1], 6), 
-                ", f(x) =", round(f(x_hist[i + 1]), 6)))
-}
-
-# El resultado final (x_hist[iter_max]) se aproxima a 0.
-`
+        
     },
     {
         id: 'a8',
         title: 'Actividad 8 — Pseudoinverso vs. Descenso de Gradiente en Regresión Lineal',
         pdf: 'iamgen 1.pdf',
         description: `
-            <p>Este resumen compara dos formas de resolver la **Regresión Lineal por Mínimos Cuadrados (OLS)**: el **Pseudoinverso** (solución directa) y el **Descenso de Gradiente** (solución iterativa).</p>
+            <p>Este resumen compara dos formas de resolver la **Regresión Lineal por Mínimos Cuadrados (OLS)**: el **Pseudoinverso** (solución directa/analítica) y el **Descenso de Gradiente** (solución iterativa).</p>
             
             <h4>1. Pseudoinverso de Moore-Penrose (Solución Exacta)</h4>
-            <p>Da la solución exacta para los pesos ($\mathbf{w}$) en un solo paso matricial, proporcionando el error mínimo posible.</p>
+            <p>Proporciona la solución exacta para los pesos ($\\mathbf{w}$) en un solo paso matricial, garantizando el error mínimo posible.</p>
             
             <div class="formula">
-                **Solución Analítica (Pesos $\mathbf{w}$):**
-                $$ \mathbf{w} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y} $$
+                **Solución Analítica (Pesos $\\mathbf{w}$):**
+                $$ \\mathbf{w} = (\\mathbf{X}^T\\mathbf{X})^{-1}\\mathbf{X}^T\\mathbf{y} $$
             </div>
 
-            <p>**Ventajas:** Exactitud. **Desventajas:** Lento e inestable con matrices de datos ($\mathbf{X}$) muy grandes o "mal condicionadas".</p>
-
             <h4>2. Descenso de Gradiente (Solución Aproximada)</h4>
-            <p>Ajusta los pesos iterativamente, moviéndose en contra del gradiente de la función de costo (MSE).</p>
+            <p>Ajusta los pesos iterativamente, minimizando la función de costo (generalmente el Error Cuadrático Medio, MSE) moviéndose en contra del gradiente.</p>
 
             <div class="formula">
                 **Función de Coste (MSE):**
-                $$ J(\mathbf{w}) = \frac{1}{2m} \sum_{i=1}^{m} (h_\mathbf{w}(\mathbf{x}^{(i)}) - y^{(i)})^2 $$
+                $$ J(\\mathbf{w}) = \\frac{1}{2m} \\sum_{i=1}^{m} (h_\\mathbf{w}(\\mathbf{x}^{(i)}) - y^{(i)})^2 $$
             </div>
 
-            <p>**Ventajas:** Muy escalable para grandes datos. **Desventajas:** Depende de la tasa de aprendizaje y puede ser lento para converger.</p>
+            <p>El Descenso de Gradiente es muy escalable para grandes conjuntos de datos, mientras que el Pseudoinverso es rápido para datasets pequeños.</p>
         `,
-        code: `
-# Código conceptual (no funcional) para ilustrar ambos métodos
-
-def pseudoinverso_ols(X, y):
-    """Solución analítica usando el pseudoinverso (linalg.pinv)."""
-    # X_dagger = np.linalg.pinv(X)
-    # w = X_dagger @ y
-    return "Retorna la solución de forma cerrada (óptima)"
-
-def descenso_gradiente(X, y, learning_rate, max_iter):
-    """Solución iterativa usando el descenso de gradiente."""
-    # w = np.zeros(X.shape[1])
-    # for i in range(max_iter):
-    #     pred = X @ w
-    #     error = pred - y
-    #     gradiente = X.T @ error / len(y)
-    #     w = w - learning_rate * gradiente
-    # return w
-    return "Retorna una aproximación a la solución después de N iteraciones"
-
-print("Comparación de rendimiento:")
-print("• Pseudoinverso: Mejor para datasets pequeños/moderados y bien condicionados.")
-print("• Descenso de Gradiente: Mejor para datasets masivos y alta dimensionalidad.")
-`
+       
     },
     {
         id: 'a9',
         title: 'Actividad 9 — Dinámica del Juego de Caramelos y Chupetines (Simulación)',
         pdf: 'Dinamica (2).pdf',
         description: `
-            <p>Esta actividad es una **simulación estocástica** (con elementos aleatorios) en R. Simula un juego cooperativo donde los jugadores combinan caramelos ('A', 'B', 'C') para crear chupetines ('D').</p>
+            <p>Esta actividad es una **simulación estocástica** (con elementos aleatorios) en R. Simula un juego cooperativo donde los jugadores combinan recursos (caramelos: 'A', 'B', 'C') para crear un producto final (chupetín: 'D').</p>
             
-            <p>La meta es obtener un chupetín para cada jugador, siguiendo reglas de transición de estado:</p>
+            <p>El enfoque principal es la **lógica de transiciones de estado** que rigen la creación de nuevos ítems a partir de recursos existentes, y el intercambio de productos finales por nuevos recursos (ciclos de reabastecimiento).</p>
 
             <div class="formula">
-                **Regla de Creación 1:**
-                $$ \{A \ge 1, B \ge 1, C \ge 1\} \Rightarrow 1D $$
+                **Regla de Creación 1 (Básica):**
+                $$ \\{A \\ge 1, B \\ge 1, C \\ge 1\\} \\Rightarrow 1D $$
             </div>
 
             <div class="formula">
-                **Regla de Creación 2 (Bonificación):**
-                $$ \{A \ge 2, B \ge 2, C \ge 2\} \Rightarrow 2D + \text{Caramelo Aleatorio} $$
+                **Regla de Creación 2 (Bonificación/Eficiencia):**
+                $$ \\{A \\ge 2, B \\ge 2, C \\ge 2\\} \\Rightarrow 2D + \\text{Caramelo Aleatorio} $$
             </div>
             
-            <p>Cuando no se pueden hacer más chupetines, un chupetín ('D') se puede intercambiar por tres caramelos aleatorios para reabastecer la bolsa.</p>
+            <p>Cuando la bolsa está vacía de recursos necesarios, se aplica una regla de intercambio donde un chupetín ('D') se puede cambiar por tres caramelos aleatorios para reabastecer la bolsa y continuar el juego.</p>
         `,
-        code: `
-# Código conceptual en R (Simulación Estocástica)
-
-# Inicialización
-JUGADORES <- 5
-BOLSA <- list(A=0, B=0, C=0, D=0)
-MAX_ITER <- 100
-set.seed(42) # Para reproducibilidad
-
-# Función para añadir caramelo aleatorio (Simulación estocástica)
-añadir_aleatorio <- function(bolsa) {
-  tipo <- sample(c('A', 'B', 'C'), 1)
-  bolsa[[tipo]] <- bolsa[[tipo]] + 1
-  return(bolsa)
-}
-
-# Bucle principal de la simulación
-for (i in 1:MAX_ITER) {
-  
-  # 1. Aplicar Regla de Creación 2 (Prioridad)
-  if (BOLSA$A >= 2 && BOLSA$B >= 2 && BOLSA$C >= 2) {
-    BOLSA$A <- BOLSA$A - 2
-    BOLSA$B <- BOLSA$B - 2
-    BOLSA$C <- BOLSA$C - 2
-    BOLSA$D <- BOLSA$D + 2
-    BOLSA <- añadir_aleatorio(BOLSA)
-    print(paste("Iter", i, ": Regla 2 aplicada (2D + reposición). Bolsa:", paste(unlist(BOLSA), collapse=", ")))
-    
-  } 
-  # 2. Aplicar Regla de Creación 1
-  else if (BOLSA$A >= 1 && BOLSA$B >= 1 && BOLSA$C >= 1) {
-    BOLSA$A <- BOLSA$A - 1
-    BOLSA$B <- BOLSA$B - 1
-    BOLSA$C <- BOLSA$C - 1
-    BOLSA$D <- BOLSA$D + 1
-    print(paste("Iter", i, ": Regla 1 aplicada (1D). Bolsa:", paste(unlist(BOLSA), collapse=", ")))
-    
-  }
-  
-  # 3. Condición de Victoria
-  if (BOLSA$D >= JUGADORES) {
-    print(paste("¡VICTORIA! Objetivo alcanzado en", i, "iteraciones."))
-    break
-  }
-  
-  # 4. Regla de Intercambio (Si no hay más creaciones posibles)
-  if (i %% 5 == 0 && BOLSA$D >= 1) { # Intenta intercambio cada 5 turnos
-      BOLSA$D <- BOLSA$D - 1
-      BOLSA <- añadir_aleatorio(BOLSA)
-      BOLSA <- añadir_aleatorio(BOLSA)
-      BOLSA <- añadir_aleatorio(BOLSA)
-      print(paste("Iter", i, ": Intercambio D por 3 caramelos aleatorios."))
-  }
-  
-  if (i == MAX_ITER) {
-      print("FIN: Límite de iteraciones alcanzado. No se alcanzó la victoria.")
-  }
-}
-`
+        
     },
     {
         id: 'a10',
         title: 'Actividad 10 — Registración No Rígida de Imágenes (Método Demons)',
         pdf: 'tarea de resumenes.pdf',
         description: `
-            <p>La **Registración No Rígida** alinea imágenes médicas que tienen deformaciones locales (como el movimiento de tejidos). El método principal que analiza el artículo es el algoritmo **Demons**.</p>
+            <p>La **Registración No Rígida** es fundamental en el procesamiento de imágenes médicas para alinear datos con deformaciones locales (ej. resonancias magnéticas tomadas en momentos diferentes). El algoritmo clave analizado es el método **Demons**.</p>
 
-            <p>Demons modela la deformación como un "flujo óptico", donde los píxeles se mueven para que la imagen flotante ($I_F$) se alinee con la de referencia ($I_R$).</p>
+            <p>Demons modela la deformación como un "flujo óptico", donde los píxeles de la imagen flotante ($I_F$) se mueven hasta coincidir con la de referencia ($I_R$), utilizando el gradiente de la imagen de referencia ($\\nabla I_R$) para guiar el movimiento.</p>
 
             <div class="formula">
-                **Fórmula de Desplazamiento del Vóxel $v$ (Demons Simple):**
-                $$ \mathbf{v}(\mathbf{x}) = \frac{(I_R(\mathbf{x}) - I_F(\mathbf{x})) \cdot \nabla I_R(\mathbf{x})}{\| \nabla I_R(\mathbf{x}) \|^2 + (I_R(\mathbf{x}) - I_F(\mathbf{x}))^2} \cdot \nabla I_R(\mathbf{x}) $$
+                **Fórmula de Desplazamiento del Vóxel $\\mathbf{v}$ (Demons Simple):**
+                $$ \\mathbf{v}(\\mathbf{x}) = \\frac{(I_R(\\mathbf{x}) - I_F(\\mathbf{x})) \\cdot \\nabla I_R(\\mathbf{x})}{\\| \\nabla I_R(\\mathbf{x}) \\|^2 + (I_R(\\mathbf{x}) - I_F(\\mathbf{x}))^2} \\cdot \\nabla I_R(\\mathbf{x}) $$
             </div>
 
-            <p>El algoritmo calcula el **Gradiente** ($\nabla I_R(\mathbf{x})$) para determinar la dirección del movimiento necesario en cada punto.</p>
+            <p>El resultado es un **Campo de Vectores de Desplazamiento (DVF)** que mapea la deformación de una imagen a la otra.</p>
         `,
-        code: `
-# Pseudocódigo/Comentario: La implementación del método Demons 
-# es compleja y típicamente se realiza usando librerías avanzadas 
-# (ej. ITK, SimpleITK en Python/C++).
-
-# === Pasos generales del Algoritmo Demons ===
-# 1. Inicializar el Campo de Deformación (DVF) a cero.
-# 2. Iterar hasta la convergencia:
-#    a. Deformar la Imagen Flotante: I_deformada = I_F(DVF).
-#    b. Calcular el Desplazamiento (v): Usando la fórmula del gradiente/intensidad.
-#    c. Suavizar/Regularizar v: Aplicar un filtro gaussiano (para estabilidad).
-#    d. Componer/Actualizar el DVF: DVF_nuevo = DVF + v.
-# 3. Resultado: El DVF final.
-
-`
+       
     },
     {
         id: 'a11',
         title: 'Actividad 11 — Diferenciación Numérica (Fórmulas de Diferencias Finitas)',
         pdf: 'Actividad11 (1).pdf',
         description: `
-            <p>La **Diferenciación Numérica** estima la derivada de una función $f'(x)$ usando valores discretos (puntos cercanos). Se basa en la definición de la derivada con un paso $h$ pequeño.</p>
+            <p>La **Diferenciación Numérica** es la técnica para estimar la derivada de una función ($f'(x)$) a partir de un conjunto discreto de puntos, reemplazando el límite de la derivada por un paso finito $h$.</p>
 
             <div class="formula">
                 **Definición de la Derivada:**
-                $$ f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h} $$
+                $$ f'(x) = \\lim_{h \\to 0} \\frac{f(x + h) - f(x)}{h} $$
             </div>
 
-            <p>Las fórmulas más comunes son las **Diferencias Finitas**:</p>
+            <p>Las fórmulas más importantes, que aproximan la pendiente de la tangente con diferentes niveles de error (truncamiento), son:</p>
 
             <h4>1. Diferencia Adelante (Error $O(h)$)</h4>
+            <p>Utiliza el punto actual y un punto hacia adelante.</p>
             <div class="formula">
-                $$ f'(x) \approx \frac{f(x + h) - f(x)}{h} $$
+                $$ f'(x) \\approx \\frac{f(x + h) - f(x)}{h} $$
             </div>
 
-            <h4>2. Diferencia Atrás (Error $O(h)$)</h4>
+            <h4>2. Diferencia Central (Más precisa, Error $O(h^2)$)</h4>
+            <p>Utiliza un punto hacia adelante y un punto hacia atrás, promediando la pendiente. Es la más usada por su mayor precisión.</p>
             <div class="formula">
-                $$ f'(x) \approx \frac{f(x) - f(x - h)}{h} $$
-            </div>
-
-            <h4>3. Diferencia Central (Más precisa, Error $O(h^2)$)</h4>
-            <div class="formula">
-                $$ f'(x) \approx \frac{f(x + h) - f(x - h)}{2h} $$
+                $$ f'(x) \\approx \\frac{f(x + h) - f(x - h)}{2h} $$
             </div>
         `,
-        code: `
-import numpy as np
-
-# Ejemplo de aproximación de la derivada de f(x) = x^3 en x=2
-def f(x):
-    return x**3
-
-x = 2.0
-h = 0.01
-
-# 1. Diferencia Adelante
-f_prime_adelante = (f(x + h) - f(x)) / h
-
-# 2. Diferencia Atrás
-f_prime_atras = (f(x) - f(x - h)) / h
-
-# 3. Diferencia Central (más precisa)
-f_prime_central = (f(x + h) - f(x - h)) / (2 * h)
-
-# Derivada analítica real: f'(x) = 3*x^2. En x=2, f'(2) = 12
-real = 3 * x**2
-
-print(f"Función: f(x) = x^3. Derivada real en x={x}: {real}")
-print(f"H = {h}")
-print(f"Diferencia Adelante: {f_prime_adelante:.6f} (Error: {abs(f_prime_adelante - real):.6f})")
-print(f"Diferencia Atrás:  {f_prime_atras:.6f} (Error: {abs(f_prime_atras - real):.6f})")
-print(f"Diferencia Central:  {f_prime_central:.6f} (Error: {abs(f_prime_central - real):.6f})")
-
-`
+        
     },
     {
         id: 'a12',
         title: 'Actividad 12 — Ecuaciones Diferenciales Ordinarias (Método de Euler)',
         pdf: 'Actividad_12.pdf',
         description: `
-            <p>El **Método de Euler** es el método más simple para resolver Ecuaciones Diferenciales Ordinarias (EDO) de primer orden con un valor inicial. Asume que la función es una línea recta durante un paso pequeño $h$, usando el primer término de la serie de Taylor.</p>
+            <p>El **Método de Euler** es el método de solución numérica más básico para resolver Ecuaciones Diferenciales Ordinarias (EDO) de primer orden con un valor inicial ($y(x_0) = y_0$).</p>
 
-            <p>Dada la EDO $\frac{dy}{dx} = f(x, y)$, la fórmula de iteración es:</p>
+            <p>Se basa en el principio de que, si el paso ($h$) es pequeño, la función se comporta como una **línea recta** (pendiente constante) durante ese intervalo, utilizando la pendiente en el punto actual para predecir el siguiente punto.</p>
+
+            <p>Dada la EDO $\\frac{dy}{dx} = f(x, y)$, la fórmula de iteración es:</p>
             <div class="formula">
-                $$ y_{i+1} = y_i + f(x_i, y_i) \cdot h $$
+                $$ y_{i+1} = y_i + f(x_i, y_i) \\cdot h $$
             </div>
 
-            <p>Donde $h$ es el tamaño del paso, y $f(x_i, y_i)$ es la pendiente en el punto actual. Es un método de **primer orden**, por lo que su precisión mejora mucho al usar pasos $h$ más pequeños.</p>
+            <p>Es un método de **primer orden** ($O(h)$). Su simplicidad es su ventaja, mientras que su principal desventaja es la necesidad de un paso $h$ muy pequeño para mantener una precisión aceptable.</p>
         `,
-        code: `
-import numpy as np
-import matplotlib.pyplot as plt
-
-# Definir la EDO: dy/dx = f(x, y)
-# Ejemplo: dy/dx = -2xy^2 (Solución real: y = 1 / (1 + x^2))
-def f(x, y):
-    return -2 * x * y**2
-
-# Parámetros iniciales
-x0 = 0.0 # Valor inicial de x
-y0 = 1.0 # Valor inicial de y(x0)
-xf = 2.0 # Valor final de x
-h = 0.1  # Tamaño del paso (step size)
-
-# Configuración del método
-n_steps = int((xf - x0) / h)
-x_vals = np.linspace(x0, xf, n_steps + 1)
-y_euler = np.zeros(n_steps + 1)
-
-# Condición inicial
-y_euler[0] = y0
-
-print("i | x_i | y_i (Aprox) | f(x_i, y_i)")
-print("---------------------------------------")
-
-# Bucle del Método de Euler
-for i in range(n_steps):
-    x_i = x_vals[i]
-    y_i = y_euler[i]
-    
-    # Calcular la pendiente (derivada)
-    slope = f(x_i, y_i)
-    
-    # Aplicar la fórmula de Euler: y_i+1 = y_i + f(x_i, y_i) * h
-    y_euler[i + 1] = y_i + slope * h
-    
-    print(f"{i:1d} | {x_i:.1f} | {y_i:.6f} | {slope:.6f}")
-
-# Graficación
-plt.figure(figsize=(8, 5))
-plt.plot(x_vals, y_euler, 'b-o', label=f"Euler (h={h})")
-
-# Solución real (para comparación)
-y_real = 1 / (1 + x_vals**2)
-plt.plot(x_vals, y_real, 'r--', label="Solución Real")
-
-plt.title("Método de Euler para EDOs")
-plt.xlabel("x")
-plt.ylabel("y(x)")
-plt.legend()
-plt.grid(True)
-plt.show()
-`
+        
     }
 ];
 
@@ -1103,6 +873,7 @@ const closeDetailBtn = document.getElementById('closeDetailBtn');
 const floatingCloseBtn = document.getElementById('floatingClose');
 const floatingBack = document.getElementById('floatingBack');
 const downloadAnchor = document.getElementById('downloadAnchor');
+const codeSection = document.getElementById('codeSection'); // Nuevo elemento para ocultar/mostrar código
 
 function renderActivities() {
     grid.innerHTML = '';
@@ -1120,21 +891,36 @@ function renderActivities() {
 function showDetail(activity) {
     detailTitle.textContent = activity.title;
     
-    // Inyectar el HTML de description (incluyendo las fórmulas y tablas)
+    // 1. Mostrar/Ocultar Sección de Código y Botón de Descarga
+    const hasCode = activity.code && !activity.code.includes('Código removido');
+    codeSection.style.display = hasCode ? 'block' : 'none';
+    downloadCodeBtn.style.display = hasCode ? 'inline-block' : 'none';
+    
+    // 2. Inyectar el HTML de description (incluyendo las fórmulas y tablas)
     detailEnunciado.innerHTML = activity.description; 
     
-    // Inyectar el texto plano del código
-    detailCode.textContent = activity.code; 
+    // 3. Inyectar el texto plano del código si existe
+    if (hasCode) {
+        detailCode.textContent = activity.code; 
+    } else {
+        detailCode.textContent = ''; // Limpiar si no hay código
+    }
     
-    // Configurar botón PDF
+    // 4. Configurar botón PDF
     openPdfBtn.onclick = () => window.open(activity.pdf, '_blank');
 
-    // Re-renderizar MathJax en el contenido dinámico para mostrar las fórmulas
+    // 5. Re-renderizar MathJax en el contenido dinámico (Crucial para ver las fórmulas)
     if (window.MathJax) {
-        MathJax.typesetPromise([detailEnunciado]); 
+        // Usa typesetPromise para garantizar que se procese después de inyectar el HTML
+        MathJax.typesetPromise([detailEnunciado]).then(() => {
+            // Este .then() se ejecuta cuando las fórmulas están listas
+        }).catch((err) => {
+            console.error("MathJax rendering failed:", err);
+            // Mostrar un mensaje de error si fuera necesario
+        });
     }
 
-    // Mostrar el modal
+    // 6. Mostrar el modal
     detailScreen.classList.add('show');
     detailScreen.setAttribute('aria-hidden', 'false');
     floatingBack.style.display = 'block';
