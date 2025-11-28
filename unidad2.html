@@ -70,13 +70,13 @@
         .volver-floating .btn{padding:10px 12px;border-radius:12px}
 
         /* ======================
-            ESTILO PARA FÓRMULAS (Mejorado para el tema oscuro)
+            ESTILO PARA FÓRMULAS
             ====================== */
         .formula {
-            background: rgba(0, 75, 154, 0.2); /* Fondo azul oscuro claro */
+            background: rgba(0, 75, 154, 0.2); 
             color: var(--blanco);
             padding: 12px;
-            border-left: 5px solid var(--azul-1); /* Borde azul brillante */
+            border-left: 5px solid var(--azul-1); 
             margin: 15px 0;
             border-radius: 6px;
             box-shadow: 0 0 10px rgba(0, 170, 255, 0.1);
@@ -249,27 +249,25 @@
     <a id="downloadAnchor" style="display:none"></a>
 
 <script>
-// Array de Actividades (DATOS ORIGINALES, SOLO description y code MODIFICADOS para 6-12)
+// Array de Actividades (DATOS CORREGIDOS, con sintaxis de LaTeX verificada)
 const activities = [
     {
         id: 'a1',
         title: 'Actividad 1 — Método de Bisección',
         pdf: 'BISECCION.pdf',
         description: `
-            <p>El método de bisección es un procedimiento numérico que permite encontrar una raíz de una función continua dentro de un intervalo $[a, b]$. Se basa en el **teorema de Bolzano**, que indica que si $f(a)$ y $f(b)$ tienen signos opuestos, entonces existe al menos una raíz dentro del intervalo.</p>
+            <p>El método de bisección encuentra la raíz de una función continua $f(x)$ dentro de un intervalo $[a, b]$. Se basa en el **teorema de Bolzano**: si $f(a)$ y $f(b)$ tienen signos opuestos, debe haber una raíz en medio.</p>
 
             <div class="formula">
+                **Fórmula del punto medio:**
                 $$ x_m = \frac{a + b}{2} $$
             </div>
 
-            <p>El intervalo se reduce a la mitad en cada iteración, garantizando la convergencia.</p>
+            <p>En cada paso, el intervalo se reduce a la mitad. Si $f(a) \cdot f(x_m) < 0$, la raíz está en $[a, x_m]$; si no, está en $[x_m, b]$.</p>
             
             <div class="formula">
-                **Condición de reemplazo:** Si $f(a) \cdot f(x_m) < 0$, la raíz está en $[a, x_m]$; de lo contrario, está en $[x_m, b]$.
-            </div>
-
-            <div class="formula">
-                **Error absoluto:** $$ E=\frac{b-a}{2} $$
+                **Error absoluto:**
+                $$ E=\frac{b-a}{2} $$
             </div>
         `,
         code: `
@@ -308,7 +306,7 @@ for i in range(1, max_iter+1):
 else:
     print("\nNo se alcanzó la convergencia después del máximo de iteraciones")
 
-# Código de graficación (mantenido)
+# Código de graficación
 margen = (b - a)*0.1
 xmin = a - margen
 xmax = b + margen
@@ -330,13 +328,14 @@ plt.show()`
         title: 'Actividad 2 — Método de la Secante',
         pdf: 'Secante.pdf',
         description: `
-            <p>El método de la secante es un algoritmo de búsqueda de raíces de una función que utiliza dos aproximaciones iniciales, $x_{n-1}$ y $x_n$. A diferencia del método de Newton-Raphson, **no requiere calcular la derivada** de la función $f(x)$, aproximándola mediante la pendiente de la recta secante que pasa por los puntos $(x_{n-1}, f(x_{n-1}))$ y $(x_n, f(x_n))$</p>
+            <p>El método de la secante halla raíces sin usar derivadas. Usa dos puntos iniciales, $x_{n-1}$ y $x_n$, para construir una recta secante. La intersección de esta secante con el eje $x$ es la nueva aproximación $x_{n+1}$.</p>
 
             <div class="formula">
-                $$ x_{n+1} = x_n - f(x_n)\,\\frac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})} $$
+                **Fórmula de la Secante:**
+                $$ x_{n+1} = x_n - f(x_n) \frac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})} $$
             </div>
 
-            <p>**Nota:** Este método puede converger más rápido que la bisección (con orden $\phi \approx 1.618$), pero no siempre está garantizada la convergencia si los puntos iniciales no son cercanos a la raíz.</p>
+            <p>Suele ser más rápido que el método de bisección, pero no siempre garantiza la convergencia si los puntos iniciales no son buenos.</p>
         `,
         code: `
 import numpy as np
@@ -413,16 +412,18 @@ else:
         title: 'Actividad 3 — Método del Punto Fijo',
         pdf: 'Puntofijo.pdf',
         description: `
-            <p>El método del punto fijo busca una solución para la ecuación $f(x)=0$ transformándola en una forma equivalente $x=g(x)$. La raíz $\alpha$ es entonces el punto fijo de $g(x)$, es decir, $\alpha = g(\alpha)$.</p>
+            <p>El método del punto fijo busca la raíz $\alpha$ de $f(x)=0$ convirtiéndola en la ecuación equivalente $x=g(x)$. La raíz $\alpha$ es el **punto fijo** de $g(x)$, es decir, $\alpha = g(\alpha)$.</p>
 
             <div class="formula">
+                **Fórmula de iteración:**
                 $$ x_{n+1} = g(x_n) $$
             </div>
 
-            <p>La **convergencia** está garantizada si la función $g(x)$ es derivable en el intervalo que contiene la raíz y su valor absoluto de la derivada es menor que uno en dicho intervalo: $|g'(x)| < 1$.</p>
+            <p>La convergencia solo ocurre si, cerca de la raíz, la derivada de $g(x)$ cumple con $|g'(x)| < 1$.</p>
 
             <div class="formula">
-                **Condición de convergencia:** $$ |g'(x)| \le k < 1 $$
+                **Condición de convergencia:**
+                $$ |g'(x)| \le k < 1 $$
             </div>
         `,
         code: `
@@ -478,15 +479,16 @@ else:
         title: 'Actividad 4 — Método de Regula Falsi',
         pdf: 'Regulafalsi.pdf',
         description: `
-            <p>El método de **Regula Falsi** (o método de la falsa posición) es una mejora del método de bisección. Se basa en trazar una recta secante entre los puntos finales $(a, f(a))$ y $(b, f(b))$ del intervalo, y usar la intersección de esta secante con el eje $x$ como la nueva aproximación a la raíz ($x_r$).</p>
+            <p>El método de **Regula Falsi** (o falsa posición) mejora a bisección usando una recta secante entre los puntos $(a, f(a))$ y $(b, f(b))$. La nueva aproximación $x_r$ es el corte de esa recta con el eje $x$.</p>
 
-            <p>Al igual que bisección, requiere que $f(a) \cdot f(b) < 0$ para acotar la raíz.</p>
+            <p>Necesita que $f(a) \cdot f(b) < 0$ para acotar la raíz.</p>
 
             <div class="formula">
+                **Fórmula de Regula Falsi:**
                 $$ x_r = b - f(b)\frac{b-a}{f(b)-f(a)} $$
             </div>
 
-            <p>**Nota:** Este método mantiene la propiedad de convergencia de bisección, pero generalmente converge más rápido porque usa información de la función, aunque la convergencia puede ser lenta si la función es muy cóncava o convexa cerca de la raíz.</p>
+            <p>Es más rápido que bisección, pero puede ser lento si la función es muy curva cerca de la raíz.</p>
         `,
         code: `
 import numpy as np
@@ -556,13 +558,14 @@ else:
         title: 'Actividad 5 — Método de Newton-Raphson',
         pdf: 'Actividad_05.pdf',
         description: `
-            <p>El método de **Newton-Raphson** es un método iterativo muy eficiente para encontrar raíces de funciones reales. Se basa en el desarrollo de la función en serie de Taylor alrededor del punto actual y truncando después del primer término, lo que equivale a usar la recta tangente a la función en $x_n$ para estimar el siguiente punto, $x_{n+1}$.</p>
+            <p>El método de **Newton-Raphson** es un método iterativo muy rápido para hallar raíces. Se basa en usar la **recta tangente** a la función en el punto actual $x_n$ para estimar el siguiente punto $x_{n+1}$.</p>
             
             <div class="formula">
+                **Fórmula de Newton-Raphson:**
                 $$ x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} $$
             </div>
 
-            <p>**Requisitos:** Requiere que la función sea derivable y que su derivada $f'(x)$ sea calculable y no nula cerca de la raíz. Tiende a la convergencia cuadrática (muy rápida) si la suposición inicial es suficientemente cercana a la raíz. En este código, la derivada se calcula numéricamente por diferencias finitas.</p>
+            <p>Necesita que la función sea derivable ($f'(x)$). En este código, la derivada se aproxima numéricamente.</p>
         `,
         code: `
 import numpy as np
@@ -630,22 +633,22 @@ else:
     print(f"Último valor aproximado: {x:.6f}")
 `
     },
-    // --- INICIO ACTIVIDADES MODIFICADAS/REESCRITAS (6 a 12) ---
     {
         id: 'a6',
         title: 'Actividad 6 — Índice H (Métrica Bibliométrica)',
         pdf: 'Actividad6.pdf',
         description: `
-            <p>El **Índice H** (o índice de Hirsch) es una métrica bibliométrica propuesta en 2005 para cuantificar la productividad y el impacto de un investigador. Combina la cantidad de publicaciones con la frecuencia de sus citaciones.</p>
-            <p>Se define de la siguiente manera: Un científico tiene un índice $h$ si $h$ de sus publicaciones tienen al menos $h$ citaciones cada una, y el resto tienen $\le h$ citaciones.</p>
-
+            <p>El **Índice H** (o índice de Hirsch) mide la productividad y el impacto de un investigador. Un autor tiene un índice $h$ si $h$ de sus publicaciones tienen al menos $h$ citaciones cada una.</p>
+            
             <div class="formula">
                 **Definición Formal:**
                 $$ h = \max \{i \in \mathbb{N} : \text{La publicación } i \text{ tiene al menos } i \text{ citas} \} $$
             </div>
 
+            <p>Es una métrica clave para evaluar el impacto científico.</p>
+
             <h4>Autores Clave en Métodos Numéricos (Ejemplos de Índice H)</h4>
-            <p>La siguiente tabla muestra el Índice H de los autores principales en el material de referencia (los enlaces son ejemplos de Scopus ID):</p>
+            <p>Esta tabla muestra ejemplos de autores importantes en el área (los enlaces son ejemplos de Scopus ID):</p>
             <table class="activity-table">
                 <thead>
                     <tr>
@@ -673,8 +676,8 @@ else:
                 </tbody>
             </table>
 
-            <h4>Índice H de Docentes de la Facultad (Ejemplo de aplicación)</h4>
-            <p>El Índice H permite evaluar el impacto de la investigación local:</p>
+            <h4>Índice H de Docentes de la Facultad (Ejemplo local)</h4>
+            <p>Ejemplo de la aplicación de esta métrica a docentes:</p>
             <table class="activity-table">
                 <thead>
                     <tr>
@@ -749,7 +752,7 @@ ejemplo_citas = [10, 8, 5, 4, 2, 1]
         title: 'Actividad 7 — Gradiente de una Función (Descenso por Gradiente)',
         pdf: 'actividad_8.pdf',
         description: `
-            <p>El **Gradiente** ($\nabla f$) de una función escalar multivariable es un vector que apunta en la dirección de máximo crecimiento de la función. En el contexto de optimización, el método de **Descenso por Gradiente** se utiliza para encontrar el mínimo local de una función de coste (Loss Function) moviéndose en la dirección opuesta al gradiente.</p>
+            <p>El **Gradiente** ($\nabla f$) es un vector que indica la dirección de **máximo crecimiento** de una función. El método de **Descenso por Gradiente** busca el mínimo de una función de costo moviéndose en la dirección **opuesta** al gradiente.</p>
 
             <div class="formula">
                 **Vector Gradiente (Función Multivariable):**
@@ -761,7 +764,7 @@ ejemplo_citas = [10, 8, 5, 4, 2, 1]
                 $$ \mathbf{x}_{k+1} = \mathbf{x}_k - \eta \nabla f(\mathbf{x}_k) $$
             </div>
 
-            <p>Donde $\mathbf{x}_k$ es el vector de variables en la iteración $k$, $\nabla f(\mathbf{x}_k)$ es el gradiente de la función de coste evaluado en $\mathbf{x}_k$, y $\eta$ (eta) es la **tasa de aprendizaje** (Learning Rate), que controla el tamaño del paso.</p>
+            <p>Aquí, $\eta$ es la **tasa de aprendizaje** (Learning Rate), que controla qué tan grande es el paso que damos en cada iteración.</p>
         `,
         code: `
 # Código de ejemplo en R para un Descenso por Gradiente simple
@@ -798,28 +801,27 @@ for (i in 1:(iter_max - 1)) {
         title: 'Actividad 8 — Pseudoinverso vs. Descenso de Gradiente en Regresión Lineal',
         pdf: 'iamgen 1.pdf',
         description: `
-            <p>Este artículo contrasta dos métodos fundamentales para resolver el problema de la **Regresión Lineal por Mínimos Cuadrados Ordinarios (OLS)**: el uso de la solución de forma cerrada a través del **Pseudoinverso de Moore-Penrose** y el método iterativo del **Descenso de Gradiente**.</p>
+            <p>Este resumen compara dos formas de resolver la **Regresión Lineal por Mínimos Cuadrados (OLS)**: el **Pseudoinverso** (solución directa) y el **Descenso de Gradiente** (solución iterativa).</p>
             
-            <h4>1. Pseudoinverso de Moore-Penrose (Solución Analítica)</h4>
-            <p>Proporciona la solución exacta para los coeficientes $\mathbf{w}$ que minimizan el error cuadrático. Se basa en la ecuación normal:</p>
+            <h4>1. Pseudoinverso de Moore-Penrose (Solución Exacta)</h4>
+            <p>Da la solución exacta para los pesos ($\mathbf{w}$) en un solo paso matricial, proporcionando el error mínimo posible.</p>
             
             <div class="formula">
                 **Solución Analítica (Pesos $\mathbf{w}$):**
                 $$ \mathbf{w} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y} $$
-                **Donde $\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T$ es el Pseudoinverso $\mathbf{X}^{\dagger}$.**
             </div>
 
-            <p>**Ventajas:** Exactitud y bajo error. **Desventajas:** Alto costo computacional e inestabilidad numérica para matrices de características ($\mathbf{X}$) grandes o mal condicionadas (solución por SVD).</p>
+            <p>**Ventajas:** Exactitud. **Desventajas:** Lento e inestable con matrices de datos ($\mathbf{X}$) muy grandes o "mal condicionadas".</p>
 
-            <h4>2. Descenso de Gradiente (Solución Iterativa)</h4>
-            <p>Minimiza la **función de coste (Error Cuadrático Medio - MSE)** iterativamente, ajustando los pesos en la dirección opuesta al gradiente de la función de coste. La función de coste $J(\mathbf{w})$ es:</p>
+            <h4>2. Descenso de Gradiente (Solución Aproximada)</h4>
+            <p>Ajusta los pesos iterativamente, moviéndose en contra del gradiente de la función de costo (MSE).</p>
 
             <div class="formula">
                 **Función de Coste (MSE):**
                 $$ J(\mathbf{w}) = \frac{1}{2m} \sum_{i=1}^{m} (h_\mathbf{w}(\mathbf{x}^{(i)}) - y^{(i)})^2 $$
             </div>
 
-            <p>**Ventajas:** Escalabilidad y eficiencia para grandes conjuntos de datos. **Desventajas:** Sensibilidad a la tasa de aprendizaje ($\eta$) y a la necesidad de normalización/escalado de las variables para asegurar una convergencia eficiente.</p>
+            <p>**Ventajas:** Muy escalable para grandes datos. **Desventajas:** Depende de la tasa de aprendizaje y puede ser lento para converger.</p>
         `,
         code: `
 # Código conceptual (no funcional) para ilustrar ambos métodos
@@ -848,24 +850,24 @@ print("• Descenso de Gradiente: Mejor para datasets masivos y alta dimensional
     },
     {
         id: 'a9',
-        title: 'Actividad 9 — Dinámica del Juego de Caramelos y Chupetines (Simulación Estocástica)',
+        title: 'Actividad 9 — Dinámica del Juego de Caramelos y Chupetines (Simulación)',
         pdf: 'Dinamica (2).pdf',
         description: `
-            <p>Esta actividad describe la simulación de un **juego cooperativo estocástico** modelado en R, donde el objetivo es alcanzar un estado final específico (un chupetín 'D' por jugador) a partir de un conjunto inicial de recursos aleatorios (caramelos 'A', 'B', 'C').</p>
+            <p>Esta actividad es una **simulación estocástica** (con elementos aleatorios) en R. Simula un juego cooperativo donde los jugadores combinan caramelos ('A', 'B', 'C') para crear chupetines ('D').</p>
             
-            <p>La simulación utiliza **reglas de transición de estado** basadas en el inventario actual de caramelos y un componente estocástico (aleatorio) para la reposición de recursos. Los estados y las transiciones se rigen por las siguientes reglas:</p>
+            <p>La meta es obtener un chupetín para cada jugador, siguiendo reglas de transición de estado:</p>
 
             <div class="formula">
-                **Regla de Creación 1 (1D):**
-                $$ \{A \ge 1, B \ge 1, C \ge 1\} \Rightarrow \text{Crear } 1D, \text{ consumir } \{1A, 1B, 1C\} $$
+                **Regla de Creación 1:**
+                $$ \{A \ge 1, B \ge 1, C \ge 1\} \Rightarrow 1D $$
             </div>
 
             <div class="formula">
-                **Regla de Creación 2 (2D + Reposición):**
-                $$ \{A \ge 2, B \ge 2, C \ge 2\} \Rightarrow \text{Crear } 2D, \text{ consumir } \{2A, 2B, 2C\}, \text{ y añadir 1 caramelo aleatorio} $$
+                **Regla de Creación 2 (Bonificación):**
+                $$ \{A \ge 2, B \ge 2, C \ge 2\} \Rightarrow 2D + \text{Caramelo Aleatorio} $$
             </div>
             
-            <p>La dinámica cesa cuando se cumple la **condición de victoria** (chupetines $\ge$ número de jugadores) o se alcanza el límite de iteraciones, sirviendo como ejemplo de modelado de sistemas complejos y dinámicos.</p>
+            <p>Cuando no se pueden hacer más chupetines, un chupetín ('D') se puede intercambiar por tres caramelos aleatorios para reabastecer la bolsa.</p>
         `,
         code: `
 # Código conceptual en R (Simulación Estocástica)
@@ -932,16 +934,16 @@ for (i in 1:MAX_ITER) {
         title: 'Actividad 10 — Registración No Rígida de Imágenes (Método Demons)',
         pdf: 'tarea de resumenes.pdf',
         description: `
-            <p>El artículo se centra en la **registración no rígida** de imágenes médicas, un proceso crítico para alinear datos obtenidos de distintos escaneos o sensores. La registración no rígida permite modelar las deformaciones locales de los tejidos biológicos, a diferencia de la registración rígida que solo permite traslaciones y rotaciones.</p>
+            <p>La **Registración No Rígida** alinea imágenes médicas que tienen deformaciones locales (como el movimiento de tejidos). El método principal que analiza el artículo es el algoritmo **Demons**.</p>
 
-            <p>El método principal discutido es el algoritmo **Demons**, que modela el campo de deformación entre la imagen flotante ($I_F$) y la imagen de referencia ($I_R$) basándose en el **flujo óptico**. La deformación es vista como un movimiento de "demons" que empujan a la imagen flotante hacia la imagen de referencia.</p>
+            <p>Demons modela la deformación como un "flujo óptico", donde los píxeles se mueven para que la imagen flotante ($I_F$) se alinee con la de referencia ($I_R$).</p>
 
             <div class="formula">
-                **Desplazamiento del Vóxel $v$ (Versión Simple de Demons):**
+                **Fórmula de Desplazamiento del Vóxel $v$ (Demons Simple):**
                 $$ \mathbf{v}(\mathbf{x}) = \frac{(I_R(\mathbf{x}) - I_F(\mathbf{x})) \cdot \nabla I_R(\mathbf{x})}{\| \nabla I_R(\mathbf{x}) \|^2 + (I_R(\mathbf{x}) - I_F(\mathbf{x}))^2} \cdot \nabla I_R(\mathbf{x}) $$
             </div>
 
-            <p>Donde $I_R(\mathbf{x})$ y $I_F(\mathbf{x})$ son la intensidad del vóxel $\mathbf{x}$ en las imágenes de referencia y flotante, y $\nabla I_R(\mathbf{x})$ es el vector gradiente de la imagen de referencia. El artículo señala que las variantes más avanzadas incorporan información direccional y de regularización para manejar grandes deformaciones y mejorar la precisión.</p>
+            <p>El algoritmo calcula el **Gradiente** ($\nabla I_R(\mathbf{x})$) para determinar la dirección del movimiento necesario en cada punto.</p>
         `,
         code: `
 # Pseudocódigo/Comentario: La implementación del método Demons 
@@ -953,7 +955,7 @@ for (i in 1:MAX_ITER) {
 # 2. Iterar hasta la convergencia:
 #    a. Deformar la Imagen Flotante: I_deformada = I_F(DVF).
 #    b. Calcular el Desplazamiento (v): Usando la fórmula del gradiente/intensidad.
-#    c. Suavizar/Regularizar v: Aplicar un filtro gaussiano (opcional, para estabilidad).
+#    c. Suavizar/Regularizar v: Aplicar un filtro gaussiano (para estabilidad).
 #    d. Componer/Actualizar el DVF: DVF_nuevo = DVF + v.
 # 3. Resultado: El DVF final.
 
@@ -964,33 +966,29 @@ for (i in 1:MAX_ITER) {
         title: 'Actividad 11 — Diferenciación Numérica (Fórmulas de Diferencias Finitas)',
         pdf: 'Actividad11 (1).pdf',
         description: `
-            <p>La **Diferenciación Numérica** consiste en aproximar la derivada de una función $f(x)$ utilizando sus valores en un conjunto discreto de puntos. El concepto se basa en la definición de la derivada, pero con un paso $h$ pequeño pero finito.</p>
+            <p>La **Diferenciación Numérica** estima la derivada de una función $f'(x)$ usando valores discretos (puntos cercanos). Se basa en la definición de la derivada con un paso $h$ pequeño.</p>
 
             <div class="formula">
                 **Definición de la Derivada:**
                 $$ f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h} $$
             </div>
 
-            <p>Las aproximaciones más comunes se conocen como **Fórmulas de Diferencias Finitas**:</p>
+            <p>Las fórmulas más comunes son las **Diferencias Finitas**:</p>
 
-            <h4>1. Diferencia Adelante (Forward Difference)</h4>
-            <p>Aproxima la pendiente usando el punto actual y el siguiente.</p>
+            <h4>1. Diferencia Adelante (Error $O(h)$)</h4>
             <div class="formula">
-                $$ f'(x) \approx \frac{f(x + h) - f(x)}{h} + O(h) $$
+                $$ f'(x) \approx \frac{f(x + h) - f(x)}{h} $$
             </div>
 
-            <h4>2. Diferencia Atrás (Backward Difference)</h4>
-            <p>Aproxima la pendiente usando el punto actual y el anterior.</p>
+            <h4>2. Diferencia Atrás (Error $O(h)$)</h4>
             <div class="formula">
-                $$ f'(x) \approx \frac{f(x) - f(x - h)}{h} + O(h) $$
+                $$ f'(x) \approx \frac{f(x) - f(x - h)}{h} $$
             </div>
 
-            <h4>3. Diferencia Central (Central Difference)</h4>
-            <p>Aproxima la pendiente usando los puntos vecino anterior y posterior. Es generalmente la más precisa ($O(h^2)$).</p>
+            <h4>3. Diferencia Central (Más precisa, Error $O(h^2)$)</h4>
             <div class="formula">
-                $$ f'(x) \approx \frac{f(x + h) - f(x - h)}{2h} + O(h^2) $$
+                $$ f'(x) \approx \frac{f(x + h) - f(x - h)}{2h} $$
             </div>
-            <p>La notación $O(h)$ u $O(h^2)$ representa el orden del error de truncamiento.</p>
         `,
         code: `
 import numpy as np
@@ -1027,19 +1025,14 @@ print(f"Diferencia Central:  {f_prime_central:.6f} (Error: {abs(f_prime_central 
         title: 'Actividad 12 — Ecuaciones Diferenciales Ordinarias (Método de Euler)',
         pdf: 'Actividad_12.pdf',
         description: `
-            <p>El **Método de Euler** es el método numérico más simple para resolver Ecuaciones Diferenciales Ordinarias (EDO) de primer orden con un valor inicial. Se basa en la aproximación de que la función es localmente lineal, utilizando el primer término de la expansión de Taylor para estimar el valor en el siguiente paso.</p>
+            <p>El **Método de Euler** es el método más simple para resolver Ecuaciones Diferenciales Ordinarias (EDO) de primer orden con un valor inicial. Asume que la función es una línea recta durante un paso pequeño $h$, usando el primer término de la serie de Taylor.</p>
 
-            <p>Dada una EDO de la forma:</p>
-            <div class="formula">
-                $$ \frac{dy}{dx} = f(x, y), \quad \text{con condición inicial } y(x_0) = y_0 $$
-            </div>
-
-            <p>La fórmula iterativa del Método de Euler permite avanzar la solución un paso de tamaño $h$ a la vez:</p>
+            <p>Dada la EDO $\frac{dy}{dx} = f(x, y)$, la fórmula de iteración es:</p>
             <div class="formula">
                 $$ y_{i+1} = y_i + f(x_i, y_i) \cdot h $$
             </div>
 
-            <p>Donde $h = x_{i+1} - x_i$ es el tamaño del paso, y $f(x_i, y_i)$ es la pendiente (derivada) en el punto actual. Este método tiene un error de truncamiento local de orden $O(h^2)$ y un error global de orden $O(h)$, por lo que requiere pasos $h$ pequeños para ser preciso.</p>
+            <p>Donde $h$ es el tamaño del paso, y $f(x_i, y_i)$ es la pendiente en el punto actual. Es un método de **primer orden**, por lo que su precisión mejora mucho al usar pasos $h$ más pequeños.</p>
         `,
         code: `
 import numpy as np
@@ -1116,7 +1109,9 @@ function renderActivities() {
     activities.forEach(activity => {
         const card = document.createElement('div');
         card.className = 'card';
-        card.innerHTML = `<h3>${activity.title}</h3><p>${activity.description.substring(0, 80).replace(/<[^>]*>?/gm, '...')}...</p>`;
+        // Se usa textContent para evitar problemas de MathJax en la vista previa
+        const previewText = activity.description.replace(/<[^>]*>?/gm, ' ').replace(/\s+/g, ' ').trim().substring(0, 80) + '...';
+        card.innerHTML = `<h3>${activity.title}</h3><p>${previewText}</p>`;
         card.onclick = () => showDetail(activity);
         grid.appendChild(card);
     });
@@ -1128,15 +1123,14 @@ function showDetail(activity) {
     // Inyectar el HTML de description (incluyendo las fórmulas y tablas)
     detailEnunciado.innerHTML = activity.description; 
     
-    // Inyectar el texto plano del código, manteniendo su formato para descarga
+    // Inyectar el texto plano del código
     detailCode.textContent = activity.code; 
     
     // Configurar botón PDF
     openPdfBtn.onclick = () => window.open(activity.pdf, '_blank');
 
-    // Re-renderizar MathJax en el contenido dinámico
+    // Re-renderizar MathJax en el contenido dinámico para mostrar las fórmulas
     if (window.MathJax) {
-        // Tip: El uso de typesetPromise asegura que se renderice después de inyectar el contenido
         MathJax.typesetPromise([detailEnunciado]); 
     }
 
@@ -1154,8 +1148,9 @@ function closeDetail() {
 
 function downloadCode() {
     const codeContent = detailCode.textContent;
-    const activityId = detailTitle.textContent.replace(/[^a-zA-Z0-9]/g, '_');
-    const filename = `${activityId}.txt`;
+    // Limpiar el título para el nombre del archivo
+    const activityName = detailTitle.textContent.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase(); 
+    const filename = `${activityName}.txt`;
     
     const blob = new Blob([codeContent], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
