@@ -249,12 +249,18 @@
             <div class="nav-tab" onclick="showActivity('act4')">4. Regula Falsi</div>
             <div class="nav-tab" onclick="showActivity('act5')">5. Newton-Raphson</div>
             <div class="nav-tab" onclick="showActivity('act6')">6. Índice H</div>
-            <div class="nav-tab" onclick="showActivity('act7')">7. Gradiente</div>
-            <div class="nav-tab" onclick="showActivity('act8')">8. Pseudoinverso</div>
-            <div class="nav-tab" onclick="showActivity('act9')">9. Juego Caramelos</div>
-            <div class="nav-tab" onclick="showActivity('act10')">10. Registración</div>
-            <div class="nav-tab" onclick="showActivity('act11')">11. Diferenciación</div>
-            <div class="nav-tab" onclick="showActivity('act12')">12. Euler</div>
+            <div class="nav-tab" onclick="showActivity('act7')">7. Gradiente de una Función</div>
+            <div class="nav-tab" onclick="showActivity('act8')">8. Analisis del articulo</div>
+            <div class="nav-tab" onclick="showActivity('act9')">9. Simulación Juego Caramelos</div>
+            <div class="nav-tab" onclick="showActivity('act10')">10. Resumen del articulo</div>
+            <div class="nav-tab" onclick="showActivity('act11')">11. Diferenciación Numérica</div>
+            <div class="nav-tab" onclick="showActivity('act12')">12. Interpolación Numérica</div>
+            <div class="nav-tab" onclick="showActivity('act12')">13. Ejercicio Aplicado light Apache Jmeter</div>
+            <div class="nav-tab" onclick="showActivity('act12')">14. Poster Científico</div>
+            <div class="nav-tab" onclick="showActivity('act12')">15. Ejercicios de Eigen Values</div>
+            <div class="nav-tab" onclick="showActivity('act12')">16. Introducción a Markov</div>
+            <div class="nav-tab" onclick="showActivity('act12')">17. Libro</div>
+            
         </div>
 
         <!-- MENÚ PRINCIPAL -->
@@ -307,25 +313,25 @@
                     
                     <!-- Actividad 7 -->
                     <div class="section" style="cursor:pointer" onclick="showActivity('act7')">
-                        <h3>7. Gradiente</h3>
+                        <h3>7. Gradiente de una Función</h3>
                         <p>Vector de máximo crecimiento y descenso.</p>
                     </div>
                     
                     <!-- Actividad 8 -->
                     <div class="section" style="cursor:pointer" onclick="showActivity('act8')">
-                        <h3>8. Pseudoinverso vs Gradiente</h3>
+                        <h3>8. Análisis del artículo</h3>
                         <p>Comparación en regresión lineal.</p>
                     </div>
                     
                     <!-- Actividad 9 -->
                     <div class="section" style="cursor:pointer" onclick="showActivity('act9')">
-                        <h3>9. Juego de Caramelos</h3>
+                        <h3>9. Simulación del Juego de Caramelos</h3>
                         <p>Simulación estocástica cooperativa.</p>
                     </div>
                     
                     <!-- Actividad 10 -->
                     <div class="section" style="cursor:pointer" onclick="showActivity('act10')">
-                        <h3>10. Registración No Rígida</h3>
+                        <h3>10. Resumen del Arcticulo</h3>
                         <p>Algoritmo Demons para imágenes médicas.</p>
                     </div>
                     
@@ -337,70 +343,244 @@
                     
                     <!-- Actividad 12 -->
                     <div class="section" style="cursor:pointer" onclick="showActivity('act12')">
-                        <h3>12. Método de Euler</h3>
+                        <h3>12. Interpolación Numérica</h3>
+                        <p>Solución.</p>
+                    </div>
+
+                    <div class="section" style="cursor:pointer" onclick="showActivity('act13')">
+                        <h3>13. Ejercicio Aplicado light Apache Jmeter</h3>
+                        <p>Comparacion.</p>
+                    </div>
+
+                    <div class="section" style="cursor:pointer" onclick="showActivity('act14')">
+                        <h3>14. Poster Cientifico</h3>
+                        <p>Un poster cientifico.</p>
+                    </div>
+
+                    <div class="section" style="cursor:pointer" onclick="showActivity('act15')">
+                        <h3>15. Ejercicios de Eigen Values</h3>
                         <p>Solución de EDOs con paso fijo.</p>
                     </div>
+
+                    <div class="section" style="cursor:pointer" onclick="showActivity('act16')">
+                        <h3>16. Introducción a Markov</h3>
+                        <p>Solución de EDOs con paso fijo.</p>
+                    </div>
+
+                    <div class="section" style="cursor:pointer" onclick="showActivity('act17')">
+                        <h3>17. Libro</h3>
+                        <p>Libro de las 2 unidades.</p>
+                    </div>
+
+                    
                 </div>
             </div>
         </div>
 
-        <!-- ACTIVIDAD 1: BISECCIÓN -->
-        <div class="activity-content" id="act1">
-            <div class="activity-container">
-                <h2 style="color:var(--azul-1); margin-bottom:20px;">Actividad 1 — Método de Bisección</h2>
-                
-                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;">
-                    <a href="#menu" class="btn ghost">⬅ Volver al Menú</a>
-                    <button class="btn" onclick="window.open('BISECCION.pdf', '_blank')">📘 Ver PDF</button>
-                    <button class="btn secondary" onclick="descargarCodigo('codigo1', 'biseccion.py')">💾 Descargar código</button>
+       <!-- ACTIVIDAD 1: BISECCIÓN -->
+<div class="activity-content" id="act1">
+    <div class="activity-container">
+        <h2 style="color:var(--azul-1); margin-bottom:20px;">
+            Actividad 1 — Método de Bisección
+        </h2>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;">
+            <a href="#menu" class="btn ghost">⬅ Volver al Menú</a>
+            <button class="btn" onclick="window.open('BISECCION.pdf', '_blank')">📘 Ver PDF</button>
+            <button class="btn secondary" onclick="descargarCodigo('codigo1', 'biseccion.py')">💾 Descargar código</button>
+        </div>
+
+        <!-- INTRODUCCIÓN -->
+        <div class="section">
+            <h3>📘 Introducción</h3>
+            <p>
+                El método de bisección es un método numérico iterativo utilizado para encontrar
+                raíces de ecuaciones no lineales de la forma <em>f(x)=0</em>. Su principal ventaja
+                es que garantiza la convergencia siempre que la función sea continua en el
+                intervalo de análisis.
+            </p>
+            <p>
+                Este método se basa en el <strong>Teorema de Bolzano</strong>, el cual establece
+                que si una función continua cambia de signo en un intervalo cerrado
+                <em>[a,b]</em>, entonces existe al menos una raíz dentro de dicho intervalo.
+            </p>
+            <p>
+                El procedimiento consiste en dividir repetidamente el intervalo en dos partes
+                iguales y seleccionar el subintervalo que contiene la raíz, hasta alcanzar una
+                tolerancia predefinida o un número máximo de iteraciones.
+            </p>
+        </div>
+
+        <!-- FÓRMULAS -->
+        <div class="section">
+            <h3>📐 Fórmulas Fundamentales</h3>
+
+            <div class="formula">
+                <strong>Condición de Bolzano:</strong>
+                $$ f(a)\cdot f(b) < 0 $$
+            </div>
+
+            <div class="formula">
+                <strong>Punto medio:</strong>
+                $$ x_m = \frac{a + b}{2} $$
+            </div>
+
+            <div class="formula">
+                <strong>Error absoluto:</strong>
+                $$ E_n = \frac{b_n - a_n}{2} $$
+            </div>
+
+            <div class="formula">
+                <strong>Criterio de parada:</strong>
+                $$ |f(x_m)| < \varepsilon \quad \text{o} \quad E_n < \varepsilon $$
+            </div>
+
+            <div class="formula">
+                <strong>Número mínimo de iteraciones:</strong>
+                $$
+                n \ge \frac{\ln\left(\frac{b-a}{\varepsilon}\right)}{\ln(2)}
+                $$
+            </div>
+        </div>
+
+        <!-- SIMULACIÓN -->
+        <div class="section">
+            <h3>🎮 Simulación Interactiva</h3>
+            <p>Ingresa la función y los parámetros para ejecutar el método de bisección:</p>
+
+            <div class="simulacion-container">
+                <div class="input-group">
+                    <input type="text" id="func1" class="input-field"
+                           value="x**2 - 4" placeholder="Función f(x)">
+                    <input type="number" id="a1" class="input-field" value="0">
+                    <input type="number" id="b1" class="input-field" value="3">
+                    <input type="number" id="tol1" class="input-field" value="0.0001">
+                    <input type="number" id="iter1" class="input-field" value="20">
                 </div>
 
-                <!-- TEORÍA -->
-                <div class="section">
-                    <h3>📚 Explicación Teórica</h3>
-                    <p>El método de bisección encuentra la raíz de una función continua $f(x)$ dentro de un intervalo $[a, b]$. Se basa en el <strong>teorema de Bolzano</strong>: si $f(a)$ y $f(b)$ tienen signos opuestos, debe haber una raíz en medio.</p>
-                    
-                    <div class="formula">
-                        <strong>Fórmula del punto medio:</strong>
-                        $$ x_m = \frac{a + b}{2} $$
-                    </div>
+                <button class="btn" onclick="simularBiseccion()" style="margin-top:10px;">
+                    🚀 Ejecutar Método de Bisección
+                </button>
 
-                    <p>En cada paso, el intervalo se reduce a la mitad. Si $f(a) \cdot f(x_m) < 0$, la raíz está en $[a, x_m]$; si no, está en $[x_m, b]$.</p>
-                    
-                    <div class="formula">
-                        <strong>Error absoluto:</strong>
-                        $$ E=\frac{b-a}{2} $$
-                    </div>
+                <div class="resultados" id="resultados1">
+                    <p style="color:#aaa;">Los resultados se mostrarán aquí...</p>
                 </div>
 
-                <!-- SIMULACIÓN -->
-                <div class="section">
-                    <h3>🎮 Simulación Interactiva</h3>
-                    <p>Ingresa una función y parámetros para ejecutar el método de bisección:</p>
-                    
-                    <div class="simulacion-container">
-                        <div class="input-group">
-                            <input type="text" id="func1" class="input-field" 
-                                   placeholder="Función f(x). Ej: x**2 - 4" value="x**2 - 4">
-                            <input type="number" id="a1" class="input-field" 
-                                   placeholder="Valor inicial a" step="0.1" value="0">
-                            <input type="number" id="b1" class="input-field" 
-                                   placeholder="Valor inicial b" step="0.1" value="3">
-                            <input type="number" id="tol1" class="input-field" 
-                                   placeholder="Tolerancia" step="0.000001" value="0.0001">
-                            <input type="number" id="iter1" class="input-field" 
-                                   placeholder="Iteraciones máx" value="20">
-                        </div>
-                        
-                        <button class="btn" onclick="simularBiseccion()" style="margin-top:10px;">
-                            🚀 Ejecutar Método de Bisección
-                        </button>
-                        
-                        <div class="resultados" id="resultados1">
-                            <p style="color:#aaa;">Los resultados se mostrarán aquí...</p>
-                        </div>
-                    </div>
-                </div>
+                <canvas id="grafico" width="600" height="300" style="margin-top:20px;"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SCRIPT -->
+<script>
+function simularBiseccion() {
+    const funcStr = document.getElementById("func1").value;
+    let a = parseFloat(document.getElementById("a1").value);
+    let b = parseFloat(document.getElementById("b1").value);
+    const tol = parseFloat(document.getElementById("tol1").value);
+    const maxIter = parseInt(document.getElementById("iter1").value);
+    const salida = document.getElementById("resultados1");
+
+    let f;
+    try {
+        f = new Function("x", `return ${funcStr}`);
+        if (isNaN(f(a)) || isNaN(f(b))) throw "Error";
+    } catch {
+        salida.innerHTML = "<p style='color:red;'>❌ Error en la función ingresada.</p>";
+        return;
+    }
+
+    if (f(a) * f(b) > 0) {
+        salida.innerHTML = "<p style='color:red;'>❌ No se cumple el Teorema de Bolzano.</p>";
+        return;
+    }
+
+    let tabla = `
+    <table class="tabla">
+        <tr>
+            <th>Iter</th>
+            <th>a</th>
+            <th>b</th>
+            <th>xₘ</th>
+            <th>f(xₘ)</th>
+            <th>Error</th>
+        </tr>`;
+
+    let xm, error;
+    let puntos = [];
+
+    for (let i = 1; i <= maxIter; i++) {
+        xm = (a + b) / 2;
+        error = Math.abs(b - a) / 2;
+
+        tabla += `
+        <tr>
+            <td>${i}</td>
+            <td>${a.toFixed(4)}</td>
+            <td>${b.toFixed(4)}</td>
+            <td>${xm.toFixed(6)}</td>
+            <td>${f(xm).toExponential(3)}</td>
+            <td>${error.toExponential(3)}</td>
+        </tr>`;
+
+        puntos.push(xm);
+
+        if (Math.abs(f(xm)) < tol || error < tol) break;
+
+        if (f(a) * f(xm) < 0) b = xm;
+        else a = xm;
+    }
+
+    tabla += "</table>";
+
+    salida.innerHTML = `
+        <p><strong>✅ Raíz aproximada:</strong> ${xm.toFixed(6)}</p>
+        <p><strong>📏 Error final:</strong> ${error.toExponential(3)}</p>
+        ${tabla}
+    `;
+
+    dibujarGrafico(f, puntos);
+}
+
+function dibujarGrafico(f, puntos) {
+    const canvas = document.getElementById("grafico");
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const escalaX = canvas.width / 10;
+    const escalaY = canvas.height / 10;
+
+    ctx.strokeStyle = "#aaa";
+    ctx.beginPath();
+    ctx.moveTo(0, canvas.height / 2);
+    ctx.lineTo(canvas.width, canvas.height / 2);
+    ctx.moveTo(canvas.width / 2, 0);
+    ctx.lineTo(canvas.width / 2, canvas.height);
+    ctx.stroke();
+
+    ctx.strokeStyle = "blue";
+    ctx.beginPath();
+    for (let x = -5; x <= 5; x += 0.1) {
+        let y = f(x);
+        let px = canvas.width / 2 + x * escalaX;
+        let py = canvas.height / 2 - y * escalaY;
+        if (x === -5) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+
+    ctx.fillStyle = "red";
+    puntos.forEach(x => {
+        let px = canvas.width / 2 + x * escalaX;
+        let py = canvas.height / 2 - f(x) * escalaY;
+        ctx.beginPath();
+        ctx.arc(px, py, 4, 0, 2 * Math.PI);
+        ctx.fill();
+    });
+}
+</script>
+
 
                 <!-- CÓDIGO -->
                 <div class="section">
@@ -444,57 +624,209 @@ else:
         </div>
 
         <!-- ACTIVIDAD 2: SECANTE -->
-        <div class="activity-content" id="act2">
-            <div class="activity-container">
-                <h2 style="color:var(--azul-1); margin-bottom:20px;">Actividad 2 — Método de la Secante</h2>
-                
-                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;">
-                    <a href="#menu" class="btn ghost">⬅ Volver al Menú</a>
-                    <button class="btn" onclick="window.open('Secante.pdf', '_blank')">📘 Ver PDF</button>
-                    <button class="btn secondary" onclick="descargarCodigo('codigo2', 'secante.py')">💾 Descargar código</button>
+        <div c<!-- ACTIVIDAD 2: SECANTE -->
+<div class="activity-content" id="act2">
+    <div class="activity-container">
+        <h2 style="color:var(--azul-1); margin-bottom:20px;">
+            Actividad 2 — Método de la Secante
+        </h2>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;">
+            <a href="#menu" class="btn ghost">⬅ Volver al Menú</a>
+            <button class="btn" onclick="window.open('Secante.pdf', '_blank')">📘 Ver PDF</button>
+            <button class="btn secondary" onclick="descargarCodigo('codigo2', 'secante.py')">💾 Descargar código</button>
+        </div>
+
+        <!-- INTRODUCCIÓN -->
+        <div class="section">
+            <h3>📘 Introducción</h3>
+            <p>
+                El método de la secante es un método numérico iterativo utilizado para hallar
+                raíces de ecuaciones no lineales de la forma <em>f(x)=0</em>. A diferencia del
+                método de Newton-Raphson, este método no requiere el cálculo de derivadas.
+            </p>
+            <p>
+                El método utiliza dos aproximaciones iniciales <em>x₀</em> y <em>x₁</em> para
+                construir una recta secante a la curva de la función. El punto donde esta recta
+                corta al eje <em>x</em> se toma como una nueva aproximación de la raíz.
+            </p>
+            <p>
+                Aunque suele converger más rápido que el método de bisección, el método de la
+                secante no garantiza convergencia para cualquier elección de puntos iniciales.
+            </p>
+        </div>
+
+        <!-- FÓRMULAS -->
+        <div class="section">
+            <h3>📐 Fórmulas Fundamentales</h3>
+
+            <div class="formula">
+                <strong>Fórmula del método de la secante:</strong>
+                $$
+                x_{n+1} = x_n - f(x_n)\frac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})}
+                $$
+            </div>
+
+            <div class="formula">
+                <strong>Error absoluto:</strong>
+                $$
+                E_n = |x_{n+1} - x_n|
+                $$
+            </div>
+
+            <div class="formula">
+                <strong>Criterio de parada:</strong>
+                $$
+                |f(x_{n+1})| < \varepsilon \quad \text{o} \quad E_n < \varepsilon
+                $$
+            </div>
+
+            <div class="formula">
+                <strong>Orden de convergencia (aproximado):</strong>
+                $$
+                p \approx 1.618
+                $$
+            </div>
+        </div>
+
+        <!-- SIMULACIÓN -->
+        <div class="section">
+            <h3>🎮 Simulación Interactiva</h3>
+            <p>Ingresa la función y los valores iniciales para ejecutar el método de la secante:</p>
+
+            <div class="simulacion-container">
+                <div class="input-group">
+                    <input type="text" id="func2" class="input-field"
+                           value="x**2 - 4" placeholder="Función f(x)">
+                    <input type="number" id="x0_2" class="input-field" value="1">
+                    <input type="number" id="x1_2" class="input-field" value="3">
+                    <input type="number" id="tol2" class="input-field" value="0.0001">
+                    <input type="number" id="iter2" class="input-field" value="20">
                 </div>
 
-                <!-- TEORÍA -->
-                <div class="section">
-                    <h3>📚 Explicación Teórica</h3>
-                    <p>El método de la secante halla raíces sin usar derivadas. Usa dos puntos iniciales, $x_{n-1}$ y $x_n$, para construir una recta secante. La intersección con el eje $x$ es la nueva aproximación $x_{n+1}$.</p>
-                    
-                    <div class="formula">
-                        <strong>Fórmula de la Secante:</strong>
-                        $$ x_{n+1} = x_n - f(x_n) \frac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})} $$
-                    </div>
+                <button class="btn" onclick="simularSecante()" style="margin-top:10px;">
+                    🚀 Ejecutar Método de la Secante
+                </button>
 
-                    <p>Suele ser más rápido que bisección, pero no siempre garantiza la convergencia si los puntos iniciales no son buenos.</p>
+                <div class="resultados" id="resultados2">
+                    <p style="color:#aaa;">Los resultados se mostrarán aquí...</p>
                 </div>
 
-                <!-- SIMULACIÓN -->
-                <div class="section">
-                    <h3>🎮 Simulación Interactiva</h3>
-                    <p>Simula el método de la secante:</p>
-                    
-                    <div class="simulacion-container">
-                        <div class="input-group">
-                            <input type="text" id="func2" class="input-field" 
-                                   placeholder="Función f(x)" value="x**2 - 4">
-                            <input type="number" id="x0_2" class="input-field" 
-                                   placeholder="x0" step="0.1" value="1">
-                            <input type="number" id="x1_2" class="input-field" 
-                                   placeholder="x1" step="0.1" value="3">
-                            <input type="number" id="tol2" class="input-field" 
-                                   placeholder="Tolerancia" value="0.0001">
-                            <input type="number" id="iter2" class="input-field" 
-                                   placeholder="Iteraciones máx" value="20">
-                        </div>
-                        
-                        <button class="btn" onclick="simularSecante()" style="margin-top:10px;">
-                            🚀 Ejecutar Método de la Secante
-                        </button>
-                        
-                        <div class="resultados" id="resultados2">
-                            <p style="color:#aaa;">Los resultados se mostrarán aquí...</p>
-                        </div>
-                    </div>
-                </div>
+                <canvas id="grafico2" width="600" height="300" style="margin-top:20px;"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SCRIPT -->
+<script>
+function simularSecante() {
+    const funcStr = document.getElementById("func2").value;
+    let x0 = parseFloat(document.getElementById("x0_2").value);
+    let x1 = parseFloat(document.getElementById("x1_2").value);
+    const tol = parseFloat(document.getElementById("tol2").value);
+    const maxIter = parseInt(document.getElementById("iter2").value);
+    const salida = document.getElementById("resultados2");
+
+    let f;
+    try {
+        f = new Function("x", `return ${funcStr}`);
+        if (isNaN(f(x0)) || isNaN(f(x1))) throw "Error";
+    } catch {
+        salida.innerHTML = "<p style='color:red;'>❌ Error en la función ingresada.</p>";
+        return;
+    }
+
+    let tabla = `
+    <table class="tabla">
+        <tr>
+            <th>Iter</th>
+            <th>xₙ₋₁</th>
+            <th>xₙ</th>
+            <th>xₙ₊₁</th>
+            <th>f(xₙ₊₁)</th>
+            <th>Error</th>
+        </tr>`;
+
+    let x2, error;
+    let puntos = [x0, x1];
+
+    for (let i = 1; i <= maxIter; i++) {
+        if (f(x1) - f(x0) === 0) {
+            salida.innerHTML = "<p style='color:red;'>❌ División por cero detectada.</p>";
+            return;
+        }
+
+        x2 = x1 - f(x1) * (x1 - x0) / (f(x1) - f(x0));
+        error = Math.abs(x2 - x1);
+
+        tabla += `
+        <tr>
+            <td>${i}</td>
+            <td>${x0.toFixed(6)}</td>
+            <td>${x1.toFixed(6)}</td>
+            <td>${x2.toFixed(6)}</td>
+            <td>${f(x2).toExponential(3)}</td>
+            <td>${error.toExponential(3)}</td>
+        </tr>`;
+
+        puntos.push(x2);
+
+        if (Math.abs(f(x2)) < tol || error < tol) break;
+
+        x0 = x1;
+        x1 = x2;
+    }
+
+    tabla += "</table>";
+
+    salida.innerHTML = `
+        <p><strong>✅ Raíz aproximada:</strong> ${x2.toFixed(6)}</p>
+        <p><strong>📏 Error final:</strong> ${error.toExponential(3)}</p>
+        ${tabla}
+    `;
+
+    dibujarGraficoSecante(f, puntos);
+}
+
+function dibujarGraficoSecante(f, puntos) {
+    const canvas = document.getElementById("grafico2");
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const escalaX = canvas.width / 10;
+    const escalaY = canvas.height / 10;
+
+    ctx.strokeStyle = "#aaa";
+    ctx.beginPath();
+    ctx.moveTo(0, canvas.height / 2);
+    ctx.lineTo(canvas.width, canvas.height / 2);
+    ctx.moveTo(canvas.width / 2, 0);
+    ctx.lineTo(canvas.width, canvas.height);
+    ctx.stroke();
+
+    ctx.strokeStyle = "blue";
+    ctx.beginPath();
+    for (let x = -5; x <= 5; x += 0.1) {
+        let y = f(x);
+        let px = canvas.width / 2 + x * escalaX;
+        let py = canvas.height / 2 - y * escalaY;
+        if (x === -5) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+
+    ctx.fillStyle = "red";
+    puntos.forEach(x => {
+        let px = canvas.width / 2 + x * escalaX;
+        let py = canvas.height / 2 - f(x) * escalaY;
+        ctx.beginPath();
+        ctx.arc(px, py, 4, 0, 2 * Math.PI);
+        ctx.fill();
+    });
+}
+</script>
+
 
                 <!-- CÓDIGO -->
                 <div class="section">
@@ -1087,3 +1419,4 @@ else:
     </script>
 </body>
 </html>
+
