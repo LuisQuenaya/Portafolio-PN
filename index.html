@@ -7,84 +7,166 @@
 
   <!-- Tipografía -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Íconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     :root {
-      --accent: #27c7ff;
-      --accent-light: #6fe8ff;
-      --bg-dark: #131a24;            /* Más claro */
-      --bg-card: rgba(25, 35, 50, 0.7); 
-      --text-light: #e0e6ee;         /* Texto más claro */
-      --radius: 16px;
-      --shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+      --white: #ffffff;
+      --white-soft: #f8faff;
+      --blue-50: #e6f0ff;
+      --blue-100: #c2d9ff;
+      --blue-200: #99c2ff;
+      --blue-300: #66a3ff;
+      --blue-400: #3385ff;
+      --blue-500: #0066ff;
+      --blue-600: #0052cc;
+      --blue-700: #003d99;
+      --blue-800: #002966;
+      --blue-900: #001433;
+      --gradient-primary: linear-gradient(135deg, var(--blue-400), var(--blue-600), var(--blue-800));
+      --gradient-secondary: linear-gradient(135deg, var(--blue-300), var(--blue-500));
+      --gradient-light: linear-gradient(135deg, var(--white), var(--blue-100));
+      --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(230,240,255,0.98));
+      --gradient-dark: linear-gradient(135deg, var(--blue-900), var(--blue-800));
+      --radius: 20px;
+      --shadow-light: 0 10px 30px rgba(0, 82, 204, 0.15);
+      --shadow-medium: 0 15px 40px rgba(0, 82, 204, 0.25);
+      --shadow-heavy: 0 20px 50px rgba(0, 82, 204, 0.3);
+      --glow-blue: 0 0 25px rgba(51, 133, 255, 0.6);
       font-family: 'Poppins', sans-serif;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      background: var(--bg-dark);
-      color: var(--text-light);
-      overflow-x: hidden;
-      line-height: 1.7;
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
     }
 
-    /* Fondo animado */
+    body {
+      background: var(--gradient-light);
+      color: var(--blue-900);
+      overflow-x: hidden;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* Fondo animado de redes neuronales con degradado */
     canvas#network {
       position: fixed;
-      top: 0; left: 0;
+      top: 0; 
+      left: 0;
       width: 100%;
       height: 100%;
       z-index: -1;
-      background: var(--bg-dark);
+      background: var(--gradient-light);
     }
 
-    /* Logos laterales */
+    /* Logos laterales con efecto flotante y degradado */
     .logo-lateral {
       position: fixed;
       top: 50%;
       transform: translateY(-50%);
-      width: 130px; 
+      width: 150px;
+      height: 150px;
       opacity: 0.95;
       z-index: 1500;
-      transition: transform 0.3s ease;
-      filter: drop-shadow(0 0 12px rgba(90, 240, 255, 0.5));
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      filter: drop-shadow(0 0 20px rgba(51, 133, 255, 0.7));
+      border-radius: 50%;
+      background: var(--gradient-card);
+      padding: 15px;
+      border: 3px solid var(--white);
+      box-shadow: var(--shadow-medium), inset 0 0 0 2px rgba(51, 133, 255, 0.2);
+      animation: floatLogo 8s ease-in-out infinite;
     }
-    .logo-lateral:hover { transform: translateY(-50%) scale(1.07); }
-    .logo-izq { left: 25px; }
-    .logo-der { right: 25px; }
+    
+    .logo-lateral:hover { 
+      transform: translateY(-50%) scale(1.15) rotate(5deg);
+      filter: drop-shadow(0 0 30px rgba(51, 133, 255, 0.9));
+      border-color: var(--blue-400);
+      box-shadow: var(--shadow-heavy), inset 0 0 0 3px rgba(51, 133, 255, 0.3);
+    }
+    
+    @keyframes floatLogo {
+      0%, 100% { transform: translateY(-50%); }
+      50% { transform: translateY(calc(-50% + 20px)); }
+    }
+    
+    .logo-izq { 
+      left: 30px; 
+      animation-delay: 0s;
+    }
+    
+    .logo-der { 
+      right: 30px; 
+      animation-delay: 4s;
+    }
 
-    /* Navbar */
+    /* Navbar elegante con degradado */
     header {
       position: fixed;
-      top: 0; left: 0;
+      top: 0; 
+      left: 0;
       width: 100%;
-      padding: 1rem 3rem;
+      padding: 1.3rem 3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(0,0,0,0.45);
-      backdrop-filter: blur(12px);
-      box-shadow: var(--shadow);
+      background: var(--gradient-primary);
+      backdrop-filter: blur(20px);
+      box-shadow: var(--shadow-medium);
       z-index: 1000;
+      border-bottom: 3px solid var(--white);
+      transition: all 0.4s ease;
+    }
+
+    header.scrolled {
+      padding: 1rem 3rem;
+      background: var(--gradient-primary);
+      box-shadow: var(--shadow-heavy);
     }
 
     header h1 {
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: white;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--white);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      letter-spacing: 0.5px;
     }
 
     nav a {
-      color: var(--text-light);
-      margin-left: 2rem;
+      color: var(--white);
+      margin-left: 2.5rem;
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.3s ease;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.4rem 0;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
-    nav a:hover { color: var(--accent-light); }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: var(--white);
+      transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border-radius: 2px;
+    }
+    
+    nav a:hover { 
+      color: var(--white-soft); 
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
 
-    /* Hero */
+    /* Hero section con efecto de entrada y degradado */
     .hero {
       height: 100vh;
       padding: 2rem;
@@ -93,107 +175,464 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      color: white;
-      animation: fadeIn 1.5s ease;
+      color: var(--blue-900);
+      animation: fadeInUp 1.5s ease-out;
+      position: relative;
+      background: radial-gradient(circle at 20% 30%, rgba(255,255,255,1) 0%, rgba(230,240,255,1) 100%);
     }
 
-    .hero h2 { font-size: 2.8rem; margin-bottom: 0.7rem; }
-    .hero p { font-size: 1.25rem; margin-bottom: 1rem; opacity: 0.9; }
-    .hero h3 { font-size: 1.8rem; margin-top: 1rem; color: var(--accent-light); }
-    .hero h4 { font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.85; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 80% 70%, rgba(51, 133, 255, 0.15) 0%, transparent 70%);
+      z-index: -1;
     }
 
-    /* Botón */
-    .btn {
+    .hero h2 { 
+      font-size: 3.5rem; 
+      margin-bottom: 1rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 5px 15px rgba(0, 82, 204, 0.1);
+    }
+    
+    .hero p { 
+      font-size: 1.4rem; 
+      margin-bottom: 1rem; 
+      color: var(--blue-700);
+      max-width: 800px;
+      line-height: 1.8;
+    }
+    
+    .hero h3 { 
+      font-size: 2.2rem; 
+      margin-top: 1.8rem; 
+      color: var(--blue-600);
+      position: relative;
       display: inline-block;
-      padding: 0.9rem 2rem;
-      background: var(--accent);
+      padding-bottom: 0.8rem;
+    }
+    
+    .hero h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      height: 4px;
+      background: var(--gradient-secondary);
+      border-radius: 2px;
+    }
+    
+    .hero h4 { 
+      font-size: 1.5rem; 
+      margin-bottom: 3rem; 
+      color: var(--blue-700);
+      font-weight: 500;
+      background: rgba(255,255,255,0.7);
+      padding: 0.8rem 2rem;
       border-radius: var(--radius);
-      color: white;
+      border: 2px solid var(--blue-100);
+    }
+
+    @keyframes fadeInUp {
+      from { 
+        opacity: 0; 
+        transform: translateY(50px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0); 
+      }
+    }
+
+    /* Botón con efecto de pulso y degradado */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 1.2rem 2.8rem;
+      background: var(--gradient-primary);
+      border-radius: var(--radius);
+      color: var(--white);
       text-decoration: none;
       font-weight: 600;
-      transition: 0.3s ease;
-      box-shadow: var(--shadow);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: var(--shadow-medium);
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 0.5px;
+      font-size: 1.1rem;
     }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.8s ease;
+    }
+    
+    .btn:hover::before {
+      left: 100%;
+    }
+    
     .btn:hover {
-      background: var(--accent-light);
-      transform: scale(1.05);
+      transform: translateY(-8px) scale(1.08);
+      box-shadow: var(--shadow-heavy), var(--glow-blue);
+    }
+    
+    .btn:active {
+      transform: translateY(-4px) scale(1.04);
+    }
+    
+    .btn i {
+      font-size: 1.2rem;
+      transition: transform 0.4s ease;
+    }
+    
+    .btn:hover i {
+      transform: translateX(8px);
     }
 
-    /* Secciones */
-    .section {
-      max-width: 1100px;
-      margin: 6rem auto;
-      padding: 3rem;
-      background: var(--bg-card);
+    /* Microreacción al hacer hover en unidades */
+    .unidad {
+      margin-bottom: 3rem;
+      padding: 2.2rem;
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
+      background: var(--gradient-card);
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 2px solid var(--white);
+      box-shadow: var(--shadow-light);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .unidad::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 8px;
+      height: 100%;
+      background: var(--gradient-primary);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    
+    .unidad:hover {
+      transform: translateX(15px) scale(1.03);
+      box-shadow: var(--shadow-heavy);
+      border-color: var(--blue-300);
+    }
+    
+    .unidad:hover::before {
+      opacity: 1;
+    }
+    
+    .unidad h4 {
+      font-size: 1.8rem;
+      color: var(--blue-700);
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 3px solid var(--blue-200);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .unidad h4 i {
+      font-size: 1.6rem;
+      background: var(--gradient-secondary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .unidad p {
+      margin-bottom: 2rem;
+      color: var(--blue-800);
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    /* Secciones con efecto de aparición y degradado */
+    .section {
+      max-width: 1200px;
+      margin: 7rem auto;
+      padding: 4rem;
+      background: var(--gradient-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-medium);
+      backdrop-filter: blur(10px);
+      border: 2px solid var(--white);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease;
+    }
+    
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .section h3 {
       text-align: center;
-      font-size: 2.2rem;
-      color: var(--accent-light);
-      margin-bottom: 2rem;
+      font-size: 2.6rem;
+      color: var(--blue-800);
+      margin-bottom: 3rem;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+      padding-bottom: 1rem;
+    }
+    
+    .section h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--gradient-primary);
+      border-radius: 3px;
+    }
+    
+    .section h3 i {
+      margin-right: 15px;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
-    .unidad h4 {
-      font-size: 1.6rem;
-      color: var(--accent);
-      margin-bottom: 1rem;
-      border-bottom: 2px solid var(--accent);
-      padding-bottom: 0.5rem;
-    }
-
-    .unidad { margin-bottom: 2.8rem; }
-
-    /* Footer */
+    /* Footer con degradado */
     footer {
       text-align: center;
-      padding: 2rem;
-      margin-top: 4rem;
-      background: rgba(0, 0, 0, 0.7);
-      color: var(--text-light);
-      font-size: 0.9rem;
+      padding: 3rem;
+      margin-top: 5rem;
+      background: var(--gradient-primary);
+      color: var(--white);
+      font-size: 1rem;
+      border-top: 3px solid var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--white);
+    }
+    
+    footer p {
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
-    /* Frases dinámicas */
+    /* Frases dinámicas con animación y degradado */
     #motivacion-text {
       text-align: center;
-      font-size: 1.3rem;
-      color: var(--accent-light);
-      margin-top: 1rem;
-      transition: opacity 0.4s ease;
+      font-size: 1.6rem;
+      color: var(--blue-700);
+      margin-top: 2.5rem;
+      transition: all 0.6s ease;
       font-weight: 600;
       letter-spacing: 0.5px;
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      background: var(--gradient-card);
+      border: 2px solid var(--blue-100);
+      min-height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-light);
+    }
+    
+    /* Efecto de partículas flotantes azules y blancas */
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    /* Animación para títulos importantes */
+    @keyframes highlight {
+      0% { 
+        text-shadow: 0 0 10px rgba(51, 133, 255, 0.3); 
+        transform: scale(1);
+      }
+      50% { 
+        text-shadow: 0 0 25px rgba(51, 133, 255, 0.7); 
+        transform: scale(1.02);
+      }
+      100% { 
+        text-shadow: 0 0 10px rgba(51, 133, 255, 0.3); 
+        transform: scale(1);
+      }
+    }
+    
+    .highlight {
+      animation: highlight 4s infinite;
+      display: inline-block;
+    }
+    
+    /* Scroll suave */
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+    
+    /* Efectos especiales */
+    .glow-effect {
+      position: relative;
+    }
+    
+    .glow-effect::after {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: var(--gradient-primary);
+      border-radius: calc(var(--radius) + 10px);
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    .glow-effect:hover::after {
+      opacity: 0.3;
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+      .logo-lateral {
+        width: 120px;
+        height: 120px;
+      }
+      
+      .logo-izq { left: 15px; }
+      .logo-der { right: 15px; }
+      
+      .hero h2 { font-size: 2.8rem; }
+      .hero p { font-size: 1.2rem; }
+      .hero h3 { font-size: 1.8rem; }
+      .hero h4 { font-size: 1.3rem; }
+      
+      .section {
+        padding: 3rem;
+        margin: 5rem auto;
+      }
+      
+      nav a {
+        margin-left: 1.8rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem 1.5rem;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+      
+      nav {
+        display: flex;
+        gap: 1.2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      nav a {
+        margin-left: 0;
+      }
+      
+      .hero h2 { font-size: 2.3rem; }
+      .hero h3 { font-size: 1.6rem; }
+      .hero h4 { font-size: 1.2rem; }
+      
+      .logo-lateral {
+        position: relative;
+        top: auto;
+        transform: none;
+        margin: 2rem auto;
+        display: block;
+        animation: none;
+        width: 140px;
+        height: 140px;
+      }
+      
+      .logo-izq, .logo-der {
+        position: relative;
+        left: auto;
+        right: auto;
+      }
+      
+      .logo-izq { order: 1; margin-bottom: 1rem; }
+      .logo-der { order: 2; }
+      
+      .hero {
+        padding: 1.5rem;
+      }
+      
+      .section {
+        padding: 2.5rem 1.5rem;
+      }
+      
+      .btn {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero h2 { font-size: 2rem; }
+      .hero p { font-size: 1rem; }
+      .section h3 { font-size: 2rem; }
+      .unidad h4 { font-size: 1.5rem; }
     }
   </style>
 </head>
 
 <body>
 
-<!-- Fondo -->
+<!-- Fondo animado de redes neuronales -->
 <canvas id="network"></canvas>
 
 <!-- Logos laterales -->
 <img src="UNA.png" class="logo-lateral logo-izq" alt="UNA Puno">
 <img src="finesi.png" class="logo-lateral logo-der" alt="Escuela de Informática">
 
-  
-
 <!-- Navbar -->
-<header>
-  <h1>Portafolio Digital</h1>
+<header id="main-header">
+  <h1><i class="fas fa-code"></i> Portafolio Digital</h1>
   <nav>
-    <a href="#inicio">Inicio</a>
-    <a href="#sobre">Sobre el Curso</a>
-    <a href="#actividades">Unidades</a>
-    <a href="#contacto">Contacto</a>
+    <a href="#inicio"><i class="fas fa-home"></i> Inicio</a>
+    <a href="#sobre"><i class="fas fa-book"></i> Sobre el Curso</a>
+    <a href="#actividades"><i class="fas fa-project-diagram"></i> Unidades</a>
+    <a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a>
   </nav>
 </header>
 
@@ -204,14 +643,14 @@
   Escuela Profesional de Ingeniería Estadística e Informática</p>
   <h3>Programación Numérica</h3>
   <h4>Estudiante: Luis Ángel Quenaya Loza</h4>
-  <a href="#actividades" class="btn">Entrar al Portafolio</a>
+  <a href="#actividades" class="btn glow-effect">Explorar Portafolio <i class="fas fa-arrow-right"></i></a>
 </section>
 
 <!-- Sobre el curso -->
 <section class="section" id="sobre">
-  <h3>Sobre el Curso</h3>
+  <h3><i class="fas fa-chalkboard-teacher"></i> Sobre el Curso</h3>
   <p>
-    El curso de <strong>Programación Numérica</strong> aborda el estudio e implementación de métodos computacionales
+    El curso de <strong class="highlight">Programación Numérica</strong> aborda el estudio e implementación de métodos computacionales
     para resolver problemas matemáticos complejos.  
     Se desarrollan competencias en el diseño de algoritmos, pensamiento lógico y precisión en el cálculo numérico.
   </p>
@@ -220,35 +659,43 @@
 
 <!-- Unidades -->
 <section class="section" id="actividades">
-  <h3>Unidades del Curso</h3>
+  <h3><i class="fas fa-layer-group"></i> Unidades del Curso</h3>
 
-  <div class="unidad">
-    <h4>Unidad 1</h4>
+  <div class="unidad glow-effect">
+    <h4><i class="fas fa-cube"></i> Unidad 1</h4>
     <p>Fundamentos de la programación numérica, estructuras y primeros algoritmos.</p>
-    <a href="unidad1.html" target="_blank" class="btn">Abrir Unidad 1</a>
+    <a href="unidad1.html" target="_blank" class="btn">Abrir Unidad 1 <i class="fas fa-external-link-alt"></i></a>
   </div>
 
-  <div class="unidad">
-    <h4>Unidad 2</h4>
+  <div class="unidad glow-effect">
+    <h4><i class="fas fa-chart-line"></i> Unidad 2</h4>
     <p>Métodos numéricos aplicados a ecuaciones, interpolación e integración.</p>
-    <a href="unidad2.html" target="_blank" class="btn">Abrir Unidad 2</a>
+    <a href="unidad2.html" target="_blank" class="btn">Abrir Unidad 2 <i class="fas fa-external-link-alt"></i></a>
   </div>
 
 </section>
 
 <!-- Footer -->
 <footer id="contacto">
-  © 2025 Luis Ángel Quenaya Loza — Universidad Nacional del Altiplano
+  <p><i class="fas fa-graduation-cap"></i> © 2025 Luis Ángel Quenaya Loza — Universidad Nacional del Altiplano</p>
+  <p style="margin-top: 1rem; opacity: 0.9; font-size: 1.1rem;">
+    <i class="fas fa-envelope"></i> Contacto: ejemplo@una.edu.pe | 
+    <i class="fas fa-map-marker-alt"></i> Puno, Perú
+  </p>
 </footer>
 
-<!-- Script animación -->
+<!-- Scripts para animaciones y efectos -->
 <script>
+  // Frases motivacionales dinámicas
   const frases = [
     "“Innovando con resultados”",
     "“Cada algoritmo suma precisión”",
     "“Un ingeniero resuelve, no se rinde”",
     "“El código también es arte”",
-    "“Pensamiento lógico, impacto real”"
+    "“Pensamiento lógico, impacto real”",
+    "“De los números nace la innovación”",
+    "“Programar es crear soluciones”",
+    "“La precisión numérica transforma el mundo”"
   ];
 
   let idx = 0;
@@ -256,59 +703,270 @@
     idx = (idx + 1) % frases.length;
     const el = document.getElementById("motivacion-text");
     el.style.opacity = 0;
+    el.style.transform = "translateY(15px) scale(0.95)";
     setTimeout(() => {
       el.textContent = frases[idx];
       el.style.opacity = 1;
+      el.style.transform = "translateY(0) scale(1)";
     }, 300);
-  }, 4000);
+  }, 5000);
 
-  // Fondo animado
+  // Fondo animado de redes neuronales (mejorado con azules vibrantes)
   const canvas = document.getElementById('network');
   const ctx = canvas.getContext('2d');
-  let w, h, nodes;
+  let w, h, nodes = [];
 
   function resize() {
     w = canvas.width = window.innerWidth;
     h = canvas.height = window.innerHeight;
-    nodes = Array(75).fill().map(() => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4
-    }));
+    
+    // Crear nodos para la red neuronal
+    nodes = [];
+    const nodeCount = Math.min(120, Math.floor((w * h) / 12000));
+    
+    for (let i = 0; i < nodeCount; i++) {
+      nodes.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
+        radius: Math.random() * 3 + 1.5,
+        color: `rgba(${Math.floor(Math.random() * 100 + 155)}, ${Math.floor(Math.random() * 100 + 155)}, 255, 0.8)`
+      });
+    }
   }
+  
   window.addEventListener('resize', resize);
   resize();
 
   function draw() {
-    ctx.clearRect(0, 0, w, h);
-    for (let n1 of nodes) {
-      n1.x += n1.vx;
-      n1.y += n1.vy;
-      if (n1.x < 0 || n1.x > w) n1.vx *= -1;
-      if (n1.y < 0 || n1.y > h) n1.vy *= -1;
-
-      ctx.beginPath();
-      ctx.arc(n1.x, n1.y, 2, 0, Math.PI * 2);
-      ctx.fillStyle = '#6fe8ff';
-      ctx.fill();
-
-      for (let n2 of nodes) {
-        let dx = n1.x - n2.x;
-        let dy = n1.y - n2.y;
-        let dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < 120) {
-          ctx.strokeStyle = `rgba(120,240,255,${1 - dist / 120})`;
+    // Fondo con desenfoque de movimiento
+    ctx.fillStyle = 'rgba(230, 240, 255, 0.03)';
+    ctx.fillRect(0, 0, w, h);
+    
+    // Dibujar conexiones
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance < 180) {
+          // Gradiente para las conexiones
+          const opacity = 1 - (distance / 180);
+          const gradient = ctx.createLinearGradient(
+            nodes[i].x, nodes[i].y,
+            nodes[j].x, nodes[j].y
+          );
+          gradient.addColorStop(0, `rgba(102, 163, 255, ${opacity * 0.7})`);
+          gradient.addColorStop(0.5, `rgba(255, 255, 255, ${opacity * 0.9})`);
+          gradient.addColorStop(1, `rgba(51, 133, 255, ${opacity * 0.7})`);
+          
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth = 1.8;
           ctx.beginPath();
-          ctx.moveTo(n1.x, n1.y);
-          ctx.lineTo(n2.x, n2.y);
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
           ctx.stroke();
         }
       }
     }
+    
+    // Dibujar nodos
+    for (let node of nodes) {
+      // Actualizar posición
+      node.x += node.vx;
+      node.y += node.vy;
+      
+      // Rebotar en los bordes
+      if (node.x < 0 || node.x > w) node.vx *= -1;
+      if (node.y < 0 || node.y > h) node.vy *= -1;
+      
+      // Dibujar nodo con gradiente
+      const gradient = ctx.createRadialGradient(
+        node.x, node.y, 0,
+        node.x, node.y, node.radius * 4
+      );
+      gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+      gradient.addColorStop(0.3, `rgba(102, 163, 255, 0.9)`);
+      gradient.addColorStop(1, 'rgba(51, 133, 255, 0)');
+      
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+      ctx.fillStyle = gradient;
+      ctx.fill();
+      
+      // Brillo interior
+      ctx.beginPath();
+      ctx.arc(node.x - node.radius/4, node.y - node.radius/4, node.radius/2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+      ctx.fill();
+    }
+    
     requestAnimationFrame(draw);
   }
+  
   draw();
+
+  // Animación al hacer scroll
+  const sections = document.querySelectorAll('.section');
+  const header = document.getElementById('main-header');
+  
+  // Observador para animar secciones al hacer scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+  
+  // Cambiar estilo del header al hacer scroll
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+  // Crear partículas flotantes azules y blancas
+  function createParticles() {
+    const particlesContainer = document.createElement('div');
+    particlesContainer.style.position = 'fixed';
+    particlesContainer.style.top = '0';
+    particlesContainer.style.left = '0';
+    particlesContainer.style.width = '100%';
+    particlesContainer.style.height = '100%';
+    particlesContainer.style.pointerEvents = 'none';
+    particlesContainer.style.zIndex = '-1';
+    document.body.appendChild(particlesContainer);
+    
+    for (let i = 0; i < 40; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      
+      // Posición aleatoria
+      particle.style.left = `${Math.random() * 100}vw`;
+      particle.style.top = `${Math.random() * 100}vh`;
+      
+      // Tamaño aleatorio
+      const size = Math.random() * 4 + 1;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      
+      // Color azul o blanco aleatorio
+      const isBlue = Math.random() > 0.3;
+      particle.style.background = isBlue 
+        ? `radial-gradient(circle, rgba(102, 163, 255, 0.8), rgba(51, 133, 255, 0.4))` 
+        : `radial-gradient(circle, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5))`;
+      
+      // Animación flotante
+      particle.style.animation = `floatParticle ${Math.random() * 15 + 10}s infinite ease-in-out`;
+      particle.style.animationDelay = `${Math.random() * 5}s`;
+      
+      particlesContainer.appendChild(particle);
+    }
+    
+    // Añadir estilo para la animación de partículas
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes floatParticle {
+        0%, 100% { 
+          transform: translate(0, 0) rotate(0deg) scale(1); 
+        }
+        25% { 
+          transform: translate(${Math.random() * 40 - 20}px, ${Math.random() * 40 - 20}px) rotate(90deg) scale(1.1); 
+        }
+        50% { 
+          transform: translate(${Math.random() * 60 - 30}px, ${Math.random() * 60 - 30}px) rotate(180deg) scale(0.9); 
+        }
+        75% { 
+          transform: translate(${Math.random() * 40 - 20}px, ${Math.random() * 40 - 20}px) rotate(270deg) scale(1.05); 
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+  
+  createParticles();
+
+  // Efecto de clic en botones (ondas azules)
+  document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('btn') || e.target.closest('.btn')) {
+      // Crear efecto de onda
+      const btn = e.target.classList.contains('btn') ? e.target : e.target.closest('.btn');
+      const ripple = document.createElement('span');
+      const rect = btn.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const x = e.clientX - rect.left - size / 2;
+      const y = e.clientY - rect.top - size / 2;
+      
+      ripple.style.cssText = `
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255,255,255,0.7), rgba(51, 133, 255, 0.4));
+        transform: scale(0);
+        animation: ripple-animation 0.8s linear;
+        width: ${size}px;
+        height: ${size}px;
+        top: ${y}px;
+        left: ${x}px;
+        pointer-events: none;
+        z-index: 1;
+      `;
+      
+      btn.appendChild(ripple);
+      
+      setTimeout(() => {
+        ripple.remove();
+      }, 800);
+    }
+  });
+
+  // Añadir estilo para el efecto de onda
+  const rippleStyle = document.createElement('style');
+  rippleStyle.textContent = `
+    @keyframes ripple-animation {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+  `;
+  document.head.appendChild(rippleStyle);
+
+  // Efecto al pasar el cursor sobre las unidades
+  document.querySelectorAll('.unidad').forEach(unidad => {
+    unidad.addEventListener('mouseenter', function() {
+      this.style.transform = 'translateX(15px) scale(1.05)';
+    });
+    
+    unidad.addEventListener('mouseleave', function() {
+      this.style.transform = 'translateX(0) scale(1)';
+    });
+  });
+
+  // Efecto de escritura para el título principal
+  const heroTitle = document.querySelector('.hero h2');
+  const originalText = heroTitle.textContent;
+  heroTitle.textContent = '';
+  let charIndex = 0;
+  
+  function typeWriter() {
+    if (charIndex < originalText.length) {
+      heroTitle.textContent += originalText.charAt(charIndex);
+      charIndex++;
+      setTimeout(typeWriter, 50);
+    }
+  }
+  
+  // Iniciar efecto de escritura después de un breve retraso
+  setTimeout(typeWriter, 1000);
 </script>
 
 </body>
