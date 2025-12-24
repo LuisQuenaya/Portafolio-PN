@@ -422,27 +422,27 @@
 
     <!-- Navegación -->
     <div class="nav-container">
-        <div class="nav-tabs" id="navTabs">
-            <button class="nav-tab active" onclick="showActivity('menu')">🏠 Inicio</button>
-            <button class="nav-tab" onclick="showActivity('act1')">1. Bisección</button>
-            <button class="nav-tab" onclick="showActivity('act2')">2. Secante</button>
-            <button class="nav-tab" onclick="showActivity('act3')">3. Punto Fijo</button>
-            <button class="nav-tab" onclick="showActivity('act4')">4. Regula Falsi</button>
-            <button class="nav-tab" onclick="showActivity('act5')">5. Newton-Raphson</button>
-            <button class="nav-tab" onclick="showActivity('act6')">6. Índice H</button>
-            <button class="nav-tab" onclick="showActivity('act7')">7. Gradiente</button>
-            <button class="nav-tab" onclick="showActivity('act8')">8. Pseudoinverso vs GD</button>
-            <button class="nav-tab" onclick="showActivity('act9')">9. Caramelos</button>
-            <button class="nav-tab" onclick="showActivity('act10')">10. Algoritmo Demons</button>
-            <button class="nav-tab" onclick="showActivity('act11')">11. Diferenciación</button>
-            <button class="nav-tab" onclick="showActivity('act12')">12. Interpolación</button>
-            <button class="nav-tab" onclick="showActivity('act13')">13. Apache JMeter</button>
-            <button class="nav-tab" onclick="showActivity('act14')">14. Poster Papa</button>
-            <button class="nav-tab" onclick="showActivity('act15')">15. Eigenvalores</button>
-            <button class="nav-tab" onclick="showActivity('act16')">16. Cadenas Markov</button>
-            <button class="nav-tab" onclick="showActivity('act17')">17. Libro Completo</button>
-        </div>
+    <div class="nav-tabs" id="navTabs">
+        <button class="nav-tab active" onclick="showActivity('menu')">🏠 Inicio</button>
+        <!-- NUEVO BOTÓN: IR A ACTIVIDADES 1-5 -->
+        <button class="nav-tab btn-volver" onclick="window.location.href='unidad2.1.html'">
+            📚 Actividades 1-5
+        </button>
+        <!-- CONTINÚAN LAS ACTIVIDADES 6-17 -->
+        <button class="nav-tab" onclick="showActivity('act6')">6. Índice H</button>
+        <button class="nav-tab" onclick="showActivity('act7')">7. Gradiente</button>
+        <button class="nav-tab" onclick="showActivity('act8')">8. Pseudoinverso vs GD</button>
+        <button class="nav-tab" onclick="showActivity('act9')">9. Caramelos</button>
+        <button class="nav-tab" onclick="showActivity('act10')">10. Algoritmo Demons</button>
+        <button class="nav-tab" onclick="showActivity('act11')">11. Diferenciación</button>
+        <button class="nav-tab" onclick="showActivity('act12')">12. Interpolación</button>
+        <button class="nav-tab" onclick="showActivity('act13')">13. Apache JMeter</button>
+        <button class="nav-tab" onclick="showActivity('act14')">14. Poster Papa</button>
+        <button class="nav-tab" onclick="showActivity('act15')">15. Eigenvalores</button>
+        <button class="nav-tab" onclick="showActivity('act16')">16. Cadenas Markov</button>
+        <button class="nav-tab" onclick="showActivity('act17')">17. Libro Completo</button>
     </div>
+</div>
 
     <!-- Contenido Principal -->
     <div class="main-content">
@@ -2558,14 +2558,19 @@ cat("Incremento estimado:", round(prod_2025 - y1, 1),
                 </div>
             </div>
         </div>
-
         <!-- Footer -->
         <div class="footer">
+            <!-- BOTÓN PARA IR A ACTIVIDADES 1-5 -->
+            <button class="btn" onclick="window.location.href='unidad2.1.html'" 
+                    style="margin-bottom: 1rem; padding: 0.8rem 1.5rem; background: white; color: #0066cc; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                <i class="fas fa-arrow-left"></i> Ver Actividades 1-5
+            </button>
+            
             <p>© 2025 - LUIS ANGEL QUENAYA LOZA - Programación Numérica - Unidad 2</p>
             <p>Código: 241411 - Universidad Nacional del Altiplano</p>
         </div>
     </div>
-
+    
     <!-- JavaScript Principal -->
     <script>
         // Variables globales para gráficos
@@ -4008,4 +4013,5 @@ def simular_markov(P, estado_inicial, n_pasos):
     </script>
 </body>
 </html>
+
 
