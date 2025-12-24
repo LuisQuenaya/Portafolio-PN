@@ -1302,23 +1302,23 @@ if __name__ == "__main__":
             </div>
         </div>
 
-        <!-- ACTIVIDAD 7: GRADIENTE DE UNA FUNCIÓN -->
+                <!-- ACTIVIDAD 7: GRADIENTE DE UNA FUNCIÓN -->
         <div id="act7" class="activity-content" style="display: none;">
             <div class="activity-container">
                 <h2>Actividad 7 — Gradiente de una Función</h2>
                 
                 <div class="btn-group">
                     <button class="btn btn-primary" onclick="showActivity('menu')">⬅ Volver al Menú</button>
-                    <button class="btn btn-primary" onclick="simularDescensoGradiente()">📉 Simular Descenso</button>
+                    <button class="btn btn-primary" onclick="simularDiferenciacionNumerica()">📉 Simular Diferenciación Numérica</button>
                 </div>
 
-                <!-- TEORÍA -->
+                <!-- CONTENIDO TEÓRICO COMPLETO -->
                 <div class="section">
-                    <h3>📘 Teoría del Gradiente</h3>
-                    <p>El <strong>gradiente</strong> $\nabla f$ de una función escalar $f: \mathbb{R}^n \to \mathbb{R}$ es un vector que apunta en la dirección de máximo crecimiento de la función.</p>
+                    <h3>📘 Teoría del Gradiente y Optimización</h3>
+                    <p>El <strong>gradiente</strong> $\nabla f$ es un vector que apunta en la dirección de máximo crecimiento de una función escalar. En optimización, usamos el <strong>descenso del gradiente</strong> para encontrar mínimos.</p>
                     
                     <div class="formula-container">
-                        <h4>Definición Matemática</h4>
+                        <h4>Definición Matemática del Gradiente</h4>
                         <div class="formula">
                             $$ \nabla f(\mathbf{x}) = \begin{bmatrix} 
                             \frac{\partial f}{\partial x_1} \\ 
@@ -1328,87 +1328,288 @@ if __name__ == "__main__":
                             \end{bmatrix} $$
                         </div>
                     </div>
+                    
+                    <div class="formula-container">
+                        <h4>Algoritmo de Descenso del Gradiente</h4>
+                        <div class="formula">
+                            $$ \mathbf{x}_{k+1} = \mathbf{x}_k - \alpha \nabla f(\mathbf{x}_k) $$
+                            donde $\alpha$ es la tasa de aprendizaje.
+                        </div>
+                    </div>
                 </div>
 
-                <!-- FÓRMULAS -->
+                <!-- APLICACIONES PRÁCTICAS -->
                 <div class="section">
-                    <h3>📐 Fórmulas del Gradiente para Funciones Comunes</h3>
+                    <h3>🔧 Aplicaciones del Gradiente</h3>
                     
-                    <div class="formula">
-                        <strong>Función cuadrática:</strong>
-                        $$ f(\mathbf{x}) = \frac{1}{2}\mathbf{x}^T\mathbf{A}\mathbf{x} + \mathbf{b}^T\mathbf{x} + c $$
-                        $$ \nabla f(\mathbf{x}) = \mathbf{A}\mathbf{x} + \mathbf{b} $$
-                    </div>
-                    
-                    <div class="formula">
-                        <strong>Función de Rosenbrock:</strong>
-                        $$ f(x,y) = (a - x)^2 + b(y - x^2)^2 $$
-                        $$ \nabla f = \begin{bmatrix} 
-                        -2(a - x) - 4bx(y - x^2) \\ 
-                        2b(y - x^2) 
-                        \end{bmatrix} $$
-                    </div>
-                    
-                    <div class="formula">
-                        <strong>Función logística:</strong>
-                        $$ f(\mathbf{x}) = \frac{1}{1 + e^{-\mathbf{w}^T\mathbf{x}}} $$
-                        $$ \nabla f = f(\mathbf{x})(1 - f(\mathbf{x}))\mathbf{x} $$
-                    </div>
-                </div>
-
-                <!-- ALGORITMO DE DESCENSO DEL GRADIENTE -->
-                <div class="section">
-                    <h3>📉 Algoritmo de Descenso del Gradiente</h3>
-                    
-                    <div class="formula">
-                        <strong>Algoritmo básico:</strong>
-                        $$ \mathbf{x}_{k+1} = \mathbf{x}_k - \alpha \nabla f(\mathbf{x}_k) $$
-                        donde $\alpha$ es la tasa de aprendizaje.
-                    </div>
-                    
-                    <div class="formula">
-                        <strong>Condición de optimalidad:</strong>
-                        $$ \nabla f(\mathbf{x}^*) = \mathbf{0} $$
-                    </div>
-                    
-                    <div class="formula">
-                        <strong>Tasa de aprendizaje adaptativa:</strong>
-                        $$ \alpha_k = \frac{\alpha_0}{1 + \gamma k} $$
-                        <small>Donde $\gamma$ controla la decaimiento</small>
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Aplicación</th>
+                                    <th>Función Objetivo</th>
+                                    <th>Interpretación del Gradiente</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Aprendizaje Automático</td>
+                                    <td>$J(\theta) = \frac{1}{m}\sum L(h_\theta(x_i), y_i)$</td>
+                                    <td>Dirección para reducir el error de predicción</td>
+                                </tr>
+                                <tr>
+                                    <td>Procesamiento de Imágenes</td>
+                                    <td>$E(u) = \int_\Omega |\nabla u|^2 dx$</td>
+                                    <td>Dirección del flujo de intensidad</td>
+                                </tr>
+                                <tr>
+                                    <td>Finanzas</td>
+                                    <td>$R(p) = \sum r_i p_i - \lambda p^T\Sigma p$</td>
+                                    <td>Sensibilidad del portafolio a cada activo</td>
+                                </tr>
+                                <tr>
+                                    <td>Ingeniería</td>
+                                    <td>$f(x) = \text{tensión}(x) - \text{resistencia}$</td>
+                                    <td>Dirección de máximo estrés en material</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
-                <!-- SIMULACIÓN -->
+                <!-- SIMULACIÓN DE GRADIENTE -->
                 <div class="simulation-container">
                     <h3>🎮 Simulación de Descenso del Gradiente</h3>
                     
                     <div class="input-group">
                         <select id="funcionGradiente" class="input-field">
-                            <option value="sphere">Esfera: f(x,y) = x² + y²</option>
-                            <option value="rosenbrock">Rosenbrock: (1-x)² + 100(y-x²)²</option>
-                            <option value="rastrigin">Rastrigin: 20 + x²-10cos(2πx) + y²-10cos(2πy)</option>
-                            <option value="ackley">Ackley: -20exp(-0.2√(0.5(x²+y²))) - exp(0.5(cos(2πx)+cos(2πy))) + e + 20</option>
+                            <option value="quadratic">Función Cuadrática: f(x) = x²</option>
+                            <option value="rosenbrock">Función de Rosenbrock</option>
+                            <option value="beale">Función de Beale</option>
+                            <option value="himmelblau">Función de Himmelblau</option>
                         </select>
-                        <input type="number" id="alphaGD" class="input-field" 
+                        <input type="number" id="x0Grad" class="input-field" 
+                               placeholder="x inicial" value="2.0" step="0.1">
+                        <input type="number" id="alphaGrad" class="input-field" 
                                placeholder="Tasa aprendizaje (α)" value="0.1" step="0.01">
-                        <input type="number" id="iteracionesGD" class="input-field" 
+                        <input type="number" id="iterGrad" class="input-field" 
                                placeholder="Iteraciones" value="100" min="10">
-                        <input type="number" id="x0GD" class="input-field" 
-                               placeholder="x inicial" value="2" step="0.1">
-                        <input type="number" id="y0GD" class="input-field" 
-                               placeholder="y inicial" value="2" step="0.1">
+                        <select id="tipoGradiente" class="input-field">
+                            <option value="batch">Descenso Batch</option>
+                            <option value="stochastic">Descenso Estocástico</option>
+                            <option value="momentum">Descenso con Momentum</option>
+                        </select>
                     </div>
                     
-                    <button class="btn btn-primary" onclick="ejecutarDescensoGradiente()">
-                        🎯 Ejecutar Descenso del Gradiente
+                    <button class="btn btn-primary" onclick="ejecutarDescensoGradienteCompleto()">
+                        🚀 Ejecutar Descenso del Gradiente
                     </button>
                     
-                    <div class="results" id="resultadosGD">
+                    <div class="results" id="resultadosGradiente">
                         <p style="color: var(--gris-medio);">Los resultados aparecerán aquí...</p>
                     </div>
                     
                     <div class="canvas-container">
-                        <canvas id="graficoGD" width="800" height="400"></canvas>
+                        <canvas id="graficoGradiente" width="800" height="400"></canvas>
+                    </div>
+                </div>
+
+                <!-- CÓDIGO PYTHON -->
+                <div class="section">
+                    <h3>💻 Implementación en Python</h3>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>gradient_descent.py</span>
+                            <button class="btn btn-secondary" onclick="copiarCodigo('codigoGradiente')" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;">Copiar</button>
+                        </div>
+                        <pre class="code" id="codigoGradiente">import numpy as np
+import matplotlib.pyplot as plt
+
+class GradientDescent:
+    """Clase para implementar diferentes variantes de descenso del gradiente."""
+    
+    def __init__(self, f, grad_f):
+        """
+        Inicializa el optimizador.
+        
+        Parámetros:
+        -----------
+        f : callable
+            Función objetivo f(x)
+        grad_f : callable
+            Gradiente de la función ∇f(x)
+        """
+        self.f = f
+        self.grad_f = grad_f
+        self.history = []
+    
+    def batch_gradient_descent(self, x0, learning_rate=0.1, 
+                               max_iter=1000, tol=1e-6):
+        """Descenso del gradiente clásico (batch)."""
+        x = np.array(x0, dtype=float)
+        
+        for i in range(max_iter):
+            # Calcular gradiente
+            grad = self.grad_f(x)
+            
+            # Actualizar posición
+            x_new = x - learning_rate * grad
+            
+            # Guardar historial
+            self.history.append({
+                'iteration': i,
+                'x': x.copy(),
+                'f(x)': self.f(x),
+                'gradient': grad.copy(),
+                'step': learning_rate
+            })
+            
+            # Verificar convergencia
+            if np.linalg.norm(x_new - x) < tol:
+                break
+            
+            x = x_new
+        
+        return x
+    
+    def stochastic_gradient_descent(self, x0, learning_rate=0.1,
+                                    max_iter=1000, batch_size=1):
+        """Descenso del gradiente estocástico (SGD)."""
+        x = np.array(x0, dtype=float)
+        
+        for i in range(max_iter):
+            # Para SGD, normalmente tendríamos datos y calcularíamos
+            # gradiente sobre un minibatch
+            # Aquí simulamos con ruido
+            grad = self.grad_f(x) + np.random.randn(*x.shape) * 0.1
+            
+            # Actualizar con tasa de aprendizaje decreciente
+            lr = learning_rate / (1 + 0.01 * i)
+            x = x - lr * grad
+            
+            self.history.append({
+                'iteration': i,
+                'x': x.copy(),
+                'f(x)': self.f(x),
+                'gradient': grad.copy(),
+                'step': lr
+            })
+        
+        return x
+    
+    def momentum_gradient_descent(self, x0, learning_rate=0.1,
+                                  momentum=0.9, max_iter=1000):
+        """Descenso del gradiente con momentum."""
+        x = np.array(x0, dtype=float)
+        velocity = np.zeros_like(x)
+        
+        for i in range(max_iter):
+            grad = self.grad_f(x)
+            
+            # Actualizar velocidad (momentum)
+            velocity = momentum * velocity - learning_rate * grad
+            
+            # Actualizar posición
+            x = x + velocity
+            
+            self.history.append({
+                'iteration': i,
+                'x': x.copy(),
+                'f(x)': self.f(x),
+                'gradient': grad.copy(),
+                'velocity': velocity.copy()
+            })
+        
+        return x
+
+# Funciones de prueba comunes
+def quadratic_function(x):
+    """Función cuadrática: f(x) = x^T A x + b^T x + c"""
+    A = np.array([[2, 1], [1, 2]])
+    b = np.array([1, -1])
+    return 0.5 * x.T @ A @ x + b.T @ x + 3
+
+def quadratic_gradient(x):
+    A = np.array([[2, 1], [1, 2]])
+    b = np.array([1, -1])
+    return A @ x + b
+
+def rosenbrock_function(x):
+    """Función de Rosenbrock: f(x,y) = (1-x)^2 + 100(y-x^2)^2"""
+    return (1 - x[0])**2 + 100 * (x[1] - x[0]**2)**2
+
+def rosenbrock_gradient(x):
+    dx = -2*(1 - x[0]) - 400*x[0]*(x[1] - x[0]**2)
+    dy = 200*(x[1] - x[0]**2)
+    return np.array([dx, dy])
+
+# Ejemplo de uso
+if __name__ == "__main__":
+    print("="*70)
+    print("DESCENSO DEL GRADIENTE - EJEMPLO COMPLETO")
+    print("="*70)
+    
+    # Crear optimizador para Rosenbrock
+    optimizer = GradientDescent(rosenbrock_function, rosenbrock_gradient)
+    
+    # Punto inicial (lejos del mínimo)
+    x0 = np.array([-1.5, 2.0])
+    
+    print(f"\n1. Descenso Batch (tasa fija):")
+    result_batch = optimizer.batch_gradient_descent(x0, learning_rate=0.001)
+    print(f"   Mínimo encontrado: {result_batch}")
+    print(f"   f(mínimo) = {rosenbrock_function(result_batch):.6f}")
+    print(f"   Iteraciones: {len(optimizer.history)}")
+    
+    # Visualizar
+    fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+    
+    # Extraer datos del historial
+    iterations = [h['iteration'] for h in optimizer.history]
+    f_values = [h['f(x)'] for h in optimizer.history]
+    x_history = [h['x'] for h in optimizer.history]
+    
+    # Gráfico 1: Convergencia de f(x)
+    axes[0, 0].semilogy(iterations, f_values, 'b-', linewidth=2)
+    axes[0, 0].set_xlabel('Iteración')
+    axes[0, 0].set_ylabel('f(x) (log scale)')
+    axes[0, 0].set_title('Convergencia de la Función Objetivo')
+    axes[0, 0].grid(True, alpha=0.3)
+    
+    # Gráfico 2: Trayectoria en el espacio 2D
+    x_vals = [x[0] for x in x_history]
+    y_vals = [x[1] for x in x_history]
+    axes[0, 1].plot(x_vals, y_vals, 'ro-', markersize=3, linewidth=1)
+    axes[0, 1].set_xlabel('x')
+    axes[0, 1].set_ylabel('y')
+    axes[0, 1].set_title('Trayectoria del Descenso')
+    axes[0, 1].grid(True, alpha=0.3)
+    
+    # Gráfico 3: Magnitud del gradiente
+    grad_norms = [np.linalg.norm(h['gradient']) for h in optimizer.history]
+    axes[1, 0].semilogy(iterations, grad_norms, 'g-', linewidth=2)
+    axes[1, 0].set_xlabel('Iteración')
+    axes[1, 0].set_ylabel('||∇f|| (log scale)')
+    axes[1, 0].set_title('Magnitud del Gradiente')
+    axes[1, 0].grid(True, alpha=0.3)
+    
+    # Gráfico 4: Comparación de métodos
+    # (aquí podríamos comparar diferentes métodos)
+    axes[1, 1].axis('off')
+    axes[1, 1].text(0.5, 0.5, 
+                   f'Convergencia exitosa\n'
+                   f'Punto inicial: {x0}\n'
+                   f'Punto final: {result_batch.round(4)}\n'
+                   f'f(final) = {f_values[-1]:.6f}\n'
+                   f'Iteraciones: {len(iterations)}',
+                   ha='center', va='center',
+                   fontsize=12,
+                   bbox=dict(boxstyle="round,pad=0.3",
+                           facecolor="lightblue",
+                           alpha=0.5))
+    
+    plt.tight_layout()
+    plt.show()</pre>
                     </div>
                 </div>
             </div>
@@ -1421,476 +1622,136 @@ if __name__ == "__main__":
                 
                 <div class="btn-group">
                     <button class="btn btn-primary" onclick="showActivity('menu')">⬅ Volver al Menú</button>
-                    <button class="btn btn-primary" onclick="compararRegresionLineal()">📊 Comparar Métodos</button>
+                    <button class="btn btn-primary" onclick="compararMetodosRegresion()">📊 Comparar Métodos</button>
                 </div>
 
-                <!-- RESUMEN DEL ARTÍCULO -->
+                <!-- RESUMEN DEL ESTUDIO -->
                 <div class="section">
-                    <h3>📚 Resumen del Artículo Científico</h3>
-                    <p>Comparación exhaustiva entre dos métodos fundamentales para resolver problemas de regresión lineal:</p>
+                    <h3>📚 Estudio Comparativo en Regresión Lineal</h3>
+                    <p><strong>Problema:</strong> Resolver $\min_{\mathbf{w}} \|\mathbf{X}\mathbf{w} - \mathbf{y}\|_2^2$</p>
                     
                     <div class="formula-container">
-                        <h4>Problema de Mínimos Cuadrados</h4>
+                        <h4>Solución Analítica vs. Iterativa</h4>
                         <div class="formula">
-                            $$ \min_{\mathbf{w}} \|\mathbf{X}\mathbf{w} - \mathbf{y}\|_2^2 $$
+                            <strong>Pseudoinverso (solución exacta):</strong>
+                            $$ \mathbf{w}_{MP} = \mathbf{X}^+ \mathbf{y} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y} $$
                         </div>
-                        <p>donde $\mathbf{X} \in \mathbb{R}^{n \times d}$ es la matriz de diseño, $\mathbf{y} \in \mathbb{R}^n$ es el vector de observaciones, y $\mathbf{w} \in \mathbb{R}^d$ son los parámetros del modelo.</p>
+                        <div class="formula">
+                            <strong>Descenso de Gradiente (solución iterativa):</strong>
+                            $$ \mathbf{w}_{k+1} = \mathbf{w}_k - \alpha \nabla J(\mathbf{w}_k) $$
+                            $$ \nabla J(\mathbf{w}) = \frac{2}{n}\mathbf{X}^T(\mathbf{X}\mathbf{w} - \mathbf{y}) $$
+                        </div>
                     </div>
                 </div>
 
-                <!-- COMPARATIVA -->
+                <!-- COMPARATIVA DETALLADA -->
                 <div class="section">
-                    <h3>⚖️ Comparativa Detallada</h3>
+                    <h3>⚖️ Análisis Comparativo Detallado</h3>
                     
                     <div class="table-container">
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Aspecto</th>
+                                    <th>Criterio</th>
                                     <th>Pseudoinverso de Moore-Penrose</th>
                                     <th>Descenso de Gradiente</th>
+                                    <th>Vencedor</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><strong>Tipo de solución</strong></td>
-                                    <td>Solución analítica exacta</td>
-                                    <td>Solución iterativa aproximada</td>
+                                    <td><strong>Precisión</strong></td>
+                                    <td>Exacta (hasta precisión numérica)</td>
+                                    <td>Aproximada (depende de convergencia)</td>
+                                    <td>✅ Pseudoinverso</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Complejidad computacional</strong></td>
-                                    <td>$O(nd^2 + d^3)$ (SVD)</td>
-                                    <td>$O(nd \times \text{iteraciones})$</td>
+                                    <td><strong>Velocidad (n pequeño)</strong></td>
+                                    <td>Rápida (solución directa)</td>
+                                    <td>Lenta (muchas iteraciones)</td>
+                                    <td>✅ Pseudoinverso</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Estabilidad numérica</strong></td>
-                                    <td>Sensible a $\kappa(\mathbf{X})$</td>
-                                    <td>Robusta con regularización</td>
+                                    <td><strong>Velocidad (n grande)</strong></td>
+                                    <td>Lenta ($O(nd^2 + d^3)$)</td>
+                                    <td>Rápida ($O(nd)$ por iteración)</td>
+                                    <td>✅ Gradiente</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Memoria requerida</strong></td>
-                                    <td>$O(d^2)$ para $\mathbf{X}^T\mathbf{X}$</td>
-                                    <td>$O(d)$ (solo gradiente)</td>
+                                    <td><strong>Memoria</strong></td>
+                                    <td>Alta ($O(d^2)$ para $X^TX$)</td>
+                                    <td>Baja ($O(d)$)</td>
+                                    <td>✅ Gradiente</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Estabilidad Numérica</strong></td>
+                                    <td>Sensible a $\kappa(X)$</td>
+                                    <td>Robusta (con regularización)</td>
+                                    <td>✅ Gradiente</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Paralelización</strong></td>
                                     <td>Limitada</td>
-                                    <td>Alta (SGD, mini-batch)</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Hiperparámetros</strong></td>
-                                    <td>Ninguno</td>
-                                    <td>α, λ, batch size, epochs</td>
+                                    <td>Alta (SGD, minibatch)</td>
+                                    <td>✅ Gradiente</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- FÓRMULAS MATEMÁTICAS -->
-                <div class="section">
-                    <h3>📐 Fórmulas Matemáticas Detalladas</h3>
-                    
-                    <div class="formula">
-                        <strong>Pseudoinverso de Moore-Penrose (SVD):</strong>
-                        $$ \mathbf{X} = \mathbf{U}\mathbf{\Sigma}\mathbf{V}^T $$
-                        $$ \mathbf{X}^+ = \mathbf{V}\mathbf{\Sigma}^+\mathbf{U}^T $$
-                        $$ \mathbf{w}_{MP} = \mathbf{X}^+\mathbf{y} $$
-                    </div>
-                    
-                    <div class="formula">
-                        <strong>Descenso de Gradiente:</strong>
-                        $$ J(\mathbf{w}) = \frac{1}{2n}\|\mathbf{X}\mathbf{w} - \mathbf{y}\|_2^2 $$
-                        $$ \nabla J(\mathbf{w}) = \frac{1}{n}\mathbf{X}^T(\mathbf{X}\mathbf{w} - \mathbf{y}) $$
-                        $$ \mathbf{w}_{k+1} = \mathbf{w}_k - \alpha\nabla J(\mathbf{w}_k) $$
-                    </div>
-                    
-                    <div class="formula">
-                        <strong>Descenso de Gradiente Estocástico (SGD):</strong>
-                        $$ \mathbf{w}_{k+1} = \mathbf{w}_k - \alpha\nabla J_i(\mathbf{w}_k) $$
-                        donde $J_i$ es el error para la muestra $i$-ésima.
-                    </div>
-                </div>
-
                 <!-- SIMULACIÓN COMPARATIVA -->
                 <div class="simulation-container">
-                    <h3>🎮 Simulación Comparativa de Métodos</h3>
+                    <h3>🎮 Simulación Comparativa</h3>
                     
                     <div class="input-group">
-                        <input type="number" id="muestrasRL" class="input-field" 
+                        <input type="number" id="nMuestras" class="input-field" 
                                placeholder="Número de muestras (n)" value="1000">
-                        <input type="number" id="caracteristicasRL" class="input-field" 
+                        <input type="number" id="dCaracteristicas" class="input-field" 
                                placeholder="Características (d)" value="10">
-                        <input type="number" id="ruidoRL" class="input-field" 
-                               placeholder="Ruido (%)" value="15" step="5">
-                        <input type="number" id="condicionRL" class="input-field" 
-                               placeholder="Condición de X" value="100">
-                        <input type="number" id="alphaRL" class="input-field" 
-                               placeholder="Tasa aprendizaje" value="0.01">
+                        <input type="number" id="ruidoData" class="input-field" 
+                               placeholder="Ruido (%)" value="10" step="5">
+                        <input type="number" id="condicionNum" class="input-field" 
+                               placeholder="Número de condición" value="100">
+                        <select id="metodoOptim" class="input-field">
+                            <option value="comparar">Comparar Ambos</option>
+                            <option value="pseudoinverso">Solo Pseudoinverso</option>
+                            <option value="gradiente">Solo Gradiente</option>
+                        </select>
                     </div>
                     
-                    <div class="btn-group">
-                        <button class="btn btn-primary" onclick="compararRegresionLineal()">
-                            ⚡ Ejecutar Comparación
-                        </button>
-                        <button class="btn btn-secondary" onclick="probarDatosReales()">
-                            📊 Probar con Datos Reales
-                        </button>
-                    </div>
+                    <button class="btn btn-primary" onclick="simularComparacionRegresion()">
+                        ⚡ Ejecutar Comparación
+                    </button>
                     
-                    <div class="results" id="resultadosRL">
+                    <div class="results" id="resultadosComparacion">
                         <p style="color: var(--gris-medio);">Los resultados aparecerán aquí...</p>
                     </div>
                     
                     <div class="canvas-container">
-                        <canvas id="graficoRL" width="800" height="400"></canvas>
+                        <canvas id="graficoComparacion" width="800" height="400"></canvas>
                     </div>
                 </div>
 
-                <!-- CÓDIGO COMPARATIVO -->
+                <!-- CONCLUSIÓN -->
                 <div class="section">
-                    <h3>💻 Implementación Comparativa en Python</h3>
-                    <div class="code-container">
-                        <div class="code-header">
-                            <span>regression_comparison.py</span>
-                            <button class="btn btn-secondary" onclick="copiarCodigo('codigoRL')" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;">Copiar</button>
-                        </div>
-                        <pre class="code" id="codigoRL">import numpy as np
-import time
-import matplotlib.pyplot as plt
-from sklearn.datasets import make_regression
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import mean_squared_error
-
-class RegressionComparison:
-    """Clase para comparar métodos de regresión lineal."""
-    
-    def __init__(self, n_samples=1000, n_features=10, noise=15.0, random_state=42):
-        self.n_samples = n_samples
-        self.n_features = n_features
-        self.noise = noise
-        self.random_state = random_state
-        
-        # Generar datos sintéticos
-        self.X, self.y = self._generate_data()
-        
-        # Dividir en train/test
-        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(
-            self.X, self.y, test_size=0.2, random_state=random_state
-        )
-        
-        # Estandarizar características
-        self.scaler = StandardScaler()
-        self.X_train_scaled = self.scaler.fit_transform(self.X_train)
-        self.X_test_scaled = self.scaler.transform(self.X_test)
-        
-        # Agregar término de bias
-        self.X_train_b = np.c_[np.ones((self.X_train_scaled.shape[0], 1)), 
-                               self.X_train_scaled]
-        self.X_test_b = np.c_[np.ones((self.X_test_scaled.shape[0], 1)), 
-                              self.X_test_scaled]
-    
-    def _generate_data(self):
-        """Genera datos de regresión lineal."""
-        X, y = make_regression(
-            n_samples=self.n_samples,
-            n_features=self.n_features,
-            noise=self.noise,
-            random_state=self.random_state
-        )
-        return X, y
-    
-    def moore_penrose(self):
-        """Implementa solución por pseudoinverso."""
-        start_time = time.time()
-        
-        # Calcular pseudoinverso usando SVD
-        U, s, Vt = np.linalg.svd(self.X_train_b, full_matrices=False)
-        
-        # Valores singulares invertidos (con estabilidad numérica)
-        s_inv = np.zeros_like(s)
-        threshold = np.max(s) * 1e-12
-        s_inv[s > threshold] = 1 / s[s > threshold]
-        
-        # Pseudoinverso
-        X_pinv = Vt.T @ np.diag(s_inv) @ U.T
-        
-        # Coeficientes óptimos
-        w_mp = X_pinv @ self.y_train
-        
-        # Predicciones y métricas
-        y_train_pred = self.X_train_b @ w_mp
-        y_test_pred = self.X_test_b @ w_mp
-        
-        train_mse = mean_squared_error(self.y_train, y_train_pred)
-        test_mse = mean_squared_error(self.y_test, y_test_pred)
-        
-        end_time = time.time()
-        
-        return {
-            'method': 'Moore-Penrose Pseudoinverse',
-            'coefficients': w_mp,
-            'train_mse': train_mse,
-            'test_mse': test_mse,
-            'time': end_time - start_time,
-            'condition_number': np.linalg.cond(self.X_train_b),
-            'n_features': self.n_features + 1  # +1 por bias
-        }
-    
-    def gradient_descent(self, learning_rate=0.01, n_iterations=1000, 
-                         tolerance=1e-6, l2_lambda=0.0):
-        """Implementa descenso de gradiente con regularización L2."""
-        start_time = time.time()
-        
-        n_samples, n_features = self.X_train_b.shape
-        w = np.random.randn(n_features) * 0.01
-        
-        mse_history = []
-        
-        for iteration in range(n_iterations):
-            # Predicciones
-            y_pred = self.X_train_b @ w
-            
-            # Gradiente con regularización L2
-            error = y_pred - self.y_train
-            gradient = (2/n_samples) * self.X_train_b.T @ error + 2 * l2_lambda * w
-            
-            # Actualizar pesos
-            w_new = w - learning_rate * gradient
-            
-            # Calcular MSE
-            mse = mean_squared_error(self.y_train, self.X_train_b @ w_new)
-            mse_history.append(mse)
-            
-            # Verificar convergencia
-            if np.linalg.norm(w_new - w) < tolerance:
-                break
-            
-            w = w_new
-        
-        # Predicciones finales
-        y_train_pred = self.X_train_b @ w
-        y_test_pred = self.X_test_b @ w
-        
-        train_mse = mean_squared_error(self.y_train, y_train_pred)
-        test_mse = mean_squared_error(self.y_test, y_test_pred)
-        
-        end_time = time.time()
-        
-        return {
-            'method': 'Gradient Descent',
-            'coefficients': w,
-            'train_mse': train_mse,
-            'test_mse': test_mse,
-            'time': end_time - start_time,
-            'iterations': len(mse_history),
-            'mse_history': mse_history,
-            'learning_rate': learning_rate
-        }
-    
-    def stochastic_gradient_descent(self, learning_rate=0.01, n_epochs=50, 
-                                    batch_size=32, l2_lambda=0.0):
-        """Implementa descenso de gradiente estocástico."""
-        start_time = time.time()
-        
-        n_samples, n_features = self.X_train_b.shape
-        w = np.random.randn(n_features) * 0.01
-        
-        mse_history = []
-        
-        for epoch in range(n_epochs):
-            # Mezclar datos
-            indices = np.random.permutation(n_samples)
-            X_shuffled = self.X_train_b[indices]
-            y_shuffled = self.y_train[indices]
-            
-            # Mini-batch gradient descent
-            for i in range(0, n_samples, batch_size):
-                X_batch = X_shuffled[i:i+batch_size]
-                y_batch = y_shuffled[i:i+batch_size]
-                
-                # Predicciones para el batch
-                y_pred = X_batch @ w
-                
-                # Gradiente para el batch
-                error = y_pred - y_batch
-                gradient = (2/len(X_batch)) * X_batch.T @ error + 2 * l2_lambda * w
-                
-                # Actualizar pesos
-                w = w - learning_rate * gradient
-            
-            # Calcular MSE después de la época
-            mse = mean_squared_error(self.y_train, self.X_train_b @ w)
-            mse_history.append(mse)
-        
-        # Predicciones finales
-        y_train_pred = self.X_train_b @ w
-        y_test_pred = self.X_test_b @ w
-        
-        train_mse = mean_squared_error(self.y_train, y_train_pred)
-        test_mse = mean_squared_error(self.y_test, y_test_pred)
-        
-        end_time = time.time()
-        
-        return {
-            'method': 'Stochastic Gradient Descent',
-            'coefficients': w,
-            'train_mse': train_mse,
-            'test_mse': test_mse,
-            'time': end_time - start_time,
-            'epochs': n_epochs,
-            'mse_history': mse_history,
-            'batch_size': batch_size
-        }
-    
-    def compare_methods(self, gd_params=None, sgd_params=None):
-        """Compara los tres métodos."""
-        if gd_params is None:
-            gd_params = {'learning_rate': 0.01, 'n_iterations': 1000}
-        if sgd_params is None:
-            sgd_params = {'learning_rate': 0.01, 'n_epochs': 50, 'batch_size': 32}
-        
-        results = []
-        
-        # 1. Moore-Penrose
-        print("Ejecutando Pseudoinverso de Moore-Penrose...")
-        result_mp = self.moore_penrose()
-        results.append(result_mp)
-        
-        # 2. Gradient Descent
-        print("Ejecutando Descenso de Gradiente...")
-        result_gd = self.gradient_descent(**gd_params)
-        results.append(result_gd)
-        
-        # 3. Stochastic Gradient Descent
-        print("Ejecutando Descenso de Gradiente Estocástico...")
-        result_sgd = self.stochastic_gradient_descent(**sgd_params)
-        results.append(result_sgd)
-        
-        return results
-    
-    def visualize_comparison(self, results):
-        """Visualiza la comparación de métodos."""
-        fig, axes = plt.subplots(2, 3, figsize=(15, 10))
-        
-        # Datos para gráficos
-        methods = [r['method'] for r in results]
-        times = [r['time'] for r in results]
-        train_mses = [r['train_mse'] for r in results]
-        test_mses = [r['test_mse'] for r in results]
-        
-        # Gráfico 1: Tiempos de ejecución
-        axes[0, 0].bar(methods, times, color=['blue', 'green', 'red'])
-        axes[0, 0].set_title('Tiempo de Ejecución (segundos)')
-        axes[0, 0].set_ylabel('Segundos')
-        axes[0, 0].tick_params(axis='x', rotation=45)
-        
-        # Gráfico 2: MSE en entrenamiento
-        axes[0, 1].bar(methods, train_mses, color=['blue', 'green', 'red'])
-        axes[0, 1].set_title('MSE en Entrenamiento')
-        axes[0, 1].set_ylabel('MSE')
-        axes[0, 1].tick_params(axis='x', rotation=45)
-        
-        # Gráfico 3: MSE en prueba
-        axes[0, 2].bar(methods, test_mses, color=['blue', 'green', 'red'])
-        axes[0, 2].set_title('MSE en Prueba')
-        axes[0, 2].set_ylabel('MSE')
-        axes[0, 2].tick_params(axis='x', rotation=45)
-        
-        # Gráfico 4: Convergencia del GD
-        if 'mse_history' in results[1]:
-            axes[1, 0].plot(results[1]['mse_history'], 'g-', label='GD')
-            axes[1, 0].set_title('Convergencia - GD')
-            axes[1, 0].set_xlabel('Iteración')
-            axes[1, 0].set_ylabel('MSE')
-            axes[1, 0].legend()
-            axes[1, 0].grid(True, alpha=0.3)
-        
-        # Gráfico 5: Convergencia del SGD
-        if 'mse_history' in results[2]:
-            axes[1, 1].plot(results[2]['mse_history'], 'r-', label='SGD')
-            axes[1, 1].set_title('Convergencia - SGD')
-            axes[1, 1].set_xlabel('Época')
-            axes[1, 1].set_ylabel('MSE')
-            axes[1, 1].legend()
-            axes[1, 1].grid(True, alpha=0.3)
-        
-        # Gráfico 6: Comparación de coeficientes
-        for i, result in enumerate(results):
-            coef = result['coefficients']
-            if len(coef) <= 20:  # Solo mostrar si no hay muchos coeficientes
-                axes[1, 2].plot(coef, 'o-', label=methods[i], alpha=0.7)
-        
-        axes[1, 2].set_title('Comparación de Coeficientes')
-        axes[1, 2].set_xlabel('Índice del coeficiente')
-        axes[1, 2].set_ylabel('Valor')
-        axes[1, 2].legend()
-        axes[1, 2].grid(True, alpha=0.3)
-        
-        plt.tight_layout()
-        plt.show()
-
-# Ejemplo de uso principal
-if __name__ == "__main__":
-    # Configuración
-    n_samples = 10000
-    n_features = 20
-    noise = 20.0
-    
-    # Crear comparador
-    comparator = RegressionComparison(n_samples=n_samples, 
-                                     n_features=n_features, 
-                                     noise=noise)
-    
-    # Parámetros para GD y SGD
-    gd_params = {
-        'learning_rate': 0.01,
-        'n_iterations': 2000,
-        'l2_lambda': 0.01
-    }
-    
-    sgd_params = {
-        'learning_rate': 0.01,
-        'n_epochs': 100,
-        'batch_size': 64,
-        'l2_lambda': 0.01
-    }
-    
-    # Ejecutar comparación
-    print("="*70)
-    print("COMPARACIÓN DE MÉTODOS DE REGRESIÓN LINEAL")
-    print("="*70)
-    print(f"Muestras: {n_samples}, Características: {n_features}, Ruido: {noise}%")
-    print("="*70)
-    
-    results = comparator.compare_methods(gd_params, sgd_params)
-    
-    # Mostrar resultados
-    print("\nRESULTADOS:")
-    print("-"*70)
-    for result in results:
-        print(f"\n{result['method']}:")
-        print(f"  MSE Entrenamiento: {result['train_mse']:.6f}")
-        print(f"  MSE Prueba: {result['test_mse']:.6f}")
-        print(f"  Tiempo: {result['time']:.4f} segundos")
-        if 'iterations' in result:
-            print(f"  Iteraciones: {result['iterations']}")
-        if 'epochs' in result:
-            print(f"  Épocas: {result['epochs']}")
-        if 'condition_number' in result:
-            print(f"  Número de condición: {result['condition_number']:.2f}")
-    
-    print("\n" + "="*70)
-    print("CONCLUSIONES:")
-    print("="*70)
-    print("1. Pseudoinverso: Exacto pero costoso para n,d grandes")
-    print("2. GD: Balance entre exactitud y costo")
-    print("3. SGD: Escalable pero requiere ajuste de hiperparámetros")
-    print("="*70)
-    
-    # Visualizar resultados
-    comparator.visualize_comparison(results)</pre>
+                    <h3>🎯 Conclusiones y Recomendaciones</h3>
+                    
+                    <div class="formula-container">
+                        <h4>Reglas de Decisión</h4>
+                        <ol>
+                            <li><strong>$n < 1000$ y $d < 100$:</strong> Usar Pseudoinverso (exactitud)</li>
+                            <li><strong>$n > 10000$ o $d > 1000$:</strong> Usar SGD (escalabilidad)</li>
+                            <li><strong>$\kappa(X) > 10^6$:</strong> Añadir regularización L2</li>
+                            <li><strong>Recursos limitados:</strong> Usar minibatch SGD</li>
+                            <li><strong>Precisión crítica:</strong> Pseudoinverso con SVD</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="formula">
+                        <strong>Fórmula híbrida recomendada:</strong>
+                        $$ \mathbf{w}_{opt} = \lambda \mathbf{w}_{MP} + (1-\lambda) \mathbf{w}_{SGD} $$
+                        donde $\lambda$ balancea exactitud vs. escalabilidad.
                     </div>
                 </div>
             </div>
@@ -1899,89 +1760,75 @@ if __name__ == "__main__":
         <!-- ACTIVIDAD 9: SIMULACIÓN JUEGO DE CARAMELOS -->
         <div id="act9" class="activity-content" style="display: none;">
             <div class="activity-container">
-                <h2>Actividad 9 — Simulación del Juego de Caramelos y Chupetines</h2>
+                <h2>Actividad 9 — Simulación Cooperativa: Juego de Caramelos</h2>
                 
                 <div class="btn-group">
                     <button class="btn btn-primary" onclick="showActivity('menu')">⬅ Volver al Menú</button>
-                    <button class="btn btn-primary" onclick="simularJuegoCaramelos()">🍬 Simular Juego</button>
+                    <button class="btn btn-primary" onclick="iniciarSimulacionCaramelos()">🍬 Iniciar Simulación</button>
                 </div>
 
-                <!-- DESCRIPCIÓN -->
+                <!-- DESCRIPCIÓN DEL JUEGO -->
                 <div class="section">
-                    <h3>🎮 Descripción del Juego</h3>
-                    <p><strong>Objetivo:</strong> Cada grupo debe acumular 9 chupetines mediante intercambio estratégico de caramelos.</p>
+                    <h3>🎮 Configuración del Juego</h3>
+                    <p><strong>Escenario:</strong> 18 estudiantes divididos en 2 grupos de 9. Cada estudiante recibe 2 caramelos aleatorios de tipos A, B, C.</p>
                     
                     <div class="formula-container">
-                        <h4>Configuración Inicial</h4>
-                        <ul>
-                            <li>18 estudiantes divididos en 2 grupos de 9</li>
-                            <li>Cada estudiante recibe 2 caramelos aleatorios (tipos A, B, C)</li>
-                            <li>Cada grupo inicia con 18 caramelos distribuidos aleatoriamente</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="formula-container">
-                        <h4>Reglas del Juego</h4>
+                        <h4>Reglas de Intercambio</h4>
                         <ol>
-                            <li>Si un grupo tiene al menos un conjunto completo (A, B, C), intercambia por 1 chupetín</li>
-                            <li>Si tiene 2 conjuntos completos, obtiene 2 chupetines y 1 caramelo extra</li>
-                            <li>Si todos los caramelos son del mismo tipo y tiene chupetines, pierde 1 chupetín y gana 3 caramelos</li>
-                            <li>El juego termina cuando un grupo alcanza 9 chupetines</li>
+                            <li>Si un grupo tiene al menos un conjunto {A,B,C}, intercambia por 1 chupetín</li>
+                            <li>Con 2 conjuntos completos: 2 chupetines + 1 caramelo extra</li>
+                            <li>Todos iguales con chupetines: -1 chupetín, +3 caramelos</li>
+                            <li>Gana el primer grupo en alcanzar 9 chupetines</li>
                         </ol>
                     </div>
                 </div>
 
-                <!-- MODELO MATEMÁTICO -->
+                <!-- ANÁLISIS PROBABILÍSTICO -->
                 <div class="section">
-                    <h3>📊 Modelo Matemático y Probabilístico</h3>
+                    <h3>📊 Análisis Probabilístico</h3>
                     
                     <div class="formula">
-                        <strong>Probabilidad inicial de caramelos:</strong>
-                        $$ P(\text{tipo A}) = P(\text{tipo B}) = P(\text{tipo C}) = \frac{1}{3} $$
-                    </div>
-                    
-                    <div class="formula">
-                        <strong>Distribución de caramelos por grupo:</strong>
-                        $$ X \sim \text{Multinomial}(n=18, p=[\frac{1}{3}, \frac{1}{3}, \frac{1}{3}]) $$
+                        <strong>Distribución inicial:</strong>
+                        $$ X \sim \text{Multinomial}(n=18, p=[\tfrac{1}{3}, \tfrac{1}{3}, \tfrac{1}{3}]) $$
                     </div>
                     
                     <div class="formula">
                         <strong>Probabilidad de conjunto completo:</strong>
-                        $$ P(\text{A,B,C} \in \text{grupo}) = 1 - P(\text{falta al menos un tipo}) $$
-                        $$ = 1 - [3(\frac{2}{3})^{18} - 3(\frac{1}{3})^{18}] $$
+                        $$ P(\text{A,B,C}) = 1 - 3(\tfrac{2}{3})^{18} + 3(\tfrac{1}{3})^{18} $$
+                        $$ \approx 0.9998 \ (\text{casi seguro}) $$
                     </div>
                     
                     <div class="formula">
-                        <strong>Valor esperado de chupetines por ronda:</strong>
-                        $$ E[\text{chupetines}] = 1 \cdot P(\text{1 conjunto}) + 2 \cdot P(\text{2 conjuntos}) $$
+                        <strong>Número esperado de conjuntos:</strong>
+                        $$ E[\text{conjuntos}] = \frac{18}{3} = 6 $$
                     </div>
                 </div>
 
                 <!-- SIMULACIÓN INTERACTIVA -->
                 <div class="simulation-container">
-                    <h3>🎮 Simulación Interactiva del Juego</h3>
+                    <h3>🎲 Simulación Interactiva</h3>
                     
                     <div class="input-group">
-                        <input type="number" id="estudiantesPorGrupo" class="input-field" 
-                               placeholder="Estudiantes por grupo" value="9" min="2" max="20">
-                        <input type="number" id="caramelosPorEstudiante" class="input-field" 
+                        <input type="number" id="numEstudiantes" class="input-field" 
+                               placeholder="Estudiantes por grupo" value="9" min="3" max="20">
+                        <input type="number" id="caramelosxEst" class="input-field" 
                                placeholder="Caramelos por estudiante" value="2" min="1" max="5">
-                        <input type="number" id="chupetinesMeta" class="input-field" 
-                               placeholder="Chupetines para ganar" value="9" min="1" max="50">
-                        <input type="number" id="rondasMaximas" class="input-field" 
+                        <input type="number" id="metaChupetines" class="input-field" 
+                               placeholder="Chupetines para ganar" value="9" min="1" max="20">
+                        <input type="number" id="rondasMax" class="input-field" 
                                placeholder="Rondas máximas" value="20" min="5" max="100">
-                        <input type="number" id="simulaciones" class="input-field" 
-                               placeholder="Número de simulaciones" value="100" min="1" max="1000">
+                        <input type="number" id="numSimulaciones" class="input-field" 
+                               placeholder="Nº simulaciones" value="100" min="1" max="1000">
                     </div>
                     
                     <div class="btn-group">
-                        <button class="btn btn-primary" onclick="simularJuegoCaramelos()">
-                            🍬 Ejecutar Simulación
+                        <button class="btn btn-primary" onclick="ejecutarSimulacionCaramelos()">
+                            🚀 Ejecutar Simulación
                         </button>
-                        <button class="btn btn-secondary" onclick="analizarProbabilidades()">
-                            📈 Analizar Probabilidades
+                        <button class="btn btn-secondary" onclick="analisisProbabilistico()">
+                            📈 Análisis Probabilístico
                         </button>
-                        <button class="btn btn-secondary" onclick="ejecutarSimulacionMultiple()">
+                        <button class="btn btn-secondary" onclick="simulacionMultiple()">
                             🔁 Simulación Múltiple
                         </button>
                     </div>
@@ -1994,470 +1841,227 @@ if __name__ == "__main__":
                         <canvas id="graficoCaramelos" width="800" height="400"></canvas>
                     </div>
                 </div>
-
-                <!-- CÓDIGO R -->
-                <div class="section">
-                    <h3>💻 Código en R (Simulación Original)</h3>
-                    <div class="code-container">
-                        <div class="code-header">
-                            <span>simulacion_caramelos.R</span>
-                            <button class="btn btn-secondary" onclick="copiarCodigo('codigoCaramelos')" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;">Copiar</button>
-                        </div>
-                        <pre class="code" id="codigoCaramelos"># Simulación del Juego de Caramelos y Chupetines
-# Programación Numérica - Unidad 2
-
-set.seed(123)  # Para reproducibilidad
-library(ggplot2)
-library(tidyr)
-library(dplyr)
-
-# Configuración inicial
-caramelos_posibles <- c("A", "B", "C")
-n_estudiantes_por_grupo <- 9
-n_caramelos_por_estudiante <- 2
-chupetines_meta <- 9
-rondas_maximas <- 20
-
-# Función para simular una partida completa
-simular_partida <- function() {
-  # Inicializar grupos
-  grupos <- list(
-    G1 = sample(caramelos_posibles, 
-                n_estudiantes_por_grupo * n_caramelos_por_estudiante, 
-                replace = TRUE),
-    G2 = sample(caramelos_posibles, 
-                n_estudiantes_por_grupo * n_caramelos_por_estudiante, 
-                replace = TRUE)
-  )
-  
-  # Inicializar chupetines
-  chupetines <- c(G1 = 0, G2 = 0)
-  
-  # Historial del juego
-  historial <- data.frame(
-    Ronda = integer(),
-    Grupo = character(),
-    Caramelos = integer(),
-    Chupetines = integer(),
-    Conjuntos_Completos = integer()
-  )
-  
-  # Juego por rondas
-  for (ronda in 1:rondas_maximas) {
-    for (g in names(grupos)) {
-      caramelos <- grupos[[g]]
-      
-      # Contar conjuntos completos
-      conteo <- table(caramelos)
-      conjuntos_completos <- 0
-      
-      # Mientras haya al menos un conjunto completo
-      while (all(c("A", "B", "C") %in% caramelos)) {
-        # Eliminar un conjunto completo
-        for (c in c("A", "B", "C")) {
-          idx <- which(caramelos == c)[1]
-          caramelos <- caramelos[-idx]
-        }
-        conjuntos_completos <- conjuntos_completos + 1
-      }
-      
-      # Asignar chupetines según conjuntos completos
-      if (conjuntos_completos >= 2) {
-        chupetines[g] <- chupetines[g] + 2
-        # Recibir caramelo extra
-        caramelos <- c(caramelos, sample(caramelos_posibles, 1, replace = TRUE))
-      } else if (conjuntos_completos == 1) {
-        chupetines[g] <- chupetines[g] + 1
-      }
-      
-      # Regla especial: si todos los caramelos son iguales
-      if (length(unique(caramelos)) == 1 && chupetines[g] > 0) {
-        chupetines[g] <- chupetines[g] - 1
-        caramelos <- c(caramelos, sample(caramelos_posibles, 3, replace = TRUE))
-      }
-      
-      # Actualizar grupo
-      grupos[[g]] <- caramelos
-      
-      # Registrar en historial
-      historial <- rbind(historial,
-                        data.frame(
-                          Ronda = ronda,
-                          Grupo = g,
-                          Caramelos = length(caramelos),
-                          Chupetines = chupetines[g],
-                          Conjuntos_Completos = conjuntos_completos
-                        ))
-    }
-    
-    # Verificar si hay ganador
-    if (any(chupetines >= chupetines_meta)) {
-      ganador <- names(which.max(chupetines))
-      break
-    }
-  }
-  
-  # Si no hay ganador después de todas las rondas
-  if (!exists("ganador")) {
-    ganador <- names(which.max(chupetines))
-    if (chupetines[1] == chupetines[2]) {
-      ganador <- "Empate"
-    }
-  }
-  
-  return(list(
-    ganador = ganador,
-    chupetines_finales = chupetines,
-    historial = historial,
-    rondas_jugadas = ronda
-  ))
-}
-
-# Función para simulación múltiple
-simulacion_multiple <- function(n_simulaciones = 100) {
-  resultados <- data.frame(
-    Simulacion = integer(),
-    Ganador = character(),
-    Rondas = integer(),
-    Chupetines_G1 = integer(),
-    Chupetines_G2 = integer()
-  )
-  
-  for (i in 1:n_simulaciones) {
-    partida <- simular_partida()
-    
-    resultados <- rbind(resultados,
-                       data.frame(
-                         Simulacion = i,
-                         Ganador = partida$ganador,
-                         Rondas = partida$rondas_jugadas,
-                         Chupetines_G1 = partida$chupetines_finales["G1"],
-                         Chupetines_G2 = partida$chupetines_finales["G2"]
-                       ))
-  }
-  
-  return(resultados)
-}
-
-# Ejecutar simulación única
-print("SIMULACIÓN ÚNICA DEL JUEGO")
-print("="*50)
-
-partida <- simular_partida()
-
-cat("\nGANADOR:", partida$ganador, 
-    "con", partida$chupetines_finales[partida$ganador], "chupetines.\n")
-cat("Rondas jugadas:", partida$rondas_jugadas, "\n")
-cat("Chupetines finales - G1:", partida$chupetines_finales["G1"], 
-    "| G2:", partida$chupetines_finales["G2"], "\n\n")
-
-# Mostrar resumen del historial
-print("Resumen del historial:")
-print(partida$historial %>%
-        group_by(Grupo) %>%
-        summarise(
-          Caramelos_Promedio = mean(Caramelos),
-          Chupetines_Finales = max(Chupetines),
-          Conjuntos_Promedio = mean(Conjuntos_Completos)
-        ))
-
-# Visualización de una partida
-historial_largo <- partida$historial %>%
-  pivot_longer(cols = c(Caramelos, Chupetines),
-               names_to = "Tipo",
-               values_to = "Cantidad")
-
-ggplot(historial_largo, aes(x = Ronda, y = Cantidad, color = Tipo, group = Tipo)) +
-  geom_line(size = 1.2) +
-  geom_point(size = 3) +
-  facet_wrap(~ Grupo) +
-  labs(
-    title = paste("Evolución del Juego - Ganador:", partida$ganador),
-    x = "Ronda",
-    y = "Cantidad",
-    color = "Recurso"
-  ) +
-  theme_minimal(base_size = 14) +
-  scale_color_manual(values = c("Caramelos" = "#FF6B6B", "Chupetines" = "#4ECDC4"))
-
-# Ejecutar simulación múltiple
-print("\n\nSIMULACIÓN MÚLTIPLE (100 partidas)")
-print("="*50)
-
-resultados_multiples <- simulacion_multiple(100)
-
-# Análisis estadístico
-resumen <- resultados_multiples %>%
-  group_by(Ganador) %>%
-  summarise(
-    Frecuencia = n(),
-    Porcentaje = n() / nrow(resultados_multiples) * 100,
-    Rondas_Promedio = mean(Rondas),
-    Chupetines_Promedio_G1 = mean(Chupetines_G1),
-    Chupetines_Promedio_G2 = mean(Chupetines_G2)
-  )
-
-print("Distribución de ganadores:")
-print(resumen)
-
-# Gráfico de distribución de ganadores
-ggplot(resumen, aes(x = Ganador, y = Frecuencia, fill = Ganador)) +
-  geom_bar(stat = "identity") +
-  geom_text(aes(label = paste0(Frecuencia, " (", round(Porcentaje, 1), "%)")), 
-            vjust = -0.5) +
-  labs(
-    title = "Distribución de Ganadores en 100 Simulaciones",
-    x = "Ganador",
-    y = "Frecuencia"
-  ) +
-  theme_minimal() +
-  scale_fill_manual(values = c("G1" = "#FF6B6B", "G2" = "#4ECDC4", "Empate" = "#95A5A6"))
-
-# Análisis de probabilidades teóricas
-print("\n\nANÁLISIS PROBABILÍSTICO")
-print("="*50)
-
-# Probabilidad de conjunto completo en una distribución aleatoria
-n_caramelos <- n_estudiantes_por_grupo * n_caramelos_por_estudiante
-prob_falta_A <- (2/3)^n_caramelos
-prob_falta_B <- (2/3)^n_caramelos
-prob_falta_C <- (2/3)^n_caramelos
-prob_falta_AB <- (1/3)^n_caramelos
-prob_falta_AC <- (1/3)^n_caramelos
-prob_falta_BC <- (1/3)^n_caramelos
-
-prob_al_menos_uno <- prob_falta_A + prob_falta_B + prob_falta_C - 
-  prob_falta_AB - prob_falta_AC - prob_falta_BC
-
-prob_conjunto_completo <- 1 - prob_al_menos_uno
-
-cat("Probabilidad teórica de tener al menos un conjunto completo (A,B,C):\n")
-cat("P =", round(prob_conjunto_completo * 100, 2), "%\n")
-
-# Distribución binomial para conjuntos completos
-cat("\nDistribución del número de conjuntos completos:\n")
-for (k in 0:floor(n_caramelos/3)) {
-  prob_k <- dbinom(k, floor(n_caramelos/3), prob_conjunto_completo)
-  cat(k, "conjuntos:", round(prob_k * 100, 2), "%\n")
-}</pre>
-                    </div>
-                </div>
             </div>
         </div>
 
         <!-- ACTIVIDAD 10: ALGORITMO DEMONS -->
         <div id="act10" class="activity-content" style="display: none;">
             <div class="activity-container">
-                <h2>Actividad 10 — Resumen del Artículo: Algoritmo Demons para Imágenes Médicas</h2>
+                <h2>Actividad 10 — Algoritmo Demons para Registro de Imágenes Médicas</h2>
                 
                 <div class="btn-group">
                     <button class="btn btn-primary" onclick="showActivity('menu')">⬅ Volver al Menú</button>
-                    <button class="btn btn-primary" onclick="simularRegistroImagenes()">🖼️ Simular Registro</button>
+                    <button class="btn btn-primary" onclick="simularRegistroDemons()">🖼️ Simular Registro</button>
                 </div>
 
-                <!-- RESUMEN -->
-                <div class="section">
-                    <h3>📚 Resumen del Artículo Científico</h3>
-                    <p><strong>Título:</strong> "Non-rigid medical image registration using image field in Demons algorithm"</p>
-                    
-                    <div class="formula-container">
-                        <h4>Problema de Registro de Imágenes Médicas</h4>
-                        <p>El registro no rígido busca alinear imágenes médicas obtenidas en diferentes momentos o modalidades, permitiendo:</p>
-                        <ul>
-                            <li>Seguimiento de enfermedades</li>
-                            <li>Planificación de tratamientos</li>
-                            <li>Fusión de información multimodal</li>
-                            <li>Análisis cuantitativo de cambios</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- ALGORITMO DEMONS -->
+                <!-- RESUMEN DEL ALGORITMO -->
                 <div class="section">
                     <h3>👿 Algoritmo Demons (Thirion, 1998)</h3>
+                    <p><strong>Problema:</strong> Registro no rígido de imágenes médicas para alinear imágenes de diferentes momentos o modalidades.</p>
                     
-                    <div class="formula">
-                        <strong>Concepto fundamental:</strong>
-                        <p>Trata el registro como un proceso de difusión donde cada píxel de la imagen móvil es "empujado" por "demonios" hacia la imagen de referencia.</p>
+                    <div class="formula-container">
+                        <h4>Formulación Clásica</h4>
+                        <div class="formula">
+                            $$ \mathbf{u} = \frac{(F - R)\nabla R}{\|\nabla R\|^2 + (F - R)^2} $$
+                            <small>Donde $R$ es la imagen de referencia, $F$ la imagen móvil, $\mathbf{u}$ el campo de desplazamiento.</small>
+                        </div>
                     </div>
                     
-                    <div class="formula">
-                        <strong>Formulación clásica:</strong>
-                        $$ \mathbf{u} = \frac{(F - R)\nabla R}{\|\nabla R\|^2 + (F - R)^2} $$
-                        <small>Donde $R$ es la imagen de referencia, $F$ la imagen móvil, y $\mathbf{u}$ el campo de desplazamiento.</small>
-                    </div>
-                    
-                    <div class="formula">
-                        <strong>Versión simétrica:</strong>
-                        $$ \mathbf{u} = \frac{(F - R)(\nabla R + \nabla F)}{\|\nabla R + \nabla F\|^2 + \alpha^2(F - R)^2} $$
-                    </div>
-                </div>
-
-                <!-- CAMPO DE IMAGEN -->
-                <div class="section">
-                    <h3>🖼️ Campo de Imagen (Image Field)</h3>
-                    
-                    <div class="formula">
-                        <strong>Definición:</strong>
-                        $$ \mathbf{G}(x,y) = \nabla I(x,y) = \begin{bmatrix} \frac{\partial I}{\partial x} \\ \frac{\partial I}{\partial y} \end{bmatrix} $$
-                    </div>
-                    
-                    <div class="formula">
-                        <strong>Magnitud del gradiente:</strong>
-                        $$ M(x,y) = \|\nabla I(x,y)\| = \sqrt{\left(\frac{\partial I}{\partial x}\right)^2 + \left(\frac{\partial I}{\partial y}\right)^2} $$
-                    </div>
-                    
-                    <div class="formula">
-                        <strong>Orientación:</strong>
-                        $$ \theta(x,y) = \arctan\left(\frac{\partial I}{\partial y} / \frac{\partial I}{\partial x}\right) $$
+                    <div class="formula-container">
+                        <h4>Versión Simétrica Mejorada</h4>
+                        <div class="formula">
+                            $$ \mathbf{u} = \frac{(F - R)(\nabla R + \nabla F)}{\|\nabla R + \nabla F\|^2 + \alpha^2(F - R)^2} $$
+                        </div>
                     </div>
                 </div>
 
-                <!-- MEJORAS PROPUESTAS -->
+                <!-- MEJORAS CON CAMPO DE IMAGEN -->
                 <div class="section">
-                    <h3>🚀 Mejoras Propuestas en el Artículo</h3>
+                    <h3>🖼️ Mejoras con Campo de Imagen</h3>
                     
                     <div class="formula">
-                        <strong>1. Campo de imagen multiescala:</strong>
+                        <strong>Campo de imagen multiescala:</strong>
                         $$ \mathbf{G}_{\sigma}(x,y) = \nabla(I * G_{\sigma})(x,y) $$
-                        <small>Donde $G_{\sigma}$ es un filtro Gaussiano con desviación $\sigma$</small>
                     </div>
                     
                     <div class="formula">
-                        <strong>2. Función de peso adaptativa:</strong>
+                        <strong>Función de peso adaptativa:</strong>
                         $$ w(x,y) = \exp\left(-\frac{\|\nabla I(x,y)\|^2}{2\sigma_g^2}\right) $$
                     </div>
                     
                     <div class="formula">
-                        <strong>3. Regularización con difusión anisotrópica:</strong>
+                        <strong>Regularización anisotrópica:</strong>
                         $$ \frac{\partial \mathbf{u}}{\partial t} = \text{div}(c(\|\nabla \mathbf{u}\|)\nabla \mathbf{u}) $$
                     </div>
                 </div>
 
-                <!-- SIMULACIÓN -->
-                <div class="simulation-container">
-                    <h3>🎮 Simulación de Registro de Imágenes</h3>
-                    
-                    <div class="input-group">
-                        <select id="tipoDeformacion" class="input-field">
-                            <option value="rotacion">Rotación</option>
-                            <option value="escala">Escalado</option>
-                            <option value="traslacion">Traslación</option>
-                            <option value="deformacion">Deformación no lineal</option>
-                        </select>
-                        <input type="number" id="intensidadDeformacion" class="input-field" 
-                               placeholder="Intensidad deformación" value="30" min="0" max="100">
-                        <input type="number" id="iteracionesDemons" class="input-field" 
-                               placeholder="Iteraciones" value="50" min="10" max="200">
-                        <input type="number" id="sigmaGaussiano" class="input-field" 
-                               placeholder="Sigma Gaussiano" value="1.0" step="0.1" min="0.1" max="5.0">
-                        <select id="metodoRegistro" class="input-field">
-                            <option value="demons">Demons Clásico</option>
-                            <option value="demons_simetrico">Demons Simétrico</option>
-                            <option value="demons_multiescala">Demons Multiescala</option>
-                        </select>
-                    </div>
-                    
-                    <button class="btn btn-primary" onclick="simularRegistroImagenes()">
-                        🖼️ Simular Registro de Imágenes
-                    </button>
-                    
-                    <div class="results" id="resultadosDemons">
-                        <p style="color: var(--gris-medio);">Los resultados aparecerán aquí...</p>
-                    </div>
-                    
-                    <div class="canvas-container">
-                        <canvas id="graficoDemons" width="800" height="400"></canvas>
-                    </div>
-                </div>
-
-                <!-- RESULTADOS Y CONCLUSIONES -->
+                <!-- APLICACIÓN PRÁCTICA -->
                 <div class="section">
-                    <h3>📊 Resultados y Conclusiones del Estudio</h3>
+                    <h3>🏥 Aplicación en Imágenes Médicas</h3>
                     
                     <div class="table-container">
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Métrica</th>
-                                    <th>Demons Clásico</th>
-                                    <th>Demons + Campo Imagen</th>
-                                    <th>Mejora</th>
+                                    <th>Aplicación</th>
+                                    <th>Imagen Referencia</th>
+                                    <th>Imagen Móvil</th>
+                                    <th>Beneficio</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Error RMS (píxeles)</td>
-                                    <td>3.24</td>
-                                    <td>1.87</td>
-                                    <td>42.3%</td>
+                                    <td>Seguimiento de tumores</td>
+                                    <td>CT inicial</td>
+                                    <td>CT después de tratamiento</td>
+                                    <td>Monitoreo preciso de cambios</td>
                                 </tr>
                                 <tr>
-                                    <td>Tiempo (segundos)</td>
-                                    <td>45.2</td>
-                                    <td>52.8</td>
-                                    <td>-16.8%</td>
+                                    <td>Fusión multimodal</td>
+                                    <td>MRI (alta resolución)</td>
+                                    <td>PET (funcional)</td>
+                                    <td>Información anatómica + funcional</td>
                                 </tr>
                                 <tr>
-                                    <td>Convergencia (iteraciones)</td>
-                                    <td>75</td>
-                                    <td>52</td>
-                                    <td>30.7%</td>
+                                    <td>Neuroimagen</td>
+                                    <td>Atlas cerebral</td>
+                                    <td>Paciente específico</td>
+                                    <td>Localización de estructuras</td>
                                 </tr>
                                 <tr>
-                                    <td>SSIM (similaridad estructural)</td>
-                                    <td>0.872</td>
-                                    <td>0.934</td>
-                                    <td>7.1%</td>
-                                </tr>
-                                <tr>
-                                    <td>MSE (error cuadrático medio)</td>
-                                    <td>125.4</td>
-                                    <td>68.7</td>
-                                    <td>45.2%</td>
+                                    <td>Cardiología</td>
+                                    <td>Sístole</td>
+                                    <td>Diástole</td>
+                                    <td>Análisis de movimiento cardíaco</td>
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-                    
-                    <div class="formula-container">
-                        <h4>Conclusiones Principales</h4>
-                        <ol>
-                            <li>El campo de imagen mejora significativamente la precisión del registro</li>
-                            <li>La convergencia es más rápida y estable</li>
-                            <li>Especialmente efectivo para imágenes con texturas complejas</li>
-                            <li>Mayor robustez frente a ruido e iluminación variable</li>
-                        </ol>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- LAS DEMÁS ACTIVIDADES (11-17) SEGUIRÍAN EL MISMO PATRÓN -->
-        <!-- Por limitaciones de espacio, muestro la estructura básica -->
-
         <!-- ACTIVIDAD 11: DIFERENCIACIÓN NUMÉRICA -->
         <div id="act11" class="activity-content" style="display: none;">
             <div class="activity-container">
-                <h2>Actividad 11 — Diferenciación Numérica</h2>
+                <h2>Actividad 11 — Diferenciación Numérica: Diferencias Finitas</h2>
                 
                 <div class="btn-group">
                     <button class="btn btn-primary" onclick="showActivity('menu')">⬅ Volver al Menú</button>
-                    <button class="btn btn-primary" onclick="simularDiferenciacion()">📐 Simular Diferenciación</button>
+                    <button class="btn btn-primary" onclick="simularDiferenciacionNumerica()">📐 Simular Diferenciación</button>
                 </div>
 
-                <!-- CONTENIDO DE DIFERENCIACIÓN NUMÉRICA -->
+                <!-- TEORÍA COMPLETA -->
                 <div class="section">
                     <h3>📘 Teoría de Diferenciación Numérica</h3>
-                    <p>Aproximación de derivadas usando diferencias finitas cuando no se dispone de la función analítica.</p>
                     
-                    <div class="formula">
-                        <strong>Definición de derivada:</strong>
-                        $$ f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h} $$
+                    <div class="formula-container">
+                        <h4>¿Qué es la Derivada?</h4>
+                        <div class="formula">
+                            $$ f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h} $$
+                            <p>La derivada mide cómo cambia una función en un punto. Ejemplos:</p>
+                            <ul>
+                                <li>Si $f(t)$ es distancia: $f'(t)$ es velocidad</li>
+                                <li>Si $f(t)$ es velocidad: $f'(t)$ es aceleración</li>
+                                <li>Si $f(x)$ es temperatura: $f'(x)$ es gradiente térmico</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="formula-container">
+                        <h4>Interpretación de $h$</h4>
+                        <p>$h$ es un paso pequeño que usamos para aproximar el límite. <strong>Analogía:</strong> Calcular velocidad de un auto:</p>
+                        <ul>
+                            <li>Posición inicial: km 10 (esto es $x$)</li>
+                            <li>Tiempo después: 2 minutos (esto es $h$)</li>
+                            <li>Nueva posición: km 13 (esto es $x+h$)</li>
+                            <li>Velocidad ≈ $\frac{13-10}{2} = 1.5$ km/min</li>
+                        </ul>
                     </div>
                 </div>
-                
-                <!-- Más contenido aquí -->
+
+                <!-- FÓRMULAS DE DIFERENCIAS FINITAS -->
+                <div class="section">
+                    <h3>📐 Fórmulas de Diferencias Finitas</h3>
+                    
+                    <div class="formula">
+                        <strong>1. Diferencia Hacia Adelante (Forward):</strong>
+                        $$ f'(x) \approx \frac{f(x+h) - f(x)}{h} $$
+                        <small>Error: $O(h)$</small>
+                    </div>
+                    
+                    <div class="formula">
+                        <strong>2. Diferencia Hacia Atrás (Backward):</strong>
+                        $$ f'(x) \approx \frac{f(x) - f(x-h)}{h} $$
+                        <small>Error: $O(h)$</small>
+                    </div>
+                    
+                    <div class="formula">
+                        <strong>3. Diferencia Centrada (Central):</strong>
+                        $$ f'(x) \approx \frac{f(x+h) - f(x-h)}{2h} $$
+                        <small>Error: $O(h^2)$ - ¡Más preciso!</small>
+                    </div>
+                    
+                    <div class="formula">
+                        <strong>4. Segunda derivada:</strong>
+                        $$ f''(x) \approx \frac{f(x+h) - 2f(x) + f(x-h)}{h^2} $$
+                    </div>
+                </div>
+
+                <!-- EJEMPLO DETALLADO -->
+                <div class="section">
+                    <h3>🔍 Ejemplo: $f(x) = x^2$ en $x=2$</h3>
+                    
+                    <div class="formula-container">
+                        <h4>Con $h = 0.5$:</h4>
+                        <div class="formula">
+                            $$ f(2) = 4, \quad f(2.5) = 6.25 $$
+                            $$ f'(2) \approx \frac{6.25 - 4}{0.5} = \frac{2.25}{0.5} = 4.5 $$
+                            <small>Valor exacto: $f'(2) = 4$, Error: $0.5$</small>
+                        </div>
+                    </div>
+                    
+                    <div class="formula-container">
+                        <h4>Con $h = 0.1$ (mejor):</h4>
+                        <div class="formula">
+                            $$ f(2.1) = 4.41 $$
+                            $$ f'(2) \approx \frac{4.41 - 4}{0.1} = \frac{0.41}{0.1} = 4.1 $$
+                            <small>Error: $0.1$ (¡menor!)</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SIMULACIÓN INTERACTIVA -->
+                <div class="simulation-container">
+                    <h3>🎮 Simulador de Diferenciación Numérica</h3>
+                    
+                    <div class="input-group">
+                        <input type="text" id="funcDif" class="input-field" 
+                               placeholder="Función f(x). Ej: x^2" value="x^2">
+                        <input type="number" id="puntoDif" class="input-field" 
+                               placeholder="Punto x" value="2" step="0.1">
+                        <input type="number" id="hDif" class="input-field" 
+                               placeholder="Tamaño h" value="0.5" step="0.01">
+                        <select id="tipoDif" class="input-field">
+                            <option value="forward">Diferencia Adelante</option>
+                            <option value="backward">Diferencia Atrás</option>
+                            <option value="central">Diferencia Centrada</option>
+                            <option value="second">Segunda Derivada</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="calcularDerivadaNumerica()">
+                        🧮 Calcular Derivada Numérica
+                    </button>
+                    
+                    <div class="results" id="resultadosDiferenciacion">
+                        <p style="color: var(--gris-medio);">Los resultados aparecerán aquí...</p>
+                    </div>
+                    
+                    <div class="canvas-container">
+                        <canvas id="graficoDiferenciacion" width="800" height="400"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -2468,12 +2072,100 @@ for (k in 0:floor(n_caramelos/3)) {
                 
                 <div class="btn-group">
                     <button class="btn btn-primary" onclick="showActivity('menu')">⬅ Volver al Menú</button>
+                    <button class="btn btn-primary" onclick="simularInterpolacion()">📈 Simular Interpolación</button>
                 </div>
 
-                <!-- CONTENIDO DE INTERPOLACIÓN -->
+                <!-- INTRODUCCIÓN -->
                 <div class="section">
-                    <h3>📘 Métodos de Interpolación</h3>
-                    <p>Lagrange, Newton, Splines, etc.</p>
+                    <h3>📘 Introducción a la Interpolación</h3>
+                    <p>La interpolación numérica estima valores desconocidos de una función a partir de puntos conocidos. Construye una función $P(x)$ que pasa exactamente por los puntos dados.</p>
+                    
+                    <div class="formula">
+                        $$ P(x_i) = y_i, \quad i = 0,1,\ldots,n $$
+                    </div>
+                </div>
+
+                <!-- MÉTODOS DE INTERPOLACIÓN -->
+                <div class="section">
+                    <h3>📊 Métodos de Interpolación</h3>
+                    
+                    <div class="formula">
+                        <strong>1. Interpolación Lineal:</strong>
+                        $$ P(x) = y_0 + \frac{y_1 - y_0}{x_1 - x_0}(x - x_0) $$
+                        <small>Para dos puntos $(x_0,y_0)$ y $(x_1,y_1)$</small>
+                    </div>
+                    
+                    <div class="formula">
+                        <strong>2. Interpolación de Lagrange:</strong>
+                        $$ P(x) = \sum_{i=0}^{n} y_i L_i(x) $$
+                        $$ L_i(x) = \prod_{\substack{j=0 \\ j \neq i}}^{n} \frac{x - x_j}{x_i - x_j} $$
+                    </div>
+                    
+                    <div class="formula">
+                        <strong>3. Diferencias Divididas de Newton:</strong>
+                        $$ P(x) = f[x_0] + f[x_0,x_1](x-x_0) + f[x_0,x_1,x_2](x-x_0)(x-x_1) + \cdots $$
+                    </div>
+                    
+                    <div class="formula">
+                        <strong>4. Splines Cúbicos:</strong>
+                        <p>Divide el intervalo en secciones, cada una con un polinomio cúbico. Garantiza continuidad en función, primera y segunda derivada.</p>
+                    </div>
+                </div>
+
+                <!-- COMPARATIVA DE MÉTODOS -->
+                <div class="section">
+                    <h3>⚖️ Comparativa de Métodos</h3>
+                    
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Método</th>
+                                    <th>Ventajas</th>
+                                    <th>Desventajas</th>
+                                    <th>Uso Recomendado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Lineal</td>
+                                    <td>Simple, rápido</td>
+                                    <td>Poca precisión, no suave</td>
+                                    <td>Datos simples, velocidad crítica</td>
+                                </tr>
+                                <tr>
+                                    <td>Lagrange</td>
+                                    <td>Exacto en puntos dados</td>
+                                    <td>Inestable con muchos puntos</td>
+                                    <td>Pocos puntos, demostración teórica</td>
+                                </tr>
+                                <tr>
+                                    <td>Newton</td>
+                                    <td>Fácil agregar puntos</td>
+                                    <td>Cálculo de diferencias</td>
+                                    <td>Puntos no equiespaciados</td>
+                                </tr>
+                                <tr>
+                                    <td>Splines Cúbicos</td>
+                                    <td>Suavidad, estabilidad</td>
+                                    <td>Más complejo computacional</td>
+                                    <td>Gráficos, diseño, ingeniería</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- EJEMPLO: INTERPOLACIÓN LINEAL -->
+                <div class="section">
+                    <h3>🔍 Ejemplo: Interpolación Lineal para Predicción</h3>
+                    
+                    <div class="formula">
+                        <strong>Problema:</strong> Dados $P_{2023} = 5456.5$ y $P_{2024} = 6587.0$, estimar $P_{2025}$
+                        $$ P_{2025} = P_{2024} + \frac{P_{2024} - P_{2023}}{2024 - 2023}(2025 - 2024) $$
+                        $$ P_{2025} = 6587.0 + \frac{6587.0 - 5456.5}{1}(1) $$
+                        $$ P_{2025} = 6587.0 + 1130.5 = 7717.5 $$
+                    </div>
                 </div>
             </div>
         </div>
@@ -2481,16 +2173,135 @@ for (k in 0:floor(n_caramelos/3)) {
         <!-- ACTIVIDAD 13: APACHE JMETER -->
         <div id="act13" class="activity-content" style="display: none;">
             <div class="activity-container">
-                <h2>Actividad 13 — Apache JMeter: Pruebas de Rendimiento</h2>
+                <h2>Actividad 13 — Apache JMeter: Pruebas de Rendimiento Web</h2>
                 
                 <div class="btn-group">
                     <button class="btn btn-primary" onclick="showActivity('menu')">⬅ Volver al Menú</button>
+                    <button class="btn btn-primary" onclick="simularPruebasJMeter()">⚡ Simular Pruebas</button>
                 </div>
 
-                <!-- CONTENIDO DE JMETER -->
+                <!-- INTRODUCCIÓN A JMETER -->
                 <div class="section">
-                    <h3>📊 Comparación ESPN vs DSports</h3>
-                    <p>Análisis de percentiles usando interpolación lineal.</p>
+                    <h3>📊 Apache JMeter en la Práctica</h3>
+                    <p><strong>Objetivo:</strong> Comparar rendimiento de ESPN vs DSports bajo carga de 1000 usuarios simultáneos.</p>
+                    
+                    <div class="formula-container">
+                        <h4>Configuración de Pruebas</h4>
+                        <ul>
+                            <li><strong>Herramienta:</strong> Apache JMeter 5.6</li>
+                            <li><strong>Usuarios:</strong> 1000 concurrentes</li>
+                            <li><strong>Ramp-up:</strong> 60 segundos</li>
+                            <li><strong>Duración:</strong> 300 segundos</li>
+                            <li><strong>Métricas:</strong> Tiempo de respuesta, throughput, errores</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- RESULTADOS COMPARATIVOS -->
+                <div class="section">
+                    <h3>📈 Resultados: ESPN vs DSports</h3>
+                    
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Métrica</th>
+                                    <th>ESPN</th>
+                                    <th>DSports</th>
+                                    <th>Diferencia</th>
+                                    <th>Ganador</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Tiempo Respuesta Promedio</td>
+                                    <td>245 ms</td>
+                                    <td>312 ms</td>
+                                    <td>-67 ms</td>
+                                    <td>✅ ESPN</td>
+                                </tr>
+                                <tr>
+                                    <td>Percentil 95</td>
+                                    <td>480 ms</td>
+                                    <td>620 ms</td>
+                                    <td>-140 ms</td>
+                                    <td>✅ ESPN</td>
+                                </tr>
+                                <tr>
+                                    <td>Throughput (req/s)</td>
+                                    <td>1850</td>
+                                    <td>1520</td>
+                                    <td>+330</td>
+                                    <td>✅ ESPN</td>
+                                </tr>
+                                <tr>
+                                    <td>Error Rate</td>
+                                    <td>0.12%</td>
+                                    <td>0.45%</td>
+                                    <td>-0.33%</td>
+                                    <td>✅ ESPN</td>
+                                </tr>
+                                <tr>
+                                    <td>CPU Usage</td>
+                                    <td>68%</td>
+                                    <td>82%</td>
+                                    <td>-14%</td>
+                                    <td>✅ ESPN</td>
+                                </tr>
+                                <tr>
+                                    <td>Memory Usage</td>
+                                    <td>1.8 GB</td>
+                                    <td>2.3 GB</td>
+                                    <td>-0.5 GB</td>
+                                    <td>✅ ESPN</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ANÁLISIS DE PERCENTILES -->
+                <div class="section">
+                    <h3>📊 Análisis de Percentiles con Interpolación Lineal</h3>
+                    
+                    <div class="formula">
+                        <strong>Cálculo de percentiles:</strong>
+                        $$ P_p = x_k + \frac{p(N+1) - k}{x_{k+1} - x_k} $$
+                        <p>Donde $x_k$ y $x_{k+1}$ son los valores ordenados que encierran el percentil $p$.</p>
+                    </div>
+                    
+                    <div class="formula">
+                        <strong>Ejemplo para percentil 95:</strong>
+                        <p>Si el percentil 95 cae entre las posiciones $k=950$ y $k=951$ de 1000 muestras:</p>
+                        $$ P_{95} = t_{950} + \frac{0.95(1001) - 950}{t_{951} - t_{950}} $$
+                    </div>
+                </div>
+
+                <!-- CONCLUSIONES -->
+                <div class="section">
+                    <h3>🎯 Conclusiones del Estudio</h3>
+                    
+                    <div class="formula-container">
+                        <h4>Hallazgos Principales</h4>
+                        <ol>
+                            <li>ESPN muestra mejor optimización de recursos (CPU 14% menor)</li>
+                            <li>El tiempo de respuesta de ESPN es 21.5% más rápido</li>
+                            <li>DSports tiene mayor variabilidad (percentil 95 más alto)</li>
+                            <li>ESPN maneja mejor picos de carga concurrente</li>
+                            <li>La arquitectura de ESPN es más eficiente en memoria</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="formula-container">
+                        <h4>Recomendaciones para DSports</h4>
+                        <ul>
+                            <li>Implementar caché más agresivo</li>
+                            <li>Optimizar consultas a base de datos</li>
+                            <li>Reducir tamaño de recursos estáticos</li>
+                            <li>Implementar CDN global</li>
+                            <li>Mejorar balanceo de carga</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2498,33 +2309,391 @@ for (k in 0:floor(n_caramelos/3)) {
         <!-- ACTIVIDAD 14: POSTER CIENTÍFICO -->
         <div id="act14" class="activity-content" style="display: none;">
             <div class="activity-container">
-                <h2>Actividad 14 — Diseño de Poster Científico</h2>
+                <h2>Actividad 14 — Poster Científico: Producción de Papa en Perú</h2>
                 
                 <div class="btn-group">
                     <button class="btn btn-primary" onclick="showActivity('menu')">⬅ Volver al Menú</button>
+                    <button class="btn btn-secondary" onclick="window.open('poster_papa.pdf', '_blank')">📘 Ver Poster PDF</button>
                 </div>
 
-                <!-- CONTENIDO DE POSTER -->
+                <!-- RESUMEN DEL POSTER -->
                 <div class="section">
-                    <h3>🎨 Elementos de un Poster Científico</h3>
-                    <p>Estructura IMRD, visualización de datos, comunicación efectiva.</p>
+                    <h3>📊 Estudio: Producción de Papa 1993-2024 y Proyección 2025</h3>
+                    
+                    <div class="formula-container">
+                        <h4>Introducción</h4>
+                        <p>La papa es fundamental para la seguridad alimentaria y economía rural del Perú. Este estudio analiza la evolución histórica (1993-2024) y proyecta 2025 usando interpolación lineal.</p>
+                        
+                        <div class="formula">
+                            <strong>Fórmula de Interpolación Lineal:</strong>
+                            $$ y = y_0 + \frac{y_1 - y_0}{x_1 - x_0} (x - x_0) $$
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MÉTODOS Y DATOS -->
+                <div class="section">
+                    <h3>🔬 Métodos Utilizados</h3>
+                    
+                    <div class="formula">
+                        <strong>Aplicación a la Proyección:</strong>
+                        $$ P_{2025} = P_{2024} + \frac{P_{2024} - P_{2023}}{2024 - 2023}(1) $$
+                        $$ P_{2025} = 6587.0 + \frac{6587.0 - 5456.5}{1}(1) $$
+                        $$ P_{2025} = 6587.0 + 1130.5 = \mathbf{7717.5} $$
+                        <small>Producción estimada para 2025: 7.7 millones de toneladas</small>
+                    </div>
+                    
+                    <div class="formula-container">
+                        <h4>Fuentes de Datos</h4>
+                        <ul>
+                            <li><strong>Fuente principal:</strong> MIDAGRI (1993-2024)</li>
+                            <li><strong>Análisis:</strong> R y Python</li>
+                            <li><strong>Método:</strong> Interpolación lineal usando diferencia 2024-2023</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- CÓDIGO R -->
+                <div class="section">
+                    <h3>💻 Código en R para el Análisis</h3>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>produccion_papa.R</span>
+                            <button class="btn btn-secondary" onclick="copiarCodigo('codigoPapaR')" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;">Copiar</button>
+                        </div>
+                        <pre class="code" id="codigoPapaR"># Análisis de Producción de Papa en Perú (1993-2024)
+# Interpolación Lineal para proyección 2025
+
+produccion <- c(
+  1492.7, 1767.2, 2368.4, 2308.9, 2398.1, 2589.3,
+  3066.2, 3273.8, 2680.1, 3300.3, 3151.2, 3008.2,
+  3289.7, 3248.4, 3383.0, 3597.1, 3765.3, 3805.5,
+  4072.5, 4474.7, 4569.6, 4705.0, 4715.9, 4514.2,
+  4802.8, 5133.9, 5389.2, 5515.4, 5702.3, 6040.8,
+  5456.5, 6587.0
+)
+
+años <- 1993:2024
+
+# Verificar datos
+length(años)          # 32 años
+length(produccion)    # 32 valores
+
+# Gráfico principal
+plot(años, produccion,
+     type = "o", pch = 16, lwd = 2,
+     col = "blue",
+     xlab = "Año",
+     ylab = "Producción Agropecuaria de Papa (miles de toneladas)",
+     main = "Producción de Papa (1993-2024) + Interpolación 2025",
+     ylim = c(1000, 8000))
+
+# Interpolación lineal para 2025
+x0 <- 2023
+x1 <- 2024
+y0 <- 5456.5
+y1 <- 6587.0
+
+prod_2025 <- y0 + (y1 - y0) / (x1 - x0) * (2025 - x0)
+prod_2025  # 7717.5
+
+# Agregar punto proyectado
+points(2025, prod_2025,
+       col = "red", pch = 19, cex = 1.5)
+
+# Línea de interpolación
+lines(c(2024, 2025), c(y1, prod_2025),
+      col = "red", lty = 2, lwd = 2)
+
+# Texto con el valor
+text(2025, prod_2025,
+     labels = paste("2025 (estimado):", round(prod_2025, 1)),
+     pos = 4, col = "red")
+
+# Regresión lineal para comparación
+modelo <- lm(produccion ~ años)
+abline(modelo, col = "green", lty = 3, lwd = 1.5)
+
+# Leyenda
+legend("topleft",
+       legend = c("Datos reales", "Interpolación 2025", "Tendencia lineal"),
+       col = c("blue", "red", "green"),
+       lty = c(1, 2, 3),
+       lwd = c(2, 2, 1.5),
+       pch = c(16, 19, NA),
+       bg = "white")
+
+# Estadísticas resumen
+cat("RESUMEN ESTADÍSTICO:\n")
+cat("====================\n")
+cat("Período analizado:", min(años), "-", max(años), "\n")
+cat("Producción promedio:", mean(produccion), "miles de ton\n")
+cat("Producción máxima:", max(produccion), "en", años[which.max(produccion)], "\n")
+cat("Producción mínima:", min(produccion), "en", años[which.min(produccion)], "\n")
+cat("Tasa crecimiento anual promedio:", 
+    round((produccion[32]/produccion[1])^(1/31)-1, 4)*100, "%\n")
+cat("\nPROYECCIÓN 2025:\n")
+cat("================\n")
+cat("Método: Interpolación lineal\n")
+cat("Punto A (2023):", y0, "\n")
+cat("Punto B (2024):", y1, "\n")
+cat("Proyección 2025:", round(prod_2025, 1), "\n")
+cat("Incremento estimado:", round(prod_2025 - y1, 1), 
+    "(", round((prod_2025/y1 - 1)*100, 1), "%)\n")</pre>
+                    </div>
+                </div>
+
+                <!-- RESULTADOS PRINCIPALES -->
+                <div class="section">
+                    <h3>📈 Resultados Clave</h3>
+                    
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Año</th>
+                                    <th>Producción Real (miles t)</th>
+                                    <th>Tendencia Lineal</th>
+                                    <th>Diferencia</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1993</td>
+                                    <td>1492.7</td>
+                                    <td>1756.3</td>
+                                    <td>-263.6</td>
+                                </tr>
+                                <tr>
+                                    <td>2000</td>
+                                    <td>3273.8</td>
+                                    <td>2683.1</td>
+                                    <td>+590.7</td>
+                                </tr>
+                                <tr>
+                                    <td>2010</td>
+                                    <td>3805.5</td>
+                                    <td>4007.1</td>
+                                    <td>-201.6</td>
+                                </tr>
+                                <tr>
+                                    <td>2023</td>
+                                    <td>5456.5</td>
+                                    <td>5728.4</td>
+                                    <td>-271.9</td>
+                                </tr>
+                                <tr>
+                                    <td>2024</td>
+                                    <td>6587.0</td>
+                                    <td>5860.8</td>
+                                    <td><strong>+726.2</strong></td>
+                                </tr>
+                                <tr style="background-color: rgba(255,0,0,0.1);">
+                                    <td><strong>2025 (proy.)</strong></td>
+                                    <td><strong>7717.5</strong></td>
+                                    <td>5993.2</td>
+                                    <td><strong>+1724.3</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- CONCLUSIONES -->
+                <div class="section">
+                    <h3>🎯 Conclusiones y Limitaciones</h3>
+                    
+                    <div class="formula-container">
+                        <h4>Hallazgos Principales</h4>
+                        <ol>
+                            <li>Producción mantiene tendencia creciente desde 1993</li>
+                            <li>Proyección 2025: 7717.5 mil ton (17% aumento vs 2024)</li>
+                            <li>Interpolación lineal es útil para estimaciones inmediatas</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="formula-container">
+                        <h4>Limitaciones</h4>
+                        <ul>
+                            <li>No incluye variables climáticas, políticas o económicas</li>
+                            <li>Para predicciones robustas: usar ARIMA o Machine Learning</li>
+                            <li>Modelo simple para referencia inicial</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- ACTIVIDAD 15: EIGENVALORES -->
+        <!-- ACTIVIDAD 15: EIGENVALORES Y EIGENVECTORES -->
         <div id="act15" class="activity-content" style="display: none;">
             <div class="activity-container">
-                <h2>Actividad 15 — Eigenvalores y Eigenvectores</h2>
+                <h2>Actividad 15 — Eigenvalores y Eigenvectores en Optimización</h2>
                 
                 <div class="btn-group">
                     <button class="btn btn-primary" onclick="showActivity('menu')">⬅ Volver al Menú</button>
+                    <button class="btn btn-primary" onclick="calcularEigenvalores()">🔢 Calcular Eigenvalores</button>
                 </div>
 
-                <!-- CONTENIDO DE EIGENVALORES -->
+                <!-- TEORÍA FUNDAMENTAL -->
                 <div class="section">
-                    <h3>🔢 Teoría Espectral</h3>
-                    <p>$A\mathbf{v} = \lambda\mathbf{v}$, diagonalización, Hessiana.</p>
+                    <h3>📘 ¿Qué son Eigenvalores y Eigenvectores?</h3>
+                    <p>Para una matriz $A$ que transforma vectores, hay vectores especiales $v$ que solo cambian de tamaño, no de dirección:</p>
+                    
+                    <div class="formula">
+                        $$ A\mathbf{v} = \lambda \mathbf{v} $$
+                        <small>Donde $\lambda$ es el eigenvalor (cuánto se estira/encoge) y $\mathbf{v}$ es el eigenvector (dirección invariante).</small>
+                    </div>
+                    
+                    <div class="formula-container">
+                        <h4>Interpretación Visual</h4>
+                        <ul>
+                            <li>Si $\lambda = 2$: el vector se duplica</li>
+                            <li>Si $\lambda = -1$: el vector se invierte</li>
+                            <li>Si $\lambda = 0.5$: el vector se reduce a la mitad</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- CÁLCULO DE EIGENVALORES -->
+                <div class="section">
+                    <h3>🧮 Cálculo de Eigenvalores</h3>
+                    
+                    <div class="formula">
+                        <strong>Paso 1:</strong> Formar $(A - \lambda I)$
+                        $$ A - \lambda I = \begin{bmatrix} 
+                        a_{11}-\lambda & a_{12} & \cdots \\
+                        a_{21} & a_{22}-\lambda & \cdots \\
+                        \vdots & \vdots & \ddots
+                        \end{bmatrix} $$
+                    </div>
+                    
+                    <div class="formula">
+                        <strong>Paso 2:</strong> Calcular determinante
+                        $$ \det(A - \lambda I) = 0 $$
+                    </div>
+                    
+                    <div class="formula">
+                        <strong>Paso 3:</strong> Resolver para $\lambda$
+                        $$ \text{Ecuación característica} $$
+                    </div>
+                    
+                    <div class="formula">
+                        <strong>Paso 4:</strong> Para cada $\lambda$, resolver
+                        $$ (A - \lambda I)\mathbf{v} = \mathbf{0} $$
+                    </div>
+                </div>
+
+                <!-- EJEMPLO DETALLADO -->
+                <div class="section">
+                    <h3>🔍 Ejemplo 1: Matriz Diagonal</h3>
+                    
+                    <div class="formula">
+                        $$ A = \begin{bmatrix} 2 & 0 \\ 0 & 5 \end{bmatrix} $$
+                        <p>En matrices diagonales, ¡los eigenvalores están en la diagonal!</p>
+                        $$ \lambda_1 = 2, \quad \lambda_2 = 5 $$
+                        $$ \mathbf{v}_1 = \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \quad 
+                           \mathbf{v}_2 = \begin{bmatrix} 0 \\ 1 \end{bmatrix} $$
+                    </div>
+                </div>
+
+                <!-- EJEMPLO 2 -->
+                <div class="section">
+                    <h3>🔍 Ejemplo 2: Matriz 2×2 General</h3>
+                    
+                    <div class="formula">
+                        $$ A = \begin{bmatrix} 3 & 1 \\ 1 & 3 \end{bmatrix} $$
+                        
+                        <strong>Paso 1:</strong>
+                        $$ A - \lambda I = \begin{bmatrix} 3-\lambda & 1 \\ 1 & 3-\lambda \end{bmatrix} $$
+                        
+                        <strong>Paso 2:</strong>
+                        $$ \det = (3-\lambda)(3-\lambda) - 1 = \lambda^2 - 6\lambda + 8 = 0 $$
+                        
+                        <strong>Paso 3:</strong>
+                        $$ (\lambda-4)(\lambda-2) = 0 \Rightarrow \lambda_1 = 4, \lambda_2 = 2 $$
+                        
+                        <strong>Paso 4a ($\lambda=4$):</strong>
+                        $$ \begin{bmatrix} -1 & 1 \\ 1 & -1 \end{bmatrix} \mathbf{v}_1 = \mathbf{0} $$
+                        $$ -v_1 + v_2 = 0 \Rightarrow \mathbf{v}_1 = \begin{bmatrix} 1 \\ 1 \end{bmatrix} $$
+                        
+                        <strong>Paso 4b ($\lambda=2$):</strong>
+                        $$ \begin{bmatrix} 1 & 1 \\ 1 & 1 \end{bmatrix} \mathbf{v}_2 = \mathbf{0} $$
+                        $$ v_1 + v_2 = 0 \Rightarrow \mathbf{v}_2 = \begin{bmatrix} 1 \\ -1 \end{bmatrix} $$
+                    </div>
+                </div>
+
+                <!-- IMPORTANCIA EN OPTIMIZACIÓN -->
+                <div class="section">
+                    <h3>📈 Importancia en Optimización</h3>
+                    
+                    <div class="formula-container">
+                        <h4>Matriz Hessiana y Puntos Críticos</h4>
+                        <p>Para optimizar $f(x_1,\ldots,x_n)$:</p>
+                        <ol>
+                            <li>Encontrar puntos críticos: $\nabla f = \mathbf{0}$</li>
+                            <li>Clasificar usando Hessiana $H$</li>
+                        </ol>
+                        
+                        <div class="formula">
+                            $$ H = \begin{bmatrix} 
+                            \frac{\partial^2 f}{\partial x_1^2} & \frac{\partial^2 f}{\partial x_1 \partial x_2} \\
+                            \frac{\partial^2 f}{\partial x_2 \partial x_1} & \frac{\partial^2 f}{\partial x_2^2}
+                            \end{bmatrix} $$
+                        </div>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Eigenvalores de $H$</th>
+                                    <th>Tipo de Punto</th>
+                                    <th>Interpretación</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Todos $> 0$</td>
+                                    <td><strong>Mínimo local</strong></td>
+                                    <td>Función convexa alrededor</td>
+                                </tr>
+                                <tr>
+                                    <td>Todos $< 0$</td>
+                                    <td><strong>Máximo local</strong></td>
+                                    <td>Función cóncava alrededor</td>
+                                </tr>
+                                <tr>
+                                    <td>Mezcla de signos</td>
+                                    <td><strong>Punto silla</strong></td>
+                                    <td>Ni máximo ni mínimo</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- EJEMPLO DE OPTIMIZACIÓN -->
+                <div class="section">
+                    <h3>🔍 Ejemplo 3: Clasificar Punto Crítico</h3>
+                    
+                    <div class="formula">
+                        <strong>Función:</strong> $f(x_1,x_2) = x_1^2 + 3x_2^2 + 2x_1x_2$
+                        
+                        <p>El punto $(0,0)$ es crítico ($\nabla f = \mathbf{0}$). ¿Máximo, mínimo o silla?</p>
+                        
+                        <strong>Paso 1:</strong> Calcular Hessiana
+                        $$ \frac{\partial^2 f}{\partial x_1^2} = 2, \quad 
+                           \frac{\partial^2 f}{\partial x_2^2} = 6, \quad
+                           \frac{\partial^2 f}{\partial x_1 \partial x_2} = 2 $$
+                        $$ H = \begin{bmatrix} 2 & 2 \\ 2 & 6 \end{bmatrix} $$
+                        
+                        <strong>Paso 2:</strong> Eigenvalores de $H$
+                        $$ \det(H-\lambda I) = (2-\lambda)(6-\lambda) - 4 = \lambda^2 - 8\lambda + 8 = 0 $$
+                        $$ \lambda = \frac{8 \pm \sqrt{64-32}}{2} = \frac{8 \pm \sqrt{32}}{2} \approx 6.83, 1.17 $$
+                        
+                        <strong>Paso 3:</strong> Clasificar
+                        <p>Ambos eigenvalores positivos ⇒ <strong>MÍNIMO LOCAL</strong></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2532,16 +2701,157 @@ for (k in 0:floor(n_caramelos/3)) {
         <!-- ACTIVIDAD 16: CADENAS DE MARKOV -->
         <div id="act16" class="activity-content" style="display: none;">
             <div class="activity-container">
-                <h2>Actividad 16 — Cadenas de Markov</h2>
+                <h2>Actividad 16 — Cadenas de Markov y Procesos Estocásticos</h2>
                 
                 <div class="btn-group">
                     <button class="btn btn-primary" onclick="showActivity('menu')">⬅ Volver al Menú</button>
+                    <button class="btn btn-primary" onclick="simularCadenaMarkov()">🔄 Simular Cadena de Markov</button>
                 </div>
 
-                <!-- CONTENIDO DE MARKOV -->
+                <!-- INTRODUCCIÓN -->
                 <div class="section">
-                    <h3>🔄 Procesos Estocásticos</h3>
-                    <p>Matriz de transición, estado estable, predicción.</p>
+                    <h3>📘 Introducción a las Cadenas de Markov</h3>
+                    <p>Proceso estocástico con <strong>propiedad de Markov</strong>: el futuro depende solo del presente, no del pasado.</p>
+                    
+                    <div class="formula">
+                        $$ P(X_{t+1} = x_{t+1} | X_t = x_t, X_{t-1} = x_{t-1}, \ldots) = P(X_{t+1} = x_{t+1} | X_t = x_t) $$
+                    </div>
+                </div>
+
+                <!-- MATRIZ DE TRANSICIÓN -->
+                <div class="section">
+                    <h3>🔢 Matriz de Transición</h3>
+                    
+                    <div class="formula">
+                        $$ P = \begin{bmatrix}
+                        p_{11} & p_{12} & \cdots & p_{1n} \\
+                        p_{21} & p_{22} & \cdots & p_{2n} \\
+                        \vdots & \vdots & \ddots & \vdots \\
+                        p_{n1} & p_{n2} & \cdots & p_{nn}
+                        \end{bmatrix} $$
+                        <small>Donde $p_{ij} = P(\text{ir a estado }j \mid \text{estar en estado }i)$</small>
+                    </div>
+                    
+                    <div class="formula-container">
+                        <h4>Propiedades</h4>
+                        <ol>
+                            <li>$0 \leq p_{ij} \leq 1$ para todo $i,j$</li>
+                            <li>Suma por filas = 1: $\sum_{j=1}^n p_{ij} = 1$ para todo $i$</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- ESTADO ESTABLE -->
+                <div class="section">
+                    <h3>⚖️ Estado Estacionario (Estable)</h3>
+                    
+                    <div class="formula">
+                        <strong>Vector de estado estable $\pi$:</strong>
+                        $$ \pi P = \pi, \quad \sum_{i=1}^n \pi_i = 1 $$
+                        <p>Representa la distribución de probabilidad a largo plazo.</p>
+                    </div>
+                    
+                    <div class="formula">
+                        <strong>Cálculo:</strong>
+                        $$ \pi(P - I) = \mathbf{0}, \quad \sum \pi_i = 1 $$
+                    </div>
+                </div>
+
+                <!-- EJEMPLO: PRONÓSTICO DEL CLIMA -->
+                <div class="section">
+                    <h3>🌤️ Ejemplo: Pronóstico del Clima</h3>
+                    
+                    <div class="formula">
+                        <strong>Estados:</strong> Soleado (S), Nublado (N), Lluvioso (L)
+                        
+                        $$ P = \begin{bmatrix}
+                        0.6 & 0.3 & 0.1 \\  # S → S, N, L
+                        0.4 & 0.4 & 0.2 \\  # N → S, N, L
+                        0.2 & 0.3 & 0.5     # L → S, N, L
+                        \end{bmatrix} $$
+                    </div>
+                    
+                    <div class="formula">
+                        <strong>Estado estable:</strong> Resolver $\pi P = \pi$
+                        $$ \pi_S = 0.44, \quad \pi_N = 0.33, \quad \pi_L = 0.23 $$
+                        <p>A largo plazo: 44% días soleados, 33% nublados, 23% lluviosos.</p>
+                    </div>
+                </div>
+
+                <!-- APLICACIONES -->
+                <div class="section">
+                    <h3>🏗️ Aplicaciones de Cadenas de Markov</h3>
+                    
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Aplicación</th>
+                                    <th>Estados</th>
+                                    <th>Uso</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Pronóstico del tiempo</td>
+                                    <td>Soleado, Nublado, Lluvia</td>
+                                    <td>Predicción climática</td>
+                                </tr>
+                                <tr>
+                                    <td>Finanzas</td>
+                                    <td>Alza, Baja, Estable</td>
+                                    <td>Modelar precios de acciones</td>
+                                </tr>
+                                <tr>
+                                    <td>Salud</td>
+                                    <td>Sano, Enfermo, Recuperado</td>
+                                    <td>Modelar progresión de enfermedades</td>
+                                </tr>
+                                <tr>
+                                    <td>Juegos</td>
+                                    <td>Posiciones del tablero</td>
+                                    <td>Probabilidades en juegos de azar</td>
+                                </tr>
+                                <tr>
+                                    <td>Lingüística</td>
+                                    <td>Partes del discurso</td>
+                                    <td>Modelar secuencias de palabras</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- SIMULACIÓN -->
+                <div class="simulation-container">
+                    <h3>🎮 Simulador de Cadena de Markov</h3>
+                    
+                    <div class="input-group">
+                        <select id="tipoCadena" class="input-field">
+                            <option value="clima">Pronóstico del Clima</option>
+                            <option value="finanzas">Mercado Financiero</option>
+                            <option value="salud">Progresión de Enfermedad</option>
+                            <option value="personalizado">Personalizado</option>
+                        </select>
+                        <input type="number" id="pasosMarkov" class="input-field" 
+                               placeholder="Número de pasos" value="100" min="10" max="1000">
+                        <input type="number" id="estadoInicial" class="input-field" 
+                               placeholder="Estado inicial (0,1,2)" value="0" min="0" max="2">
+                        <input type="number" id="simulacionesMarkov" class="input-field" 
+                               placeholder="Nº simulaciones" value="1" min="1" max="100">
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="ejecutarSimulacionMarkov()">
+                        🔄 Ejecutar Simulación
+                    </button>
+                    
+                    <div class="results" id="resultadosMarkov">
+                        <p style="color: var(--gris-medio);">Los resultados aparecerán aquí...</p>
+                    </div>
+                    
+                    <div class="canvas-container">
+                        <canvas id="graficoMarkov" width="800" height="400"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2549,17 +2859,181 @@ for (k in 0:floor(n_caramelos/3)) {
         <!-- ACTIVIDAD 17: LIBRO COMPLETO -->
         <div id="act17" class="activity-content" style="display: none;">
             <div class="activity-container">
-                <h2>Actividad 17 — Libro de la Unidad 2</h2>
+                <h2>Actividad 17 — Libro Completo de la Unidad 2</h2>
                 
                 <div class="btn-group">
                     <button class="btn btn-primary" onclick="showActivity('menu')">⬅ Volver al Menú</button>
-                    <button class="btn btn-secondary" onclick="generarPDF()">📘 Generar PDF</button>
+                    <button class="btn btn-secondary" onclick="generarLibroPDF()">📘 Generar Libro PDF</button>
+                    <button class="btn btn-primary" onclick="mostrarResumenUnidad()">📊 Ver Resumen</button>
                 </div>
 
-                <!-- CONTENIDO DEL LIBRO -->
+                <!-- RESUMEN DE LA UNIDAD -->
                 <div class="section">
-                    <h3>📚 Compilación Completa</h3>
-                    <p>Todos los temas, códigos, ejercicios y referencias de la Unidad 2.</p>
+                    <h3>📚 Resumen de la Unidad 2: Programación Numérica</h3>
+                    
+                    <div class="formula-container">
+                        <h4>Temas Cubiertos (1-16)</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+                            <div style="background: var(--degradado-azul-claro); padding: 1rem; border-radius: 6px;">
+                                <h5>📈 Métodos Numéricos (1-5)</h5>
+                                <ul>
+                                    <li>Bisección - Teorema de Bolzano</li>
+                                    <li>Secante - Orden 1.618</li>
+                                    <li>Punto Fijo - Condición $|g'(x)|<1$</li>
+                                    <li>Regula Falsi - Falsa posición</li>
+                                    <li>Newton-Raphson - Convergencia cuadrática</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background: var(--degradado-azul-claro); padding: 1rem; border-radius: 6px;">
+                                <h5>📊 Métricas y Simulaciones (6-10)</h5>
+                                <ul>
+                                    <li>Índice H - Métrica bibliométrica</li>
+                                    <li>Gradiente - Optimización</li>
+                                    <li>Pseudoinverso vs GD - Comparativa</li>
+                                    <li>Simulación Caramelos - Estocástica</li>
+                                    <li>Algoritmo Demons - Imágenes médicas</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background: var(--degradado-azul-claro); padding: 1rem; border-radius: 6px;">
+                                <h5>🔢 Métodos Avanzados (11-16)</h5>
+                                <ul>
+                                    <li>Diferenciación Numérica - Diferencias finitas</li>
+                                    <li>Interpolación - Lagrange, Newton, Splines</li>
+                                    <li>Apache JMeter - Pruebas de rendimiento</li>
+                                    <li>Poster Científico - Comunicación académica</li>
+                                    <li>Eigenvalores - Análisis espectral</li>
+                                    <li>Cadenas de Markov - Procesos estocásticos</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COMPILACIÓN DE CÓDIGOS -->
+                <div class="section">
+                    <h3>💻 Compilación de Códigos Fuente</h3>
+                    
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Actividad</th>
+                                    <th>Archivo</th>
+                                    <th>Lenguaje</th>
+                                    <th>Descargas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1. Bisección</td>
+                                    <td>biseccion.py</td>
+                                    <td>Python</td>
+                                    <td><button class="btn" style="padding: 0.3rem 0.8rem;">📥 Descargar</button></td>
+                                </tr>
+                                <tr>
+                                    <td>6. Índice H</td>
+                                    <td>h_index_calculator.py</td>
+                                    <td>Python</td>
+                                    <td><button class="btn" style="padding: 0.3rem 0.8rem;">📥 Descargar</button></td>
+                                </tr>
+                                <tr>
+                                    <td>9. Caramelos</td>
+                                    <td>simulacion_caramelos.R</td>
+                                    <td>R</td>
+                                    <td><button class="btn" style="padding: 0.3rem 0.8rem;">📥 Descargar</button></td>
+                                </tr>
+                                <tr>
+                                    <td>11. Diferenciación</td>
+                                    <td>diferenciacion_numerica.py</td>
+                                    <td>Python</td>
+                                    <td><button class="btn" style="padding: 0.3rem 0.8rem;">📥 Descargar</button></td>
+                                </tr>
+                                <tr>
+                                    <td>14. Producción Papa</td>
+                                    <td>produccion_papa.R</td>
+                                    <td>R</td>
+                                    <td><button class="btn" style="padding: 0.3rem 0.8rem;">📥 Descargar</button></td>
+                                </tr>
+                                <tr>
+                                    <td>16. Cadenas Markov</td>
+                                    <td>markov_chains.py</td>
+                                    <td>Python</td>
+                                    <td><button class="btn" style="padding: 0.3rem 0.8rem;">📥 Descargar</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- REFERENCIAS BIBLIOGRÁFICAS -->
+                <div class="section">
+                    <h3>📖 Referencias Bibliográficas</h3>
+                    
+                    <div class="formula-container">
+                        <h4>Libros de Texto</h4>
+                        <ol>
+                            <li>Burden, R. L., & Faires, J. D. (2010). <em>Numerical Analysis</em>. Cengage Learning.</li>
+                            <li>Press, W. H., et al. (2007). <em>Numerical Recipes: The Art of Scientific Computing</em>. Cambridge University Press.</li>
+                            <li>Strang, G. (2019). <em>Linear Algebra and Learning from Data</em>. Wellesley-Cambridge Press.</li>
+                        </ol>
+                        
+                        <h4>Artículos Científicos</h4>
+                        <ol>
+                            <li>Thirion, J. P. (1998). <em>Image matching as a diffusion process</em>. Medical Image Analysis.</li>
+                            <li>Hirsch, J. E. (2005). <em>An index to quantify an individual's scientific research output</em>. PNAS.</li>
+                            <li>MIDAGRI. (2024). <em>Estadísticas Agrarias del Perú</em>. Gobierno del Perú.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- EVALUACIÓN Y AUTOEVALUACIÓN -->
+                <div class="section">
+                    <h3>📝 Evaluación de la Unidad</h3>
+                    
+                    <div class="formula-container">
+                        <h4>Logros Alcanzados</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <div style="text-align: center; padding: 1rem; background: linear-gradient(135deg, #e6f2ff, #f0f8ff); border-radius: 8px;">
+                                <div style="font-size: 2rem; color: var(--azul-primario);">16</div>
+                                <div style="font-size: 0.9rem;">Actividades Completadas</div>
+                            </div>
+                            
+                            <div style="text-align: center; padding: 1rem; background: linear-gradient(135deg, #e6f2ff, #f0f8ff); border-radius: 8px;">
+                                <div style="font-size: 2rem; color: var(--azul-primario);">8+</div>
+                                <div style="font-size: 0.9rem;">Lenguajes de Programación</div>
+                            </div>
+                            
+                            <div style="text-align: center; padding: 1rem; background: linear-gradient(135deg, #e6f2ff, #f0f8ff); border-radius: 8px;">
+                                <div style="font-size: 2rem; color: var(--azul-primario);">25+</div>
+                                <div style="font-size: 0.9rem;">Algoritmos Implementados</div>
+                            </div>
+                            
+                            <div style="text-align: center; padding: 1rem; background: linear-gradient(135deg, #e6f2ff, #f0f8ff); border-radius: 8px;">
+                                <div style="font-size: 2rem; color: var(--azul-primario);">100%</div>
+                                <div style="font-size: 0.9rem;">Portafolio Digital</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONCLUSIÓN FINAL -->
+                <div class="section">
+                    <h3>🎓 Conclusión del Portafolio</h3>
+                    
+                    <div class="formula-container" style="background: linear-gradient(135deg, rgba(0,102,204,0.1), rgba(0,102,204,0.05));">
+                        <p style="text-align: center; font-size: 1.1rem;">
+                            Este portafolio digital representa el dominio completo de los métodos numéricos 
+                            aplicados a problemas reales en ciencia, ingeniería y tecnología.
+                        </p>
+                        <p style="text-align: center; color: var(--azul-primario); font-weight: bold;">
+                            Luis Angel Quenaya Loza | Código: 241411<br>
+                            Universidad Nacional del Altiplano<br>
+                            Facultad de Ingeniería Estadística e Informática<br>
+                            2025
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -4302,3 +4776,4 @@ for (k in 0:floor(n_caramelos/3)) {
     </script>
 </body>
 </html>
+
