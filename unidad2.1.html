@@ -442,6 +442,26 @@
             border-radius: 6px;
             margin: 1rem 0;
         }
+        
+        /* BADGES PARA COMPARATIVA */
+        .badge-verde {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+        .badge-amarillo {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
@@ -799,7 +819,7 @@
                     <div class="input-group">
                         <input type="text" id="funcBiseccion" class="input-field" 
                                placeholder="Función f(x). Ej: x^3 - 2*x - 5" 
-                               value="x^3 - 2*x - 5">
+                               value="x**3 - 2*x - 5">
                         <input type="number" id="aBiseccion" class="input-field" 
                                placeholder="Límite inferior a" value="2" step="0.1">
                         <input type="number" id="bBiseccion" class="input-field" 
@@ -1174,8 +1194,8 @@ if __name__ == "__main__":
                     
                     <div class="input-group">
                         <input type="text" id="funcSecante" class="input-field" 
-                               placeholder="Función f(x). Ej: x^2 - 4" 
-                               value="x^2 - 4">
+                               placeholder="Función f(x). Ej: x**2 - 4" 
+                               value="x**2 - 4">
                         <input type="number" id="x0Secante" class="input-field" 
                                placeholder="Primer punto x₀" value="1" step="0.1">
                         <input type="number" id="x1Secante" class="input-field" 
@@ -1615,8 +1635,8 @@ if __name__ == "__main__":
                     
                     <div class="input-group">
                         <input type="text" id="funcPuntoFijo" class="input-field" 
-                               placeholder="Función g(x). Ej: cos(x)" 
-                               value="cos(x)">
+                               placeholder="Función g(x). Ej: Math.cos(x)" 
+                               value="Math.cos(x)">
                         <input type="number" id="x0PuntoFijo" class="input-field" 
                                placeholder="Valor inicial x₀" value="0.5" step="0.1">
                         <input type="number" id="tolPuntoFijo" class="input-field" 
@@ -2078,8 +2098,8 @@ if __name__ == "__main__":
                     
                     <div class="input-group">
                         <input type="text" id="funcRegulaFalsi" class="input-field" 
-                               placeholder="Función f(x). Ej: x^3 - 2*x - 5" 
-                               value="x^3 - 2*x - 5">
+                               placeholder="Función f(x). Ej: x**3 - 2*x - 5" 
+                               value="x**3 - 2*x - 5">
                         <input type="number" id="aRegulaFalsi" class="input-field" 
                                placeholder="Límite inferior a" value="2" step="0.1">
                         <input type="number" id="bRegulaFalsi" class="input-field" 
@@ -2519,8 +2539,8 @@ if __name__ == "__main__":
                     
                     <div class="input-group">
                         <input type="text" id="funcNewton" class="input-field" 
-                               placeholder="Función f(x). Ej: x^2 - 2" 
-                               value="x^2 - 2">
+                               placeholder="Función f(x). Ej: x**2 - 2" 
+                               value="x**2 - 2">
                         <input type="text" id="derivNewton" class="input-field" 
                                placeholder="Derivada f'(x). Ej: 2*x" 
                                value="2*x">
@@ -2972,7 +2992,7 @@ if __name__ == "__main__":
             // Validar función
             let f;
             try {
-                f = new Function('x', `return ${funcStr.replace(/\^/g, '**')};`);
+                f = new Function('x', `return ${funcStr};`);
                 // Probar la función
                 f(0);
             } catch (e) {
@@ -3198,7 +3218,6 @@ if __name__ == "__main__":
                         },
                         tooltip: {
                             callbacks: {
-                                                           callbacks: {
                                 label: function(context) {
                                     if (context.dataset.label === 'Raíces aproximadas') {
                                         const idx = context.dataIndex;
@@ -3253,7 +3272,7 @@ if __name__ == "__main__":
             // Validar función
             let f;
             try {
-                f = new Function('x', `return ${funcStr.replace(/\^/g, '**')};`);
+                f = new Function('x', `return ${funcStr};`);
                 f(0);
             } catch (e) {
                 alert('Error en la función. Usa sintaxis JavaScript.');
@@ -3523,7 +3542,7 @@ if __name__ == "__main__":
             // Validar función
             let g;
             try {
-                g = new Function('x', `return ${funcStr.replace(/\^/g, '**')};`);
+                g = new Function('x', `return ${funcStr};`);
                 g(0);
             } catch (e) {
                 alert('Error en la función g(x). Usa sintaxis JavaScript.');
@@ -3792,7 +3811,7 @@ if __name__ == "__main__":
             // Validar función
             let f;
             try {
-                f = new Function('x', `return ${funcStr.replace(/\^/g, '**')};`);
+                f = new Function('x', `return ${funcStr};`);
                 f(0);
             } catch (e) {
                 alert('Error en la función. Usa sintaxis JavaScript.');
@@ -4126,8 +4145,8 @@ if __name__ == "__main__":
             // Validar funciones
             let f, df;
             try {
-                f = new Function('x', `return ${funcStr.replace(/\^/g, '**')};`);
-                df = new Function('x', `return ${derivStr.replace(/\^/g, '**')};`);
+                f = new Function('x', `return ${funcStr};`);
+                df = new Function('x', `return ${derivStr};`);
                 f(0);
                 df(0);
             } catch (e) {
@@ -4587,27 +4606,10 @@ if __name__ == "__main__":
             
             resultadosDiv.innerHTML = tablaHTML;
             
-            // Añadir estilos para badges
-            const style = document.createElement('style');
-            style.textContent = `
-                .badge-verde {
-                    background-color: #d4edda;
-                    color: #155724;
-                    padding: 0.2rem 0.5rem;
-                    border-radius: 12px;
-                    font-size: 0.8rem;
-                    font-weight: 500;
-                }
-                .badge-amarillo {
-                    background-color: #fff3cd;
-                    color: #856404;
-                    padding: 0.2rem 0.5rem;
-                    border-radius: 12px;
-                    font-size: 0.8rem;
-                    font-weight: 500;
-                }
-            `;
-            document.head.appendChild(style);
+            // Actualizar MathJax
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
         }
 
         // ==============================================
